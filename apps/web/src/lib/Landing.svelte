@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getCompletedCount } from './progress-store';
   import { listLessons } from './lessons-api';
+  import InteractiveGrid from './InteractiveGrid.svelte';
 
   let { navigate }: { navigate: (to: string) => void } = $props();
 
@@ -23,8 +24,11 @@
 </script>
 
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-  <!-- Hero with dot-grid background + high-tech vibe -->
-  <section class="relative pt-16 pb-12 sm:pt-28 sm:pb-20 overflow-hidden dot-grid-blueprint bg-surface-50 dark:bg-[#020617]">
+  <!-- Hero with interactive grid background + high-tech vibe -->
+  <section class="relative pt-16 pb-12 sm:pt-28 sm:pb-20 overflow-hidden bg-surface-50 dark:bg-[#020617]" style="min-height: 60vh;">
+    <!-- Interactive dot-grid canvas (spring-physics responsive to mouse) -->
+    <InteractiveGrid />
+
     <!-- Ambient emerald glow behind hero content -->
     <div class="absolute inset-0 pointer-events-none">
       <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full bg-emerald-500/5 dark:bg-emerald-500/8 blur-[120px]"></div>
@@ -32,7 +36,13 @@
       <div class="absolute top-1/3 right-1/4 w-[300px] h-[200px] rounded-full bg-emerald-400/3 dark:bg-emerald-400/5 blur-[80px]"></div>
     </div>
 
-    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Tech crosshair decorations -->
+    <div class="absolute top-6 left-6 w-6 h-6 crosshair-tech" aria-hidden="true"></div>
+    <div class="absolute top-6 right-6 w-6 h-6 crosshair-tech" aria-hidden="true"></div>
+    <div class="absolute bottom-6 left-6 w-6 h-6 crosshair-tech" aria-hidden="true"></div>
+    <div class="absolute bottom-6 right-6 w-6 h-6 crosshair-tech" aria-hidden="true"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pointer-events-none">
       <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-surface-900 tracking-tight mb-4 dark:text-surface-100" style="font-family: var(--font-family-heading); line-height: 1.35; letter-spacing: -0.02em;">
         System Design<br class="hidden sm:block" />
         <span class="text-emerald-600 dark:text-emerald-400 dark:text-glow-emerald">ที่คุณเข้าใจจริง</span>
@@ -47,10 +57,10 @@
       {totalLessons} บทเรียน · {sectionCount} หมวดหมู่ · Progressive Learning
     </p>
 
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pointer-events-auto">
       <button
         onclick={() => navigate('overview')}
-        class="inline-flex items-center gap-2 px-6 py-3 text-base font-semibold text-white bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 rounded shadow-sm transition-maha dark:bg-emerald-500 dark:hover:bg-emerald-600 dark:active:bg-emerald-700 dark:text-white"
+        class="hero-cta inline-flex items-center gap-2 px-6 py-3 text-base font-semibold text-white bg-emerald-600 hover:bg-emerald-500 rounded-lg shadow-sm hover:shadow-lg hover:shadow-emerald-500/25 hover:scale-105 active:scale-100 transition-all duration-300 ease-out dark:bg-emerald-500 dark:hover:bg-emerald-400 dark:hover:shadow-emerald-400/25 dark:active:bg-emerald-600 dark:text-white"
         style="font-family: var(--font-family-heading); letter-spacing: 0.02em;"
       >
         เริ่มเรียน
@@ -61,7 +71,7 @@
       {#if hasProgress}
         <button
           onclick={() => navigate('overview')}
-          class="inline-flex items-center gap-2 px-6 py-3 text-base font-semibold text-surface-700 border border-surface-300 hover:bg-surface-100 rounded transition-maha dark:text-surface-200 dark:border-surface-600 dark:hover:bg-surface-800"
+          class="inline-flex items-center gap-2 px-6 py-3 text-base font-semibold text-surface-700 border border-surface-300 hover:bg-surface-100 rounded transition-maha cursor-pointer dark:text-surface-200 dark:border-surface-600 dark:hover:bg-surface-800"
           style="font-family: var(--font-family-heading); letter-spacing: 0.02em;"
         >
           เรียนต่อ ({completedCount}/{totalLessons})
@@ -90,9 +100,10 @@
   </section>
 
   <!-- Features grid -->
-  <section class="pb-12 sm:pb-16">
+  <section class="pb-12 sm:pb-16" aria-labelledby="features-heading">
+    <h2 id="features-heading" class="sr-only">ทำไมต้องเรียนที่นี่</h2>
     <div class="grid gap-4 sm:grid-cols-3">
-      <div class="bg-white rounded-lg border border-surface-200 p-6 dark:bg-surface-800 dark:border-surface-700 corner-accent">
+      <div class="feature-card bg-white rounded-lg border border-surface-200 p-6 dark:bg-surface-800 dark:border-surface-700 corner-accent">
         <div class="w-10 h-10 rounded bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-4">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 dark:text-emerald-400">
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
@@ -108,7 +119,7 @@
         </p>
       </div>
 
-      <div class="bg-white rounded-lg border border-surface-200 p-6 dark:bg-surface-800 dark:border-surface-700 corner-accent">
+      <div class="feature-card bg-white rounded-lg border border-surface-200 p-6 dark:bg-surface-800 dark:border-surface-700 corner-accent">
         <div class="w-10 h-10 rounded bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-4">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 dark:text-emerald-400">
             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
@@ -123,7 +134,7 @@
         </p>
       </div>
 
-      <div class="bg-white rounded-lg border border-surface-200 p-6 dark:bg-surface-800 dark:border-surface-700 corner-accent">
+      <div class="feature-card bg-white rounded-lg border border-surface-200 p-6 dark:bg-surface-800 dark:border-surface-700 corner-accent">
         <div class="w-10 h-10 rounded bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-4">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-emerald-600 dark:text-emerald-400">
             <circle cx="12" cy="12" r="10"/>
@@ -141,15 +152,15 @@
     </div>
   </section>
 
-  <!-- Philosophy -->
-  <section class="pb-14 sm:pb-18">
+  <!-- Manifesto -->
+  <section class="pb-14 sm:pb-18" aria-labelledby="manifesto-heading">
     <!-- Blueprint divider -->
     <hr class="divider-blueprint max-w-md mx-auto mb-10" />
     <div class="text-center mb-8">
       <span class="inline-block text-xs font-semibold text-emerald-600 uppercase tracking-widest mb-3 dark:text-emerald-400" style="font-family: var(--font-family-heading); letter-spacing: 0.08em;">
-        Our Philosophy
+        Manifesto
       </span>
-      <h2 class="text-2xl sm:text-3xl font-bold text-surface-900 tracking-tight mb-2 dark:text-surface-100" style="font-family: var(--font-family-heading); letter-spacing: -0.02em;">
+      <h2 id="manifesto-heading" class="text-2xl sm:text-3xl font-bold text-surface-900 tracking-tight mb-2 dark:text-surface-100" style="font-family: var(--font-family-heading); letter-spacing: -0.02em;">
         เขียนแบบ Engineer<br class="sm:hidden" /> ไม่ใช่ Salesperson
       </h2>
       <p class="max-w-md mx-auto text-sm text-surface-500 dark:text-surface-400">
@@ -166,7 +177,7 @@
         { num: '04', title: 'ตัดสินใจตามบริบท', desc: 'สิ่งที่ใช้ได้ที่ 1K req/s อาจพังที่ 1M req/s — เราแสดงขอบเขตการตัดสินใจเสมอ', highlight: 'Context Matters' },
         { num: '05', title: 'แสดงต้นทุน ไม่ใช่แค่ผลลัพธ์', desc: 'Redis ให้ sub-ms reads — แต่คุณต้องจัดการ cache invalidation, memory limits, และ consistency', highlight: 'Cost Aware' },
       ] as principle}
-        <div class="group relative bg-white rounded-xl border border-surface-200 p-5 hover:border-emerald-200 hover:shadow-lg transition-all duration-300 dark:bg-surface-800 dark:border-surface-700 dark:hover:border-emerald-600 dark:hover:glow-emerald corner-accent">
+        <div class="principle-card group relative bg-white rounded-xl border border-surface-200 p-5 hover:border-emerald-200 hover:shadow-lg transition-all duration-300 dark:bg-surface-800 dark:border-surface-700 dark:hover:border-emerald-600 dark:hover:glow-emerald corner-accent">
           <!-- Number badge -->
           <div class="flex items-center gap-3 mb-3">
             <span class="flex-shrink-0 w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center text-xs font-bold dark:bg-emerald-900/30 dark:text-emerald-400" style="font-family: var(--font-family-heading);">
@@ -198,18 +209,18 @@
   </section>
 
   <!-- Topic categories preview -->
-  <section class="pb-16 sm:pb-20">
+  <section class="pb-16 sm:pb-20" aria-labelledby="topics-heading">
     <!-- Blueprint divider -->
     <hr class="divider-blueprint max-w-md mx-auto mb-10" />
     <div class="mb-6">
-      <h2 class="text-xs font-semibold text-surface-400 uppercase tracking-widest mb-4 dark:text-surface-500" style="font-family: var(--font-family-heading);">
+      <h2 id="topics-heading" class="text-xs font-semibold text-surface-400 uppercase tracking-widest mb-4 dark:text-surface-500" style="font-family: var(--font-family-heading);">
         Topics
       </h2>
       <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {#each data?.sections ?? [] as section}
           <button
             onclick={() => navigate('overview')}
-            class="group text-left bg-white rounded-lg border border-surface-200 px-5 py-4 hover:border-emerald-300 hover:shadow-maha-sm transition-maha dark:bg-surface-800 dark:border-surface-600 dark:hover:border-emerald-600"
+            class="group text-left bg-white rounded-lg border border-surface-200 px-5 py-4 hover:border-emerald-300 hover:shadow-maha-sm transition-maha cursor-pointer dark:bg-surface-800 dark:border-surface-600 dark:hover:border-emerald-600"
           >
             <div class="flex items-center justify-between mb-1">
               <h3 class="text-sm font-semibold text-surface-900 group-hover:text-emerald-700 dark:text-surface-100 dark:group-hover:text-emerald-400 transition-maha" style="font-family: var(--font-family-heading);">

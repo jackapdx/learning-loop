@@ -94,12 +94,7 @@
 
 /* ── Dark mode overrides ── */
 .dark {
-  /* Only flip surface-50 for the page background.
-     Cards/surfaces use surface-800 (#1e293b) — works well on dark bg.
-     Text uses surface-100 (#f1f5f9) — light gray, readable on dark. */
   --color-surface-50: #020617;
-  /* surface-100 through surface-950 stay at light-mode values */
-  /* Emerald scale: lighter tones for visibility on dark backgrounds */
   --color-emerald-50: #022c22;
   --color-emerald-100: #064e3b;
   --color-emerald-200: #065f46;
@@ -133,10 +128,6 @@
 @keyframes maha-scale-in {
   from { transform: scale(0.95); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
-}
-@keyframes maha-shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
 }
 
 /*
@@ -174,7 +165,7 @@
 
 @layer components {
   /* ══════════════════════════════════════════════════════════════════════
-     Button (Emerald Green primary, Slate outline secondary)
+     Button
      ══════════════════════════════════════════════════════════════════════ */
   .mha-btn {
     @apply inline-flex items-center justify-center font-medium rounded
@@ -204,34 +195,16 @@
            dark:border-surface-500 dark:text-surface-200 dark:hover:bg-surface-800 dark:hover:text-surface-100 dark:active:bg-surface-700;
     background: transparent;
   }
-  .mha-btn-ghost {
-    @apply text-surface-600 hover:bg-surface-100 active:bg-surface-200
-           dark:text-surface-400 dark:hover:bg-surface-800 dark:hover:text-surface-200 dark:active:bg-surface-700;
-  }
-  .mha-btn-danger {
-    @apply bg-red-600 text-white hover:bg-red-700 active:bg-red-800
-           shadow-sm;
-  }
   .mha-btn-sm {
     @apply px-3 py-1.5 text-sm gap-1.5;
   }
-  .mha-btn-md {
-    @apply px-4 py-2 text-base gap-2;
-  }
-  .mha-btn-lg {
-    @apply px-6 py-3 text-lg gap-2.5;
-  }
-  .mha-btn-icon {
-    @apply p-2 aspect-square;
-  }
 
   /* ══════════════════════════════════════════════════════════════════════
-     Card (white surface, 1px slate border, 24px padding)
+     Card
      ══════════════════════════════════════════════════════════════════════ */
   .mha-card {
     @apply bg-white rounded-lg border border-surface-200 shadow-none
            dark:bg-surface-800 dark:border-surface-700;
-    /* Dark mode: faint emerald ambient glow — like illuminated glass */
     box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
     transition: box-shadow 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
   }
@@ -246,7 +219,6 @@
   .dark .mha-card:hover {
     box-shadow: 0 0 16px rgba(16, 185, 129, 0.18), 0 4px 24px rgba(0, 0, 0, 0.3);
   }
-  /* Static card variant — no hover lift/glow. Use for reading/content cards where hover is distracting. */
   .mha-card-static {
     @apply bg-white rounded-lg border border-surface-200 shadow-none
            dark:bg-surface-800 dark:border-surface-700;
@@ -256,31 +228,12 @@
   .dark .mha-card-static {
     box-shadow: 0 0 30px rgba(16, 185, 129, 0.04);
   }
-  .mha-card-header {
-    @apply px-6 py-4 border-b border-surface-200
-           dark:border-surface-600;
-  }
   .mha-card-body {
     @apply px-6 py-5;
   }
-  .mha-card-footer {
-    @apply px-6 py-4 border-t border-surface-200 bg-surface-50 rounded-b-lg
-           dark:border-surface-600 dark:bg-surface-800/50;
-  }
-  .mha-card-title {
-    @apply text-lg font-semibold text-surface-900 tracking-tight;
-    font-family: var(--font-family-heading);
-  }
-  .dark .mha-card-title {
-    @apply text-surface-100;
-  }
-  .mha-card-subtitle {
-    @apply mt-1 text-sm text-surface-500
-           dark:text-surface-400;
-  }
 
   /* ══════════════════════════════════════════════════════════════════════
-     Badge / Chip (soft style, light backgrounds, no borders)
+     Badge / Chip
      ══════════════════════════════════════════════════════════════════════ */
   .mha-badge {
     @apply inline-flex items-center font-medium rounded;
@@ -289,12 +242,6 @@
   }
   .mha-badge-sm {
     @apply text-xs px-2 py-0.5;
-  }
-  .mha-badge-md {
-    @apply text-sm px-2.5 py-0.5;
-  }
-  .mha-badge-lg {
-    @apply text-base px-3 py-1;
   }
   .mha-badge-default {
     @apply bg-surface-100 text-surface-700
@@ -307,25 +254,6 @@
   .mha-badge-success {
     @apply bg-green-100 text-green-800
            dark:bg-green-900/30 dark:text-green-300;
-  }
-  .mha-badge-danger {
-    @apply bg-red-100 text-red-800
-           dark:bg-red-900/30 dark:text-red-300;
-  }
-  .mha-badge-warning {
-    @apply bg-amber-100 text-amber-800
-           dark:bg-amber-900/30 dark:text-amber-300;
-  }
-  .mha-badge-info {
-    @apply bg-blue-100 text-blue-800
-           dark:bg-blue-900/30 dark:text-blue-300;
-  }
-  .mha-badge-outline {
-    @apply bg-transparent border border-surface-300 text-surface-700
-           dark:border-surface-600 dark:text-surface-300;
-  }
-  .mha-badge-dot {
-    @apply before:inline-block before:w-2 before:h-2 before:rounded-full before:me-1.5;
   }
 
   /* ══════════════════════════════════════════════════════════════════════
@@ -358,130 +286,12 @@
   }
 
   /* ══════════════════════════════════════════════════════════════════════
-     Spinner / Loading
+     Spinner
      ══════════════════════════════════════════════════════════════════════ */
   .mha-spinner {
     @apply animate-spin text-emerald-600 dark:text-emerald-400;
   }
-  .mha-spinner-sm { @apply size-4; }
-  .mha-spinner-md { @apply size-6; }
-  .mha-spinner-lg { @apply size-8; }
   .mha-spinner-xl { @apply size-12; }
-  .mha-spinner-secondary { @apply text-surface-500; }
-  .mha-spinner-success { @apply text-green-600; }
-  .mha-spinner-danger { @apply text-red-600; }
-  .mha-spinner-warning { @apply text-amber-600; }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     Input
-     ══════════════════════════════════════════════════════════════════════ */
-  .mha-input {
-    @apply block w-full rounded-lg border border-surface-300 bg-white px-3 py-2 text-sm
-           text-surface-900 placeholder:text-surface-400
-           transition-maha
-           focus-ring-maha
-           disabled:bg-surface-100 disabled:text-surface-400 disabled:cursor-not-allowed
-           dark:bg-surface-800 dark:border-surface-600 dark:text-surface-100
-           dark:placeholder:text-surface-500 dark:disabled:bg-surface-700 dark:disabled:text-surface-500;
-  }
-  .mha-input-error {
-    @apply border-red-500 focus:ring-red-500
-           dark:border-red-500 dark:focus:ring-red-500;
-  }
-  .mha-label {
-    @apply block text-sm font-medium text-surface-700 mb-1
-           dark:text-surface-300;
-  }
-  .mha-hint {
-    @apply mt-1 text-xs text-surface-500
-           dark:text-surface-400;
-  }
-  .mha-error-text {
-    @apply mt-1 text-xs text-red-600
-           dark:text-red-400;
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     Select
-     ══════════════════════════════════════════════════════════════════════ */
-  .mha-select {
-    @apply block w-full rounded-lg border border-surface-300 bg-white px-3 py-2 pr-10 text-sm
-           text-surface-900 appearance-none
-           bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20fill%3D%22none%22%20stroke%3D%22%239CA3AF%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22m6%208%204%204%204-4%22%2F%3E%3C%2Fsvg%3E')]
-           bg-[length:1.25rem_1.25rem] bg-[right_0.5rem_center] bg-no-repeat
-           transition-maha
-           focus-ring-maha
-           disabled:bg-surface-100 disabled:text-surface-400 disabled:cursor-not-allowed
-           dark:bg-surface-800 dark:border-surface-600 dark:text-surface-100
-           dark:disabled:bg-surface-700 dark:disabled:text-surface-500;
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     Modal / Dialog
-     ══════════════════════════════════════════════════════════════════════ */
-  .mha-modal-overlay {
-    @apply fixed inset-0 z-50 flex items-center justify-center
-           bg-black/40 animate-maha-fade-in
-           dark:bg-black/60;
-  }
-  .mha-modal {
-    @apply bg-white rounded-xl shadow-maha-xl max-w-lg w-full mx-4
-           animate-maha-scale-in
-           dark:bg-surface-850 dark:shadow-maha-dark-lg;
-  }
-  .mha-modal-header {
-    @apply flex items-center justify-between px-6 py-4 border-b border-surface-200
-           dark:border-surface-700;
-  }
-  .mha-modal-body {
-    @apply px-6 py-5;
-  }
-  .mha-modal-footer {
-    @apply flex items-center justify-end gap-2 px-6 py-4 border-t border-surface-200
-           dark:border-surface-700;
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     Table
-     ══════════════════════════════════════════════════════════════════════ */
-  .mha-table {
-    @apply w-full text-left text-sm text-surface-700
-           dark:text-surface-300;
-  }
-  .mha-table thead {
-    @apply bg-surface-50 text-surface-600 text-xs uppercase tracking-wider
-           dark:bg-surface-800 dark:text-surface-400;
-  }
-  .mha-table th {
-    @apply px-4 py-3 font-medium;
-  }
-  .mha-table td {
-    @apply px-4 py-3 border-t border-surface-100
-           dark:border-surface-700;
-  }
-  .mha-table tbody tr {
-    @apply transition-maha hover:bg-surface-50
-           dark:hover:bg-surface-800/60;
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     Tabs
-     ══════════════════════════════════════════════════════════════════════ */
-  .mha-tabs {
-    @apply flex gap-0 border-b border-surface-200
-           dark:border-surface-700;
-  }
-  .mha-tab {
-    @apply px-4 py-2.5 text-sm font-medium text-surface-500
-           border-b-2 border-transparent
-           transition-maha cursor-pointer
-           hover:text-surface-700 hover:border-surface-300
-           dark:hover:text-surface-300 dark:hover:border-surface-500;
-  }
-  .mha-tab-active {
-    @apply text-maha-700 border-maha-600
-           dark:text-maha-600;
-  }
 
   /* ══════════════════════════════════════════════════════════════════════
      Empty State
@@ -501,35 +311,6 @@
     @apply mt-1 text-sm text-surface-500 max-w-sm
            dark:text-surface-400;
   }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     Divider
-     ══════════════════════════════════════════════════════════════════════ */
-  .mha-divider {
-    @apply w-full border-t border-surface-200
-           dark:border-surface-700;
-  }
-  .mha-divider-label {
-    @apply flex items-center gap-3 text-xs text-surface-400 uppercase tracking-wider;
-  }
-  .mha-divider-label::before,
-  .mha-divider-label::after {
-    content: "";
-    @apply flex-1 border-t border-surface-200
-           dark:border-surface-700;
-  }
-
-  /* ══════════════════════════════════════════════════════════════════════
-     Skeleton (loading placeholder)
-     ══════════════════════════════════════════════════════════════════════ */
-  .mha-skeleton {
-    @apply animate-pulse bg-surface-200 rounded
-           dark:bg-surface-700;
-  }
-  .mha-skeleton-text { @apply h-4 w-full; }
-  .mha-skeleton-title { @apply h-6 w-3/4; }
-  .mha-skeleton-avatar { @apply size-10 rounded-full; }
-  .mha-skeleton-button { @apply h-10 w-24 rounded-lg; }
 }
 
 /*
@@ -545,7 +326,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: -0.2em; /* Optical adjustment for Noto Sans Thai */
+  margin-top: -0.2em;
 }
 
 .prose .material-symbols-outlined {
@@ -558,7 +339,6 @@
    ════════════════════════════════════════════════════════════════════════════
 */
 
-/* Surface-850 utility for dark card surfaces */
 @utility bg-surface-850 {
   background-color: #1e293b;
 }
@@ -587,7 +367,6 @@
   border-bottom-color: var(--color-emerald-400);
 }
 
-/* Tooltip popup — rendered by vocab-tooltip-action.ts */
 .vocab-tooltip {
   font-family: var(--font-family-sans);
 }
@@ -629,7 +408,7 @@ html {
 
 /*
    ════════════════════════════════════════════════════════════════════════════
-   ♿ Reduced Motion — respect user preference
+   ♿ Reduced Motion
    ════════════════════════════════════════════════════════════════════════════
 */
 
@@ -648,7 +427,7 @@ html {
 
 /*
    ════════════════════════════════════════════════════════════════════════════
-   ⌨️  Focus visible — only show rings for keyboard nav, not mouse clicks
+   ⌨️  Focus visible
    ════════════════════════════════════════════════════════════════════════════
 */
 
@@ -665,7 +444,7 @@ html {
 /*
    ════════════════════════════════════════════════════════════════════════════
    📝 Markdown Content (rendered via {@html})
-   ════════════════════════════════════════════════════════════════════════
+   ════════════════════════════════════════════════════════════════════════════
 */
 
 .prose {
@@ -830,7 +609,7 @@ html {
   font-family: inherit;
 }
 
-/* ── Syntax highlighting tokens (procedural via syntax-highlight.ts) ── */
+/* ── Syntax highlighting tokens ── */
 .syn-kw  { color: #c792ea; font-weight: 500; }
 .syn-str { color: #c3e88d; }
 .syn-num { color: #f78c6c; }
@@ -948,162 +727,18 @@ html {
 
 /*
    ════════════════════════════════════════════════════════════════════════════
-   🎨 Shinny / Shimmer loading effect
-   ════════════════════════════════════════════════════════════════════════════
-*/
-
-@utility shimmer-bg {
-  background: linear-gradient(
-    90deg,
-    var(--color-surface-100) 0%,
-    var(--color-surface-200) 50%,
-    var(--color-surface-100) 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 1.5s ease-in-out infinite;
-}
-
-.dark .shimmer-bg {
-  background: linear-gradient(
-    90deg,
-    var(--color-surface-800) 0%,
-    var(--color-surface-700) 50%,
-    var(--color-surface-800) 100%
-  );
-  background-size: 200% 100%;
-}
-
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-@keyframes maha-pulse-glow {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
-}
-
-@keyframes maha-scanline {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(100%); }
-}
-
-/*
-   ════════════════════════════════════════════════════════════════════════════
-   🗺️  Dot-Grid Background Utilities
-   Apply to any container for a blueprint/CAD drafting aesthetic.
-   ════════════════════════════════════════════════════════════════════════════
-*/
-
-.dot-grid {
-  background-image:
-    radial-gradient(circle, rgba(15, 23, 42, 0.12) 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
-}
-
-.dot-grid-sm {
-  background-size: 16px 16px;
-}
-
-.dot-grid-lg {
-  background-size: 32px 32px;
-}
-
-.dot-grid-emerald {
-  background-image:
-    radial-gradient(circle, rgba(16, 185, 129, 0.15) 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
-}
-
-.dark .dot-grid-dark {
-  background-image:
-    radial-gradient(circle, rgba(148, 163, 184, 0.12) 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
-}
-
-.dark .dot-grid-dark-emerald {
-  background-image:
-    radial-gradient(circle, rgba(16, 185, 129, 0.12) 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
-}
-
-/* Dot-grid — blueprint dot pattern for hero sections */
-.dot-grid-blueprint {
-  background-image:
-    radial-gradient(circle, rgba(15, 23, 42, 0.12) 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
-}
-
-.dark .dot-grid-blueprint {
-  background-image:
-    radial-gradient(circle, rgba(148, 163, 184, 0.12) 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
-}
-
-@media (max-width: 640px) {
-  .dot-grid,
-  .dot-grid-emerald,
-  .dark .dot-grid-dark,
-  .dark .dot-grid-dark-emerald {
-    background-size: 20px 20px;
-  }
-}
-
-/*
-   ════════════════════════════════════════════════════════════════════════════
    🧬 High-Tech Accents
    ════════════════════════════════════════════════════════════════════════════
 */
 
-/* Neon glow — emerald halo on hover */
 @utility glow-emerald {
   box-shadow: 0 0 20px rgba(16, 185, 129, 0.12), 0 0 40px rgba(16, 185, 129, 0.04);
 }
 
-@utility glow-emerald-strong {
-  box-shadow: 0 0 24px rgba(16, 185, 129, 0.2), 0 0 60px rgba(16, 185, 129, 0.06);
-}
-
-/* Text glow — for hero headlines in dark mode */
 @utility text-glow-emerald {
   text-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
 }
 
-/* HUD status dot — pulsing indicator */
-@utility hud-dot {
-  @apply inline-block rounded-full bg-emerald-500;
-  width: 6px;
-  height: 6px;
-  animation: maha-pulse-glow 2s ease-in-out infinite;
-}
-
-@utility hud-dot-sm {
-  width: 4px;
-  height: 4px;
-}
-
-/* Scanline overlay — CRT/holographic feel for hero sections */
-.scanlines {
-  position: relative;
-  overflow: hidden;
-}
-
-.scanlines::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 3px
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Corner accents — CAD selection handles */
 .corner-accent {
   position: relative;
 }
@@ -1141,7 +776,6 @@ html {
   opacity: 1;
 }
 
-/* Blueprint dashed divider */
 .divider-blueprint {
   border: none;
   border-top: 1px dashed var(--color-surface-300);
@@ -1150,4 +784,139 @@ html {
 
 .dark .divider-blueprint {
   border-top-color: var(--color-surface-600);
+}
+
+/*
+   ════════════════════════════════════════════════════════════════════════════
+   🚀 Hero CTA Button — shimmer sweep + arrow slide
+   ════════════════════════════════════════════════════════════════════════════
+*/
+
+.hero-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+}
+
+.hero-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.12) 45%,
+    rgba(255, 255, 255, 0.18) 50%,
+    rgba(255, 255, 255, 0.12) 55%,
+    transparent 65%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-cta:hover::before {
+  transform: translateX(100%);
+}
+
+.hero-cta svg {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-cta:hover svg {
+  transform: translateX(3px);
+}
+
+.dark .hero-cta::before {
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.08) 45%,
+    rgba(255, 255, 255, 0.14) 50%,
+    rgba(255, 255, 255, 0.08) 55%,
+    transparent 65%
+  );
+}
+
+/*
+   ════════════════════════════════════════════════════════════════════════════
+   🎯 Tech Crosshair — CAD-style corner alignment markers
+   ════════════════════════════════════════════════════════════════════════════
+*/
+
+.crosshair-tech {
+  position: relative;
+  opacity: 0.25;
+  transition: opacity 0.3s ease;
+}
+
+.crosshair-tech::before,
+.crosshair-tech::after {
+  content: '';
+  position: absolute;
+  background: var(--color-emerald-400);
+}
+
+.crosshair-tech::before {
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  left: 0;
+  transform: translateY(-0.5px);
+}
+
+.crosshair-tech::after {
+  width: 1px;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-0.5px);
+}
+
+.dark .crosshair-tech {
+  opacity: 0.15;
+}
+
+.dark .crosshair-tech::before,
+.dark .crosshair-tech::after {
+  background: var(--color-emerald-500);
+}
+
+/*
+   ════════════════════════════════════════════════════════════════════════════
+   ✨ Premium Card Hover Transitions
+   ════════════════════════════════════════════════════════════════════════════
+*/
+
+.feature-card {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+  border-color: var(--color-emerald-300);
+}
+
+.dark .feature-card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(16, 185, 129, 0.1);
+  border-color: var(--color-emerald-600);
+}
+
+.principle-card {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.principle-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.1);
+}
+
+.dark .principle-card:hover {
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), 0 0 24px rgba(16, 185, 129, 0.12);
 }
