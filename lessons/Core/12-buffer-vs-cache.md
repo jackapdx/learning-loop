@@ -21,7 +21,7 @@ prerequisites: [core/03-cache-invalidation]
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ** สถานการณ์:** คุณกำลังออกแบบระบบ"บันทึกวิดีโอสด (Live Streaming)" 
+> ** สถานการณ์:** คุณกำลังออกแบบระบบ"บันทึกวิดีโอสด (Live Streaming)"
 > -** ฝั่งส่ง (Producer):** กล้องส่งข้อมูลภาพดิบมาด้วยความเร็วสูงมากแต่ไม่คงที่ (Bursty)
 > -** ฝั่งรับ (Consumer):** ระบบประมวลผล (Encoding) ทำงานด้วยความเร็วคงที่และช้ากว่าความเร็วสูงสุดของกล้อง
 >
@@ -60,12 +60,14 @@ prerequisites: [core/03-cache-invalidation]
 
 ### 2. Buffering Patterns ใน System Design
 
-####**Load Leveling (การเกลี่ยภาระ)**
+#### **Load Leveling (การเกลี่ยภาระ)**
+
 ใช้ Message Queue (เช่น Kafka, RabbitMQ) เป็น Buffer ตัวใหญ่ เพื่อรับแรงกระแทกจาก Traffic ที่มาเป็นลูกคลื่น (Spikes) ไม่ให้ Database หรือ Backend ล่ม
 -**Gain:** ระบบไม่ล่มเมื่อมีคนเข้าพร้อมกันมหาศาล
 -**Sacrifice:** ข้อมูลอาจจะดีเลย์ (Consistency ⛓️/Staleness) เพราะต้องรออยู่ในคิว
 
-####**Double Buffering **
+#### **Double Buffering **
+
 ใช้พื้นที่เก็บข้อมูล 2 ชุดสลับกัน ฝั่งหนึ่งกำลังเขียน (Write) ในขณะที่อีกฝั่งกำลังประมวลผล (Process) เพื่อให้งานไหลลื่นไม่สะดุด (เช่น ในงาน Graphic หรือ Real-time ⏰ Signal Processing)
 
 ---
@@ -73,15 +75,18 @@ prerequisites: [core/03-cache-invalidation]
 ## 🔬 ขยายความ (Extend)
 
 ### เมื่อ Buffer กลายเป็นปัญหา (Bufferbloat)
+
 หากคุณทำ Buffer ใหญ่เกินไปเพื่อหวังว่าจะไม่เสียข้อมูลเลย (No Data Loss) คุณจะเจอกับปัญหา **Latency มหาศาล ** เพราะข้อมูลต้องต่อคิวนานเกินไปก่อนจะถูกประมวลผล
 -**Senior Tip:** ในระบบ Real-time ⏰ (เช่น Voice Call) บางครั้งการ"ทิ้งข้อมูล (Drop Packets)" ยังดีกว่าการ"รอใน Buffer นานเกินไป"
 
 ### ผสมโรง: Buffer Pool ใน Database
+
 ในฐานข้อมูลอย่าง PostgreSQL หรือ MySQL มีสิ่งที่เรียกว่า **Buffer Pool **(หรือ Buffer Cache) ซึ่งทำหน้าที่"ลูกครึ่ง":
 1.** เป็น Buffer:** พักข้อมูลที่เพิ่งเขียน (Dirty Pages) ไว้ใน RAM ก่อนจะ Flush ลง Disk เพื่อลดจำนวน I/O
 2.** เป็น Cache:** เก็บข้อมูลที่เพิ่งอ่านไว้ใน RAM เพื่อให้ Query ครั้งต่อไปไม่ต้องไปอ่านจาก Disk
 
 ### สรุปย่อเพื่อการสัมภาษณ์
+
 - หากคุณพูดถึง **"การรับมือกับ Traffic Spikes"**→ ให้ใช้คำว่า **Buffering **(Message Queues)
 - หากคุณพูดถึง **"การลด Latency ของการอ่าน"**→ ให้ใช้คำว่า **Caching **(Redis/CDN)
 
@@ -112,6 +117,7 @@ prerequisites: [core/03-cache-invalidation]
 ---
 
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
+
 - [[03-cache-invalidation|Cache Invalidation: ปัญหาโลกแตกของ Caching]]
 - [[Messaging/01-google-pubsub|Pub/Sub & Load Leveling]]
 - [[Networking/02-tcp-vs-udp|TCP Flow Control & Buffering]]

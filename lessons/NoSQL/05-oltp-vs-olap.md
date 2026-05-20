@@ -43,12 +43,14 @@ tags: [chat-exp, system-design, database, nosql, big-data]
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. OLTP (Online Transactional Processing)
+
 คือระบบที่ออกแบบมาเพื่อ **"จัดการธุรกรรม"** ในชีวิตประจำวัน
 *   **ลักษณะงาน:** เขียนบ่อย, อ่านรายบรรทัด (Primary Key), เน้นความเร็ว (Low Latency), รองรับ User มหาศาลพร้อมกัน
 *   **การจัดเก็บ:** **Row-oriented **(เก็บข้อมูลเรียงตามแถว) เหมาะกับการดึงข้อมูลของ"หนึ่งคน" ครบทุกคอลัมน์
 *   **ตัวอย่าง:**PostgreSQL, MySQL, Oracle, MongoDB
 
 ### 2. OLAP (Online Analytical Processing)
+
 คือระบบที่ออกแบบมาเพื่อ **"วิเคราะห์ข้อมูล"**
 *   **ลักษณะงาน:** อ่านทีละเยอะๆ (Bulk Read), คำนวณ Aggregation (Sum, Avg), เขียนแบบ Batch (เช่น ทุกชั่วโมง/วัน)
 *   **การจัดเก็บ:** **Column-oriented **(เก็บข้อมูลเรียงตามคอลัมน์) เหมาะกับการ Sum ข้อมูล"หนึ่งคอลัมน์" จากหมื่นล้านแถว
@@ -69,15 +71,18 @@ tags: [chat-exp, system-design, database, nosql, big-data]
 ## 🔬 ขยายความ (Extend)
 
 ### ทำไม Columnar Storage ถึงเร็วกว่าในงาน Analytics?
+
 ใน OLTP (Row-oriented) ถ้าคุณต้องการแค่`SUM(price)` DB ต้องอ่านข้อมูล"ทุกคอลัมน์" (ชื่อ, ที่อยู่, วันที่) ขึ้นมา Memory ก่อนจะทิ้งคอลัมน์ที่ไม่ใช้ออกไป
 แต่ใน **OLAP (Columnar)**DB จะอ่าน ** เฉพาะไฟล์คอลัมน์ price ** เท่านั้น! ทำให้ลดการใช้ Disk IO ไปได้มากกว่า 90%
 
 ### ETL vs ELT: สะพานเชื่อมสองโลก
+
 เพื่อให้ OLAP มีข้อมูลไปใช้งาน เราต้องย้ายข้อมูลจาก OLTP ไป:
 **ETL (Extract, Transform, Load):** ปรับแต่งข้อมูลให้สวยงามก่อนใส่ลง OLAP
 **ELT (Extract, Load, Transform):** โยนข้อมูลดิบลง OLAP (เช่น BigQuery) แล้วค่อยไปสั่ง Transform ในนั้นด้วยพลังการประมวลผลมหาศาลของมัน
 
 ### HTAP (Hybrid Transactional/Analytical Processing)
+
 ฐานข้อมูลยุคใหม่บางตัวพยายามทำทั้งสองอย่างในตัวเดียว (เช่น TiDB) แต่ส่วนใหญ่ยังคงแนะนำให้แยกเพื่อป้องกัน Resource Contention
 
 ---

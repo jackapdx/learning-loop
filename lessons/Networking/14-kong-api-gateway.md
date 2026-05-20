@@ -46,6 +46,7 @@ prerequisites: [networking/09-load-balancer, core/10-monolith-microservice-monor
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. API Gateway คืออะไร?
+
 API Gateway ทำหน้าที่เป็น Reverse Proxy ที่อยู่หน้าสุดของระบบ คอยจัดการเรื่อง:
 -**Authentication/Authorization:** เช็คว่าใครเป็นคนเรียก และมีสิทธิ์ไหม
 -**Rate Limiting:** จำกัดจำนวนการเรียกใช้งาน
@@ -53,6 +54,7 @@ API Gateway ทำหน้าที่เป็น Reverse Proxy ที่อ�
 -**Service Discovery:** รู้ว่าต้องส่ง Request ต่อไปที่เซอร์วิสไหน (IP/Port อะไร)
 
 ### 2. ทำไมต้อง Kong?
+
 Kong เป็น API Gateway ที่ได้รับความนิยมสูงสุดตัวหนึ่ง เพราะสร้างขึ้นบน **Nginx ** และ **OpenResty **(Lua) ทำให้มันเร็วมากและขยายความสามารถได้ด้วย Plugins
 -**DB-less Mode (Declarative Config):** เก็บการตั้งค่าในไฟล์ YAML (เหมาะกับ GitOps/K8s)
 -**DB Mode:** เก็บการตั้งค่าใน Postgres/Cassandra (เหมาะกับการเปลี่ยน Config ผ่าน API แบบ Real-time)
@@ -70,11 +72,13 @@ Kong เป็น API Gateway ที่ได้รับความนิย�
 ## 🔬 ขยายความ (Extend)
 
 ### Gateway vs. Sidecar (Service Mesh)
+
 ในระบบขนาดใหญ่มหาศาล การมี Gateway ตัวเดียวอาจไม่พอ (Gateway becomes a Bottleneck)
 -**API Gateway (North-South):** จัดการ Traffic จากภายนอกเข้ามาในระบบ เน้นความปลอดภัยและการจัดการลูกค้า
 -**Service Mesh (East-West):** ใช้ Sidecar (เช่น Envoy) แปะติดไปกับทุกเซอร์วิส เพื่อจัดการการคุยกันเองภายในระบบ (เช่น mTLS, Retries, Circuit Breaking)
 
 ### ความเสี่ยง: The Fat Gateway Anti-pattern
+
 กับดักที่ Senior ต้องระวังคือการใส่ Business Logic ลงไปใน Gateway (เช่น การ Join ข้อมูลจาก 2 เซอร์วิสใน Gateway)
 -** ผลเสีย:** ทำให้ Gateway ซับซ้อน ทดสอบยาก และถ้าพังจะทำให้ทุกเซอร์วิสพังตามกันไปหมด
 -** ทางแก้:**Gateway ควรทำหน้าที่เป็น"ท่อที่ฉลาด" เท่านั้น หากต้องทำ Logic ซับซ้อน ให้สร้าง **BFF (Backend For Frontend)** ขึ้นมาคั่นกลางแทน
@@ -98,6 +102,7 @@ Kong เป็น API Gateway ที่ได้รับความนิย�
 </details>
 
 ---
+
 ## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ระบบของคุณมี"งานส่วนกลาง" ที่กระจายอยู่ตามเซอร์วิสต่างๆ มากเกินไปหรือเปล่า? การนำ API Gateway มาใช้จะช่วยลดความซ้ำซ้อนนั้นได้ หรือจะกลายเป็นการสร้างจุดที่อาจจะพัง (SPOF) เพิ่มขึ้นอีกหนึ่งจุดกันแน่?
@@ -105,12 +110,12 @@ Kong เป็น API Gateway ที่ได้รับความนิย�
 ---
 
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
+
 - [[09-load-balancer|Load Balancer: L4 vs L7]]
 - [[Distributed/04-spof|SPOF: เมื่อ Gateway กลายเป็นจุดตาย]]
 - [[Distributed/11-distributed-rate-limiting|Distributed Rate Limiting: การควบคุมปริมาณ Request]]
 - [[10-monolith-microservice-monorepo|Monolith vs Microservices]]
 - [[01-trade-off-articulation|Trade-off Articulation: การให้เหตุผลเชิงสถาปัตยกรรม]]
-
 
 > ** อ้างอิง:**
 > - [Kong Documentation — What is an API Gateway?](https://docs.konghq.com/gateway/latest/introduction/)

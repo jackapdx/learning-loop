@@ -67,12 +67,14 @@ Cloud Run functions (เดิมคือ Cloud Functions) ทำหน้า�
 ## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: การรับมือกับ Cold Start
+
 ปัญหาใหญ่ของ Serverless คือ **Cold Start **(เวลาที่ใช้ในการ"ตื่น" เมื่อมี Request แรกหลังจาก Instance ดับไป)
 **Min Instances:** ตั้งค่าขั้นต่ำไว้ 1 เพื่อให้มีคนตื่นรอเสมอ (เสียเงินเพิ่มเล็กน้อย)
 **Lightweight Code:** อย่าใส่ Library ที่ไม่จำเป็น เพราะมันจะเพิ่มเวลาในการโหลดตอนตื่น
 **Global Variables:** ใช้ประโยชน์จากการประกาศตัวแปรนอกฟังก์ชัน (เช่น DB Connection) เพื่อให้ Instance ที่"อุ่น" อยู่แล้วนำไปใช้ซ้ำได้
 
 ### เมื่อไหร่ควรเปลี่ยนจาก Functions ไปเป็น Service?
+
 - เมื่อฟังก์ชันของคุณเริ่มเยอะและซับซ้อนจนจัดการยาก (กลายเป็น Distributed Monolith)
 - เมื่อคุณต้องการประหยัดต้นทุนโดยการรัน **Multiple Requests ** ใน Instance เดียว (Concurrency 🧵)
 

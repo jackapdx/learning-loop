@@ -18,7 +18,7 @@ tags: [observability, sre, monitoring, metrics]
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️ **สถานการณ์:** คุณเป็น SRE ที่ดูแลระบบ **Microservices ** ขนาดใหญ่ 
+> ✍️ **สถานการณ์:** คุณเป็น SRE ที่ดูแลระบบ **Microservices ** ขนาดใหญ่
 > - ผู้ใช้เริ่มบ่นว่า"แอปช้า" (Slowness)
 > - เมื่อคุณดู Dashboard พบว่า CPU Usage ของเซิร์ฟเวอร์ทุกตัวอยู่ที่ 20% (น้อยมาก)
 > - แต่ Error Rate เริ่มค่อยๆ สูงขึ้น
@@ -49,6 +49,7 @@ tags: [observability, sre, monitoring, metrics]
 💡 ในโลก SRE มี 3 แนวทางหลักในการเลือก Metrics:
 
 ### 1. The Four Golden Signals (โดย Google)
+
 หัวใจของการวัด"ประสบการณ์ผู้ใช้":
 -**Latency:** เวลาที่ใช้ประมวลผล (ต้องแยก Success vs Error)
 -**Traffic:** ปริมาณงานที่ไหลเข้าระบบ (Requests/s)
@@ -56,12 +57,14 @@ tags: [observability, sre, monitoring, metrics]
 -**Saturation:**"ความอิ่มตัว" — ระบบรับโหลดได้อีกเท่าไหร่? (เช่น Queue ที่รอประมวลผล)
 
 ### 2. The RED Method (สำหรับ Services)
+
 เน้นไปที่การวัดประสิทธิภาพของ Microservice:
 -**(R)ate:** จำนวน Request ต่อวินาที
 -**(E)rrors:** จำนวน Request ที่พัง
 -**(D)uration:** เวลาที่ใช้ (Latency)
 
 ### 3. The USE Method (สำหรับ Resources/Hardware)
+
 เน้นไปที่การวิเคราะห์คอขวดของทรัพยากร:
 -**(U)tilization:** ทรัพยากรถูกใช้ไปกี่ % (เช่น CPU 80%)
 -**(S)aturation:** มีงานที่"รอคิว" ใช้ทรัพยากรนั้นไหม? (เช่น Disk I/O Wait)
@@ -72,11 +75,13 @@ tags: [observability, sre, monitoring, metrics]
 ## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: การวัด Saturation ที่มองไม่เห็น
+
 Saturation คือจุดที่แยกมือโปรออกจากมือสมัครเล่น:
 -**Database 📦 Connections:** หาก App เชื่อมต่อ DB ได้สูงสุด 100 แล้วตอนนี้ใช้ไป 99 นี่คือ Saturation แม้ CPU DB จะอยู่ที่ 10% ก็ตาม
 -**Thread 🧵 Pool:** หากแอปมี 10 Thread 🧵 และทุกตัวกำลังทำงานอยู่ งานที่ 11 ต้องรอคิว นี่คือสาเหตุของ"แอปช้าทั้งที่ CPU ว่าง"
 
 ### สรุปการเลือกใช้
+
 | สถานการณ์ | Framework ที่ควรใช้ |
 |:---|:---|
 |** ออกแบบ Dashboard ให้ User เห็น **| Golden Signals |

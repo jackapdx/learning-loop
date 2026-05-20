@@ -21,7 +21,8 @@ tags: [chat-exp, system-design, postgres]
 ## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณมี Query ที่ทำงานช้ามาก คุณจึงรัน`EXPLAIN ANALYZE` และพบข้อความนี้ในผลลัพธ์:
->```
+>
+>```sql
 > Seq Scan on orders (cost 💰=0.00..15240.00 rows=500 width=120)
 > Filter: (customer_id = 42)
 > Rows Removed by Filter: 999500
@@ -46,16 +47,19 @@ tags: [chat-exp, system-design, postgres]
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. EXPLAIN vs EXPLAIN ANALYZE
+
 *   **EXPLAIN:** บอกแค่ **"แผน"** ที่ฐานข้อมูลคิดจะทำ (ไม่รันจริง) - ใช้สำหรับ Query ที่รันนานมากๆ และเราแค่อยากเช็คเบื้องต้น
 *   **EXPLAIN ANALYZE:** รัน Query **"จริง"** และบอกเวลาที่ใช้จริง - แม่นยำที่สุด แต่ต้องระวังหากใช้กับคำสั่ง`DELETE` หรือ`UPDATE` (แนะนำให้รันใน Transaction แล้ว Rollback)
 
 ### 2. Node Types ที่พบบ่อย
+
 *   **Seq Scan:** อ่านทั้งตาราง (แย่หากตารางใหญ่)
 *   **Index Scan:** ใช้ Index เพื่อหาตำแหน่งแถว แล้วค่อยไปอ่านข้อมูลจริง (ดี)
 *   **Index Only Scan:** อ่านแค่ Index อย่างเดียว ไม่ต้องไปแตะตารางจริงเลย (ดีที่สุด)
 *   **Bitmap Index Scan:** รวบรวมตำแหน่งจาก Index ก่อนแล้วค่อยไปดึงข้อมูลเป็นก้อน (ดีสำหรับข้อมูลจำนวนปานกลาง)
 
 ### 3. Join Algorithms (การเชื่อมตาราง)
+
 *   **Nested Loop:** เอาแถวจากตาราง A ไปวนหาในตาราง B (ดีถ้า B มี Index)
 *   **Hash Join:** สร้างตารางชั่วคราวใน Memory (Hash Table) เพื่อจับคู่ (ดีสำหรับตารางใหญ่ทั้งคู่)
 *   **Merge Join:** เรียงลำดับทั้ง 2 ตารางก่อนแล้วค่อยจับคู่ (ดีถ้าข้อมูลถูกเรียงลำดับมาอยู่แล้ว)
@@ -65,17 +69,22 @@ tags: [chat-exp, system-design, postgres]
 ## 🔬 ขยายความ (Extend)
 
 ### การตรวจสอบ I/O ด้วย BUFFERS
+
 หากคุณต้องการรู้ว่า Query ของคุณ"อ่าน Disk" หนักแค่ไหน ให้ใช้:
+
 ```sql
 EXPLAIN (ANALYZE, BUFFERS) SELECT ...;
 ```
+
 ดูค่า`Shared Read` (อ่านจาก Disk) และ`Shared Hit` (อ่านจาก Memory/Cache) เป้าหมายของเราคือทำให้`Shared Hit` สูงที่สุดเท่าที่จะเป็นไปได้
 
 ### Statistics ที่ไม่อัปเดต: กับดักของ Planner
+
 บางครั้งเราทำ Index แล้วแต่ Postgres ยังใช้ Seq Scan นั่นอาจเป็นเพราะฐานข้อมูลมีความเชื่อ (Statistics) ที่ผิดเกี่ยวกับข้อมูลของเรา
 *   **วิธีแก้:** รันคำสั่ง`ANALYZE table_name;` เพื่ออัปเดตข้อมูลให้ Planner ฉลาดขึ้น
 
 ### เครื่องมือช่วยอ่าน (Visualizer)
+
 หากข้อความดิบอ่านยาก แนะนำให้ใช้เครื่องมืออย่าง **[Explain Dalibo](https://explain.dalibo.com/)** หรือ **[Postgres Explain Visualizer (PEV)](https://tatiyants.com/pev/)** เพื่อดูเป็นแผนภาพที่เข้าใจง่ายขึ้น
 
 ---

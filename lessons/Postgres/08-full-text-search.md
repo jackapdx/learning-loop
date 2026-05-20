@@ -55,10 +55,13 @@ WHERE to_tsvector('english', content) @@ to_tsquery('english', 'database & sql')
 ```
 
 ### 2. Stemming: การลดรูปคำ
+
 PostgreSQL ฉลาดพอที่จะรู้ว่า`running`,`runs`,`ran` มาจากรากศัพท์เดียวกันคือ`run` ทำให้คุณค้นหาได้กว้างและแม่นยำขึ้น
 
 ### 3. GIN Index: อาวุธลับความเร็วสูง
+
 เพื่อให้ Search ทำงานได้ในระดับมิลลิวินาที เราต้องสร้าง Index ประเภท GIN บน Column ที่เป็น`tsvector`
+
 ```sql
 -- แนะนำให้สร้างเป็น Generated Column เพื่อความเร็วสูงสุด
 ALTER TABLE articles ADD COLUMN content_tsv tsvector 
@@ -68,6 +71,7 @@ CREATE INDEX idx_content_fts ON articles USING GIN (content_tsv);
 ```
 
 ### 4. Ranking & Highlighting: ทำให้เหมือน Google
+
 *   **`ts_rank`:** ให้คะแนนความเกี่ยวข้อง (เช่น คำที่หาปรากฏบ่อยแค่ไหน หรืออยู่ใกล้กันไหม)
 *   **`ts_headline`:** ทำตัวหนาครอบคำที่ค้นหาเพื่อแสดงใน UI
 
@@ -83,9 +87,11 @@ ORDER BY rank DESC;
 ## 🔬 ขยายความ (Extend)
 
 ### การค้นหาหลายภาษา (Multi-language)
+
 PostgreSQL รองรับพจนานุกรมหลายภาษา หากคุณทำแอปที่รองรับทั้งไทยและอังกฤษ คุณสามารถเก็บค่า`language` ไว้ในตารางและเรียกใช้ใน`to_tsvector` ได้ (สำหรับภาษาไทยอาจต้องใช้ Extension เพิ่มเติม เช่น`icu` หรือ`pg_thai`)
 
 ### เมื่อไหร่ที่ควรย้ายไป Elasticsearch?
+
 แม้ Postgres จะเก่งมาก แต่หากคุณต้องการฟีเจอร์เหล่านี้ Elasticsearch จะทำได้ดีกว่า:
 *   **Fuzzy Search:** เช่น พิมพ์ผิด (Typo) แล้วยังหาเจอ (Postgres ทำได้ผ่าน`pg_trgm` แต่ไม่ยืดหยุ่นเท่า)
 *   **Faceting/Aggregations:** เช่น การทำฟิลเตอร์ข้างหน้าจอว่า"มีสินค้าในหมวดหมู่นี้กี่ชิ้น" สำหรับข้อมูลมหาศาล

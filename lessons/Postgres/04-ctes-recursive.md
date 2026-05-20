@@ -41,7 +41,9 @@ tags: [chat-exp, system-design, postgres]
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. Basic CTE (Non-Recursive)
+
 เปรียบเสมือนการสร้างตัวแปรเพื่อเก็บผลลัพธ์ของ Query หนึ่งไว้ใช้ใน Query ถัดไปภายในคำสั่งเดียว
+
 ```sql
 WITH regional_sales AS (
     SELECT region, SUM(amount) as total_sales
@@ -57,6 +59,7 @@ SELECT * FROM orders WHERE region IN (SELECT region FROM top_regions);
 ```
 
 ### 2. Recursive CTE (หัวใจของบทนี้)
+
 โครงสร้างประกอบด้วย 2 ส่วนหลัก เชื่อมด้วย`UNION ALL`:
 **Anchor Member:** จุดเริ่มต้น (เช่น หาตัว CEO)
 **Recursive Member:** การหาลูกน้องในชั้นถัดไป โดยอ้างอิงจากผลลัพธ์ก่อนหน้า
@@ -83,7 +86,9 @@ SELECT * FROM org_chart ORDER BY level;
 ## 🔬 ขยายความ (Extend)
 
 ### Materialized CTE (PostgreSQL 12+)
+
 โดยปกติ PostgreSQL จะพยายามเอา CTE ไปยุบรวมกับ Main Query (Inlining) เพื่อ Optimize แต่บางครั้งเราอยากให้มันรันแยกกันและเก็บผลลัพธ์ชั่วคราวไว้เลย เราใช้`MATERIALIZED`
+
 ```sql
 WITH expensive_query AS MATERIALIZED (
     SELECT ... -- Query ที่รันนานๆ
@@ -92,7 +97,9 @@ SELECT * FROM expensive_query; -- จะดึงจากที่คำนว�
 ```
 
 ### การป้องกัน Infinite Loop
+
 ในการทำ Recursive กับข้อมูลแบบ Graph (เช่น เพื่อนแนะนำเพื่อน) อาจเกิดการวนลูปได้ เราควรมีกลไกป้องกัน เช่น การเก็บเส้นทาง (Path) ที่เคยไปมาแล้ว
+
 ```sql
 WITH RECURSIVE search_graph(id, link, path, cycle) AS (
     SELECT id, link, ARRAY[id], false FROM graph

@@ -46,11 +46,12 @@ tags: [chat-exp, system-design, postgres]
 
 ### ประเภทของ Partitioning ใน PostgreSQL
 
-
 PostgreSQL รองรับการทำ Declarative Partitioning หลักๆ 3 รูปแบบ:
 
 #### 1. RANGE Partitioning (ยอดนิยมที่สุด)
+
 แบ่งตามช่วงข้อมูล เช่น วันที่ หรือตัวเลขต่อเนื่อง เหมาะมากสำหรับข้อมูลแบบ Time-series หรือ Logs
+
 ```sql
 CREATE TABLE orders (
     id BIGSERIAL,
@@ -64,7 +65,9 @@ CREATE TABLE orders_2026_05 PARTITION OF orders
 ```
 
 #### 2. LIST Partitioning
+
 แบ่งตามค่าที่แน่นอน (Discrete Values) เช่น สถานะ หรือรหัสประเทศ
+
 ```sql
 CREATE TABLE tickets (
     id BIGSERIAL,
@@ -76,7 +79,9 @@ CREATE TABLE tickets_active PARTITION OF tickets
 ```
 
 #### 3. HASH Partitioning
+
 กระจายข้อมูลให้เท่ากันในทุกตารางย่อย เหมาะสำหรับการทำ Load Balancing ของข้อมูล
+
 ```sql
 CREATE TABLE users (id BIGINT, name TEXT) PARTITION BY HASH (id);
 
@@ -87,6 +92,7 @@ CREATE TABLE users_0 PARTITION OF users FOR VALUES WITH (MODULUS 4, REMAINDER 0)
 ### Partition Pruning: เวทมนตร์ที่ทำให้ Query เร็วขึ้น
 
 เมื่อคุณรัน Query โดยมีเงื่อนไข (WHERE clause) ที่ตรงกับ Partition Key ระบบจะฉลาดพอที่จะ **"ข้าม"** ตารางย่อยที่ไม่เกี่ยวข้องไปเลย
+
 ```sql
 -- Query: ดึงข้อมูลเดือนพฤษภาคม
 SELECT * FROM orders WHERE created_at >= '2026-05-15';
@@ -101,17 +107,21 @@ SELECT * FROM orders WHERE created_at >= '2026-05-15';
 ## 🔬 ขยายความ (Extend)
 
 ### Sub-partitioning: การแบ่งย่อยสองชั้น
+
 คุณสามารถทำ Partition ซ้อน Partition ได้ เช่น แบ่งตาม"เดือน" ก่อน แล้วข้างในเดือนแบ่งตาม"ภูมิภาค" (Region) เพื่อให้การ Query เฉพาะเจาะจงมากขึ้น
 
 ### pg_partman: เครื่องมือทุ่นแรงที่ Senior ต้องรู้จัก
+
 การสร้าง Partition ด้วยมือทุกเดือน/ทุกวันนั้นเสี่ยงต่อความผิดพลาด (Human Error) การใช้ Extension อย่าง **pg_partman ** จะช่วยสร้างตารางย่อยล่วงหน้าอัตโนมัติ และจัดการการลบตารางเก่า (Retention Policy) ให้เราเอง
 
 ### เมื่อไหร่ที่ควรเริ่มทำ Partitioning?
+
 *   **ขนาดตาราง:** เมื่อตารางเริ่มใหญ่กว่า RAM ของเครื่อง (เช่น > 10-20 GB)
 *   **จำนวนแถว:** เริ่มมีข้อมูลหลัก 10 ล้านแถวขึ้นไป
 *   **ลักษณะงาน:** ต้องลบข้อมูลเก่าเป็นก้อนใหญ่ๆ (Bulk Deletion) หรือ Query มักจะมีเงื่อนไขตามช่วงเวลาเสมอ
 
 ### ข้อควรระวัง (Trade-offs)
+
 *   **Primary Key:** ทุก Primary Key และ Unique Index จะต้องรวม Partition Key เข้าไปด้วยเสมอ (เช่น`PRIMARY KEY (id, created_at)`)
 *   **Cross-partition Query:** หาก Query โดยไม่มี Partition Key ในเงื่อนไข Postgres จะต้องสแกนทุกตารางย่อย ซึ่งอาจช้ากว่าตารางปกติเล็กน้อย
 

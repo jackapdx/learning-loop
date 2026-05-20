@@ -70,7 +70,7 @@ The Learning Loop App supports multiple content types. Each lesson declares its 
 | Content Type | Frontmatter Value | Description | Required Sections |
 |---|---|---|---|
 | **Learning Loop** | `learning-loop` | Standard 7-stage interactive lesson (default) | orient → attempt → feedback → explain → extend → checkpoint → reflect |
-| **Overview** | `overview` | Series overview/roadmap with lesson listing | orient → roadmap → lesson list |
+| **Overview** | `overview` | Series overview/roadmap with lesson listing | roadmap → lesson list (orient optional) |
 | **Deep Dive** | `deep-dive` | Long-form technical article (no quiz cycle) | orient → explain → extend → checkpoint → reflect |
 | **Cheatsheet** | `cheatsheet` | Quick reference card (tables, commands, patterns) | orient → commands → patterns → checkpoint |
 | **Case Study** | `case-study` | Real-world production incident analysis | orient → scenario → timeline → analysis → reflect |
@@ -115,7 +115,7 @@ Every lesson follows a 7-stage progression (plus intro and related topics). The 
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 ```
 
-For **overview** lessons (`contentType: overview`), use `🗺️` and `📋` sections instead of the attempt/feedback pair.
+For **overview** lessons (`contentType: overview`), use `🗺️` and `📋` sections instead of the attempt/feedback pair. The `🎯` Orient section is optional — include it only when there's a meaningful problem-space framing to add beyond what the roadmap already conveys.
 
 ### Section Content Guidelines
 

@@ -16,9 +16,11 @@ tags: [testing, api-testing, service-virtualization, mountebank, load-testing, p
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: API Testing & Service Virtualization → #1
+
 [[01-api-testing-mountebank|API Testing with Mountebank]] — จำลอง API ของ Third-Party และ Dependency เพื่อทดสอบระบบของคุณแบบแยกส่วน โดยไม่ต้องรอให้ Dependency พร้อม
 
 ### Path B: Load Testing → #2
+
 [[02-load-testing|Load Testing]] — กดดันระบบด้วย Traffic จริงเพื่อหาจุดแตกหัก ก่อนที่ผู้ใช้จริงจะหาเจอ
 
 ```mermaid

@@ -18,9 +18,9 @@ tags: [nosql, mongodb, locking, performance, system-design]
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️ ** สถานการณ์:** คุณอัปเกรดเซิร์ฟเวอร์ Database 📦 เป็นเครื่องที่แรงที่สุดในตลาด (96 Cores, 512GB RAM) 
+> ✍️ ** สถานการณ์:** คุณอัปเกรดเซิร์ฟเวอร์ Database 📦 เป็นเครื่องที่แรงที่สุดในตลาด (96 Cores, 512GB RAM)
 > - คุณหวังว่าจะรองรับ Write ได้เพิ่มขึ้น 10 เท่า
-> - แต่เมื่อรันจริง Throughput กลับเท่าเดิม และ CPU % System กลับสูงปรี๊ด 
+> - แต่เมื่อรันจริง Throughput กลับเท่าเดิม และ CPU % System กลับสูงปรี๊ด
 > - เมื่อตรวจสอบพบว่า Thread 🧵 จำนวนมากติดสถานะ"Waiting for Lock"
 >
 > ** คำถาม:** ในฐานะ Senior Engineer คุณจะอธิบายปรากฏการณ์นี้ว่าอย่างไร? และทำไมการเพิ่ม CPU ถึงไม่ช่วย (หรืออาจทำให้แย่ลง)?
@@ -44,6 +44,7 @@ tags: [nosql, mongodb, locking, performance, system-design]
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. ลำดับขั้นของการ Lock (Lock Granularity)
+
 ยิ่ง Lock ละเอียด ระบบยิ่งทำงานขนาน (Parallel) ได้ดี:
 -**Global Lock:** ล็อกทั้ง Database 📦 (คนหนึ่งเขียน ทั้งโลกหยุดรอ) -> *แย่ที่สุด*
 - **Database 📦 Lock:** ล็อกเฉพาะ DB นั้น (DB อื่นยังทำงานได้)
@@ -51,6 +52,7 @@ tags: [nosql, mongodb, locking, performance, system-design]
 -**Document/Row Lock:** ล็อกเฉพาะแถวที่กำลังแก้ -> *ดีที่สุด*
 
 ### 2. บทเรียนจาก Foursquare (The Page Fault Death Spiral)
+
 ในปี 2010 Foursquare ล่มเพราะ MongoDB รุ่นเก่าใช้ **Global Write Lock **:
 ข้อมูลโตจนเกิน RAM ทำให้เกิด **Page Fault **(ต้องไปดึงจากดิสก์)
 MongoDB ถือ **Global Lock ** ค้างไว้ระหว่างรออ่านดิสก์ที่แสนช้า
@@ -58,6 +60,7 @@ MongoDB ถือ **Global Lock ** ค้างไว้ระหว่างร
 ยิ่งคนรอเยอะ แถวยิ่งยาว จนระบบน็อคไปทั้งระบบ
 
 ### 3. วิวัฒนาการสู่ WiredTiger
+
 MongoDB แก้ปัญหานี้ถาวรโดยการเปลี่ยน Storage Engine เป็น **WiredTiger ** ซึ่งใช้:
 -**Document-level Locking 🧵:** ยอมให้คนเขียนคนละหน้ากระดาษพร้อมกันได้
 -**Optimistic Concurrency 🧵:** สมมติว่าไม่มีใครแก้ข้อมูลชนกัน แล้วค่อยเช็คตอนจบ ถ้าชนค่อยแก้ใหม่
@@ -67,10 +70,12 @@ MongoDB แก้ปัญหานี้ถาวรโดยการเปล
 ## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: การหา Serial Bottleneck
+
 จำกฎของ **Amdahl's Law **: ความเร็วของระบบจะถูกจำกัดด้วยส่วนที่"รันขนานไม่ได้" (Sequential part)
 - หากระบบของคุณมีการ Lock ที่คอขวด ต่อให้คุณเพิ่มเซิร์ฟเวอร์หรือ CPU เท่าไหร่ ประสิทธิภาพจะไม่มีวันเพิ่มขึ้นแบบ Linear
 
 ### วิธีสังเกตอาการ"ติด Lock" ใน Production
+
 **High CPU Wait / System CPU:** คอร์ทำงานหนักกับการ"จัดการคิว" ไม่ใช่งานจริง
 **Lock Percentage > 50%:**(ในเครื่องมือ Monitor) บอกว่า Database 📦 ใช้เวลาส่วนใหญ่ไปกับการถือ Lock ค้างไว้
 **Thread 🧵 State"Locked":** เมื่อใช้คำสั่ง`db.currentOp()` แล้วเจอคำว่า`waitingForLock: true` จำนวนมาก

@@ -25,7 +25,7 @@ tags: [redis, workers, bullmq, system-design]
 > ** ปัญหา:** ระหว่างที่ Worker กำลังย่อรูปภาพ จู่ๆ เซิร์ฟเวอร์เกิดพัง (Crash) หรือเน็ตหลุด ทำให้ Worker หายไปดื้อๆ โดยที่งานยังทำไม่เสร็จ
 >
 > ** คำถาม:**
-> 1. งานที่ค้างอยู่นั้นจะหายไปเลยหรือไม่? 
+> 1. งานที่ค้างอยู่นั้นจะหายไปเลยหรือไม่?
 > 2. BullMQ มีกลไกอะไรในการนำงานที่"ค้าง" กลับมาทำใหม่?
 >
 > ** หยุดตรงนี้ก่อน **— ลองนึกถึงสภาวะที่เรียกว่า **Stalled Job **
@@ -47,19 +47,23 @@ tags: [redis, workers, bullmq, system-design]
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. ทำไมต้อง Redis? (Speed & Features)
+
 การที่ BullMQ รันบน Redis ทำให้มันได้เปรียบเรื่อง:
 -**Throughput:** รองรับการเพิ่มงานนับหมื่นต่อวินาทีโดยไม่ทำให้ระบบช้าลง
 -**Rich Features:** รองรับลำดับความสำคัญ (Priority), การตั้งเวลาล่วงหน้า (Delayed), และ Parent-Child Jobs (Flows)
 
 ### 2. กลไกการจัดการงานล้มเหลว (Stalled Jobs)
+
 BullMQ ใช้ระบบ **Lock **:
 - เมื่อ Worker หยิบงาน มันจะ Lock งานนั้นไว้ในเวลาที่กำหนด (เช่น 30 วินาที)
 - ระหว่างทำงาน Worker จะคอยต่ออายุ Lock (Heartbeat) เรื่อยๆ
 -** ถ้า Worker ตาย:**Lock จะหมดอายุ และ BullMQ จะย้ายงานจากสถานะ`active` กลับไปที่`wait` เพื่อให้ Worker ตัวอื่นมาหยิบไปทำใหม่
 
 ### 3. ปัญหาที่พบบ่อย: Redis Memory Full
+
 เนื่องจาก Redis เก็บข้อมูลใน RAM หากคุณไม่ลบงานที่ทำเสร็จแล้วออก RAM จะเต็มและระบบจะล่ม
 - *วิธีแก้:* ตั้งค่า **Retention Policy ** เสมอ
+
 ```javascript
 const myQueue = new Queue('paint', {
   defaultJobOptions: {
@@ -74,11 +78,13 @@ const myQueue = new Queue('paint', {
 ## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: การทำ [[../../05-idempotency|Idempotency]]
+
 เนื่องจาก BullMQ รับประกันการส่งงานแบบ **"At Least Once"**(อย่างน้อยหนึ่งครั้ง) หมายความว่างานเดิมอาจถูกรันซ้ำได้ (เช่น กรณี Stalled Job)
--**[[../../05-idempotency|Idempotency]]:** โค้ดใน Worker ต้องเช็คก่อนเสมอว่า"งานนี้เคยทำสำเร็จไปแล้วหรือยัง?" 
+-**[[../../05-idempotency|Idempotency]]:** โค้ดใน Worker ต้องเช็คก่อนเสมอว่า"งานนี้เคยทำสำเร็จไปแล้วหรือยัง?"
 - *เทคนิค:* ใช้`jobId` ที่มีความหมาย (เช่น`order_123`) เพื่อป้องกันการเพิ่มงานซ้ำ (Deduplication) ในระดับ Queue
 
 ### Connection Management
+
 การเชื่อมต่อ Redis ของ BullMQ ต้องตั้งค่า`maxRetriesPerRequest: null` ใน`ioredis` เพื่อให้กลไกการรอรับงาน (Blocking commands) ทำงานได้อย่างถูกต้อง
 
 ---

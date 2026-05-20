@@ -20,12 +20,12 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md]
 ## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณกำลังออกแบบระบบ Chat ระดับโลกที่ต้องรองรับการส่งข้อความ 1 ล้านข้อความต่อวินาที (1M msgs/sec) โดยข้อมูลถูกกระจายเก็บในฐานข้อมูล 10 ตัว (Shards) ทั่วโลก
-> 
+>
 > ** โจทย์:**
 > 1. ข้อความทุุกข้อความต้องมี Unique ID ที่ไม่ซ้ำกันเด็ดขาด
 > 2. ID ต้องสามารถเรียงลำดับตามเวลาได้คร่าวๆ (K-ordered) เพื่อให้ดึงข้อความล่าสุดได้เร็ว
 > 3. ต้องรองรับการเขียนระดับสูงโดยไม่มีคอขวดที่ตัวเจน ID กลาง
-> 
+>
 > ** คำถาม:** คุณจะเลือกใช้กลยุทธ์การสร้าง ID แบบใด? และเพราะอะไรถึงยอมแลก (Trade-off) กับตัวเลือกอื่น?
 >
 > **✋ หยุดตรงนี้ก่อน **— ลองคิดดูว่า UUID v4, UUID v7 หรือ Snowflake ID แบบไหนที่ตอบโจทย์นี้ได้ดีที่สุดในบริบทของประสิทธิภาพ Index และพื้นที่จัดเก็บ
@@ -81,16 +81,19 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md]
 ### การเลือก ID ตามบริบท (Decision Framework)
 
 ### ควรใช้ UUID v7 เมื่อ...
+
 - คุณต้องการความง่าย (Decentralized) โดยไม่ต้องรัน ID Generator Service แยกต่างหาก
 - ระบบคุณไม่ซีเรียสเรื่องพื้นที่ 16 Bytes (เช่น App ทั่วไป, Web Services)
 - ฐานข้อมูลรองรับ UUID เป็น Native Type (เช่น PostgreSQL)
 
 ### ควรใช้ Snowflake ID เมื่อ...
+
 - คุณต้องการ **Maximum Throughput ** และความประหยัดพื้นที่ (เช่น ระบบ Log, ระบบ Chat ขนาดใหญ่)
 - คุณสามารถจัดการ **Machine ID Allocation ** ได้ (เช่น ใช้ Zookeeper หรือ Etcd ช่วย)
 - ต้องการ ID ที่เป็นตัวเลขล้วนเพื่อความสะดวกในการส่งผ่าน API หรือเก็บใน JavaScript (ระบุ BigInt)
 
 ### กับดักที่ต้องระวัง (Production Gotchas)
+
 1.**Clock Skew:**Snowflake พึ่งพาเวลาเครื่อง หากเวลาในเครื่อง Generator ถอยหลัง (NTP sync) อาจเกิด ID ซ้ำได้ ต้องมีกลไกป้องกัน
 2.**JS Precision:**Snowflake ID (64-bit) มีค่าเกิน`Number.MAX_SAFE_INTEGER` ของ JavaScript เสมอ ต้องส่งเป็น String หรือใช้ BigInt เท่านั้น
 3.**Information Leakage:**ID ที่มี Timestamp อาจเปิดเผยเวลาที่ข้อมูลถูกสร้าง ซึ่งอาจเป็นความลับทางธุรกิจในบางกรณี

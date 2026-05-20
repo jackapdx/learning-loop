@@ -21,18 +21,23 @@ tags: [chat-exp, system-design, postgres]
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: ประสิทธิภาพและสถาปัตยกรรม (Performance) → #1, 2, 10
+
 สำหรับผู้ที่พบปัญหา Query ช้าหรือต้องการเตรียมระบบรับโหลดมหาศาล — เจาะลึก Table Partitioning, Index Types และการอ่าน EXPLAIN ANALYZE
 
 ### Path B: การดึงข้อมูลขั้นสูง (Advanced SQL) → #3, 4, 7, 8
+
 ยกระดับการเขียน Query ให้ทรงพลังและสั้นลง — เจาะลึก Window Functions, Recursive CTEs, JSONB และ Full-text Search
 
 ### Path C: การบริหารจัดการและเสถียรภาพ (Operations) → #5, 6, 9, 11
+
 สำหรับคนดูแลระบบที่ต้องการความมั่นใจใน Production — เข้าใจกลไก MVCC/VACUUM, Connection Pooling, Locking 🧵 และ Isolation Levels
 
 ### Path D: นวัตกรรมใหม่ใน Postgres (Modern Ecosystem) → #12
+
 สำรวจความเป็นไปได้ใหม่ๆ ที่ Postgres ทำได้มากกว่าแค่เก็บข้อมูล 📦 — ตั้งแต่ Vector Database 📦 (AI 🧠) ไปจนถึง Time-series และ Geospatial
 
 ### Path E: ความน่าเชื่อถือระดับ Senior (Reliability) → #13
+
 เตรียมรับมือกับภัยเงียบที่อาจทำให้ระบบล่มทันที — เข้าใจ Transaction ID Wraparound และวิกฤต Database 📦 Hard-stop
 
 ---

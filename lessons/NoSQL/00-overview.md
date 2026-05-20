@@ -10,7 +10,7 @@ tags: [chat-exp, system-design, nosql, databases]
 
 > [!info] ปฐมนิเทศ
 > เมื่อข้อมูลของคุณโตเกินกว่าที่เซิร์ฟเวอร์ตัวเดียวจะรับไหว (Vertical Scale) หรือคุณต้องการ Write Throughput ที่รุนแรงระดับล้านรายการต่อวินาที NoSQL คือคำตอบ
-> 
+>
 > แต่ NoSQL ไม่ใช่"ยาวิเศษ" มันมาพร้อมกับข้อแลกเปลี่ยน (Trade-offs) ที่เจ็บปวด ทั้งเรื่องความถูกต้องของข้อมูล (Consistency ⛓️) และความซับซ้อนในการออกแบบ Schema บทเรียนนี้จะพาคุณไปดูเบื้องหลังการทำงานของ NoSQL ผ่านเหตุการณ์จริงของบริษัทระดับโลก
 >
 > Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
@@ -18,9 +18,11 @@ tags: [chat-exp, system-design, nosql, databases]
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: Scaling Strategy → #1, 2, 5
+
 [[01-sql-vs-nosql-tradeoffs|SQL vs NoSQL]] + [[02-nosql-hotspots-sharding|Hotspots & Sharding]] + [[05-oltp-vs-olap|OLTP vs OLAP]] — เมื่อไหร่ควรเปลี่ยน และจะเลือกใช้ฐานข้อมูลประเภทไหนให้ถูกงาน
 
 ### Path B: Concurrency & Integrity → #3, 4
+
 [[03-nosql-locking-concurrency|Locking & Concurrency]] + [[04-eventual-consistency|Eventual Consistency]] — เจาะลึกกลไกภายในที่ทำให้ระบบช้าลงโดยไม่รู้ตัว
 
 ## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)

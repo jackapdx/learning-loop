@@ -128,6 +128,7 @@ POST http://localhost:2525/imposters
   ]
 }
 ```
+
 > ⚠️ ** ข้อจำกัดของตัวอย่างข้างบน:** ถ้าใช้ Predicate ซ้ำกัน Mountebank จะเลือก Stub แรกที่ Match เสมอ — ถ้าต้องการให้ระบบทำงานได้หลาย State ต้องใช้ **Stub Overlap Behavior ** หรือ`x-mountebank-inject-headers` เพื่อให้ Client เลือกว่าจะให้ตอบแบบไหน [source: mountebank docs — predicates]
 
 ---
@@ -189,6 +190,7 @@ Mountebank มีโหมด`proxyOnce` — มันจะ Forward Request ไ
   ]
 }
 ```
+
 > ⚠️ ** ข้อควรระวัง:**`proxyOnce` ใช้ได้ดีกับ Idempotent API (GET, Read-only) — กับ POST/PUT ที่มี Side Effect (สร้าง Transaction จริง) มันจะสร้างของจริงในครั้งแรก! ใช้`proxyAlways` หรือเขียน Custom Stub แทนสำหรับ Mutating Operations
 
 ---

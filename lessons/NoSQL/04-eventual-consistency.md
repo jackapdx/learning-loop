@@ -19,7 +19,7 @@ tags: [nosql, consistency, cap-theorem, system-design, databases]
 ## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ **สถานการณ์:** คุณออกแบบแอป Social Media ที่ใช้ **Cassandra ** แบบกระจาย 3 Regions (Asia, Europe, US)
-> - User A ในไทย โพสต์ข้อความ"สวัสดี" 
+> - User A ในไทย โพสต์ข้อความ"สวัสดี"
 > - ระบบตอบกลับ User A ทันทีว่า"สำเร็จ"
 > - User B ในอเมริกา รีเฟรชหน้าจอในวินาทีถัดมา แต่ ** ยังไม่เห็น ** ข้อความของ User A
 >
@@ -44,6 +44,7 @@ tags: [nosql, consistency, cap-theorem, system-design, databases]
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. CAP Theorem (ทฤษฎีพื้นฐาน)
+
 ในระบบกระจายตัว คุณเลือกได้แค่ 2 จาก 3 อย่าง:
 -**(C)onsistency:** ข้อมูลทุกเครื่องต้องตรงกันเสมอ
 -**(A)vailability:** ระบบต้องตอบสนองได้ตลอดเวลา (แม้ข้อมูลจะเก่า)
@@ -52,11 +53,13 @@ tags: [nosql, consistency, cap-theorem, system-design, databases]
 **กฎเหล็ก:** ในโลก Cloud เราหลีกเลี่ยง (P) ไม่ได้ ดังนั้นเราต้องเลือกระหว่าง **CP **(เป๊ะแต่ช้า ⚡/ล่มง่าย) หรือ **AP **(เร็วแต่ไม่เป๊ะ)
 
 ### 2. PACELC: ทฤษฎีที่ละเอียดกว่า
+
 PACELC บอกว่าแม้ในสภาวะปกติ (ไม่มี Partition) เรายังต้องเลือก:
 -**Latency (L):** ตอบเร็วที่สุด (แต่ข้อมูลอาจจะเก่า)
 -**Consistency ⛓️ (C):** ตอบข้อมูลล่าสุด (แต่ต้องรอซิงค์)
 
 ### 3. Eventual Consistency คืออะไร?
+
 คือการรับประกันว่า"หากไม่มีการเขียนข้อมูลใหม่เพิ่มเข้ามา ในที่สุด (Eventually) ข้อมูลทุกเครื่องจะตรงกันเอง"
 
 ---
@@ -66,7 +69,7 @@ PACELC บอกว่าแม้ในสภาวะปกติ (ไม่�
 ### ยุทธศาสตร์ Senior: การออกแบบ App ให้รับมือ Eventual Consistency
 
 **Read-Your-Own-Writes:**
-    - เทคนิคที่ทำให้ User A เห็นโพสต์ตัวเองทันที (อาจจะดึงจาก Local Cache หรือ Sticky Session ไปหา Node เดิม) 
+    - เทคนิคที่ทำให้ User A เห็นโพสต์ตัวเองทันที (อาจจะดึงจาก Local Cache หรือ Sticky Session ไปหา Node เดิม)
     - แม้ User คนอื่นจะยังไม่เห็นก็ตาม เพื่อให้ User A รู้สึกว่าระบบทำงานสำเร็จ
 **[[../../05-idempotency|Idempotency]] & Versioning:**
     - เนื่องจากการส่งข้อมูลข้ามเครื่องอาจเกิดการ"มาสลับลำดับกัน" (Out of order)

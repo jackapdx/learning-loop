@@ -142,6 +142,7 @@ export default function () {
   sleep(Math.random() * 3 + 1); // 1-4 วิ ระหว่างแต่ละรอบ
 }
 ```
+
 > ⚠️ **ข้อจำกัดของ Script:**`sleep()` random กระจาย Request — แต่ใน Flash Sale จริงผู้ใช้จะกดพร้อมกันหมด (Thundering Herd) — Spike Test ควรใช้`scenarios` แบบ`ramping-arrival-rate` แทน`ramping-vus`
 
 ---

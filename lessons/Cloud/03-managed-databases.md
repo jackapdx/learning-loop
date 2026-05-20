@@ -18,11 +18,11 @@ tags: [cloud, databases, gcp, cloud-sql, firestore, high-availability]
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️ ** สถานการณ์:** คุณกำลังออกแบบระบบ"Banking Application" ที่ต้องมีความแม่นยำสูง (ACID) และ"E-commerce Product Catalog" ที่ต้องการสเกลระดับโลก 
+> ✍️ ** สถานการณ์:** คุณกำลังออกแบบระบบ"Banking Application" ที่ต้องมีความแม่นยำสูง (ACID) และ"E-commerce Product Catalog" ที่ต้องการสเกลระดับโลก
 > -**Banking:** ต้องการ Transaction ที่เป๊ะที่สุด ข้อมูลห้ามพังเด็ดขาด
 > -**Catalog:** ข้อมูลสินค้ามีความหลากหลาย (Attributes เยอะ) และต้องรองรับคนเข้าชมหลักล้าน
 >
-> ** คำถาม:** ในฐานะ Senior Architect คุณจะเลือกใช้บริการใดของ Google Cloud สำหรับทั้ง 2 งานนี้? 
+> ** คำถาม:** ในฐานะ Senior Architect คุณจะเลือกใช้บริการใดของ Google Cloud สำหรับทั้ง 2 งานนี้?
 > 1.**Cloud SQL (PostgreSQL)** สำหรับ Banking และ **Firestore ** สำหรับ Catalog
 > 2.**Firestore ** สำหรับ Banking และ **Cloud SQL ** สำหรับ Catalog
 >
@@ -46,14 +46,17 @@ tags: [cloud, databases, gcp, cloud-sql, firestore, high-availability]
 💡 ใน Google Cloud (GCP) มี 3 ตัวเลือกหลักที่มือโปรต้องรู้จัก:
 
 ### 1. Cloud SQL (Relational - PostgreSQL/MySQL)
+
 -** จุดเด่น:** รองรับมาตรฐาน SQL เต็มรูปแบบ, มี ACID สูง, ทำ Joint ได้ซับซ้อน
 -**High Availability (HA):**GCP จัดการรันเครื่องสำรอง (Standby) ไว้ในอีก Zone หนึ่งให้อัตโนมัติ หากเครื่องหลักล่ม มันจะสลับไปหา Standby ในไม่กี่วินาที
 
 ### 2. Firestore (NoSQL - Document)
+
 -** จุดเด่น:** **Serverless 100%**, สเกลตามการใช้งานจริง (Pay-per-use), ยืดหยุ่นเรื่อง Schema (JSON-like)
 -** เหมาะสำหรับ:**Mobile 📱 Backends, User Profiles, Product Catalogs
 
 ### 3. Bigtable (NoSQL - Wide Column)
+
 -** จุดเด่น:** รองรับข้อมูลระดับ Petabytes และ Low Latency มหาศาล
 -** เหมาะสำหรับ:**Time-series, Ad-tech, และงานที่ต้องการ Write หนักๆ ระดับล้านรายการต่อวินาที
 

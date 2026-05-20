@@ -18,9 +18,11 @@ tags: [chat-exp, system-design, networking]
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: Traffic Management → #1, 2
+
 [[../Networking/09-load-balancer|Load Balancer Fundamentals]] → [[01-load-balancing-l4-l7|Load Balancing (L4 vs L7)]] + [[02-cdn-edge-computing|CDN & Edge]] — วางรากฐานและกระจายโหลดให้ผู้ใช้ทั่วโลก
 
 ### Path B: Communication Protocols → #3, 4
+
 [[03-tcp-vs-udp|TCP vs UDP]] + [[04-grpc-vs-rest|gRPC vs REST]] — เลือกเครื่องมือสื่อสารให้เหมาะกับงาน (Speed vs Reliability)
 
 ## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)

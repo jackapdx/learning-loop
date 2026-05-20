@@ -27,6 +27,7 @@ tags:
 > 2. ส่งงาน (Job) เข้าคิวเพื่อให้ Worker ส่ง **"อีเมลยืนยันตัวตน"**
 >
 > ** ปัญหา:** คุณใช้ Redis เป็นคิว และเขียนโค้ดแบบนี้:
+>
 >```javascript
 > await db.insertUser(userData); // (1) เขียนลง DB
 > await redisQueue.add('send-email', { email }); // (2) ส่งเข้าคิว
@@ -53,6 +54,7 @@ tags:
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. Transactional Enqueue (ท่าไม้ตายของ pg-boss)
+
 หัวใจของ pg-boss คือการที่มันใช้ตารางใน Postgres เป็นคิว ทำให้เราสามารถใช้คำสั่ง SQL ร่วมกับงานอื่นๆ ได้:
 
 ```javascript
@@ -62,9 +64,11 @@ await db.transaction(async (tx) => {
   await boss.send('welcome-email', { userId }, { db: tx }); 
 });
 ```
+
 *ผลลัพธ์:* หาก`INSERT` พัง Job จะไม่ถูกสร้าง และหาก`boss.send` พัง`INSERT` จะถูก Rollback
 
 ### 2. กลไกการทำงาน (SKIP LOCKED)
+
 Postgres ไม่ใช่คิวโดยธรรมชาติ แต่ pg-boss ใช้ฟีเจอร์ที่ชื่อว่า`FOR UPDATE SKIP LOCKED`:
 - เมื่อ Worker จะหยิบงาน มันจะ Lock แถวนั้นไว้
 - หากมี Worker อื่นมาดูพร้อมกัน มันจะ"ข้าม" (SKIP) แถวที่ถูก Lock อยู่ไปดูแถวถัดไปทันที
@@ -79,6 +83,7 @@ Postgres ไม่ใช่คิวโดยธรรมชาติ แต่ 
 **1. ระวัง Table Bloat!**
 ทุกครั้งที่ Job ทำงานเสร็จ แถวข้อมูลในตารางจะถูกลบหรือย้าย (Archive) ซึ่งจะสร้าง"ขยะ" (Dead Tuples)
 - *วิธีแก้:* ต้องตั้งค่า **Autovacuum ** ให้ดุดันเป็นพิเศษสำหรับตารางของ pg-boss
+
 ```sql
 ALTER TABLE pgboss.job SET (autovacuum_vacuum_scale_factor = 0.01);
 ```

@@ -77,6 +77,7 @@ prerequisites: [distributed/02-consistency-vs-availability, core/03-cache-invali
 |**Distributed Transactions **| ใช้ **Saga Pattern ** หรือ Event-driven | พัฒนายากขึ้น และระบบจะเป็น Eventual Consistency ⛓️ |
 
 ### Snowflake ID: กุญแจสำคัญของ Sharding
+
 เพื่อให้แต่ละ Shard สร้าง ID ได้เองโดยไม่ซ้ำกันข้ามเครื่อง (ดูรายละเอียดที่ [[Distributed/10-distributed-id-generation|บทที่ 10: Distributed ID Generation]]):
 -**Timestamp (41 bits):** เรียงตามเวลาได้
 -**Machine ID (10 bits):** รองรับ 1,024 เครื่อง

@@ -50,11 +50,13 @@ PostgreSQL ใช้ระบบ Snapshot เพื่อให้แต่ล�
 *   **ข้อดี:** การ"อ่าน" (SELECT) จะไม่ Block การ"เขียน" (UPDATE/DELETE) เลย!
 
 ### 2. Dead Tuples และปัญหาตารางบวม (Bloat)
+
 แถวที่ถูกมาร์ค Expired/Deleted ไปแล้วเรียกว่า **Dead Tuples **
 *   หากเรามีตาราง 1 ล้านแถว และอัปเดตทุกแถว 1 ครั้ง เราจะมี 1 ล้าน Live Tuples และ 1 ล้าน Dead Tuples
 *   PostgreSQL ต้องสแกนผ่าน Dead Tuples เหล่านี้ด้วย ทำให้ Query ช้าลงมาก
 
 ### 3. VACUUM: พนักงานทำความสะอาด
+
 หน้าที่ของ VACUUM คือการเข้าไปกวาดล้าง Dead Tuples เพื่อให้พื้นที่นั้นกลับมาใช้งานใหม่ได้
 *   **Standard VACUUM:** ทำความสะอาดพื้นที่ให้ Postgres นำไปใช้ใหม่ได้ (ไม่ต้อง Lock ตาราง)
 *   **VACUUM FULL:** บีบอัดตารางใหม่เพื่อให้คืนพื้นที่ให้ OS (** อันตราย:** มันจะ Lock ตารางทั้งใบแบบ Exclusive ห้ามใช้ใน Production)
@@ -65,7 +67,9 @@ PostgreSQL ใช้ระบบ Snapshot เพื่อให้แต่ล�
 ## 🔬 ขยายความ (Extend)
 
 ### การตั้งค่า Auto-VACUUM ให้ทำงานดุดันขึ้น (Tuning)
+
 ในระบบที่มีการเขียนข้อมูลสูง (High Write Load) ค่า Default ของ Auto-VACUUM มักจะช้าเกินไปจนทำความสะอาดไม่ทัน
+
 ```sql
 -- ตัวอย่างการปรับแต่งเฉพาะตารางที่มีการอัปเดตบ่อย
 ALTER TABLE big_table SET (
@@ -75,11 +79,14 @@ ALTER TABLE big_table SET (
 ```
 
 ### Transaction ID (XID) Wraparound: หายนะที่เงียบเชียบ
+
 PostgreSQL มีขีดจำกัดของหมายเลข Transaction (ประมาณ 2 พันล้าน) หาก VACUUM ไม่ได้รันนานเกินไปจนเลขรันมาชนกัน ** ฐานข้อมูลจะ Shutdown ตัวเองเพื่อป้องกันข้อมูลเสียหาย **
 *   **วิธีป้องกัน:** ตรวจสอบ`age(relfrozenxid)` ของทุกตารางเสมอผ่านระบบ Monitoring
 
 ### การตรวจสอบ Bloat
+
 คุณสามารถใช้ Extension อย่าง`pgstattuple` เพื่อดูว่าตอนนี้ตารางของคุณมี Dead Tuples อยู่กี่เปอร์เซ็นต์
+
 ```sql
 CREATE EXTENSION pgstattuple;
 SELECT * FROM pgstattuple('orders');

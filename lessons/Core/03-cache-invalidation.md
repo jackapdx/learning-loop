@@ -70,6 +70,7 @@ prerequisites: [distributed/02-consistency-vs-availability]
 
 **1. Jitter (Probabilistic Expiration):**
 แทนที่จะตั้ง`TTL = 300` วินาทีเป๊ะๆ ให้ใช้การสุ่มช่วงเวลาเพื่อให้แคชทยอยหมดอายุ:
+
 ```python
 # ดีกว่า: กระจายโหลดการ Rebuild แคช
 base_ttl = 300
@@ -79,6 +80,7 @@ set_cache(key, value, base_ttl + jitter)
 
 **2. Mutex Lock (SET NX):**
 ใช้เทคนิค"Single Flight" โดยให้ Request แรกที่เจอ Cache Miss เป็นคนจอง Lock เพื่อไปดึง DB ส่วน Request อื่นๆ ที่ตามมาให้รอหรือใช้ข้อมูลเก่าไปก่อน:
+
 ```redis
 # ใช้ SET with NX (Not Exists) เพื่อจองสิทธิ์ดึงข้อมูล
 SET lock:profile:123"locked" NX EX 5

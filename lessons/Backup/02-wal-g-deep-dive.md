@@ -37,7 +37,8 @@ WAL-G เป็น **continuous archiving tool **— หมายความว
 #### Pipeline ของ WAL-E (Python) — จุดที่เป็นคอขวด
 
 WAL-E ใช้ **Unix pipes ** เชื่อมต่อกระบวนการภายนอก:
-```
+
+```text
 PostgreSQL WAL segment → Python process → pipe → lzop compression → pipe → AWS SDK → S3
 ```
 
@@ -48,7 +49,7 @@ PostgreSQL WAL segment → Python process → pipe → lzop compression → pipe
 
 #### Pipeline ของ WAL-G (Go) — ตัดกระบวนการภายนอกทิ้ง
 
-```
+```text
 PostgreSQL WAL segment → Go process (in-memory LZ4/LZMA/ZSTD/Brotli) → Go AWS SDK (multi-part upload) → S3
 ```
 
@@ -128,6 +129,7 @@ wal-g backup-push --delta /var/lib/postgresql/data
 ### Decision Framework — ควรใช้ WAL-G เมื่อ...
 
 #### ✅ เหมาะกับ:
+
 -** ทีม DevOps ที่คุ้นกับ CLI/Infrastructure-as-Code **— config ผ่าน environment variables หรือ config file, ใช้ cron สำหรับ scheduling
 -**Multi-database environments **— มีทั้ง PostgreSQL, MySQL, MongoDB — WAL-G ตัวเดียวจัดการทั้งหมด
 -**Cloud-native deployments **— Kubernetes, containerized — WAL-G binary เดียวไม่ต้องติดตั้ง dependencies มาก
@@ -135,6 +137,7 @@ wal-g backup-push --delta /var/lib/postgresql/data
 -** ต้องการ PITR แต่ไม่ต้องการ operational overhead ของ pgBackRest **— WAL-G ง่ายกว่า pgBackRest ในการ setup
 
 #### ❌ ไม่เหมาะกับ:
+
 -**Managed databases (RDS, Cloud SQL, Azure)**— WAL-G ต้องการ filesystem access เพื่อ restore — managed services ไม่ให้ access ระดับนี้ — ใช้ built-in backup ของ provider แทน
 -** ฐานข้อมูล > 1TB ที่ต้องการ block-level incremental backup **— pgBackRest ทำ incremental ได้ละเอียดกว่า WAL-G (block-level vs page-level)
 -** ทีมที่ต้องการ GUI/Scheduling ในตัว **— WAL-G เป็น CLI-only, ไม่มี scheduler ในตัว — ต้องใช้ cron หรือ external orchestrator

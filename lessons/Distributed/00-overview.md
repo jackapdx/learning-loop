@@ -18,12 +18,15 @@ Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: Resilience & Scalability → #1, 4, 7, 10, 11
+
 [[01-self-recovery|Self-Recovery]] (Circuit Breaker) + [[04-spof|Single Point of Failure]] + [[07-stateless-vs-stateful|Stateless vs Stateful]] + [[10-distributed-id-generation|Distributed ID Generation]] + [[11-distributed-rate-limiting|Distributed Rate Limiting]] — ทำให้ระบบไม่พังและ Scale ได้แบบ Horizontal โดยไม่มีคอขวดที่ ID และป้องกันการโดนถล่มด้วย Request
 
 ### Path B: Data Consistency & Optimization → #2, 3, 9, 12, 13
+
 [[02-dual-write|Dual Write Problem]] (DB + Event Bus) + [[03-feed-fan-out|Feed Fan-out]] (Push 📱/Pull Hybrid) + [[09-cqrs|CQRS]] (Read/Write Segregation) + [[12-distributed-transactions|Distributed Transactions]] + [[13-probabilistic-data-structures|Probabilistic Data Structures]] — ทำให้ข้อมูลถูกต้อง อ่านเร็ว และประหยัด RAM สูงสุดด้วย Bloom Filters
 
 ### Path C: Infrastructure Reliability → #5, 6, 8
+
 [[05-circular-dependencies|Circular Dependencies]] + [[06-blast-radius-guardrails|Blast Radius & Guardrails]] + [[08-multi-tenant|Multi-Tenant Architecture]] — ออกแบบโครงสร้างพื้นฐานให้ทนทานและรองรับลูกค้าหลายรายอย่างปลอดภัย
 
 ## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)
@@ -43,10 +46,6 @@ Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
 | 11 | [[11-distributed-rate-limiting\|Distributed Rate Limiting]] |"ตั้งโควต้า 100 req/min แต่มี 50 Servers จะคุมยังไงไม่ให้เกินจริง?" |
 | 12 | [[12-distributed-transactions\|Distributed Transactions]] |"Saga vs 2PC: จะจัดการ Transaction ข้าม Microservices ยังไงโดยไม่ให้ระบบค้าง?" |
 | 13 | [[13-probabilistic-data-structures\|Probabilistic Data Structures]] |"นับ User 1,000 ล้านคนด้วย RAM 1.5 KB? และ Bloom Filter ช่วยลด Disk I/O ได้ยังไง?" |
-
-
-
-
 
 > [!question] ลองทำก่อน
 > ก่อนเริ่มเรียน ลองตอบคำถามนี้:

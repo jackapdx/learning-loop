@@ -80,6 +80,7 @@ prerequisites: []
 ในระบบ Messaging เรามักเจอ **At-least-once delivery ** หมายความว่า Consumer อาจได้รับ Message เดิมซ้ำได้เสมอ
 
 **ท่ามาตรฐานของ Senior:**
+
 ```typescript
 async function processOrder(message: Message) {
   const { orderId, idempotencyKey } = message.data;
@@ -98,6 +99,7 @@ async function processOrder(message: Message) {
 ```
 
 ### ระวัง: Side Effects ที่ไม่ใช่ Database
+
 ถ้าฟังก์ชันของคุณต้อง ** ส่ง Email ** หรือ ** เรียก API ภายนอก **(เช่น Stripe) คุณต้องมั่นใจว่า API ภายนอกเหล่านั้นรองรับ Idempotency Key เช่นกัน (ซึ่ง Stripe และผู้ให้บริการระดับโลกส่วนใหญ่รองรับผ่าน Header`Idempotency-Key`)
 
 ---

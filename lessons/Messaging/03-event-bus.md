@@ -62,6 +62,7 @@ Event Bus ทำหน้าที่เป็น **Message Broker ** ที่�
 |**Event-Driven (Event Bus)**| Latency ต่ำ, Decoupling, ความทนทาน | ความง่ายในการติดตาม (Observability), ต้องจัดการ Eventual Consistency | ระบบที่มี Traffic สูง, งานที่ทำแบบ Asynchronous ได้ |
 
 ### กลไกสำคัญของ Event Bus:
+
 1.**Fan-out:** ส่ง 1 Message แต่มีผู้รับ (Subscriber) ได้หลายคน (1-to-Many)
 2.**Durability:** หากผู้รับพัง Message ยังคงค้างอยู่ในระบบจนกว่าจะกลับมาทำงาน
 3.**Retries:** หากประมวลผลพลาด สามารถสั่งให้ Bus ส่งมาใหม่ได้ หรือส่งเข้า Dead Letter Queue (DLQ)
@@ -91,15 +92,18 @@ eventBus.subscribe('OrderCreated', async (event) => {
 ## 🔬 ขยายความ (Extend)
 
 ### ควรใช้ Event Bus เมื่อ...
+
 - ✅ ต้องการลด Latency ของ User-facing Action โดยย้ายงานที่ทำทีหลังได้ไปเป็น Background
 - ✅ มีหลาย Services ที่ต้องการรับรู้ข้อมูลจากแหล่งเดียวกัน (Fan-out)
 - ✅ ต้องการเพิ่มความทนทาน (Reliability) ให้ระบบสามารถฟื้นตัวจากการล่มบางส่วนได้ (Partial Failure)
 
 ### ควรหลีกเลี่ยง Event Bus เมื่อ...
+
 - ❌ ระบบต้องการ **Strong Consistency ** ระหว่าง Services (เช่น การโอนเงินข้ามธนาคารที่ยอดต้องตรงกันเป๊ะในทุกระบบทันที)
 - ❌ สถาปัตยกรรมยังเป็น Simple Monolith ขนาดเล็ก การเพิ่ม Event Bus เข้ามาจะกลายเป็นการเพิ่ม Operational Cost โดยไม่จำเป็น
 
 ### สิ่งที่ต้องแลก (Trade-offs)
+
 -**Eventual Consistency:** ข้อมูลในระบบต่างๆ จะอัปเดตไม่พร้อมกัน ต้องจัดการ UX ให้ผู้ใช้ไม่สับสน (เช่น ขึ้นสถานะว่า"กำลังดำเนินการ")
 -**Observability:** ติดตามยากว่าคำสั่งซื้อนี้ไปติดค้างอยู่ที่ Service ไหน (มักต้องใช้ Distributed Tracing อย่าง Jaeger/OpenTelemetry)
 -**Idempotency:** ต้องเขียน Consumer ให้รองรับการทำงานซ้ำ เพราะในระบบกระจายตัวมีความเป็นไปได้ที่จะเกิด At-least-once delivery
@@ -123,6 +127,7 @@ eventBus.subscribe('OrderCreated', async (event) => {
 > ในระบบที่คุณดูแลอยู่ มีจุดไหนที่ยังเรียกหากันแบบ Sync API ทั้งที่จริงแล้วเป็นงานที่สามารถรอได้ (Asynchronous) บ้างหรือไม่? และถ้าคุณจะเปลี่ยนมาใช้ Event Bus คุณพร้อมรับมือกับปัญหาเรื่อง การส่งข้อความซ้ำ (Duplication) และความล่าช้า (Lag) แล้วหรือยัง?
 
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
+
 - [[01-google-pubsub|Google Cloud Pub/Sub]]
 - [[02-streaming-vs-queuing|Streaming vs Queuing]]
 - [[../Distributed/02-dual-write|Distributed/Dual Write Problem]]

@@ -46,6 +46,7 @@ prerequisites: []
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. Queuing (Smart Broker / Dumb Consumer) - เช่น RabbitMQ
+
 -** แนวคิด:** เหมือน"ไปรษณีย์" Broker จะฉลาดมาก รู้ว่าจะส่งจดหมายไปลงถังไหน มีระบบ Priority และเมื่อ Consumer อ่านแล้ว ** ข้อความจะถูกลบทิ้ง **
 -** จุดเด่น:**
     -**Complex Routing:** ส่งตามเงื่อนไขที่ซับซ้อน (Exchange Types)
@@ -53,6 +54,7 @@ prerequisites: []
     -**Individual Ack:** ยืนยันการรับทีละฉบับได้แม่นยำ
 
 ### 2. Streaming (Dumb Broker / Smart Consumer) - เช่น Kafka
+
 -** แนวคิด:** เหมือน"สายพานลำเลียง" หรือ"บันทึกประจำวัน (Log)" ข้อมูลถูกเขียนต่อท้ายไปเรื่อยๆ และ ** ไม่ถูกลบ ** ทันทีที่อ่านเสร็จ Consumer ต้องจำเองว่าอ่านถึงไหนแล้ว (Offset)
 -** จุดเด่น:**
     -**Replayability:** กลับมาอ่านข้อมูลย้อนหลังได้ (Time Travel)

@@ -49,7 +49,6 @@ prerequisites: [networking/09-load-balancer, core/10-monolith-microservice-monor
 
 ### 1. ยุทธศาสตร์การ Deploy (Deployment Strategies)
 
-
 | Strategy | วิธีการ | ข้อดี | สิ่งที่ต้องแลก (Trade-off 🤝) |
 |---|---|---|---|
 |**Rolling Update **| ค่อยๆ เปลี่ยนทีละเครื่องใน Pool | ใช้ทรัพยากรเท่าเดิม | ระบบมี 2 เวอร์ชันรันพร้อมกันนานที่สุด |
@@ -57,6 +56,7 @@ prerequisites: [networking/09-load-balancer, core/10-monolith-microservice-monor
 |**Canary **| ปล่อยเวอร์ชันใหม่ให้ผู้ใช้แค่ 5-10% ก่อน | เจอ Bug เร็วโดยเจ็บตัวน้อย | จัดการ Traffic ยาก (ต้องใช้ Sticky Session หรือ Header) |
 
 ### 2. หัวใจของ Zero Downtime DB: Expand-Contract Pattern
+
 การเปลี่ยน Schema แบบทำลายล้าง (Breaking Changes) ต้องทำเป็น 5 ขั้นตอนเสมอ:
 
 1.**Expand (Phase 1):** เพิ่มคอลัมน์ใหม่ (`full_name`) แบบ Nullable เข้าไปใน DB (ห้ามลบอันเก่า!)
@@ -70,10 +70,12 @@ prerequisites: [networking/09-load-balancer, core/10-monolith-microservice-monor
 ## 🔬 ขยายความ (Extend)
 
 ### การจัดการ Stateful Sessions
+
 หากแอปของคุณเก็บ Session ไว้ใน Memory (In-memory Session) เมื่อมีการ Deploy และเครื่องเก่าถูกปิด ผู้ใช้จะหลุดทันที (Session Drop)
 -** วิธีแก้:** ใช้ **Distributed Session Cache **(เช่น Redis) เพื่อให้ทุกเวอร์ชันเข้าถึงข้อมูลเดียวกันได้ หรือใช้ **Graceful Shutdown ** เพื่อรอให้ Request ที่ค้างอยู่ทำงานจนจบก่อนปิดเครื่อง
 
 ### Health Checks กับการ Deploy
+
 -**Readiness Probe:** บอก Load Balancer ว่า"ฉันพร้อมรับ Traffic แล้วนะ" (Green ต้องผ่านอันนี้ก่อน Blue จะโดนตัด)
 -**Liveness Probe:** บอกระบบว่า"ฉันยังไม่ตาย" (ถ้าพังให้รีสตาร์ท)
 **Senior Tip:** อย่าเซ็ต Readiness ให้ผ่านเร็วเกินไป ควรเผื่อเวลาให้แอปทำ Warm-up (เช่น อุ่น Cache หรือเชื่อมต่อ DB) ก่อนรับงานจริง
@@ -105,6 +107,7 @@ prerequisites: [networking/09-load-balancer, core/10-monolith-microservice-monor
 ---
 
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
+
 - [[09-load-balancer|Load Balancer: ตัวจัดระเบียบ Traffic]]
 - [[Distributed/01-self-recovery|Self-Recovery & Health Checks]]
 - [[Postgres/11-transactions-isolation|Transactions & Concurrency]]

@@ -20,12 +20,12 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 ## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณเป็นวิศวกรที่ระบบ Chat ระบบหนึ่งซึ่งมี API Server 20 เครื่อง โจทย์คือต้องจำกัดการส่งข้อความของผู้ใช้ที่"10 ข้อความต่อนาที" เพื่อป้องกัน Spam
-> 
+>
 > ** ข้อจำกัด:**
 > 1. การเช็ค Rate Limit ต้องใช้เวลาไม่เกิน 5ms (Latency-sensitive)
 > 2. ห้าม"เผลอปล่อย" ให้ยิงเกินโควต้าเด็ดขาด (Accuracy is important)
 > 3. ระบบต้องทำงานได้แม้จะมี API Server บางเครื่องตายไป
-> 
+>
 > ** คำถาม:** คุณจะเลือกสถาปัตยกรรมแบบใดในการเก็บสถานะ (State) ของการนับ? และจะเลือกใช้อัลกอริทึมใดระหว่าง **Fixed Window ** กับ **Sliding Window Log **?
 >
 > **✋ หยุดตรงนี้ก่อน **— ลองพิจารณาดูว่าการเก็บข้อมูลไว้ที่ Redis กลาง กับการนับที่เครื่องตัวเอง (Local) มีข้อดีข้อเสียต่างกันอย่างไรในแง่ของความแม่นยำ
@@ -67,16 +67,19 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 ### การทำ Rate Limiting ในระดับโปร (Advanced Patterns)
 
 ### ประสิทธิภาพ: Redis + Lua Scripts
-การเช็ค Rate Limit ใน Redis มักใช้คำสั่งหลายตัว (GET, INCR, EXPIRE) หากส่งแยกกันจะเสียเวลา Network Round-trip 
+
+การเช็ค Rate Limit ใน Redis มักใช้คำสั่งหลายตัว (GET, INCR, EXPIRE) หากส่งแยกกันจะเสียเวลา Network Round-trip
 **Solution:** ใช้ **Lua Script ** เพื่อส่งคำสั่งทั้งหมดไปรันที่ Redis ในครั้งเดียว (Atomic operation) ช่วยลด Latency และป้องกัน Race Conditions
 
 ### ความทนทาน: Fail-open vs Fail-closed
+
 ถ้า Redis (Rate Limiter) พัง ระบบคุณจะทำอย่างไร?
 -**Fail-open:** ปล่อยให้ Request ผ่านไปก่อน (เน้น Availability)
 -**Fail-closed:** บล็อคทุกอย่าง (เน้น Security/Budget)
 > **Senior Advice:** ในระบบส่วนใหญ่ เรามักเลือก **Fail-open ** พร้อมกับมี Local Rate Limit สำรองไว้ เพื่อไม่ให้ระบบล่มเพราะตัวเช็คพัง
 
 ### Multi-tier Rate Limiting
+
 อย่าพึ่งพาระดับเดียว:
 -**L4/L7 (Infrastructure):** บล็อคที่ Cloudflare/NGINX (เน้นป้องกัน DDoS)
 -**API Gateway (App level):** บล็อคตาม API Key/UserID (เน้น Business Logic)

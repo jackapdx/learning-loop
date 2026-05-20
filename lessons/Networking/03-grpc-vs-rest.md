@@ -52,6 +52,7 @@ tags: [networking, protocols, microservices, system-design]
 -** ข้อเสีย:** ข้อมูลใหญ่ (Payload overhead), ช้ากว่าในการ Serialize/Deserialize, ไม่มีระบบบังคับ Schema (ทำให้บั๊กเกิดง่ายตอนแก้ API)
 
 ### 2. gRPC (Google Remote Procedure Call)
+
 -**Format:** ใช้ **Protocol Buffers (Protobuf)** ซึ่งเป็น Binary
 -**Protocol:** บังคับใช้ **HTTP/2 ** เท่านั้น
 -** ข้อดี:** **เร็วมาก (Performance)**, ข้อมูลเล็ก (Compact), มี **Strong Typing **(สร้างโค้ดให้โดยอัตโนมัติจากไฟล์`.proto`), รองรับ Streaming แบบสองทาง
@@ -71,17 +72,23 @@ tags: [networking, protocols, microservices, system-design]
 ## 🔬 ขยายความ (Extend)
 
 ### ทำไม Protobuf ถึงเร็วกว่า JSON?
+
 JSON ส่งชื่อ Field ไปทุกครั้ง:
+
 ```json
 {"user_id": 123,"name":"John"}
 ```
+
 Protobuf ส่งแค่ตัวเลขลำดับ (Field Number) และข้อมูล:
+
 ```text
 1: 123, 2:"John"  (ในรูปแบบ Binary ที่คนอ่านไม่ออก)
 ```
+
 *ผลลัพธ์:* ขนาดเล็กลง 3-10 เท่า และ CPU ถอดรหัสได้เร็วกว่ามาก
 
 ### HTTP/2: ท่อส่งข้อมูลยุคใหม่
+
 gRPC ได้อานิสงส์จาก HTTP/2:
 - **Multiplexing:** ส่งหลาย Request/Response ในสายเดียว (TCP) พร้อมกัน ไม่ต้องรอคิว (Head-of-line blocking)
 -**Server Push 📱:** เซิร์ฟเวอร์ส่งข้อมูลหาไคลเอนต์ได้โดยไม่ต้องรอให้ขอ

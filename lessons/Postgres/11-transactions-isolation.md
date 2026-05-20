@@ -47,7 +47,6 @@ PostgreSQL รองรับระดับความเข้มงวดข
 
 ### 1. 4 ระดับของ Isolation ใน PostgreSQL
 
-
 | Level | ความเข้มงวด | สรุปสั้นๆ |
 |---|---|---|
 |**Read Uncommitted **| ต่ำสุด | ใน Postgres จะทำงานเหมือน Read Committed (ไม่มี Dirty Read) |
@@ -56,6 +55,7 @@ PostgreSQL รองรับระดับความเข้มงวดข
 |**Serializable ** | สูงสุด | รับประกันว่าผลลัพธ์จะเหมือนกับการรัน Transaction ทีละอันเรียงกัน (Sequential) |
 
 ### 2. ความผิดปกติที่อาจเกิดขึ้น (Anomalies)
+
 *   **Dirty Read:** อ่านข้อมูลที่คนอื่นกำลังแก้แต่ยังไม่ Commit (Postgres ป้องกันให้เสมอ)
 *   **Non-repeatable Read:** อ่านแถวเดิมซ้ำ 2 ครั้งใน Transaction เดียวกันแต่ได้ค่าไม่เท่ากัน
 *   **Phantom Read:**SELECT ช่วงข้อมูลเดิม 2 ครั้ง แต่ได้จำนวนแถวไม่เท่ากัน (เพราะมีคนแทรกข้อมูลใหม่)
@@ -66,16 +66,20 @@ PostgreSQL รองรับระดับความเข้มงวดข
 ## 🔬 ขยายความ (Extend)
 
 ### Serialization Failure: สิ่งที่ต้องเตรียมใจ
+
 เมื่อคุณใช้`SERIALIZABLE` หรือ`REPEATABLE READ` บางครั้ง Postgres จะตอบกลับมาว่า **"ฉันทำให้ Transaction นี้สำเร็จไม่ได้เพราะมันจะขัดแย้งกับคนอื่น"**(Error 40001)
 *   **ทางแก้:**Application ของคุณต้องมีกลไก **"Retry"** อัตโนมัติเมื่อเจอ Error นี้
 
 ### การเลือก Isolation Level ให้เหมาะกับงาน
+
 *   **Read Committed:** งานส่วนใหญ่ 95% ของระบบ (เร็ว ⚡, ไม่ซับซ้อน)
 *   **Repeatable Read:** งานทำ Report ที่ต้องการความนิ่งของข้อมูลตลอดการรัน
 *   **Serializable:** งานที่เกี่ยวกับเงินทองหรือกฎทางธุรกิจที่ซับซ้อนและห้ามพลาดเด็ดขาด
 
 ### เทคนิคระดับ Senior: Lost Update Protection
+
 ในการ`UPDATE` ข้อมูล อย่าเขียนแค่`SET balance = {new_val}` แต่ให้คำนวณใน SQL เลย:
+
 ```sql
 UPDATE accounts SET balance = balance - 100 
 WHERE id = 1 AND balance >= 100;

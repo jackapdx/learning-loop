@@ -1,0 +1,56 @@
+# markdownlint-cli2 configuration for Learning Loop lessons
+# Thai + English mixed content with wikilinks, YAML frontmatter, code blocks
+# Run: bunx markdownlint-cli2 "lessons/**/*.md"
+
+config:
+  default: true
+
+  # ── Line length ──
+  MD013: false # Prose paragraphs — rendered HTML handles wrapping
+
+  # ── Tables ──
+  MD055: false # Table pipe style
+  MD056: false # Table column count
+  MD057: false # Table indentation
+  MD060: false # Table column style
+
+  # ── Lists ──
+  MD004: false # Unordered list style — mix - and *
+  MD007: false # List indentation
+  MD030: false # List marker spaces
+
+  # ── Headings ──
+  MD024: false # Duplicate headings
+  MD025:         # Multiple top-level headings
+    front_matter_title: ""
+  MD026: false # Trailing punctuation
+  MD036: false # Emphasis as heading
+
+  # ── Spacing ──
+  MD022:
+    lines_above: 1
+    lines_below: 1
+  MD032: false # Fenced code blocks — can be adjacent
+
+  # ── HTML ──
+  MD033: false # Allow HTML
+  MD046: false # Code block style
+
+  # ── Inline ──
+  MD037: false # Spaces inside emphasis
+  MD049: false # Emphasis style
+  MD050: false # Strong style
+
+  # ── Misc ──
+  MD029: false # Ordered list style
+  MD034: false # Bare URLs OK
+  MD041: false # First line heading
+
+globs:
+  - "lessons/**/*.md"
+
+ignores:
+  - "node_modules/**"
+  - "apps/web/dist/**"
+  - ".research/**"
+  - "lessons/.obsidian/**"

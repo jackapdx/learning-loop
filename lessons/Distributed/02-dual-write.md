@@ -61,7 +61,6 @@ Dual Write Problem คือหนึ่งใน Distributed Systems Bug ที
 
 ### 4 รูปแบบความล้มเหลว
 
-
 | กรณี | DB Write | PubSub Publish | ผลลัพธ์ |
 |---|---|---|---|
 | 1. Happy Path | ✅ | ✅ | ถูกต้อง |

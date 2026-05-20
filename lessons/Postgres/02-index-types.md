@@ -43,34 +43,43 @@ tags: [chat-exp, system-design, postgres]
 ### 7 มหัศจรรย์ดัชนีของ PostgreSQL
 
 #### 1. B-tree (Balanced Tree)
+
 *   **เมื่อไหร่ควรใช้:** 90% ของงานทั่วไป (Equality`=`, Range`>`,`<`,`BETWEEN`,`IN`)
 *   **จุดเด่น:** รองรับเกือบทุก Data Type และสามารถใช้ในการจัดลำดับ (`ORDER BY`) ได้
 
 #### 2. BRIN (Block Range Index)
+
 *   **เมื่อไหร่ควรใช้:** ตารางขนาดมหาศาล (100M+ rows) ที่ข้อมูลเรียงลำดับตามเวลาหรือตัวเลข
 *   **หลักการ:** เก็บค่า Min/Max ของแต่ละบล็อกข้อมูล แทนที่จะเก็บทุกค่า ทำให้ประหยัดพื้นที่มหาศาล
 
 #### 3. GIN (Generalized Inverted Index)
+
 *   **เมื่อไหร่ควรใช้:** ค้นหาใน JSONB, Full-text search (`tsvector`), หรือ Array
 *   **จุดเด่น:** ค้นหาว่า"ค่านี้นี้อยู่ในเซ็ตข้อมูลนี้ไหม?" ได้รวดเร็วมาก
 
 #### 4. GiST (Generalized Search Tree)
+
 *   **เมื่อไหร่ควรใช้:** พิกัดแผนที่ (Geometry/Geography), ช่วงเวลาที่ซ้อนทับกัน (Overlapping Ranges)
 *   **จุดเด่น:** ค้นหาข้อมูลเชิงพื้นที่ เช่น"ร้านอาหารที่อยู่ใกล้ฉันที่สุด"
 
 #### 5. Hash Index
+
 *   **เมื่อไหร่ควรใช้:** ค้นหาแบบเปรียบเทียบค่าเท่ากันเท่านั้น (`=`)
 *   **ข้อสังเกต:** ในปัจจุบัน B-tree ทำงานได้ดีพอๆ กัน และรองรับฟีเจอร์มากกว่า คนจึงไม่ค่อยนิยมใช้ Hash แล้ว
 
 #### 6. Partial Index (ดัชนีเฉพาะส่วน)
+
 *   **เทคนิคระดับ Senior:** สร้าง Index เฉพาะแถวที่เราสนใจ เช่น ค้นหาเฉพาะ Order ที่ยังไม่ได้ส่ง
+
 ```sql
 CREATE INDEX idx_pending_orders ON orders (id) WHERE status = 'PENDING';
 -- ช่วยลดขนาด Index และเพิ่มความเร็วในการเขียนข้อมูล (Write Throughput)
 ```
 
 #### 7. Covering Index (INCLUDE)
+
 *   **เทคนิคระดับ Senior:** เก็บค่าของ Column อื่นไว้ใน Index เลย เพื่อไม่ต้องไปอ่านจากตารางจริง (Index-only Scan)
+
 ```sql
 CREATE INDEX idx_user_email ON users (id) INCLUDE (email);
 -- SELECT email FROM users WHERE id = 123 จะอ่านแค่ Index ทันที!
@@ -81,14 +90,18 @@ CREATE INDEX idx_user_email ON users (id) INCLUDE (email);
 ## 🔬 ขยายความ (Extend)
 
 ### Index-only Scan: ความเร็วแสง
+
 เมื่อ PostgreSQL พบว่าข้อมูลที่ต้องการทั้งหมดอยู่ใน Index แล้ว มันจะไม่เสียเวลาโหลดข้อมูลจากตารางจริง (Heap) มาอ่านเลย นี่คือเป้าหมายสูงสุดของการทำ Query Optimization
 
 ### Write Amplification: ราคาที่ต้องจ่าย
+
 ทุกครั้งที่คุณเพิ่ม Index การเขียนข้อมูล (INSERT/UPDATE) จะช้าลง เพราะฐานข้อมูลต้องไปอัปเดตสารบัญทุกเล่มที่คุณสร้างไว้
 *   **คำแนะนำ:** อย่าสร้าง Index พร่ำเพรื่อ — ลบดัชนีที่ไม่ได้ใช้ออกเสมอ (`pg_stat_user_indexes`)
 
 ### การสร้างดัชนีแบบไม่กระทบระบบ (CONCURRENTLY)
+
 หากคุณสร้าง Index บนตารางที่มีคนใช้งานอยู่ ปกติมันจะ Lock ตารางนั้น! ให้ใช้คีย์เวิร์ด`CONCURRENTLY` เสมอใน Production
+
 ```sql
 CREATE INDEX CONCURRENTLY idx_orders_customer ON orders (customer_id);
 -- ระบบจะทำงานต่อได้ปกติ แต่การสร้าง Index จะใช้เวลานานขึ้นเล็กน้อย

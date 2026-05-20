@@ -36,3 +36,5 @@ coverage/
 # Bun
 *.local
 bun.lock.hash
+
+.obsidian

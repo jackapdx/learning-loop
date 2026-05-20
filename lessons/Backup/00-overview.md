@@ -31,12 +31,15 @@ graph TD
 ```
 
 ### Path A: พื้นฐานที่ทุกคนต้องรู้ → #1
+
 เริ่มต้นด้วยการเข้าใจประเภทของ backup, RPO/RTO, และความแตกต่างระหว่าง Logical vs Physical backup
 
 ### Path B: เจาะลึก WAL-G → #2
+
 เข้าใจสถาปัตยกรรมของ WAL-G — ทำไมต้อง rewrite จาก Python เป็น Go, compression algorithms, parallel restore, และข้อจำกัดที่ต้องรู้
 
 ### Path C: เปรียบเทียบเครื่องมือ → #3
+
 WAL-G, pgBackRest, Barman — แต่ละตัวเก่งด้านไหน, เหมาะกับ context แบบไหน, และ trade-off ที่คุณต้องแลก
 
 ---

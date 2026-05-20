@@ -21,7 +21,7 @@ prerequisites: []
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ** สถานการณ์:** คุณกำลังคุมทีมวิศวกร 20 คน (3 ทีมย่อย) สร้างแอปพลิเคชัน E-commerce 
+> ** สถานการณ์:** คุณกำลังคุมทีมวิศวกร 20 คน (3 ทีมย่อย) สร้างแอปพลิเคชัน E-commerce
 > -** ปัญหาปัจจุบัน:** โค้ดปนกันมั่วไปหมด (Spaghetti Code) การแก้ไขหนึ่งจุดกระทบส่วนอื่นแบบคาดเดาไม่ได้
 > -** โจทย์:** ต้องการความเร็วในการ Deploy (Agility) และความชัดเจนในความเป็นเจ้าของโค้ด (Code Ownership)
 > -** ข้อจำกัด:** ทีม DevOps มีเพียง 1 คน และคุณยังไม่มีระบบ Automated Monitoring/Tracing ที่แข็งแกร่ง
@@ -50,6 +50,7 @@ prerequisites: []
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. Runtime Architecture: Monolith vs. Microservices
+
 คือการตัดสินใจว่า **"เมื่อรันระบบ มันอยู่ใน Process เดียวกันหรือเปล่า?"**
 
 -**Monolith:** ทุกฟังก์ชันรันอยู่ใน Binary/Container เดียวกัน
@@ -60,6 +61,7 @@ prerequisites: []
     - ❌ ** ข้อเสีย:** **Operational Complexity มหาศาล **, Network Latency, ความยากในการจัดการ Distributed Transactions และ Consistency
 
 ### 2. Code Organization: Monorepo vs. Polyrepo
+
 คือการตัดสินใจว่า **"โค้ดทั้งหมดอยู่ที่ไหน?"**
 
 -**Polyrepo (Multi-repo):**1 เซอร์วิส = 1 Repo
@@ -83,14 +85,17 @@ prerequisites: []
 ## 🔬 ขยายความ (Extend)
 
 ### กับดักที่พบบ่อย: Distributed Monolith
+
 นี่คือฝันร้ายที่สุด: คุณแยกเซอร์วิสออกเป็น Microservices แต่ทุกเซอร์วิสต้อง **Deploy พร้อมกัน ** เสมอ เพราะโค้ดผูกกันแน่น (Tight Coupling) ผ่าน API ที่เปลี่ยนบ่อยเกินไป
 -** ผลลัพธ์:** คุณได้ความช้าของ Monolith + ความซับซ้อนของ Microservices โดยไม่ได้ข้อดีของอะไรเลย
 
 ### ทางเลือกที่สาม: Modular Monolith
+
 เป็นการเขียน Monolith ที่มีระเบียบวินัยสูง แยก Module ชัดเจนผ่าน Interface ห้ามเรียกข้ามกันมั่วซั่ว
 -** เป้าหมาย:** ได้ระเบียบของ Microservices แต่รันอยู่ใน Process เดียวกันเพื่อความง่ายและเร็ว เหมาะมากสำหรับทีมขนาดกลางที่ต้องการ Agility แต่ไม่อยากจ่ายค่า"Distributed Tax"
 
 ### เมื่อไหร่ควรเปลี่ยน? (The Tipping Point)
+
 อย่าใช้ Microservices จนกว่า **"ความเจ็บปวดจากการรอคิว Deploy ใน Monolith จะมากกว่าความเจ็บปวดจากการจัดการ Microservices"**
 
 วิศวกรที่ Segment ค้นพบว่าการแยก Service ย่อยเกินไป (140+ microservices สำหรับทีมขนาดกลาง) นำไปสู่"Microservice Hell" ที่ลด Productivity ลงอย่างมาก จนต้องตัดสินใจรวมกลับมาเป็น Monolith เพื่อความคล่องตัว [source: Segment Blog — Goodbye Microservices]
@@ -122,6 +127,7 @@ prerequisites: []
 ---
 
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
+
 - [[Distributed/04-spof|SPOF: ความเสี่ยงในระบบกระจาย]]
 - [[Distributed/02-dual-write|Dual Write: เมื่อข้อมูลกระจายอยู่หลายที่]]
 - [[01-trade-off-articulation|Trade-off Articulation: การให้เหตุผลเชิงสถาปัตยกรรม]]

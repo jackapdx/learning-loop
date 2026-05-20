@@ -55,6 +55,7 @@ tags: [networking, load-balancing, system-design]
 -** ข้อเสีย:** ไม่มีความฉลาด (Content-blind) ทำได้แค่กระจายโหลดตาม IP/Port เท่านั้น
 
 ### 2. Layer 7 Load Balancing (Application Layer)
+
 ทำงานที่ระดับโปรโตคอล HTTP/HTTPS:
 -** มองเห็นอะไร:**URL Path, Headers, Cookies, Query Parameters
 -** ข้อดี:** **ฉลาดมาก (Content-aware)** ทำ Path-based routing, Header-based routing หรือ Session Persistence (Sticky Sessions) ได้
@@ -84,7 +85,9 @@ tags: [networking, load-balancing, system-design]
     - ต้องการจัดการ SSL/TLS Offloading (ให้ LB เป็นคนถอดรหัส HTTPS แทน Server)
 
 ### เทคนิค Senior: L4 + L7 Hybrid
+
 ในระบบขนาดใหญ่ เรามักใช้ทั้งสองตัวทำงานร่วมกัน:
+
 ```text
 [Internet] 
     │

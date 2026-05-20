@@ -18,7 +18,7 @@ tags: [nosql, sharding, hotspots, cassandra, dynamodb, system-design]
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️ ** สถานการณ์:** คุณใช้ **Cassandra ** เก็บข้อมูล 📦 Followers ของ Twitter 
+> ✍️ ** สถานการณ์:** คุณใช้ **Cassandra ** เก็บข้อมูล 📦 Followers ของ Twitter
 > - คุณเลือกใช้`user_id` เป็น Partition Key เพื่อให้ข้อมูลของแต่ละ User แยกจากกัน
 > - ทุกอย่างทำงานได้ดีจนกระทั่ง ** ลิซ่า (Lisa BLACKPINK)** โพสต์รูปใหม่!
 > - แฟนคลับนับล้านคนแห่กันเข้ามาดูลิสต์ผู้ติดตามของลิซ่าพร้อมกัน
@@ -44,14 +44,17 @@ tags: [nosql, sharding, hotspots, cassandra, dynamodb, system-design]
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. Hot Partition คืออะไร?
+
 คือสภาวะที่โหนดหนึ่งใน Cluster รับโหลด (Read/Write) หนักกว่าเพื่อนบ้านอย่างมหาศาล เนื่องจาก Sharding Key ที่เลือกดันเป็นข้อมูลยอดนิยม (Hot Key)
 
 ### 2. กลยุทธ์การเลือก Sharding Key (The Best Practices)
+
 -**High Cardinality:** เลือก Key ที่มีค่าหลากหลายมากๆ (เช่น`uuid`,`order_id`) หลีกเลี่ยง Key ที่มีค่าซ้ำกันเยอะๆ (เช่น`country`,`gender`)
 -**Uniform Distribution:** เลือก Key ที่เมื่อรัน Hash แล้วจะกระจายตัวลงทุกโหนดเท่าๆ กัน
 -**Avoid Time-based Keys:** ห้ามใช้`timestamp` เป็น Partition Key ตรงๆ เพราะข้อมูลใหม่จะไปกองอยู่ที่เครื่องล่าสุดเครื่องเดียวเสมอ (Append-only Hotspot)
 
 ### 3. วิธีแก้ปัญหา Hot Key ระดับ Senior
+
 **Salting:** เติมเลขสุ่ม (0-9) ต่อท้าย Key ตอนเขียน และตอนอ่านต้องไปอ่านจากทุก Key มาสรุปผล
 **Read-Through Cache:** ใส่ Redis กั้นหน้า NoSQL เพื่อรับโหลดการอ่านข้อมูลที่ฮิตที่สุด
 **Request Coalescing:**(เหมือนที่ Discord ใช้) ใช้ Service ตรงกลางรวม Request ที่ขอข้อมูลชิ้นเดียวกันไว้ แล้วส่งคำสั่งไป DB แค่ครั้งเดียว
@@ -61,6 +64,7 @@ tags: [nosql, sharding, hotspots, cassandra, dynamodb, system-design]
 ## 🔬 ขยายความ (Extend)
 
 ### กรณีศึกษา: Discord's Data Service (Rust)
+
 Discord แก้ปัญหา Hot Partition ใน Cassandra โดยการสร้างเซอร์วิสในภาษา **Rust ** มาคั่นกลาง:
 - เมื่อคน 10,000 คนในเซิร์ฟเวอร์เดียวกันขออ่านประกาศ (Announcement) พร้อมกัน
 - เซอร์วิส Rust จะรู้ว่าทุกคนขอสิ่งเดียวกัน
@@ -69,6 +73,7 @@ Discord แก้ปัญหา Hot Partition ใน Cassandra โดยกา�
 *ผลลัพธ์:* ลดโหลด DB ลง 10,000 เท่าทันที!
 
 ### Cassandra Tombstones (กับดักการลบ)
+
 ใน NoSQL แบบ Wide Column การลบข้อมูลไม่ได้แปลว่าลบทิ้งทันที แต่มันจะสร้างป้าย **"Tombstone"** ไว้:
 - หากคุณลบข้อมูลบ่อยๆ ใน Partition เดียวกัน การอ่านจะช้าลงมหาศาลเพราะ DB ต้องสแกนผ่านกองซากศพ (Tombstones) เพื่อหาข้อมูลที่ยังอยู่
 

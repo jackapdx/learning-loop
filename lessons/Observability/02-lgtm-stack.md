@@ -18,7 +18,7 @@ tags: [observability, grafana, prometheus, loki, tempo, lgtm]
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️ ** สถานการณ์:** ระบบ Checkout ของคุณเกิด Error พุ่งสูงขึ้น (Spike) ใน Grafana 
+> ✍️ ** สถานการณ์:** ระบบ Checkout ของคุณเกิด Error พุ่งสูงขึ้น (Spike) ใน Grafana
 > - คุณเห็นกราฟสีแดงใน **Prometheus **(Metrics)
 > - คุณต้องการรู้ว่า Request ที่พังนั้น"พ่น Error อะไรออกมา" และ"มันไปติดที่เซอร์วิสตัวไหน" (เช่น ติดที่ Payment หรือ Inventory?)
 >
@@ -48,18 +48,22 @@ tags: [observability, grafana, prometheus, loki, tempo, lgtm]
 💡**LGTM Stack ** คือการรวมตัวของ 4 เครื่องมือจาก Grafana Labs:
 
 ### 1. (L)oki — Logs (Like Prometheus, but for Logs)
+
 -**Concept:** เน้นการเก็บ Metadata (Labels) แทนที่จะเก็บ Full-text index ของ Log ทุกตัว
 -** ข้อดี:** ประหยัดที่เก็บข้อมูล 📦 (Cost-efficient) และรวดเร็วมากเมื่อใช้ค้นหาคู่กับ Metrics
 
 ### 2. (G)rafana — Visualization (The Single Pane of Glass)
+
 -**Concept:** ตัวกลางที่ใช้ดึงข้อมูลจากทุกแหล่งมาโชว์ในที่เดียว
 -** หน้าที่:** สร้าง Dashboard และทำ **Data Correlation **(เช่น คลิกจุดบนกราฟ Metrics แล้วเด้งไปดู Traces ได้เลย)
 
 ### 3. (T)empo — Traces (Distributed Tracing)
+
 -**Concept:** บันทึกเส้นทางการเดินทางของ 1 Request ตั้งแต่ต้นจนจบข้ามทุกเซอร์วิส
 -** หน้าที่:** หาจุดที่ Latency สูง หรือจุดที่เกิด Error ในสายพาน Microservices
 
 ### 4. (M)imir / Prometheus — Metrics
+
 -**Concept:** เก็บข้อมูลตัวเลขเชิงปริมาณ (เช่น CPU, Latency, Error Rate)
 -** หน้าที่:** ตรวจจับอาการผิดปกติและส่ง Alert
 
@@ -68,12 +72,14 @@ tags: [observability, grafana, prometheus, loki, tempo, lgtm]
 ## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: Correlation is King
+
 สิ่งที่จะแยกคุณออกจาก Junior คือการเซ็ต **Correlation ** ระหว่างเครื่องมือ:
 
 **Exemplars:** เทคนิคที่ทำให้ Prometheus แอบแนบ"Trace ID" ไว้ในจุดบนกราฟ ทำให้คุณคลิกที่จุด Peak ของ Latency แล้วเปิดดู Trace นั้นได้ทันที
 **Derived Fields:** การตั้งค่าใน Loki ให้สกัด Trace ID ออกจาก Log และสร้างลิงก์กดไปดูใน Tempo ได้อัตโนมัติ
 
 ### 3 Pillars of Observability
+
 | เสาหลัก | เครื่องมือ | ถามว่า... |
 |:---|:---:|:---|
 |**Metrics **| Prometheus |"ตอนนี้ระบบเราพังไหม? (Is it broken?)" |

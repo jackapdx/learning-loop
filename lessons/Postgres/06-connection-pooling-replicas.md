@@ -47,14 +47,17 @@ tags: [chat-exp, system-design, postgres]
 PostgreSQL ออกแบบมาให้ 1 Connection = 1 Process ซึ่งมีค่าใช้จ่าย (Overhead) สูงมาก
 
 #### PgBouncer Pooling Modes:
+
 *   **Session Mode:** 1 แอปจอง 1 Connection จนกว่าจะปิดแอป (เหมือนไม่ได้ใช้ Pooler)
 *   **Transaction Mode (แนะนำ):** จอง Connection เฉพาะตอนรัน Transaction พอจบปุ๊บ คืนให้คนอื่นใช้ทันที! (เหมาะมากสำหรับ Microservices)
 *   **Statement Mode:** คืนทันทีที่รัน 1 คำสั่งเสร็จ (ห้ามใช้ถ้ามีการใช้ Transaction)
 
 ### 2. Read Replicas: แบ่งเบาภาระเครื่องหลัก
+
 หากเครื่อง Primary ของคุณเริ่มรับโหลด"การอ่าน" ไม่ไหว (CPU 100%) ทางแก้คือการสร้างสำเนาข้อมูล (Replica)
 
 #### กลไกการทำ Replication:
+
 *   **Physical Replication:** ส่งไฟล์ WAL (Logs) ไปทั้งดุ้น เร็วและแม่นยำที่สุด
 *   **Synchronous:** เขียน Primary เสร็จ ต้องรอ Replica ยืนยัน (ปลอดภัยแต่ช้า ⚡)
 *   **Asynchronous (ยอดนิยม):** เขียน Primary เสร็จแล้วค่อยส่งไป Replica (เร็วแต่ข้อมูลอาจ Delay หลักมิลลิวินาที)
@@ -64,15 +67,18 @@ PostgreSQL ออกแบบมาให้ 1 Connection = 1 Process ซึ่�
 ## 🔬 ขยายความ (Extend)
 
 ### Load Balancing: ใครจะอ่านเครื่องไหน?
+
 เมื่อมีเครื่องอ่าน (Read Replicas) หลายเครื่อง แอปของคุณต้องรู้ว่าจะส่ง Query ไปที่ไหน
 *   **Application Level:** ใน Code ต้องแยก Database 📦 Connection ระหว่าง`Writer` (Primary) และ`Reader` (Replica Cluster)
 *   **Infrastructure 🏗️ Level:** ใช้ Proxy เช่น **HAProxy ** หรือ **Cloud Load Balancer ** เพื่อกระจายงานไปยัง Replicas
 
 ### Replication Lag: สิ่งที่ต้องระวัง
+
 เนื่องจากข้อมูลส่งไปแบบ Async บางครั้งคุณเขียนข้อมูลลง Primary ปุ๊บ แล้วไปอ่านจาก Replica ทันที ข้อมูลอาจจะยังไปไม่ถึง! (เกิดอาการ"หาข้อมูลที่เพิ่งสร้างไม่เจอ")
 *   **วิธีแก้:** สำหรับ Logic ที่สำคัญมาก (เช่น เพิ่งกดจ่ายเงินเสร็จ) ให้บังคับอ่านจาก Primary เสมอ
 
 ### กรณีศึกษา: สถาปัตยกรรมระบบแชทจริง (Scaling Strategy)
+
 ในระบบตัวอย่างที่เราศึกษา ซึ่งรองรับ Agent นับพันคนพร้อมกัน:
 *   ใช้ **PgBouncer ** ในโหมด **Transaction ** เพื่อรับโหลดจาก 19 Microservices
 *   ใช้ **Read Replicas ** เพื่อให้ระบบ Dashboard ของ Agent ดึงข้อมูลประวัติแชทมหาศาลโดยไม่รบกวนการรับส่งข้อความ Real-time ⏰ ในเครื่อง Primary

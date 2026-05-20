@@ -88,7 +88,9 @@ prerequisites: []
 **กับดักที่พบบ่อย:** วิศวกรหลายคนพยายามยัดเยียด Vector DB เข้ามาในทุกโปรเจกต์เพราะความล้ำ (Hype) ทั้งที่จริงๆ แล้ว PostgreSQL พร้อมส่วนเสริม`pgvector` ก็เพียงพอสำหรับข้อมูลระดับหลายล้านแถวแล้ว
 
 ### การจัดการ GPU ใน Kubernetes (K8s)
+
 ในการรันระบบ AI 🧠 บน Production คุณต้องรู้จักการตั้งค่า Resource Limits:
+
 ```yaml
 resources:
   limits:
@@ -96,6 +98,7 @@ resources:
 nodeSelector:
   accelerator: nvidia-a100 # เลือกเครื่องที่มี GPU รุ่นที่ต้องการ
 ```
+
 *เทคนิค:* ใช้ **Taints และ Tolerations ** เพื่อป้องกันไม่ให้ Service ทั่วไป (เช่น Web Server) มาแย่งใช้เครื่องที่มี GPU
 
 ---

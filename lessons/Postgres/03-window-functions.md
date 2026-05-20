@@ -55,7 +55,9 @@ FROM table_name;
 ### 3 กลุ่มฟังก์ชันที่พบบ่อย
 
 #### 1. Aggregate Window Functions
+
 ใช้ฟังก์ชันมาตรฐาน (`SUM`,`AVG`,`COUNT`) แต่ทำงานเป็น Window
+
 ```sql
 -- หา Running Total ยอดขายสะสมตามพนักงาน
 SELECT 
@@ -66,6 +68,7 @@ FROM sales;
 ```
 
 #### 2. Ranking Functions
+
 จัดอันดับข้อมูลภายในกลุ่ม
 *  `ROW_NUMBER()`: อันดับแบบเรียงตัวเลข (1, 2, 3, 4)
 *  `RANK()`: อันดับแบบข้ามเลขถ้าคะแนนเท่ากัน (1, 2, 2, 4)
@@ -82,6 +85,7 @@ SELECT * FROM (
 ```
 
 #### 3. Value Functions
+
 เข้าถึงข้อมูลของแถวอื่นใน Window
 *  `LAG()`: ดึงค่าจาก"แถวก่อนหน้า" (เหมาะมากสำหรับหา Growth Rate)
 *  `LEAD()`: ดึงค่าจาก"แถวถัดไป"
@@ -101,7 +105,9 @@ FROM daily_sales;
 ## 🔬 ขยายความ (Extend)
 
 ### Window Frames: การกำหนดขอบเขตที่ละเอียดขึ้น
+
 บางครั้งเราไม่ได้ต้องการคำนวณ"ทั้งหมด" แต่ต้องการคำนวณ"3 วันย้อนหลัง" หรือ"5 แถวก่อนหน้า" เราใช้`ROWS` หรือ`RANGE` ในการกำหนด Frame
+
 ```sql
 -- หา Moving Average 3 วันล่าสุด
 SELECT 
@@ -114,6 +120,7 @@ FROM daily_sales;
 ```
 
 ### ประสิทธิภาพ (Performance)
+
 *   **Window Functions ไม่ใช่ Magic:** มันยังต้องมีการ Sort ข้อมูลภายใน หากข้อมูลมหาศาล (ล้านแถว) การทำ Index บน Column ที่ใช้ใน`PARTITION BY` และ`ORDER BY` จะช่วยให้ Window Function ทำงานเร็วขึ้นอย่างมาก
 *   **Filter ข้อมูลก่อน:** พยายาม`WHERE` ข้อมูลให้เล็กลงก่อนจะรัน Window Functions เพื่อลดภาระการ Sort
 

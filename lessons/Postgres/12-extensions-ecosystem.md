@@ -45,18 +45,22 @@ tags: [chat-exp, system-design, postgres]
 ### 3 ยอดขุนพล Extension ที่ Senior ต้องรู้จัก
 
 #### 1. pgvector (อาวุธสำหรับยุค AI)
+
 ช่วยให้คุณเก็บข้อมูล **Embeddings **(ตัวเลขเวกเตอร์จาก AI 🧠 เช่น OpenAI) ได้โดยตรง และค้นหาความคล้ายคลึงของข้อมูล (Similarity Search) ได้อย่างรวดเร็ว
 *   **ใช้ทำ:** ระบบแนะนำสินค้า, Semantic Search ("หารูปที่มีหมาสีขาว"), RAG (Retrieval-Augmented Generation)
 
 #### 2. PostGIS (มาตรฐานโลกสำหรับ GIS)
+
 Extension ที่ทรงพลังที่สุดในโลกสำหรับการจัดการข้อมูลเชิงพื้นที่ (Geospatial)
 *   **ใช้ทำ:** ค้นหาร้านค้าในรัศมี 5 กม., หาเส้นทางเดินรถ, คำนวณพื้นที่ในแผนที่
 
 #### 3. TimescaleDB (จัดการข้อมูลตามเวลา)
+
 แปลง Postgres ให้เป็น Time-series Database 📦 ที่รองรับการเขียนข้อมูลมหาศาล (IoT, Metrics) และบีบอัดข้อมูลเก่าให้อัตโนมัติ
 *   **ใช้ทำ:** เก็บกราฟหุ้น, Log การใช้งานเซนเซอร์, ประวัติราคาขาย
 
 ### Extension อื่นๆ ที่น่าสนใจ
+
 *   **pg_cron:** รันคำสั่ง SQL ตามเวลาที่กำหนด (เหมือน Crontab แต่อยู่ใน DB)
 *   **pg_stat_statements:** ดูสถิติว่า Query ไหนรันช้าและใช้ทรัพยากรเยอะที่สุด (แนะนำให้เปิดเสมอ)
 *   **pg_partman:** ช่วยจัดการ Table Partitioning อัตโนมัติ (คู่หูของ Lesson 1)
@@ -66,19 +70,23 @@ Extension ที่ทรงพลังที่สุดในโลกสำ�
 ## 🔬 ขยายความ (Extend)
 
 ### Foreign Data Wrappers (FDW): การเชื่อมต่อข้ามโลก
+
 PostgreSQL สามารถมองเห็นตารางใน Database 📦 อื่น (MySQL, MongoDB, หรือแม้แต่ Google Sheets) ให้กลายเป็น"ตารางเสมือน" ในตัวมันเองได้ผ่าน FDW
+
 ```sql
 -- ตัวอย่างการอ่านข้อมูลจาก Postgres เครื่องอื่น
 SELECT * FROM remote_server_orders WHERE amount > 1000;
 ```
 
 ### ราคาที่ต้องจ่าย (Trade-offs)
+
 แม้ Extensions จะเก่งมาก แต่การติดตั้งเยอะเกินไปมีข้อควรระวัง:
 *   **Version Compatibility:** เมื่อต้องการอัปเกรด Postgres ต้องเช็คว่า Extensions รองรับเวอร์ชันใหม่หรือยัง
 *   **Memory Usage:**Extension บางตัว (เช่น TimescaleDB) กินทรัพยากรเพิ่มขึ้นอย่างเห็นได้ชัด
 *   **Vendor Support:** หากใช้ Managed Database 📦 (เช่น AWS RDS, Google Cloud SQL) ต้องเช็คลิสต์ว่าเขารองรับ Extension ตัวนั้นไหม
 
 ### กรณีศึกษา: พลังของการใช้ระบบเดียว (The Power of One)
+
 ในระบบจริงที่เราศึกษา เราใช้ PostgreSQL เพียงตัวเดียวร่วมกับ`pgvector` เพื่อทำระบบ AI 🧠 ช่วยตอบแชท และ`pg_stat_statements` เพื่อคอยเฝ้าระวัง Query ที่มีปัญหา ทำให้ทีมงานขนาดเล็กสามารถดูแลระบบที่ซับซ้อนได้โดยไม่ต้องเสียเวลาไปกับการดูแล Database 📦 หลายประเภท
 
 ---

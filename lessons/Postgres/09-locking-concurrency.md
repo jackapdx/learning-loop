@@ -21,6 +21,7 @@ tags: [chat-exp, system-design, postgres]
 ## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณมีตาราง`jobs` ที่ใช้เป็นคิวงาน (Task Queue) มี Worker 10 ตัวทำงานพร้อมกัน ทุกตัวจะรันคำสั่ง:
+>
 >```sql
 > SELECT * FROM jobs WHERE status = 'PENDING' LIMIT 1;
 > UPDATE jobs SET status = 'PROCESSING' WHERE id = {id_from_select};
@@ -53,12 +54,14 @@ PostgreSQL มี Lock หลายระดับ แต่ที่ควร�
 *   **Table-Level Locks:** ล็อกทั้งตาราง (เช่น`ALTER TABLE` หรือ`DROP TABLE`) พยายามหลีกเลี่ยงใน Production
 
 ### 2. อาวุธลับ: SELECT FOR UPDATE
+
 เมื่อคุณต้องการจองข้อมูลเพื่อแก้ไข ป้องกันคนอื่นมาแตะต้อง:
 *   **`FOR UPDATE`:** ล็อกแถว ห้ามคนอื่น UPDATE/DELETE/SELECT FOR UPDATE (คนอื่นต้องรอ)
 *   **`FOR UPDATE SKIP LOCKED`:** ถ้าแถวนั้นโดนล็อกอยู่ ให้ **"ข้าม"** ไปเลย (เหมาะมากสำหรับระบบ Queue)
 *   **`FOR UPDATE NOWAIT`:** ถ้าแถวนั้นโดนล็อกอยู่ ให้ **"Error"** ทันที (ไม่ต้องรอ)
 
 ### 3. Deadlock: เมื่อต่างคนต่างรอ
+
 Deadlock เกิดขึ้นเมื่อ Transaction A ล็อก Row 1 และจะไปล็อก Row 2 ในขณะที่ Transaction B ล็อก Row 2 และจะไปล็อก Row 1 ต่างคนต่างรอจนไม่มีใครไปต่อได้
 *   **วิธีป้องกัน:** ล็อกลำดับของข้อมูลให้เหมือนกันเสมอในทุก Code (เช่น เรียงลำดับตาม ID ก่อนล็อกเสมอ)
 
@@ -67,7 +70,9 @@ Deadlock เกิดขึ้นเมื่อ Transaction A ล็อก Row 
 ## 🔬 ขยายความ (Extend)
 
 ### Advisory Locks: การสร้าง Lock ของเราเอง
+
 บางครั้งเราไม่ได้อยากล็อกแถวในฐานข้อมูล แต่อยากล็อก"ตรรกะบางอย่าง" (เช่น ป้องกันไม่ให้ Cron Job รันซ้ำพร้อมกัน) เราสามารถใช้ **Advisory Locks ** ได้
+
 ```sql
 -- ลองจอง Lock หมายเลข 12345
 SELECT pg_try_advisory_lock(12345); 
@@ -75,7 +80,9 @@ SELECT pg_try_advisory_lock(12345);
 ```
 
 ### การตรวจสอบ Lock ที่ค้างอยู่
+
 หากระบบของคุณช้าผิดปกติ คุณสามารถตรวจสอบได้ว่าใครกำลังล็อกใครอยู่
+
 ```sql
 SELECT pid, state, query, wait_event_type, wait_event 
 FROM pg_stat_activity 
@@ -83,6 +90,7 @@ WHERE wait_event_type = 'Lock';
 ```
 
 ### การใช้ SELECT FOR SHARE
+
 หากคุณต้องการแค่"อ่าน" และมั่นใจว่า"ห้ามใครมาแก้แถวนี้จนกว่าฉันจะอ่านจบ" แต่ยังยอมให้คนอื่น"อ่าน" พร้อมกันได้ ให้ใช้`FOR SHARE` (เบากว่า`FOR UPDATE`)
 
 ---

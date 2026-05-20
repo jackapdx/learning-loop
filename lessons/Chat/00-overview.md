@@ -10,12 +10,11 @@ tags: [chat-exp, system-design, chat]
 
 ---
 
-### ปฐมนิเทศ (Orient)
+## ปฐมนิเทศ (Orient)
 
 "การออกแบบระบบ WhatsApp / LINE / Messenger" ไม่ใช่แค่การวาดแผนภาพรับส่งข้อความ แต่มันคือโจทย์ System Design ที่คลาสสิกที่สุด เพราะมันรวมทุกมิติของ Distributed Systems ไว้ในที่เดียว: ตั้งแต่ **Real-time ⏰ Connectivity **,**Data Consistency ⛓️ **,**Horizontal Scaling ** ไปจนถึง **Efficient Storage **[source: Slack Engineering — Scaling Slack’s Real-time Messaging]
 
 ซีรีส์นี้ประกอบด้วย **6 บทเรียนเข้มข้น ** ที่กลั่นกรองจากประสบการณ์การสร้างระบบจริงจาก ** สถาปัตยกรรมระบบแชท **(สถาปัตยกรรม 19 Microservices บน Google Pub/Sub, MongoDB และ Firebase) ทุกบทเรียนถูกออกแบบตามหลัก **Learning Loop ** เพื่อให้คุณเข้าใจทั้ง"ทฤษฎี" และ"การนำไปใช้จริง" ภายใน 5-10 นาที
-
 
 ---
 
@@ -34,9 +33,11 @@ graph TD
 ```
 
 ### Path A: Connection Layer (การเชื่อมต่อ) → บทเรียนที่ 1, 2, 4
+
 เจาะลึก WebSocket 📡/SSE, Presence Detection และ Push 📱 Notifications — เรียนรู้วิธีทำให้ Server ส่งข้อมูลหา Client ได้"ทันที" ในทุกสถานการณ์แม้แอปจะปิดอยู่
 
 ### Path B: Data Layer (ชั้นข้อมูล) → บทเรียนที่ 3, 5, 6
+
 เจาะลึก Message Ordering, Read Receipts และ Storage & Pagination — เรียนรู้วิธีรับประกันว่าข้อความจะ"ถูกต้อง ครบถ้วน และค้นหาได้" แม้ข้อมูลจะโตระดับพันล้านแถว
 
 ---
@@ -64,4 +65,5 @@ graph TD
 ---
 
 ## พร้อมแล้วหรือยัง?
+
 เริ่มบทเรียนแรกของคุณได้ที่นี่: [[01-websocket-realtime|บทที่ 1: WebSocket & Real-time Connections]]

@@ -1,10 +1,11 @@
 {
   "name": "learning-loop-app",
   "devDependencies": {
-    "@types/node": "^22.15.0",
+    "@types/node": "^22.19.19",
     "husky": "^9.1.7",
+    "markdownlint-cli2": "^0.22.1",
     "oxfmt": "^0.49.0",
-    "oxlint": "^1.63.0",
+    "oxlint": "^1.66.0",
     "turbo": "^2.9.14"
   },
   "engines": {
@@ -21,6 +22,8 @@
     "format:check": "turbo run format:check",
     "lint:fix": "turbo run lint:fix",
     "typecheck": "turbo run typecheck",
+    "lint:md": "bunx markdownlint-cli2",
+    "lint:md:fix": "bunx markdownlint-cli2 --fix",
     "docker:up": "docker-compose up -d",
     "docker:down": "docker-compose down",
     "prepare": "husky",

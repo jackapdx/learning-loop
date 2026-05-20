@@ -10,7 +10,7 @@ tags: [chat-exp, system-design, messaging, pubsub]
 
 > [!info] ปฐมนิเทศ
 > เมื่อ Microservices ต้องคุยกันโดยไม่รอคำตอบ (Asynchronous) หรือต้องกระจายข้อมูลไปหาเซอร์วิสหลายๆ ตัวพร้อมกัน (Fan-out)"Message Broker" คือพระเอกของงานนี้
-> 
+>
 > ซีรีส์นี้จะพาคุณไปเจาะลึก **Google Cloud Pub/Sub ** เครื่องมือระดับ Global ที่ทรงพลังแต่แฝงไปด้วยข้อจำกัดที่คุณต้องรู้ เพื่อเปรียบเทียบกับทางเลือกอื่นๆ อย่าง Kafka หรือ RabbitMQ
 >
 > Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
@@ -18,12 +18,15 @@ tags: [chat-exp, system-design, messaging, pubsub]
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: Managed Cloud Messaging → #1
+
 [[01-google-pubsub|Google Cloud Pub/Sub]] — พลังของ Serverless Messaging และขีดจำกัดที่คุณต้องระวัง
 
 ### Path B: Streaming vs. Queuing → #2
+
 [[02-streaming-vs-queuing|Streaming vs. Queuing]] — เปรียบเทียบ Log-based Streaming (Kafka) vs. Smart Brokers (RabbitMQ)
 
 ### Path C: Event-Driven Design → #3
+
 [[03-event-bus|Event Bus]] — ลดความผูกมัด (Decoupling) เพื่อเพิ่มความทนทานและความเร็ว
 
 ## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)

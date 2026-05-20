@@ -61,7 +61,7 @@ prerequisites: [Chat/01-websocket-realtime]
 
 1.** ข้อความสลับลำดับ (Ordering):**
    - อย่าพึ่งพา Time-order เพียงอย่างเดียว
-   - ใช้ **Logical Clocks ** หรือ **Sequence Numbers ** ที่กำกับโดย Client/Sender 
+   - ใช้ **Logical Clocks ** หรือ **Sequence Numbers ** ที่กำกับโดย Client/Sender
    - [source: Lamport Timestamps — Leslie Lamport, 1978]
 
 2.** ข้อความซ้ำ (Duplicates):**
@@ -77,7 +77,9 @@ prerequisites: [Chat/01-websocket-realtime]
 ## 🔬 ขยายความ (Extend)
 
 ### การใช้ Idempotency ในฐานข้อมูล
+
 ตัวอย่าง SQL ที่ช่วยให้ระบบทนทานต่อการส่งซ้ำ:
+
 ```sql
 -- ✅ ป้องกันการเขียนข้อมูลซ้ำแม้ Broker จะส่งมา 10 รอบ
 INSERT INTO messages (message_id, text, sender_id, sequence)
@@ -86,6 +88,7 @@ ON CONFLICT (message_id) DO NOTHING;
 ```
 
 ### กลยุทธ์ Reordering ที่ Client (The Buffer Strategy)
+
 หาก Client ได้รับ Msg 102 ก่อน Msg 101:
 1. เก็บ Msg 102 ไว้ใน **Buffer ** ชั่วคราว
 2. รอสักครู่ (Short Timeout) หรือขอ Sync ใหม่สำหรับ Msg 101
@@ -93,6 +96,7 @@ ON CONFLICT (message_id) DO NOTHING;
 -**Trade-off:** ยอมรับ Latency ที่เพิ่มขึ้นเล็กน้อยเพื่อแลกกับความถูกต้องของหน้าจอ (UI Consistency)
 
 ### กรณีศึกษา: ความท้าทายของการใช้ Pub/Sub ในระบบแชทจริง
+
 ในระบบตัวอย่าง:
 - เราใช้ Google Pub/Sub ซึ่งเป็น **At-least-once **
 - เรายอมรับให้มีความซ้ำซ้อนไหลเข้ามาในระบบ (Write Amplification) แต่เรากรองออกที่ **Read Model **(View) โดยใช้ Message UUID เป็นตัวเช็ค

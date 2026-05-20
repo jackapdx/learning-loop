@@ -18,9 +18,9 @@ tags: [postgres, system-design, reliability]
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️ ** สถานการณ์:** คุณเป็น Lead Engineer ที่บริษัท Startup ที่กำลังโตเร็วมาก (Hyper-growth) ระบบของคุณประมวลผลธุรกรรมนับล้านต่อวันบน PostgreSQL 
-> 
-> คืนวันเสาร์ เวลา ⏰ 03:00 น. จู่ๆ ระบบแจ้งเตือนว่า **"database is not accepting commands to avoid wraparound data loss"** และทุกอย่างกลายเป็น Read-only ทันที 
+> ✍️ ** สถานการณ์:** คุณเป็น Lead Engineer ที่บริษัท Startup ที่กำลังโตเร็วมาก (Hyper-growth) ระบบของคุณประมวลผลธุรกรรมนับล้านต่อวันบน PostgreSQL
+>
+> คืนวันเสาร์ เวลา ⏰ 03:00 น. จู่ๆ ระบบแจ้งเตือนว่า **"database is not accepting commands to avoid wraparound data loss"** และทุกอย่างกลายเป็น Read-only ทันที
 >
 > ** คำถาม:**
 > 1. ทำไม PostgreSQL ถึงต้อง"หยุด" การทำงานของระบบคุณ?
@@ -45,17 +45,20 @@ tags: [postgres, system-design, reliability]
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. ทำไมต้องมี Wraparound?
+
 PostgreSQL ใช้ **MVCC (Multi-Version Concurrency 🧵 Control)** โดยทุกครั้งที่ Update ข้อมูล มันจะไม่ทับข้อมูลเก่า แต่จะสร้าง"Version ใหม่" และติดป้ายกำกับว่าแถวนี้ถูกสร้างโดย Transaction ID (TXID) ไหน
 
 เลข TXID นี้เป็นตัวเลข **32-bit ** ซึ่งมีค่าสูงสุดประมาณ **4,200 ล้าน **
-- เพื่อความประหยัดเนื้อที่ PostgreSQL จึงใช้การวนซ้ำ (Circular) 
+- เพื่อความประหยัดเนื้อที่ PostgreSQL จึงใช้การวนซ้ำ (Circular)
 - โดยกำหนดให้เลขครึ่งหนึ่ง (2,100 ล้าน) อยู่ใน"อดีต" และอีกครึ่งหนึ่งอยู่ใน"อนาคต"
 
 ### 2. จุดจบของโลก (The Wraparound)
+
 หากเลข TXID วิ่งไปเรื่อยๆ จนวันหนึ่งมัน"วนกลับมา" ทับเลขเดิม ข้อมูลที่เคยอยู่ในอดีตจะกลายเป็นอยู่ในอนาคตทันที!
 *   **ผลลัพธ์:** ข้อมูลเก่าของคุณจะ"หายตัวไป" (Invisible) เพราะ PostgreSQL คิดว่ามันยังไม่เกิดขึ้น
 
 ### 3. กลไกการป้องกัน
+
 ก่อนจะถึงจุดตาย PostgreSQL จะเข้าสู่โหมด **Safety Shutdown **:
 -**200 ล้าน TXID:** เริ่มรัน`autovacuum` แบบดุดัน (to prevent wraparound)
 -** เหลือ 1 ล้านสุดท้าย:** หยุดรับคำสั่ง Write ทุกชนิด!
@@ -65,6 +68,7 @@ PostgreSQL ใช้ **MVCC (Multi-Version Concurrency 🧵 Control)** โดย
 ## 🔬 ขยายความ (Extend)
 
 ### วิธีการ Monitor (The Senior Way)
+
 อย่ารอให้ระบบล่ม ให้รัน Query นี้เพื่อดูว่าจุดจบอยู่ใกล้แค่ไหน:
 
 ```sql
@@ -75,10 +79,13 @@ SELECT
 FROM pg_database
 ORDER BY age_in_txids DESC;
 ```
+
 *หาก`percent_towards_wraparound` เกิน 50% (1,000 ล้าน) คุณต้องเริ่มกังวลแล้ว*
 
 ### วิธีป้องกัน: การ Tuning Autovacuum
+
 ในระบบที่ Write หนัก ค่า Default มักจะไม่พอ:
+
 ```sql
 -- ปรับให้ Autovacuum ทำงานเร็วขึ้นและบ่อยขึ้น
 ALTER SYSTEM SET autovacuum_vacuum_cost_limit = 1000; -- ยอมให้กิน I/O มากขึ้น
@@ -86,6 +93,7 @@ ALTER SYSTEM SET autovacuum_freeze_max_age = 500000000; -- เริ่ม Freez
 ```
 
 ### ศัตรูตัวฉกาจ: Long-running Transactions
+
 แม้คุณจะตั้ง`autovacuum` ดีแค่ไหน แต่ถ้ามีใครเปิด Transaction ค้างไว้ (Idle in transaction) นานเกินไป มันจะบล็อกไม่ให้`VACUUM` ลบข้อมูลเก่าได้เลย
 
 ---

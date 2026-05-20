@@ -18,9 +18,11 @@ tags: [chat-exp, system-design, workers, queues]
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: Transactional Integrity → #1
+
 [[01-pg-boss-transactional|pg-boss (PostgreSQL)]] — เมื่อความถูกต้องของข้อมูล (Atomicity) สำคัญที่สุด
 
 ### Path B: High Performance → #2
+
 [[02-bullmq-redis-performance|BullMQ (Redis)]] — เมื่อความเร็ว (Throughput) และความซับซ้อนของคิวคือหัวใจ
 
 ## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)

@@ -73,7 +73,9 @@ tags: [chat-exp, system-design, distributed-systems, saas, architecture]
 ## 🔬 ขยายความ (Extend)
 
 ### Row-Level Security (RLS) ใน PostgreSQL
+
 หากคุณเลือกแบบ **Pool** (Shared Table) คุณควรใช้ RLS เพื่อป้องกันมนุษย์ (Dev) เขียน Query ลืม `WHERE tenant_id = ...`:
+
 ```sql
 -- สร้างนโยบายความปลอดภัย
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
@@ -82,9 +84,11 @@ CREATE POLICY tenant_order_isolation ON orders
 FOR ALL TO authenticated
 USING (tenant_id = current_setting('app.current_tenant_id')::UUID);
 ```
+
 ด้วยวิธีนี้ แม้คุณจะเขียน `SELECT * FROM orders` แอปจะเห็นแค่ข้อมูลของลูกค้าที่ล็อกอินอยู่เท่านั้น
 
 ### การรับมือ Noisy Neighbor
+
 - **Throttling / Rate Limiting:** จำกัดจำนวน Request ต่อวินาทีของแต่ละ Tenant
 - **Tiered Hosting:** ลูกค้าจ่ายถูกอยู่ Pool, ลูกค้าจ่ายแพงอยู่ Silo
 - **Resource Quotas:** ใช้ Database ที่รองรับการจำกัดทรัพยากรราย User/Schema

@@ -41,10 +41,12 @@ tags: [chat-exp, system-design, postgres]
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. JSON vs JSONB (ต่างกันที่ B)
+
 *   **JSON:** เก็บเป็น Text ดิบๆ ข้อดีคือเก็บไว (ไม่ต้อง Parse) แต่ข้อเสียคือ Query ช้ามากเพราะต้อง Parse ใหม่ทุกครั้งที่อ่าน
 *   **JSONB (Binary):** เก็บเป็น Format พิเศษที่ผ่านการ Parse มาแล้ว ข้อดีคือ Query เร็วมาก, รองรับการทำ Index และลบช่องว่าง/คีย์ที่ซ้ำให้อัตโนมัติ **(แนะนำให้ใช้ตัวนี้ 99% ของงาน)**
 
 ### 2. การ Query ข้อมูล JSONB
+
 PostgreSQL มี Operator พิเศษสำหรับ JSONB:
 *  `->` : ดึงค่าออกมาเป็น JSON object
 *  `->>` : ดึงค่าออกมาเป็น **Text **(ใช้บ่อยสุดเพื่อเอาไปเปรียบเทียบ)
@@ -57,7 +59,9 @@ WHERE attributes @> '{"color":"red"}';
 ```
 
 ### 3. พลังของ GIN Index
+
 นี่คือเหตุผลที่ JSONB ชนะขาด คุณสามารถสร้าง Index บนข้อมูล"ข้างใน" JSON ได้เลย
+
 ```sql
 CREATE INDEX idx_product_attr ON products USING GIN (attributes);
 -- Query ที่ใช้ @> จะเร็วขึ้นอย่างมหาศาล!
@@ -68,19 +72,23 @@ CREATE INDEX idx_product_attr ON products USING GIN (attributes);
 ## 🔬 ขยายความ (Extend)
 
 ### jsonpath: การค้นหาขั้นสูง (PostgreSQL 12+)
+
 หากคุณต้องการเงื่อนไขที่ซับซ้อน เช่น"หาสินค้าที่มีราคาใน JSONB มากกว่า 100" คุณสามารถใช้`jsonpath` ได้เหมือน XPath ใน XML
+
 ```sql
 SELECT * FROM products 
 WHERE attributes @@ '$.price > 100';
 ```
 
 ### เมื่อไหร่ที่ไม่ควรใช้ JSONB? (The Trap)
+
 นักพัฒนาหลายคนหลงรักความง่ายจน"ยัดทุกอย่างลง JSONB" จนฐานข้อมูลกลายเป็นที่ทิ้งขยะ
 *   **ห้ามใช้:** กับข้อมูลที่ต้องนำมาทำ Foreign Key หรือมีกฎความถูกต้อง (Constraints) ที่เข้มงวด
 *   **ห้ามใช้:** กับข้อมูลที่ต้อง UPDATE บ่อยๆ (เพราะทุกครั้งที่อัปเดต 1 คีย์ Postgres ต้องเขียน JSON ทั้งก้อนใหม่ลง Disk ตามหลัก MVCC)
 *   **กฎเหล็ก:** ข้อมูลหลัก (Core Data) → Table | ข้อมูลเสริม (Metadata/Dynamic) → JSONB
 
 ### กรณีศึกษา: การจัดการ Metadata ในระบบแชทจริง
+
 ในระบบตัวอย่างที่เราศึกษา เราเก็บข้อความหลักในตารางปกติ แต่ข้อมูลเสริม เช่น"ข้อมูล Browser ของลูกค้า" หรือ"Payload จาก Webhook" เราเก็บใน JSONB เพื่อให้รองรับ API หลายเวอร์ชันโดยไม่ต้องเปลี่ยน Schema ตลอดเวลา
 
 ---

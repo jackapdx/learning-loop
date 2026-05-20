@@ -23,9 +23,9 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 > 1.**Booking Service:** สร้างคำขอจอง (Postgres)
 > 2.**Payment Service:** ตัดเงินจากบัตรเครดิต (External API)
 > 3.**Seat Service:** ล็อคที่นั่งในระบบ (MySQL)
-> 
+>
 > ** โจทย์:** เมื่อผู้ใช้กดจอง ระบบต้องทำทั้ง 3 อย่างให้สำเร็จ ถ้าตัดเงินผ่านแต่ล็อคที่นั่งไม่ได้ คุณต้อง"คืนเงิน" ให้ผู้ใช้โดยอัตโนมัติ
-> 
+>
 > ** คำถาม:** คุณจะเลือกใช้กลยุทธ์ใดเพื่อให้มั่นใจว่าข้อมูลจะสอดคล้องกัน (Eventually Consistent) โดยที่ระบบยังสามารถรองรับ Traffic สูงๆ ได้?
 >
 > **✋ หยุดตรงนี้ก่อน **— ลองคิดดูว่าระหว่างการใช้ **Two-Phase Commit (2PC)** กับ **Saga Pattern ** แบบไหนจะทำให้ระบบของคุณ"ล่ม" ได้ง่ายกว่ากันหากมี Network Latency สูง
@@ -47,10 +47,12 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 ## 📖 คำอธิบาย (Explain)
 
 ### 1. ปัญหาของ Two-Phase Commit (2PC)
+
 2PC พยายามทำ Distributed ACID โดยใช้ Coordinator สั่ง"Prepare" และ"Commit"
 -** ข้อเสียหลัก:** มันเป็น **Synchronous & Blocking ** ถ้าโหนดหนึ่งช้า ทุกคนช้าหมด และถ้า Coordinator ตาย ระบบจะค้างอยู่ในสถานะกึ่งกลาง (In-doubt state)
 
 ### 2. Saga Pattern: ทางออกที่ทันสมัย
+
 Saga คือชุดของ Local Transactions ที่รันต่อเนื่องกัน ถ้าขั้นตอนหนึ่งพัง Saga จะรัน **Compensating Transactions ** เพื่อย้อนกลับสิ่งที่ทำไปก่อนหน้า
 
 | รูปแบบ (Implementation) | วิธีการ | เหมาะกับ |
@@ -59,6 +61,7 @@ Saga คือชุดของ Local Transactions ที่รันต่อ�
 |**Orchestration **| มี"Orchestrator" ตัวกลางคอยสั่งการ | ระบบซับซ้อนที่มีหลายขั้นตอน, ต้องการควบคุม Flow ชัดเจน |
 
 ### 3. Transactional Outbox Pattern: การส่ง Event ที่เชื่อถือได้
+
 เพื่อไม่ให้เกิดปัญหา **Dual Write **(DB สำเร็จแต่ส่ง Event เข้า Message Queue พัง) เราจะ:
 1. เขียนข้อมูลและ Event ลงในฐานข้อมูลเดียวกันใน **Transaction เดียวกัน **
 2. มี Worker ตัวเล็กๆ (Relay) คอยดึง Event จากตาราง Outbox ไปส่งเข้า Message Queue
@@ -76,6 +79,7 @@ Saga คือชุดของ Local Transactions ที่รันต่อ�
 3.**Isolation Issue:** ในระหว่างที่ Saga ยังไม่จบ ผู้ใช้อื่นอาจเห็นข้อมูลที่กึ่งกลาง (Dirty Read) คุณต้องตัดสินใจว่าจะรับความเสี่ยงนี้ได้ไหม หรือต้องมีสถานะ`PENDING` กำกับไว้
 
 ### เมื่อไหร่ควรใช้ Orchestration?
+
 - เมื่อ Flow เริ่มมีเงื่อนไขเยอะ (If-Then-Else)
 - เมื่อต้องการเห็นภาพรวม (Visualization) ว่าตอนนี้ Transaction ค้างอยู่ที่ขั้นตอนไหน
 - เครื่องมือยอดนิยม:**Temporal.io **,**AWS Step Functions **,**Camunda **

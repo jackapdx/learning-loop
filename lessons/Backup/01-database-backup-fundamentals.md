@@ -141,22 +141,26 @@ archive_command = 'pgbackrest --stanza=main archive-push %p'
 ### Decision Framework: เมื่อไหร่ควรใช้ Backup แต่ละประเภท
 
 #### ควรใช้ Logical Backup (`pg_dump`) เมื่อ...
+
 - ✅ ต้องการ restore เฉพาะ table หรือ database เดียว
 - ✅ กำลัง upgrade PostgreSQL major version
 - ✅ ฐานข้อมูลขนาดเล็กกว่า 50GB
 - ✅ ต้องการ corruption check (pg_dump scan ทั้งตาราง ถ้าเจอ corruption จะ throw error)
 
 #### ควรหลีกเลี่ยง`pg_dump` เมื่อ...
+
 - ❌ ฐานข้อมูล > 100GB (restore ช้าเพราะต้อง rebuild indexes)
 - ❌ ต้องการ RPO < 1 ชม.
 - ❌ Production มีโหลดสูงตลอดเวลา (sequential scan จะกระทบ performance)
 
 #### ควรใช้ Physical Backup + WAL Archiving เมื่อ...
+
 - ✅ ต้องการ PITR (RPO เป็นวินาที)
 - ✅ ฐานข้อมูล > 100GB
 - ✅ ต้องการ restore ทั้ง cluster อย่างรวดเร็ว
 
 #### ควรหลีกเลี่ยง Physical Backup เมื่อ...
+
 - ❌ ทีมไม่มี bandwidth จัดการ operational complexity (monitoring, alerting, testing)
 - ❌ ใช้ managed database ที่มี built-in PITR (RDS, Cloud SQL) — WAL-G ไม่สามารถ restore เข้า managed instance ได้โดยตรง
 - ❌ ต้องการ cross-version restore

@@ -18,7 +18,7 @@ tags: [distributed-systems, reliability, infrastructure]
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️ ** สถานการณ์:** คุณกำลังออกแบบระบบ"Self-healing Infrastructure 🏗️" ที่ใช้ AI 🧠 ตรวจจับบั๊กและ Restart เซอร์วิสอัตโนมัติ 
+> ✍️ ** สถานการณ์:** คุณกำลังออกแบบระบบ"Self-healing Infrastructure 🏗️" ที่ใช้ AI 🧠 ตรวจจับบั๊กและ Restart เซอร์วิสอัตโนมัติ
 > - เซอร์วิส **AI 🧠-Monitor ** ทำหน้าที่คอยสั่ง Restart เซอร์วิสอื่นๆ
 > - เซอร์วิส **API-Gateway ** เป็นทางผ่านเดียวที่จะเข้าไปสั่งการเซิร์ฟเวอร์ได้
 > -**AI 🧠-Monitor ** ต้องรันอยู่บน Infrastructure 🏗️ ที่จัดการโดย **API-Gateway **
@@ -56,6 +56,7 @@ tags: [distributed-systems, reliability, infrastructure]
 นี่คือ **Circular Dependency ** ที่สมบูรณ์แบบ: คุณต้องมี Network 📡 เพื่อแก้ Network 📡
 
 ### 2. วิธีการแก้: Level 0 Architecture
+
 ในระบบที่ซับซ้อน เราต้องแบ่ง Priority ของ Dependency:
 -**Level 0 (Bootstrap):** เซอร์วิสที่ต้องทำงานได้โดยไม่พึ่งพาใคร (เช่น Local Auth, Hard-coded IPs)
 -**Level 1 (Core):** เซอร์วิสพื้นฐาน (DNS, Database 📦, Network 📡)
@@ -68,12 +69,14 @@ tags: [distributed-systems, reliability, infrastructure]
 ## 🔬 ขยายความ (Extend)
 
 ### Out-of-band Management: ทางลับสำหรับ Engineer
+
 Senior Engineer จะไม่ยอมให้"ทางเข้าหลัก" เป็นทางเดียวที่เข้าถึงระบบได้:
 -**Serial Console / IPMI:** การเข้าถึง Server ผ่านสายแลนแยกต่างหากที่ไม่ยุ่งกับ Network 📡 หลัก
 -**Static Configurations:** มีไฟล์คอนฟิกที่รันได้ทันทีโดยไม่ต้องดึงจาก Cloud หรือ Database 📦
 -**Emergency Access:** ระบบกุญแจแมนนวล หรือบัตรพนักงานที่ทำงานได้แม้ Offline
 
 ### การทำ Dependency Mapping
+
 ใช้เครื่องมือหรือทำ Diagram เพื่อหา **"Hidden Circles"**:
 -**Auth Cycle:**App เรียก Auth Service แต่ Auth Service ดันต้องรันบน App Engine ที่ต้องการ Auth เพื่อ Start
 -**Logging Cycle:** ระบบจะพ่น Error ลง Kafka แต่ Kafka ล่มเพราะ Disk เต็มเนื่องจาก Log ของระบบพ่น Error มากเกินไป
