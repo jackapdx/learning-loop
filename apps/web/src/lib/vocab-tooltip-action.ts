@@ -135,18 +135,26 @@ function wrapTermsInRoot(root: HTMLElement): number {
     const matches: { term: string; start: number; end: number }[] = [];
 
     for (const term of glossaryTerms) {
-      const regex = new RegExp(
-        `(?<![a-zA-Z0-9])${escapeRegex(term)}(?![a-zA-Z0-9])`,
-        'g',
-      );
+      const escaped = escapeRegex(term);
+      let pattern: string;
+      if (term.toLowerCase() === 'redis') {
+        pattern = `(?<![a-zA-Z0-9])${escaped}(?![a-zA-Z0-9])`;
+      } else if (term.toLowerCase().endsWith('s')) {
+        const stem = escapeRegex(term.slice(0, -1));
+        pattern = `(?<![a-zA-Z0-9])${stem}(?:es|s)?(?![a-zA-Z0-9])`;
+      } else {
+        pattern = `(?<![a-zA-Z0-9])${escaped}(?:es|s)?(?![a-zA-Z0-9])`;
+      }
+
+      const regex = new RegExp(pattern, 'g');
       let m: RegExpExecArray | null;
       while ((m = regex.exec(text)) !== null) {
         const overlaps = matches.some(
           (existing) =>
-            m!.index < existing.end && m!.index + term.length > existing.start,
+            m!.index < existing.end && m!.index + m![0].length > existing.start,
         );
         if (!overlaps) {
-          matches.push({ term, start: m.index, end: m.index + term.length });
+          matches.push({ term, start: m.index, end: m.index + m[0].length });
         }
       }
     }
