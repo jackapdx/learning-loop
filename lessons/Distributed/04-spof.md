@@ -33,12 +33,12 @@ SPOF (Single Point of Failure) คือการบ้านก่อนนอ�
 
 | จำนวน SPOF ที่หาได้ | การวิเคราะห์ |
 |---|---|
-| 2-3 จุด (LB, DB Primary, Redis) | 🙂 พื้นฐาน — นี่คือจุดที่ทุกคนเห็น |
-| 5-6 จุด (เพิ่ม Read Replica, Network 📡 Switch, DNS) | ✅ Mid-level — คุณกำลังคิดถึง Infrastructure 🏗️ Layer |
+| 2-3 จุด (LB, DB Primary, Redis) | พื้นฐาน — นี่คือจุดที่ทุกคนเห็น |
+| 5-6 จุด (เพิ่ม Read Replica, Network Switch, DNS) | ✅ Mid-level — คุณกำลังคิดถึง Infrastructure Layer |
 | 8+ จุด (เพิ่ม Config Store, CI/CD, Deployment Process, IAM) | ✅**Senior — คุณกำลังคิดทั้งระบบ**|
 | คน (On-call, Knowledge Silo) | ✅✅ **Staff — คุณคิดถึง Socio-technical System**|
 
-**คนส่วนใหญ่ตอบผิดเพราะ**: มองแค่ Infrastructure 🏗️ Diagram — แต่ SPOF ที่แท้จริงอยู่ทุก Layer ตั้งแต่ Network 📡 ไปจนถึงคน
+**คนส่วนใหญ่ตอบผิดเพราะ**: มองแค่ Infrastructure Diagram — แต่ SPOF ที่แท้จริงอยู่ทุก Layer ตั้งแต่ Network ไปจนถึงคน
 
 ---
 
@@ -55,12 +55,12 @@ SPOF (Single Point of Failure) คือการบ้านก่อนนอ�
 | Layer | SPOF ตัวอย่าง | มีกี่คนที่นึกถึง? |
 |---|---|---|
 |**Application**| Single Instance ของ Service | 90% |
-|**Database 📦**| Primary DB ไม่มี Replica/Failover | 85% |
+|**Database**| Primary DB ไม่มี Replica/Failover | 85% |
 |**Cache**| Redis Node เดียว | 70% |
 |**Load Balancer**| LB ตัวเดียวไม่มี Backup | 60% |
 |**Message Queue**| Kafka Broker เดียว | 50% |
 |**DNS**| DNS Provider เดียว (Route53 → CloudFlare) | 30% |
-|**Network 📡**| Single Availability Zone, Switch ตัวเดียว | 25% |
+|**Network**| Single Availability Zone, Switch ตัวเดียว | 25% |
 |**Config/Secret Store**| Single Vault/Consul instance | 15% |
 |**CI/CD Pipeline**| Build Pipeline ใช้ GitHub Actions อย่างเดียว → ถ้า GitHub ล่ม = Deploy ไม่ได้ | 🔴 5% |
 |**Deployment**| Blue/Green แต่ Rollback ยัง Manual | 🔴 5% |
@@ -233,7 +233,7 @@ SPOF ที่ซ่อนอยู่:
 
 ## 🤔 สะท้อนคิด (Reflect)
 
-> 💭 หยิบ Architecture 🏗️ Diagram ของระบบที่คุณดูแล — ลากเส้นผ่านทุก Component แล้วถามว่า:"ถ้าสิ่งนี้หายไปตอนนี้ ระบบยังทำงานไหม?" แล้วเดินต่อไปที่ Layer ที่ _ไม่อยู่ใน Diagram_: Build Pipeline, Config Store, DNS, People — ถามคำถามเดิมกับทุกจุด
+> 💭 หยิบ Architecture Diagram ของระบบที่คุณดูแล — ลากเส้นผ่านทุก Component แล้วถามว่า:"ถ้าสิ่งนี้หายไปตอนนี้ ระบบยังทำงานไหม?" แล้วเดินต่อไปที่ Layer ที่ _ไม่อยู่ใน Diagram_: Build Pipeline, Config Store, DNS, People — ถามคำถามเดิมกับทุกจุด
 
 ---
 

@@ -69,7 +69,7 @@ prerequisites: [distributed/02-consistency-vs-availability, core/03-cache-invali
 |**Hot Keys (Celebrity)**| แยก Hot Users ออกไปอยู่ใน Dedicated Shard/Replica พิเศษ | ความซับซ้อนในการจัดการ Logic การเลือก Shard |
 |**Cross-shard Joins**| ทำ **Denormalization** หรือ Join ที่ระดับ Application | เปลืองพื้นที่เก็บข้อมูลมากขึ้น และต้องจัดการความสอดคล้องเอง |
 |**Global Unique IDs**| ใช้ [[Distributed/10-distributed-id-generation|Snowflake ID]] (Timestamp + MachineID) | ต้องมีระบบ ID Generator ที่เชื่อถือได้เพิ่มขึ้นมา |
-|**Distributed Transactions**| ใช้ **Saga Pattern** หรือ Event-driven | พัฒนายากขึ้น และระบบจะเป็น Eventual Consistency ⛓️ |
+|**Distributed Transactions**| ใช้ **Saga Pattern** หรือ Event-driven | พัฒนายากขึ้น และระบบจะเป็น Eventual Consistency |
 
 ### Snowflake ID: กุญแจสำคัญของ Sharding
 

@@ -3,7 +3,7 @@ verified: false
 contentType: learning-loop
 level: senior
 status: polished
-tags: [cloud, storage 📦, gcp, gcs, cost 💰-optimization]
+tags: [cloud, storage, gcp, gcs, cost-optimization]
 ---
 
 # Cloud Storage: ยุทธศาสตร์การเก็บข้อมูลระดับ Petabyte
@@ -32,7 +32,7 @@ tags: [cloud, storage 📦, gcp, gcs, cost 💰-optimization]
 |:---|:---|
 |"เก็บไว้ใน Standard Class ตลอดไป" | ❌**ผลาญงบ!** การเก็บไฟล์ 1PB ที่ไม่มีคนดูใน Standard Class จะทำให้บริษัทล้มละลายได้จากค่าเช่าที่แพงเกินจำเป็น |
 |"ใช้ Lifecycle Management" | ✅**ถูกต้อง!** คุณควรย้ายไฟล์ที่ไม่มีคนดูไปอยู่ใน Coldline หรือ Archive Class อัตโนมัติเพื่อลดค่าใช้จ่ายลงกว่า 10 เท่า |
-|"ให้ User ส่งไฟล์ผ่าน API ของเรา" | ⚠️**คอขวด!** เซิร์ฟเวอร์คุณจะรับโหลดไม่ไหว (Network 📡 IO) คุณควรใช้ **Signed URLs** เพื่อให้ User คุยกับ Storage ได้โดยตรง |**ทำไมคนส่วนใหญ่ถึงพลาด?** เพราะเรามักมอง Cloud Storage เป็นแค่"ตู้เก็บของ" แต่ลืมมองเรื่อง **Cost Tiering** และ **Security Delegation** ซึ่งเป็นหัวใจของการจัดการข้อมูลขนาดใหญ่
+|"ให้ User ส่งไฟล์ผ่าน API ของเรา" | ⚠️**คอขวด!** เซิร์ฟเวอร์คุณจะรับโหลดไม่ไหว (Network IO) คุณควรใช้ **Signed URLs** เพื่อให้ User คุยกับ Storage ได้โดยตรง |**ทำไมคนส่วนใหญ่ถึงพลาด?** เพราะเรามักมอง Cloud Storage เป็นแค่"ตู้เก็บของ" แต่ลืมมองเรื่อง **Cost Tiering** และ **Security Delegation** ซึ่งเป็นหัวใจของการจัดการข้อมูลขนาดใหญ่
 
 ---
 
@@ -82,7 +82,7 @@ User นำกุญแจนี้ไปอัปโหลดไฟล์เข
 
 🎯**Quick Check:** หากต้องการเก็บ Log ย้อนหลัง 5 ปีที่แท้จริงไม่เคยเปิดดูเลย Class ไหนถูกที่สุด?
 Signed URL ช่วยลดโหลดของเซิร์ฟเวอร์ Backend ได้อย่างไร?
-ทำไมเราถึงไม่ควรใช้ Cloud Storage มาติดตั้ง OS หรือรัน Database 📦?
+ทำไมเราถึงไม่ควรใช้ Cloud Storage มาติดตั้ง OS หรือรัน Database?
 
 <details>
 <summary>ดูเฉลย (คลิกเพื่อเปิด)</summary>**Archive Storage**(ถูกที่สุด แต่เสียค่าดึงข้อมูลแพงและใช้เวลาดึงนาน)

@@ -11,7 +11,7 @@ tags: [chat-exp, system-design, cloud, gcp, serverless]
 > [!info] ปฐมนิเทศ
 > การย้ายระบบขึ้นคลาวด์ไม่ได้หมายความว่างานของคุณเสร็จแล้ว แต่มันคือจุดเริ่มต้นของการเลือกว่าจะ"รันงานที่ไหน" ให้คุ้มค่าและสเกลได้ดีที่สุด
 >
-ซีรีส์นี้จะพาคุณไปสำรวจองค์ประกอบหลักของ Modern Cloud ตั้งแต่การประมวลผลแบบ Serverless ไปจนถึงการจัดการ Network 📡 และความปลอดภัยในระดับ Infrastructure 🏗️
+ซีรีส์นี้จะพาคุณไปสำรวจองค์ประกอบหลักของ Modern Cloud ตั้งแต่การประมวลผลแบบ Serverless ไปจนถึงการจัดการ Network และความปลอดภัยในระดับ Infrastructure
 
 Each lesson takes **5-10 minutes** based on the **Learning Loop** principle.
 

@@ -18,7 +18,7 @@ Distributed Systems ไม่ได้แค่"พัง" — มันพั�
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️ **สถานการณ์**:คุณมี Microservice A ที่เรียก Microservice B ผ่าน HTTP B เริ่มตอบช้าเพราะ DB ของมันกำลังยุ่ง A ยังคงส่ง Request เข้าไปเรื่อยๆ ด้วย Timeout 5 วินาที — Request ค้างจน Thread 🧵 Pool ของ A เต็ม
+> ✍️ **สถานการณ์**:คุณมี Microservice A ที่เรียก Microservice B ผ่าน HTTP B เริ่มตอบช้าเพราะ DB ของมันกำลังยุ่ง A ยังคงส่ง Request เข้าไปเรื่อยๆ ด้วย Timeout 5 วินาที — Request ค้างจน Thread Pool ของ A เต็ม
 >
 >**คำถาม**:ควรทำอย่างไรกับ A? (Hint:"แค่เพิ่ม Timeout" ไม่ใช่คำตอบ)
 
@@ -30,7 +30,7 @@ Distributed Systems ไม่ได้แค่"พัง" — มันพั�
 
 | ถ้าคุณตอบว่า... | การวิเคราะห์ |
 |---|---|
-|"ลด Timeout เหลือ 1 วิ" | ⚠️ แค่เลื่อนปัญหา — ถ้า B ยังพัง Request ก็ยังเสียเวลา 1 วิและสะสมจน Thread 🧵 Pool เต็มอยู่ดี |
+|"ลด Timeout เหลือ 1 วิ" | ⚠️ แค่เลื่อนปัญหา — ถ้า B ยังพัง Request ก็ยังเสียเวลา 1 วิและสะสมจน Thread Pool เต็มอยู่ดี |
 |"Retry when failed" | ❌**แย่กว่าเดิม!**— Retry โดยไม่คิด = เพิ่มโหลดให้ B สองเท่า → B พังหนักกว่าเดิม → Retry Storm |
 |"Circuit Breaker — หยุดส่งไป B ชั่วคราว" | ✅ **ถูกต้อง!** หยุดการส่ง Request เมื่อ B พัง → ให้ B ฟื้นตัว → ระบบไม่ลุกลาม |
 |"Circuit Breaker + Retry with Backoff + Fallback" | ✅**Senior-level!** ไม่ใช่แค่หยุดส่ง แต่มีแผนสำรองระหว่างรอ B ฟื้น |**คนส่วนใหญ่ตอบผิดเพราะ**: คิดว่า"Retry" แก้ทุกปัญหาได้ — โดยไม่รู้ว่า Retry ที่ไม่ควบคุมคือการฆ่าระบบที่กำลังป่วยให้ตายเร็วขึ้น
@@ -61,7 +61,7 @@ Service A ──Request──▶ Service B ──Query──▶ DB
 |---|---|---|
 |**Retry with Backoff**| ลองใหม่ แต่ _เพิ่มระยะห่าง_ ทุกครั้ง |"Exponential Backoff + Jitter เพื่ออะไร?" |
 |**Circuit Breaker**| ตัดวงจรเมื่อ Error Rate สูงเกินเกณฑ์ |"คุณตั้งเกณฑ์เปิดวงจรที่เท่าไหร่? แล้ว Half-Open คืออะไร?" |
-|**Bulkhead**| แยก Thread 🧵 Pool ตามประเภทงาน |"ถ้า Payment กับ Notification 📱 ใช้ Pool เดียวกันจะเกิดอะไร?" |
+|**Bulkhead**| แยก Thread Pool ตามประเภทงาน |"ถ้า Payment กับ Notification ใช้ Pool เดียวกันจะเกิดอะไร?" |
 |**Deadline Propagation**| ส่ง Timeout ตาม Chain ไม่ใช่ตั้งทีละ Service |"ถ้า A Timeout 5 วิ แต่ B Timeout 10 วิ — ปัญหาคืออะไร?" |
 |**Health Check + Auto-restart**| Orchestrator เช็คสุขภาพและ Restart ถ้าพัง |"Liveness vs. Readiness Probe ต่างกันอย่างไร?" |
 
@@ -194,15 +194,15 @@ Key Learning:
 🎯**Quick Check:** เลือกกลไก Self-Recovery ให้ถูกต้อง:
 
 1. Payment Service เรียก Inventory Service ที่พังอยู่ → ?
-2. User Service ส่ง Notification 📱 ไม่สำเร็จเพราะ Network 📡 ขัดข้องชั่วครู่ → ?
-3. Thread 🧵 Pool ของ Image Processing Service เต็มเพราะมี Video Processing แย่ง Threads → ?
+2. User Service ส่ง Notification ไม่สำเร็จเพราะ Network ขัดข้องชั่วครู่ → ?
+3. Thread Pool ของ Image Processing Service เต็มเพราะมี Video Processing แย่ง Threads → ?
 
 <details>
 <summary>ดูคำตอบ (คลิกเพื่อเปิด)</summary>
 
 1.**Circuit Breaker**— หยุดส่ง Request ไปยัง Service ที่พัง ป้องกัน Retry Storm
-2.**Retry with Exponential Backoff + Jitter**— Network 📡 ขัดข้องชั่วครู่ ลองใหม่แป๊บเดียวก็ผ่าน
-3.**Bulkhead** — แยก Thread 🧵 Pool ตามประเภทงาน Image กับ Video ไม่ควรแย่งกัน
+2.**Retry with Exponential Backoff + Jitter**— Network ขัดข้องชั่วครู่ ลองใหม่แป๊บเดียวก็ผ่าน
+3.**Bulkhead** — แยก Thread Pool ตามประเภทงาน Image กับ Video ไม่ควรแย่งกัน
 
 </details>
 

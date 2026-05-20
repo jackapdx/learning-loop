@@ -3,7 +3,7 @@ verified: false
 contentType: learning-loop
 level: senior
 status: polished
-tags: [cloud, security 🛡️, iam, gcp, compliance]
+tags: [cloud, security, iam, gcp, compliance]
 ---
 
 # IAM Security: ปราการด่านแรกของการสเกลระบบอย่างปลอดภัย

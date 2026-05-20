@@ -98,7 +98,7 @@ SELECT * FROM pgstattuple('orders');
 หากคุณลบข้อมูล 50% ของตาราง แต่ขนาดไฟล์ใน OS ไม่ลดลง เป็นเรื่องปกติหรือไม่?
 
 <details>
-<summary>ดูเฉลย (คลิกเพื่อเปิด)</summary>**Multi-Version Concurrency 🧵 Control**- ประโยชน์คือทำให้การ"อ่าน" ไม่ Block การ"เขียน"
+<summary>ดูเฉลย (คลิกเพื่อเปิด)</summary>**Multi-Version Concurrency Control**- ประโยชน์คือทำให้การ"อ่าน" ไม่ Block การ"เขียน"
 เพราะมันจะ **Lock ตารางแบบ Exclusive** ทำให้ไม่มีใครสามารถ Query หรือเขียนข้อมูลได้เลยจนกว่าจะเสร็จ (Downtime)**ปกติมาก** - พื้นที่ที่ถูกลบจะกลายเป็นช่องว่าง (Free Space) ภายในไฟล์เดิมเพื่อให้ PostgreSQL เขียนข้อมูลใหม่ทับลงไปได้
 
 </details>

@@ -36,9 +36,9 @@ prerequisites: [Chat/00-overview]
 
 | หากคุณตอบว่า...                                   | การวิเคราะห์                                                                                                                                                     |
 | :------------------------------------------------ | :--------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|"ใช้ WebSocket 📡 อย่างเดียวทุกกรณี"              | ⚠️ **เสี่ยง!** ในพื้นที่เน็ตที่ไม่ดี WebSocket จะหลุดบ่อย การ Reconnect ทันทีแบบถี่ๆ จะผลาญแบตเตอรี่และสร้าง Thundering Herd 🐂 ให้ Server จนล่มซ้ำซ้อน             |
+|"ใช้ WebSocket อย่างเดียวทุกกรณี"              | ⚠️ **เสี่ยง!** ในพื้นที่เน็ตที่ไม่ดี WebSocket จะหลุดบ่อย การ Reconnect ทันทีแบบถี่ๆ จะผลาญแบตเตอรี่และสร้าง Thundering Herd ให้ Server จนล่มซ้ำซ้อน             |
 |"ใช้ HTTP Polling"                                | ❌**พังแน่นอน!** 1 ล้านคนที่เรียก API ทุกๆ 2-3 วินาที จะทำให้ Server น็อคทันทีจาก Overhead ของ HTTP Headers และ TCP Handshakes                                   |
-|"WebSocket 📡 + Push 📱 Notification 📱 Fallback" | ✅ **Senior-level!** คุณแยกแยะระหว่างการส่งข้อมูลแบบ Real-time (Active) และการประหยัดพลังงาน (Background) และเข้าใจว่า Protocol เดียวไม่สามารถตอบโจทย์ได้ทุกสภาวะ |**ทำไมการให้เหตุผลแบบนี้สำคัญ?** เพราะวิศวกรอาวุโสมองว่า"Connectivity" เป็นทรัพยากรที่มีราคา (Resource Cost) การ Reconnect แต่ละครั้งมีค่าใช้จ่ายทั้ง CPU, Memory และ Battery
+|"WebSocket + Push Notification Fallback" | ✅ **Senior-level!** คุณแยกแยะระหว่างการส่งข้อมูลแบบ Real-time (Active) และการประหยัดพลังงาน (Background) และเข้าใจว่า Protocol เดียวไม่สามารถตอบโจทย์ได้ทุกสภาวะ |**ทำไมการให้เหตุผลแบบนี้สำคัญ?** เพราะวิศวกรอาวุโสมองว่า"Connectivity" เป็นทรัพยากรที่มีราคา (Resource Cost) การ Reconnect แต่ละครั้งมีค่าใช้จ่ายทั้ง CPU, Memory และ Battery
 
 ---
 
@@ -48,10 +48,10 @@ prerequisites: [Chat/00-overview]
 
 | โปรโตคอล | Latency | ภาระ Server | ภาระแบตเตอรี่ | ข้อดี | สิ่งที่ต้องแลก (Trade-off) |
 |:---|:---:|:---:|:---:|---|---|
-|**WebSocket 📡**| ต่ำที่สุด | สูง | ปานกลาง | Full-duplex, real-time | Stateful, Scale ยาก (Sticky Session) |
+|**WebSocket**| ต่ำที่สุด | สูง | ปานกลาง | Full-duplex, real-time | Stateful, Scale ยาก (Sticky Session) |
 |**SSE**| ต่ำ | ปานกลาง | ต่ำ | ทำงานบน HTTP ปกติ, Auto-reconnect | รับข้อมูลได้ทางเดียว (Uni-directional) |
 |**Long Polling**| สูง | สูงมาก | สูง | รองรับ Browser เก่าๆ | สร้าง Connection ใหม่บ่อยมาก |
-|**Push 📱**| ปานกลาง | ต่ำ | ต่ำที่สุด | ทำงานได้แม้แอปปิด | ควบคุม Latency ไม่ได้ (Best-effort) |
+|**Push**| ปานกลาง | ต่ำ | ต่ำที่สุด | ทำงานได้แม้แอปปิด | ควบคุม Latency ไม่ได้ (Best-effort) |
 
 ### WebSocket: ราคาที่ต้องจ่ายในระดับ OS
 
@@ -68,10 +68,10 @@ prerequisites: [Chat/00-overview]
 
 ## 🔬 ขยายความ (Extend)
 
-### Connection Strategy: เมื่อไหร่ควรใช้อะไร?**1. Client กำลัง Active (Forefront):**- ใช้ **WebSocket 📡** เป็นหลัก
+### Connection Strategy: เมื่อไหร่ควรใช้อะไร?**1. Client กำลัง Active (Forefront):**- ใช้ **WebSocket** เป็นหลัก
 
 - ใช้ **Exponential Backoff** ในการ Reconnect (เช่น 1s, 2s, 4s, 8s...) เพื่อป้องกันการรุมถล่ม Server **2. Client อยู่ใน Background:**-**ตัดสาย WebSocket ทิ้งทันที!** คืนทรัพยากรให้ Server
-- ใช้ **Push 📱 Notification 📱** เพื่อแจ้งเตือน และปลุกแอปให้มาดึงข้อมูล (Fetch) เฉพาะเมื่อจำเป็น
+- ใช้ **Push Notification** เพื่อแจ้งเตือน และปลุกแอปให้มาดึงข้อมูล (Fetch) เฉพาะเมื่อจำเป็น
 
 ### กรณีศึกษา: สถาปัตยกรรมระบบแชทจริง
 

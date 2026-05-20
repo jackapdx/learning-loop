@@ -34,7 +34,7 @@ tags: [chat-exp, system-design, messaging, pubsub]
 | # | บทเรียน | คำถามสัมภาษณ์ |
 |---|---|---|
 | 1 | [[01-google-pubsub\|Google Pub/Sub]] |"ทำไมถึงไม่ควรใช้ Pub/Sub ทำ Event Replay? และวิธีจัดการกับ Duplicates" |
-| 2 | [[02-streaming-vs-queuing\|Streaming vs. Queuing]] |"เมื่อไหร่ควรใช้ RabbitMQ แทนที่จะเป็น Kafka? และ Trade-off 🤝 ของ Log-based Architecture 🏗️" |
+| 2 | [[02-streaming-vs-queuing\|Streaming vs. Queuing]] |"เมื่อไหร่ควรใช้ RabbitMQ แทนที่จะเป็น Kafka? และ Trade-off 🤝 ของ Log-based Architecture" |
 | 3 | [[03-event-bus\|Event Bus]] |"เมื่อไหร่ควรเปลี่ยนจาก Synchronous API มาใช้ Event Bus? และจะรับมือกับ Eventual Consistency อย่างไร?" |
 
 > [!question] ลองทำก่อน

@@ -61,6 +61,24 @@ These principles are **non-negotiable**. Every section of every lesson must foll
 | Vendor marketing language | Factual description of capability + limitation |
 | Unsupported performance claims | Benchmarked data with source, or "generally observed" with caveat |
 
+### Formatting & Markdown Syntax Guidelines 📐
+
+To ensure lessons compile cleanly and display correctly without parser or readability issues in the frontend Svelte application:
+
+1. **Spaces around Bold Tags (`**`)**:
+   - Always ensure a space exists between bold markers (`**`) and adjacent Thai or English word characters (e.g., `**เสี่ยง!** ใน...` instead of `**เสี่ยง!**ใน...`, or `ใช้ **WebSocket** เพื่อ...` instead of `ใช้**WebSocket**เพื่อ...`).
+   - The Svelte markdown parser (`marked`) fails to render bold tags correctly if they are immediately adjacent to word characters.
+2. **No Inner Spaces inside Bold Tags**:
+   - Never put spaces inside the bold markers (e.g., use `**text**`, not `** text**` or `**text **`).
+3. **Colons Outside Bold Tags**:
+   - Always put labels' colons *outside* the bold tags (e.g., `**Label**: ` instead of `**Label:**` or `**Label**:**`).
+4. **Spacing between Thai and English/Numbers**:
+   - Maintain a single space between Thai text and English words or numbers (e.g., `10 วินาที` instead of `10วินาที`, `ระบบ WebSocket` instead of `ระบบWebSocket`).
+5. **Strategic Emoji Usage**:
+   - Use emojis **only as structural visual anchors** in headings (e.g., `## 🎯 ปฐมนิเทศ (Orient)`) or callout blocks/list statuses (e.g., `✅ Correct`, `❌ Incorrect`).
+   - **Avoid inline emojis** inside body paragraphs or normal sentences, as they increase cognitive load, disrupt reading flow, and slow down reading speed.
+   - Emojis should supplement the text, not replace words. The content must remain fully understandable if emojis are removed or fail to render.
+
 ---
 
 ## Lesson Content Types

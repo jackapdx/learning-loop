@@ -20,7 +20,7 @@ tags: [postgres, system-design, reliability]
 
 > ✍️**สถานการณ์**:คุณเป็น Lead Engineer ที่บริษัท Startup ที่กำลังโตเร็วมาก (Hyper-growth) ระบบของคุณประมวลผลธุรกรรมนับล้านต่อวันบน PostgreSQL
 >
-> คืนวันเสาร์ เวลา ⏰ 03:00 น. จู่ๆ ระบบแจ้งเตือนว่า **"database is not accepting commands to avoid wraparound data loss"** และทุกอย่างกลายเป็น Read-only ทันที
+> คืนวันเสาร์ เวลา 03:00 น. จู่ๆ ระบบแจ้งเตือนว่า **"database is not accepting commands to avoid wraparound data loss"** และทุกอย่างกลายเป็น Read-only ทันที
 >
 >**คำถาม**:> 1. ทำไม PostgreSQL ถึงต้อง"หยุด" การทำงานของระบบคุณ?
 > 2. คุณจะตรวจสอบได้อย่างไรว่าสถานการณ์ตอนนี้เลวร้ายแค่ไหน (เหลือเวลาอีกเท่าไหร่)?
@@ -43,7 +43,7 @@ tags: [postgres, system-design, reliability]
 
 ### 1. ทำไมต้องมี Wraparound?
 
-PostgreSQL ใช้ **MVCC (Multi-Version Concurrency 🧵 Control)** โดยทุกครั้งที่ Update ข้อมูล มันจะไม่ทับข้อมูลเก่า แต่จะสร้าง"Version ใหม่" และติดป้ายกำกับว่าแถวนี้ถูกสร้างโดย Transaction ID (TXID) ไหน
+PostgreSQL ใช้ **MVCC (Multi-Version Concurrency Control)** โดยทุกครั้งที่ Update ข้อมูล มันจะไม่ทับข้อมูลเก่า แต่จะสร้าง"Version ใหม่" และติดป้ายกำกับว่าแถวนี้ถูกสร้างโดย Transaction ID (TXID) ไหน
 
 เลข TXID นี้เป็นตัวเลข **32-bit** ซึ่งมีค่าสูงสุดประมาณ **4,200 ล้าน**
 - เพื่อความประหยัดเนื้อที่ PostgreSQL จึงใช้การวนซ้ำ (Circular)

@@ -26,7 +26,7 @@ tags: [observability, sre, monitoring, metrics]
 >**คำถาม**:หากคุณต้องเลือก Metrics 3 ตัวเพื่อหาคอขวดที่แท้จริง คุณจะเลือกอะไร?
 > 1. CPU, RAM, Disk Space
 > 2. Requests per second, Error Rate, Average Latency
-> 3. Database 📦 Connection Count, Thread 🧵 Pool Queue, Disk I/O Wait
+> 3. Database Connection Count, Thread Pool Queue, Disk I/O Wait
 >
 >**หยุดตรงนี้ก่อน**— (คำใบ้: ลองนึกดูว่า 'ระบบช้า' ทั้งที่ 'CPU ว่าง' แปลว่ามันกำลัง 'รอ' อะไรบางอย่างอยู่หรือเปล่า?)
 
@@ -40,7 +40,7 @@ tags: [observability, sre, monitoring, metrics]
 |"Req/s, Error, Latency" | ⚠️**เกือบใช่!**(RED Method) บอกอาการของเซอร์วิสได้ดี แต่ในเคสนี้มันยังไม่บอกว่า"ทำไมถึงช้า" |
 |"Connections, Queue, Wait" | ✅ **นี่คือระดับ Senior!**(Saturation) คุณกำลังมองหาสิ่งที่"เต็ม" หรือ"คอขวด" ที่ซ่อนอยู่แม้ CPU จะว่างก็ตาม |
 
-**ทำไมคนส่วนใหญ่ถึงพลาด?** เพราะเรามักยึดติดกับ Resource Metrics (CPU/RAM) แต่ลืมมอง **Saturation**(การอิ่มตัวของทรัพยากรที่มองไม่เห็น เช่น Thread 🧵 Pool หรือ Database 📦 Connections)
+**ทำไมคนส่วนใหญ่ถึงพลาด?** เพราะเรามักยึดติดกับ Resource Metrics (CPU/RAM) แต่ลืมมอง **Saturation**(การอิ่มตัวของทรัพยากรที่มองไม่เห็น เช่น Thread Pool หรือ Database Connections)
 
 ---
 
@@ -77,8 +77,8 @@ tags: [observability, sre, monitoring, metrics]
 ### ยุทธศาสตร์ Senior: การวัด Saturation ที่มองไม่เห็น
 
 Saturation คือจุดที่แยกมือโปรออกจากมือสมัครเล่น:
--**Database 📦 Connections:** หาก App เชื่อมต่อ DB ได้สูงสุด 100 แล้วตอนนี้ใช้ไป 99 นี่คือ Saturation แม้ CPU DB จะอยู่ที่ 10% ก็ตาม
--**Thread 🧵 Pool:** หากแอปมี 10 Thread 🧵 และทุกตัวกำลังทำงานอยู่ งานที่ 11 ต้องรอคิว นี่คือสาเหตุของ"แอปช้าทั้งที่ CPU ว่าง"
+-**Database Connections:** หาก App เชื่อมต่อ DB ได้สูงสุด 100 แล้วตอนนี้ใช้ไป 99 นี่คือ Saturation แม้ CPU DB จะอยู่ที่ 10% ก็ตาม
+-**Thread Pool:** หากแอปมี 10 Thread และทุกตัวกำลังทำงานอยู่ งานที่ 11 ต้องรอคิว นี่คือสาเหตุของ"แอปช้าทั้งที่ CPU ว่าง"
 
 ### สรุปการเลือกใช้
 

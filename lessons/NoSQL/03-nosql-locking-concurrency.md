@@ -18,10 +18,10 @@ tags: [nosql, mongodb, locking, performance, system-design]
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️**สถานการณ์**:คุณอัปเกรดเซิร์ฟเวอร์ Database 📦 เป็นเครื่องที่แรงที่สุดในตลาด (96 Cores, 512GB RAM)
+> ✍️**สถานการณ์**:คุณอัปเกรดเซิร์ฟเวอร์ Database เป็นเครื่องที่แรงที่สุดในตลาด (96 Cores, 512GB RAM)
 > - คุณหวังว่าจะรองรับ Write ได้เพิ่มขึ้น 10 เท่า
 > - แต่เมื่อรันจริง Throughput กลับเท่าเดิม และ CPU % System กลับสูงปรี๊ด
-> - เมื่อตรวจสอบพบว่า Thread 🧵 จำนวนมากติดสถานะ"Waiting for Lock"
+> - เมื่อตรวจสอบพบว่า Thread จำนวนมากติดสถานะ"Waiting for Lock"
 >
 >**คำถาม**:ในฐานะ Senior Engineer คุณจะอธิบายปรากฏการณ์นี้ว่าอย่างไร? และทำไมการเพิ่ม CPU ถึงไม่ช่วย (หรืออาจทำให้แย่ลง)?
 >
@@ -34,10 +34,10 @@ tags: [nosql, mongodb, locking, performance, system-design]
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
 |"Disk Write ไม่ทัน" | ⚠️ **เกือบใช่!** แต่อาจไม่ใช่สาเหตุหลักที่ทำให้ CPU รอ Lock นานขนาดนั้น |
-|"เกิด Global Write Lock" | ✅**นี่คือคำตอบ!**(Lock Contention) หาก Database 📦 ใช้ Lock ระดับกระบวนการ (Process-wide) ต่อให้มีกี่คอร์ ทุกคนก็ต้องต่อคิวใช้ Lock เดียวกันอยู่ดี |
+|"เกิด Global Write Lock" | ✅**นี่คือคำตอบ!**(Lock Contention) หาก Database ใช้ Lock ระดับกระบวนการ (Process-wide) ต่อให้มีกี่คอร์ ทุกคนก็ต้องต่อคิวใช้ Lock เดียวกันอยู่ดี |
 |"RAM ไม่พอ" | ⚠️ **เป็นตัวกระตุ้น!** RAM ไม่พอทำให้เกิด Page Fault ซึ่งทำให้ตัวที่ถือ Lock อยู่ต้องรอ Disk นานขึ้น และขวางคนอื่นนานขึ้นตามไปด้วย |
 
-**ทำไมคนส่วนใหญ่ถึงพลาด?** เพราะเรามักเชื่อว่าซอฟต์แวร์สมัยใหม่จะใช้พลังของ Multi-core ได้เต็มที่เสมอ แต่ความจริงแล้ว **Locking 🧵 Strategy** คือตัวกำหนดขีดจำกัดที่แท้จริง
+**ทำไมคนส่วนใหญ่ถึงพลาด?** เพราะเรามักเชื่อว่าซอฟต์แวร์สมัยใหม่จะใช้พลังของ Multi-core ได้เต็มที่เสมอ แต่ความจริงแล้ว **Locking Strategy** คือตัวกำหนดขีดจำกัดที่แท้จริง
 
 ---
 
@@ -46,8 +46,8 @@ tags: [nosql, mongodb, locking, performance, system-design]
 ### 1. ลำดับขั้นของการ Lock (Lock Granularity)
 
 ยิ่ง Lock ละเอียด ระบบยิ่งทำงานขนาน (Parallel) ได้ดี:
--**Global Lock:** ล็อกทั้ง Database 📦 (คนหนึ่งเขียน ทั้งโลกหยุดรอ) -> *แย่ที่สุด*
-- **Database 📦 Lock:** ล็อกเฉพาะ DB นั้น (DB อื่นยังทำงานได้)
+-**Global Lock:** ล็อกทั้ง Database (คนหนึ่งเขียน ทั้งโลกหยุดรอ) -> *แย่ที่สุด*
+- **Database Lock:** ล็อกเฉพาะ DB นั้น (DB อื่นยังทำงานได้)
 -**Collection/Table Lock:** ล็อกเฉพาะตาราง
 -**Document/Row Lock:** ล็อกเฉพาะแถวที่กำลังแก้ -> *ดีที่สุด*
 
@@ -62,8 +62,8 @@ MongoDB ถือ **Global Lock** ค้างไว้ระหว่างร�
 ### 3. วิวัฒนาการสู่ WiredTiger
 
 MongoDB แก้ปัญหานี้ถาวรโดยการเปลี่ยน Storage Engine เป็น **WiredTiger** ซึ่งใช้:
--**Document-level Locking 🧵:** ยอมให้คนเขียนคนละหน้ากระดาษพร้อมกันได้
--**Optimistic Concurrency 🧵:** สมมติว่าไม่มีใครแก้ข้อมูลชนกัน แล้วค่อยเช็คตอนจบ ถ้าชนค่อยแก้ใหม่
+-**Document-level Locking:** ยอมให้คนเขียนคนละหน้ากระดาษพร้อมกันได้
+-**Optimistic Concurrency:** สมมติว่าไม่มีใครแก้ข้อมูลชนกัน แล้วค่อยเช็คตอนจบ ถ้าชนค่อยแก้ใหม่
 
 ---
 
@@ -76,15 +76,15 @@ MongoDB แก้ปัญหานี้ถาวรโดยการเปล
 
 ### วิธีสังเกตอาการ"ติด Lock" ใน Production
 
-**High CPU Wait / System CPU:** คอร์ทำงานหนักกับการ"จัดการคิว" ไม่ใช่งานจริง **Lock Percentage > 50%:**(ในเครื่องมือ Monitor) บอกว่า Database 📦 ใช้เวลาส่วนใหญ่ไปกับการถือ Lock ค้างไว้
-**Thread 🧵 State"Locked":** เมื่อใช้คำสั่ง`db.currentOp()` แล้วเจอคำว่า`waitingForLock: true` จำนวนมาก
+**High CPU Wait / System CPU:** คอร์ทำงานหนักกับการ"จัดการคิว" ไม่ใช่งานจริง **Lock Percentage > 50%:**(ในเครื่องมือ Monitor) บอกว่า Database ใช้เวลาส่วนใหญ่ไปกับการถือ Lock ค้างไว้
+**Thread State"Locked":** เมื่อใช้คำสั่ง`db.currentOp()` แล้วเจอคำว่า`waitingForLock: true` จำนวนมาก
 
 ---
 
 ## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:** ทำไมการเกิด Page Fault ถึงทำให้อาการ Global Lock เลวร้ายลง?
-"Optimistic Concurrency 🧵" ต่างจาก"Pessimistic Locking 🧵" อย่างไร?
+"Optimistic Concurrency" ต่างจาก"Pessimistic Locking" อย่างไร?
 ระหว่างการ Query ข้อมูล (Read) และการ Update ข้อมูล (Write) ตัวไหนมักจะสร้างปัญหา Lock มากกว่ากัน?
 
 <details>
@@ -98,7 +98,7 @@ MongoDB แก้ปัญหานี้ถาวรโดยการเปล
 
 ## 🤔 สะท้อนคิด (Reflect)
 
-> 💭 คุณเคยตรวจสอบ"Locking 🧵 Strategy" ของเครื่องมือที่คุณใช้ไหม? ไม่ว่าจะเป็น Database 📦, Message Broker หรือแม้แต่ Code ในภาษาที่คุณเขียน (เช่น`synchronized` ใน Java หรือ`lock` ใน C#) การออกแบบให้ระบบ"Lock น้อยที่สุดและสั้นที่สุด" คือกุญแจสู่ระบบที่สเกลได้จริง
+> 💭 คุณเคยตรวจสอบ"Locking Strategy" ของเครื่องมือที่คุณใช้ไหม? ไม่ว่าจะเป็น Database, Message Broker หรือแม้แต่ Code ในภาษาที่คุณเขียน (เช่น`synchronized` ใน Java หรือ`lock` ใน C#) การออกแบบให้ระบบ"Lock น้อยที่สุดและสั้นที่สุด" คือกุญแจสู่ระบบที่สเกลได้จริง
 
 ---
 

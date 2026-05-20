@@ -61,9 +61,9 @@ prerequisites: [core/03-cache-invalidation]
 #### **Load Leveling (การเกลี่ยภาระ)** ใช้ Message Queue (เช่น Kafka, RabbitMQ) เป็น Buffer ตัวใหญ่ เพื่อรับแรงกระแทกจาก Traffic ที่มาเป็นลูกคลื่น (Spikes) ไม่ให้ Database หรือ Backend ล่ม
 
 -**Gain**: ระบบไม่ล่มเมื่อมีคนเข้าพร้อมกันมหาศาล
--**Sacrifice**: ข้อมูลอาจจะดีเลย์ (Consistency ⛓️/Staleness) เพราะต้องรออยู่ในคิว
+-**Sacrifice**: ข้อมูลอาจจะดีเลย์ (Consistency/Staleness) เพราะต้องรออยู่ในคิว
 
-#### **Double Buffering** ใช้พื้นที่เก็บข้อมูล 2 ชุดสลับกัน ฝั่งหนึ่งกำลังเขียน (Write) ในขณะที่อีกฝั่งกำลังประมวลผล (Process) เพื่อให้งานไหลลื่นไม่สะดุด (เช่น ในงาน Graphic หรือ Real-time ⏰ Signal Processing)
+#### **Double Buffering** ใช้พื้นที่เก็บข้อมูล 2 ชุดสลับกัน ฝั่งหนึ่งกำลังเขียน (Write) ในขณะที่อีกฝั่งกำลังประมวลผล (Process) เพื่อให้งานไหลลื่นไม่สะดุด (เช่น ในงาน Graphic หรือ Real-time Signal Processing)
 
 ---
 
@@ -72,7 +72,7 @@ prerequisites: [core/03-cache-invalidation]
 ### เมื่อ Buffer กลายเป็นปัญหา (Bufferbloat)
 
 หากคุณทำ Buffer ใหญ่เกินไปเพื่อหวังว่าจะไม่เสียข้อมูลเลย (No Data Loss) คุณจะเจอกับปัญหา **Latency มหาศาล** เพราะข้อมูลต้องต่อคิวนานเกินไปก่อนจะถูกประมวลผล
--**Senior Tip:** ในระบบ Real-time ⏰ (เช่น Voice Call) บางครั้งการ"ทิ้งข้อมูล (Drop Packets)" ยังดีกว่าการ"รอใน Buffer นานเกินไป"
+-**Senior Tip:** ในระบบ Real-time (เช่น Voice Call) บางครั้งการ"ทิ้งข้อมูล (Drop Packets)" ยังดีกว่าการ"รอใน Buffer นานเกินไป"
 
 ### ผสมโรง: Buffer Pool ใน Database
 
@@ -98,7 +98,7 @@ prerequisites: [core/03-cache-invalidation]
 
 1.**Buffering** พยายามแก้ปัญหา **Network Instability**(ความเร็วเน็ตไม่คงที่) โดยการสะสมข้อมูลไว้ล่วงหน้าเพื่อให้วิดีโอเล่นได้ต่อเนื่องแม้เน็ตจะกระตุกชั่วคราว
 2. เพราะ Redis ถูกออกแบบมาเพื่อ **Read Many**(อ่านซ้ำๆ) และเน้นความเร็วในการเข้าถึง Key มากกว่าการรันคิวแบบ FIFO (แม้จะทำได้ก็ตาม)
-3.**Buffer เล็กแต่เร็ว** เพราะข้อมูลหุ้นเน้นความสด (Real-time ⏰) ข้อมูลที่มาช้าไปเพียง 1 วินาทีอาจไร้ค่า การสะสมข้อมูลไว้ใน Buffer ขนาดใหญ่จะทำให้เกิด Latency ที่ยอมรับไม่ได้
+3.**Buffer เล็กแต่เร็ว** เพราะข้อมูลหุ้นเน้นความสด (Real-time) ข้อมูลที่มาช้าไปเพียง 1 วินาทีอาจไร้ค่า การสะสมข้อมูลไว้ใน Buffer ขนาดใหญ่จะทำให้เกิด Latency ที่ยอมรับไม่ได้
 
 </details>
 

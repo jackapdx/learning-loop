@@ -67,8 +67,8 @@ PostgreSQL ออกแบบมาให้ 1 Connection = 1 Process ซึ่�
 ### Load Balancing: ใครจะอ่านเครื่องไหน?
 
 เมื่อมีเครื่องอ่าน (Read Replicas) หลายเครื่อง แอปของคุณต้องรู้ว่าจะส่ง Query ไปที่ไหน
-*   **Application Level:** ใน Code ต้องแยก Database 📦 Connection ระหว่าง`Writer` (Primary) และ`Reader` (Replica Cluster)
-*   **Infrastructure 🏗️ Level:** ใช้ Proxy เช่น **HAProxy** หรือ **Cloud Load Balancer** เพื่อกระจายงานไปยัง Replicas
+*   **Application Level:** ใน Code ต้องแยก Database Connection ระหว่าง`Writer` (Primary) และ`Reader` (Replica Cluster)
+*   **Infrastructure Level:** ใช้ Proxy เช่น **HAProxy** หรือ **Cloud Load Balancer** เพื่อกระจายงานไปยัง Replicas
 
 ### Replication Lag: สิ่งที่ต้องระวัง
 
@@ -79,7 +79,7 @@ PostgreSQL ออกแบบมาให้ 1 Connection = 1 Process ซึ่�
 
 ในระบบตัวอย่างที่เราศึกษา ซึ่งรองรับ Agent นับพันคนพร้อมกัน:
 *   ใช้ **PgBouncer** ในโหมด **Transaction** เพื่อรับโหลดจาก 19 Microservices
-*   ใช้ **Read Replicas** เพื่อให้ระบบ Dashboard ของ Agent ดึงข้อมูลประวัติแชทมหาศาลโดยไม่รบกวนการรับส่งข้อความ Real-time ⏰ ในเครื่อง Primary
+*   ใช้ **Read Replicas** เพื่อให้ระบบ Dashboard ของ Agent ดึงข้อมูลประวัติแชทมหาศาลโดยไม่รบกวนการรับส่งข้อความ Real-time ในเครื่อง Primary
 
 ---
 

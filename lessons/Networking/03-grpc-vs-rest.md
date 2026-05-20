@@ -65,7 +65,7 @@ tags: [networking, protocols, microservices, system-design]
 |**รูปแบบข้อมูล**| JSON (Text) | Protobuf (Binary) |
 |**ความเร็ว**| ปานกลาง | สูงมาก |
 |**Schema**| มักจะไม่มี (หรือใช้ OpenAPI/Swagger) | บังคับ (ไฟล์ .proto) |
-|**การใช้งาน**| Client-Server (Web, Mobile 📱) |**Internal Microservices** |
+|**การใช้งาน**| Client-Server (Web, Mobile) |**Internal Microservices** |
 
 ---
 
@@ -91,7 +91,7 @@ Protobuf ส่งแค่ตัวเลขลำดับ (Field Number) แ�
 
 gRPC ได้อานิสงส์จาก HTTP/2:
 - **Multiplexing**: ส่งหลาย Request/Response ในสายเดียว (TCP) พร้อมกัน ไม่ต้องรอคิว (Head-of-line blocking)
--**Server Push 📱:** เซิร์ฟเวอร์ส่งข้อมูลหาไคลเอนต์ได้โดยไม่ต้องรอให้ขอ
+-**Server Push:** เซิร์ฟเวอร์ส่งข้อมูลหาไคลเอนต์ได้โดยไม่ต้องรอให้ขอ
 -**Header Compression:** บีบอัดข้อมูลส่วนหัว (Header) ให้เล็กลง
 
 ---
@@ -113,7 +113,7 @@ gRPC ได้อานิสงส์จาก HTTP/2:
 
 ## 🤔 สะท้อนคิด (Reflect)
 
-> 💭 ในระบบของคุณ มี Microservices ที่คุยกันเองด้วย JSON อยู่กี่จุด? หากคุณเปลี่ยนเป็น gRPC คุณจะประหยัดค่า Compute (CPU) และค่า Data Transfer (Network 📡) ไปได้เท่าไหร่? การเลือก Protocol ที่ถูกต้องคือความรับผิดชอบของ Senior Engineer ในการคุมต้นทุนและประสิทธิภาพ
+> 💭 ในระบบของคุณ มี Microservices ที่คุยกันเองด้วย JSON อยู่กี่จุด? หากคุณเปลี่ยนเป็น gRPC คุณจะประหยัดค่า Compute (CPU) และค่า Data Transfer (Network) ไปได้เท่าไหร่? การเลือก Protocol ที่ถูกต้องคือความรับผิดชอบของ Senior Engineer ในการคุมต้นทุนและประสิทธิภาพ
 
 ---
 

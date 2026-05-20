@@ -18,7 +18,7 @@ tags: [distributed-systems, devops, reliability]
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️ **สถานการณ์**:คุณต้องอัปเดต Configuration ของระบบ Database 📦 ทั้งหมด 100 Cluster ทั่วโลกเพื่อเพิ่มประสิทธิภาพ วิศวกรในทีมเขียน Script เสร็จแล้วและทดสอบใน Staging ผ่านฉลุย
+> ✍️ **สถานการณ์**:คุณต้องอัปเดต Configuration ของระบบ Database ทั้งหมด 100 Cluster ทั่วโลกเพื่อเพิ่มประสิทธิภาพ วิศวกรในทีมเขียน Script เสร็จแล้วและทดสอบใน Staging ผ่านฉลุย
 >
 >**Script**: `update_config.sh --all-regions --force`
 >
@@ -48,7 +48,7 @@ tags: [distributed-systems, devops, reliability]
 -**Bad Design:** หนึ่งความผิดพลาด ทำระบบล่ม 100% (Blast Radius = Global)
 -**Good Design:** หนึ่งความผิดพลาด ทำระบบล่ม 1% (Blast Radius = Cell/Partition)
 
-### 2. กลยุทธ์การจำกัด Blast Radius **Cell-based Architecture 🏗️:** แบ่ง Infrastructure 🏗️ เป็น"กรง" (Cells) ที่แยกขาดจากกันอย่างสิ้นเชิง หาก Cell A พัง ลูกค้าใน Cell B จะไม่รู้สึกอะไรเลย **Regional Isolation:** ห้ามให้ Service ใน Region หนึ่ง ต้องพึ่งพา Service ในอีก Region หนึ่งในระดับ Runtime **Control Plane vs. Data Plane:** แยกส่วนที่ใช้"สั่งการ" ออกจากส่วนที่ใช้"รับส่งข้อมูล" เพื่อไม่ให้ระบบจัดการทำระบบทำงานพังไปด้วยกัน
+### 2. กลยุทธ์การจำกัด Blast Radius **Cell-based Architecture:** แบ่ง Infrastructure เป็น"กรง" (Cells) ที่แยกขาดจากกันอย่างสิ้นเชิง หาก Cell A พัง ลูกค้าใน Cell B จะไม่รู้สึกอะไรเลย **Regional Isolation:** ห้ามให้ Service ใน Region หนึ่ง ต้องพึ่งพา Service ในอีก Region หนึ่งในระดับ Runtime **Control Plane vs. Data Plane:** แยกส่วนที่ใช้"สั่งการ" ออกจากส่วนที่ใช้"รับส่งข้อมูล" เพื่อไม่ให้ระบบจัดการทำระบบทำงานพังไปด้วยกัน
 
 ---
 

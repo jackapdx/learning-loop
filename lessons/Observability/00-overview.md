@@ -28,7 +28,7 @@ tags: [chat-exp, system-design, observability, sre, monitoring]
 
 | # | บทเรียน | คำถามสัมภาษณ์ |
 |---|---|---|
-| 1 | [[01-monitoring-levels\|Monitoring Levels]] |"คุณจะรู้ได้อย่างไรว่าระบบช้าลงเพราะ CPU เต็ม หรือเพราะ Database 📦 Lock?" |
+| 1 | [[01-monitoring-levels\|Monitoring Levels]] |"คุณจะรู้ได้อย่างไรว่าระบบช้าลงเพราะ CPU เต็ม หรือเพราะ Database Lock?" |
 | 2 | [[02-lgtm-stack\|LGTM Stack]] |"ความแตกต่างระหว่าง Logs, Metrics และ Traces คืออะไร? และเมื่อไหร่ควรใช้ตัวไหน?" |
 
 > [!question] ลองทำก่อน

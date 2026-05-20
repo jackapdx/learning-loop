@@ -48,7 +48,7 @@ tags: [observability, grafana, prometheus, loki, tempo, lgtm]
 ### 1. (L)oki — Logs (Like Prometheus, but for Logs)
 
 -**Concept**: เน้นการเก็บ Metadata (Labels) แทนที่จะเก็บ Full-text index ของ Log ทุกตัว
--**ข้อดี**:ประหยัดที่เก็บข้อมูล 📦 (Cost-efficient) และรวดเร็วมากเมื่อใช้ค้นหาคู่กับ Metrics
+-**ข้อดี**:ประหยัดที่เก็บข้อมูล (Cost-efficient) และรวดเร็วมากเมื่อใช้ค้นหาคู่กับ Metrics
 
 ### 2. (G)rafana — Visualization (The Single Pane of Glass)
 

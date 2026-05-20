@@ -9,7 +9,7 @@ tags: [chat-exp, system-design, distributed]
 # Distributed Systems Patterns — ซีรีส์ออกแบบระบบกระจาย
 
 > [!info] ปฐมนิเทศ
-> Distributed Systems ไม่ได้พังแบบ"มี Bug" — มันพังแบบ"ทุกอย่างทำงานถูกต้องตาม Design แต่ระบบยังพัง" เพราะธรรมชาติของ Distributed Systems เต็มไปด้วย Partial Failures, Network 📡 Partitions, และ Timing Assumptions ที่ผิด
+> Distributed Systems ไม่ได้พังแบบ"มี Bug" — มันพังแบบ"ทุกอย่างทำงานถูกต้องตาม Design แต่ระบบยังพัง" เพราะธรรมชาติของ Distributed Systems เต็มไปด้วย Partial Failures, Network Partitions, และ Timing Assumptions ที่ผิด
 >
 ซีรีส์นี้รวบรวม **13 บทเรียน** ที่ครอบคลุม Patterns ที่ใช้แก้ปัญหาเหล่านี้ใน Production จริง
 
@@ -23,7 +23,7 @@ Each lesson takes **5-10 minutes** based on the **Learning Loop** principle.
 
 ### Path B: Data Consistency & Optimization → #2, 3, 9, 12, 13
 
-[[02-dual-write|Dual Write Problem]] (DB + Event Bus) + [[03-feed-fan-out|Feed Fan-out]] (Push 📱/Pull Hybrid) + [[09-cqrs|CQRS]] (Read/Write Segregation) + [[12-distributed-transactions|Distributed Transactions]] + [[13-probabilistic-data-structures|Probabilistic Data Structures]] — ทำให้ข้อมูลถูกต้อง อ่านเร็ว และประหยัด RAM สูงสุดด้วย Bloom Filters
+[[02-dual-write|Dual Write Problem]] (DB + Event Bus) + [[03-feed-fan-out|Feed Fan-out]] (Push/Pull Hybrid) + [[09-cqrs|CQRS]] (Read/Write Segregation) + [[12-distributed-transactions|Distributed Transactions]] + [[13-probabilistic-data-structures|Probabilistic Data Structures]] — ทำให้ข้อมูลถูกต้อง อ่านเร็ว และประหยัด RAM สูงสุดด้วย Bloom Filters
 
 ### Path C: Infrastructure Reliability → #5, 6, 8
 
@@ -35,7 +35,7 @@ Each lesson takes **5-10 minutes** based on the **Learning Loop** principle.
 |---|---|---|
 | 1 | [[01-self-recovery\|Self-Recovery]] |"Service B พัง — Service A ควรทำยังไง? (ไม่ใช่แค่ Retry)" |
 | 2 | [[02-dual-write\|Dual Write Problem]] |"เขียน DB กับ Pub/Sub พร้อมกัน — ถ้าอันใดอันหนึ่งพังล่ะ?" |
-| 3 | [[03-feed-fan-out\|Feed Fan-out]] |"Push 📱 หรือ Pull? แล้ว Hybrid คืออะไร?" |
+| 3 | [[03-feed-fan-out\|Feed Fan-out]] |"Push หรือ Pull? แล้ว Hybrid คืออะไร?" |
 | 4 | [[04-spof\|Single Point of Failure]] |"SPOF ในระบบคุณ — หาให้ครบทุกระดับ (รวม DNS, CI/CD, คน)" |
 | 5 | [[05-circular-dependencies\|Circular Dependencies]] |"ทำไม Meta ถึงล่มจนวิศวกรเข้าออฟฟิศไม่ได้? และวิธีแก้ด้วย Level 0 Service" |
 | 6 | [[06-blast-radius-guardrails\|Blast Radius & Guardrails]] |"การจำกัดพลังทำลายล้าง: วิธีป้องกันไม่ให้ Script เดียวทำพังทั้งภูมิภาค" |

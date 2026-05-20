@@ -20,7 +20,7 @@ Dual Write Problem คือหนึ่งใน Distributed Systems Bug ที
 
 > ✍️ **สถานการณ์**:คุณมี Order Service ที่เมื่อรับออเดอร์แล้วต้อง:
 > 1. เขียน Order ลง PostgreSQL
-> 2. ส่ง Event`OrderCreated` เข้า Kafka/Google PubSub ให้ Notification 📱 Service
+> 2. ส่ง Event`OrderCreated` เข้า Kafka/Google PubSub ให้ Notification Service
 >
 >**คำถาม**:เกิดอะไรขึ้นถ้า... PostgreSQL เขียนสำเร็จ แต่ Kafka/PubSub publish ไม่สำเร็จ? และ _กลับกัน_ ถ้า Kafka publish สำเร็จ แต่ PostgreSQL เขียนไม่สำเร็จ? ระบบของคุณรับมือกับทั้งสองกรณีได้หรือไม่?**✋ หยุดตรงนี้**— เขียนแนวทางแก้ของคุณก่อนอ่านต่อ
 
@@ -31,8 +31,8 @@ Dual Write Problem คือหนึ่งใน Distributed Systems Bug ที
 | ถ้าคุณตอบว่า... | การวิเคราะห์ |
 |---|---|
 |"ใช้ Transaction — ถ้าอันใดหนึ่งพังก็ Rollback ทั้งคู่" | ⚠️ PostgreSQL กับ PubSub คนละระบบ — ทำ Distributed Transaction ไม่ได้ (ไม่มี 2PC ใน PubSub) |
-|"เขียน DB ก่อน แล้วค่อยส่ง Event — ส่งไม่สำเร็จก็ไม่เป็นไร" | ❌ Notification 📱 Service ไม่รู้ว่ามี Order ใหม่ → ผู้ใช้ไม่ได้ Notification 📱 → ระบบไม่สมบูรณ์ |
-|"ใช้ Outbox Pattern" | ✅ **ถูกทาง!** เก็บ Event ไว้ใน DB table เดียวกับ Business Data → Atomically ปลอดภัย 🛡️ → Worker ค่อยไปส่ง |
+|"เขียน DB ก่อน แล้วค่อยส่ง Event — ส่งไม่สำเร็จก็ไม่เป็นไร" | ❌ Notification Service ไม่รู้ว่ามี Order ใหม่ → ผู้ใช้ไม่ได้ Notification → ระบบไม่สมบูรณ์ |
+|"ใช้ Outbox Pattern" | ✅ **ถูกทาง!** เก็บ Event ไว้ใน DB table เดียวกับ Business Data → Atomically ปลอดภัย → Worker ค่อยไปส่ง |
 |"ใช้ CDC (Change Data Capture)" | ✅**ถูกต้องเช่นกัน!** อ่านจาก DB Write-ahead Log → ส่ง Event — ไม่ต้องเปลี่ยน Business Logic เลย |**คนส่วนใหญ่ตอบผิดเพราะ**: ไม่รู้ว่า Distributed Transaction ระหว่างสองระบบที่แตกต่างกัน _ไม่มีอยู่จริง_ — หรือคิดว่า"แค่ Retry" ก็พอ
 
 ---
@@ -61,8 +61,8 @@ Dual Write Problem คือหนึ่งใน Distributed Systems Bug ที
 |---|---|---|---|
 | 1. Happy Path | ✅ | ✅ | ถูกต้อง |
 | 2. DB พังก่อน | ❌ | ไม่ได้เรียก | ถูกต้อง (แค่ Retry ทั้งหมด) |
-| 3. DB สำเร็จ PubSub พัง | ✅ | ❌ | ❌**Order อยู่ใน DB แต่ Notification 📱 ไม่ส่ง**|
-| 4. PubSub สำเร็จ DB พัง | ❌ | ✅ | ❌ **Notification 📱 ส่งแล้ว แต่ Order ไม่มีอยู่จริง** |
+| 3. DB สำเร็จ PubSub พัง | ✅ | ❌ | ❌**Order อยู่ใน DB แต่ Notification ไม่ส่ง**|
+| 4. PubSub สำเร็จ DB พัง | ❌ | ✅ | ❌ **Notification ส่งแล้ว แต่ Order ไม่มีอยู่จริง** |
 
 ### 4 วิธีแก้ — เรียงจากง่ายไปซับซ้อน
 
@@ -96,7 +96,7 @@ PostgreSQL WAL Log ──▶ Debezium/Kafka Connect ──▶ Kafka/PubSub
                             │
                             └── อ่านทุก INSERT/UPDATE/DELETE จาก DB
                                 โดยไม่ต้องแก้ Business Logic เลย
-```**ข้อดี**:ไม่ต้องเปลี่ยน Code เดิม — แค่เสียบเข้าไป**ข้อเสีย**:เพิ่ม Infrastructure 🏗️ Complexity (ต้องรัน Debezium)**เมื่อใช้**:**Microservices เยอะ (10+) ที่แชร์ DB เดียวกัน
+```**ข้อดี**:ไม่ต้องเปลี่ยน Code เดิม — แค่เสียบเข้าไป**ข้อเสีย**:เพิ่ม Infrastructure Complexity (ต้องรัน Debezium)**เมื่อใช้**:**Microservices เยอะ (10+) ที่แชร์ DB เดียวกัน
 
 #### วิธีที่ 3: Transactional Outbox + Polling Publisher
 
@@ -207,7 +207,7 @@ Key Learning:
 
 ## ✅ จุดตรวจสอบ (Checkpoint)
 
-🎯**Quick Check:** คุณมี User Service ที่เวลา ⏰ User Register ต้อง:
+🎯**Quick Check:** คุณมี User Service ที่เวลา User Register ต้อง:
 INSERT INTO users
 Publish`UserRegistered` Event
 ส่ง Welcome Email
@@ -237,7 +237,7 @@ Welcome Email ต้องเป็น _ผลลัพธ์จากการ 
 
 ## 🤔 สะท้อนคิด (Reflect)
 
-> 💭 กลับไปดู Service ที่คุณเขียน — มีตรงไหนที่เขียน DB แล้วส่ง Event/Message ทันที โดยไม่มี Transactional Guarantee บ้าง? ถ้า Process ตายระหว่างนั้น — ข้อมูลจะหายไปเงียบๆ หรือเปล่า? นี่คือ Bug ที่ตรวจไม่เจอใน Unit Test — มันเจอเฉพาะใน Production เวลา ⏰ 3am
+> 💭 กลับไปดู Service ที่คุณเขียน — มีตรงไหนที่เขียน DB แล้วส่ง Event/Message ทันที โดยไม่มี Transactional Guarantee บ้าง? ถ้า Process ตายระหว่างนั้น — ข้อมูลจะหายไปเงียบๆ หรือเปล่า? นี่คือ Bug ที่ตรวจไม่เจอใน Unit Test — มันเจอเฉพาะใน Production เวลา 3am
 
 ---
 

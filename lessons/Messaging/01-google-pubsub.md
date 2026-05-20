@@ -47,7 +47,7 @@ Google Cloud Pub/Sub คือ Message Broker ระดับโลกที่�
 
 ### 1. ข้อจำกัดของ Pub/Sub (The Hard Truths)
 
--**Latency**: เนื่องจากเป็น Managed Service ที่มีหลาย Layer (gRPC -> Google Network 📡 -> Internal Storage) ทำให้ Latency สูงกว่าระบบที่อ่านจาก Memory (Redis/BullMQ)
+-**Latency**: เนื่องจากเป็น Managed Service ที่มีหลาย Layer (gRPC -> Google Network -> Internal Storage) ทำให้ Latency สูงกว่าระบบที่อ่านจาก Memory (Redis/BullMQ)
 -**Retention**: เก็บข้อมูลได้สูงสุด **31 วัน** เท่านั้น ไม่สามารถใช้เป็นแหล่งเก็บข้อมูลหลักสำหรับ Event Sourcing ระยะยาวได้
 -**No Global Ordering:** การเรียงลำดับ (Ordering Key) ทำได้ดีแค่ภายใน Region เดียวกัน และจะทำให้ความสามารถในการ Scale ลดลง (Throughput capped per key)
 

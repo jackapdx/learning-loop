@@ -11,7 +11,7 @@ tags: [chat-exp, system-design, workers, queues]
 > [!info] ปฐมนิเทศ
 > ในระบบที่ต้องรองรับผู้ใช้จำนวนมาก เราไม่สามารถให้ User นั่งรอเซิร์ฟเวอร์ส่งอีเมล หรือประมวลผลวิดีโอจนเสร็จได้ การแยกงานที่"หนัก" หรือ"รอได้" ไปทำที่หลังบ้าน (Background) คือหัวใจสำคัญของการทำ Scalability
 >
-> ซีรีส์นี้จะพาคุณไปเจาะลึกเครื่องมือยอดนิยมในโลก Node.js อย่าง **pg-boss** และ **BullMQ** เพื่อดูว่าเมื่อไหร่ควรใช้ฐานข้อมูล 📦 (Postgres) และเมื่อไหร่ควรใช้หน่วยความจำ (Redis) ในการจัดการคิวงาน
+> ซีรีส์นี้จะพาคุณไปเจาะลึกเครื่องมือยอดนิยมในโลก Node.js อย่าง **pg-boss** และ **BullMQ** เพื่อดูว่าเมื่อไหร่ควรใช้ฐานข้อมูล (Postgres) และเมื่อไหร่ควรใช้หน่วยความจำ (Redis) ในการจัดการคิวงาน
 >
 > Each lesson takes **5-10 minutes** based on the **Learning Loop** principle.
 
@@ -29,7 +29,7 @@ tags: [chat-exp, system-design, workers, queues]
 
 | # | บทเรียน | คำถามสัมภาษณ์ |
 |---|---|---|
-| 1 | [[01-pg-boss-transactional\|pg-boss]] |"ทำไมต้องส่ง Job ใน Database 📦 Transaction? และวิธีแก้ปัญหา Table Bloat" |
+| 1 | [[01-pg-boss-transactional\|pg-boss]] |"ทำไมต้องส่ง Job ใน Database Transaction? และวิธีแก้ปัญหา Table Bloat" |
 | 2 | [[02-bullmq-redis-performance\|BullMQ]] |"วิธีรับมือกับ Stalled Jobs และการจัดการหน่วยความจำ Redis ไม่ให้เต็ม" |
 
 > [!question] ลองทำก่อน

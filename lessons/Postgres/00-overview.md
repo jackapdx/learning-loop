@@ -30,15 +30,15 @@ tags: [chat-exp, system-design, postgres]
 
 ### Path C: การบริหารจัดการและเสถียรภาพ (Operations) → #5, 6, 9, 11
 
-สำหรับคนดูแลระบบที่ต้องการความมั่นใจใน Production — เข้าใจกลไก MVCC/VACUUM, Connection Pooling, Locking 🧵 และ Isolation Levels
+สำหรับคนดูแลระบบที่ต้องการความมั่นใจใน Production — เข้าใจกลไก MVCC/VACUUM, Connection Pooling, Locking และ Isolation Levels
 
 ### Path D: นวัตกรรมใหม่ใน Postgres (Modern Ecosystem) → #12
 
-สำรวจความเป็นไปได้ใหม่ๆ ที่ Postgres ทำได้มากกว่าแค่เก็บข้อมูล 📦 — ตั้งแต่ Vector Database 📦 (AI 🧠) ไปจนถึง Time-series และ Geospatial
+สำรวจความเป็นไปได้ใหม่ๆ ที่ Postgres ทำได้มากกว่าแค่เก็บข้อมูล — ตั้งแต่ Vector Database (AI 🧠) ไปจนถึง Time-series และ Geospatial
 
 ### Path E: ความน่าเชื่อถือระดับ Senior (Reliability) → #13
 
-เตรียมรับมือกับภัยเงียบที่อาจทำให้ระบบล่มทันที — เข้าใจ Transaction ID Wraparound และวิกฤต Database 📦 Hard-stop
+เตรียมรับมือกับภัยเงียบที่อาจทำให้ระบบล่มทันที — เข้าใจ Transaction ID Wraparound และวิกฤต Database Hard-stop
 
 ---
 
@@ -55,10 +55,10 @@ tags: [chat-exp, system-design, postgres]
 | 7 | [[07-json-jsonb\|JSON & JSONB]] |"NoSQL ภายใน Postgres: เมื่อไหร่ควร Schema-less และเมื่อไหร่ควร Normalize?" |
 | 8 | [[08-full-text-search\|Full-Text Search]] |"สร้างระบบ Search ภาษาไทย/อังกฤษ โดยไม่ต้องพึ่ง Elasticsearch" |
 | 9 | [[09-locking-concurrency\|Locking & Concurrency]] |"แก้ปัญหา Race Condition ด้วย SELECT FOR UPDATE SKIP LOCKED" |
-| 10 | [[10-explain-analyze\|EXPLAIN ANALYZE]] |"อ่านใจ Database 📦: วิธีอ่าน Query Plan เพื่อหาคอขวดที่แท้จริง" |
+| 10 | [[10-explain-analyze\|EXPLAIN ANALYZE]] |"อ่านใจ Database: วิธีอ่าน Query Plan เพื่อหาคอขวดที่แท้จริง" |
 | 11 | [[11-transactions-isolation\|Isolation Levels]] |"ACID ในระดับที่ต่างกัน: ตั้งแต่ Read Committed ไปจนถึง Serializable" |
 | 12 | [[12-extensions-ecosystem\|Extensions Ecosystem]] |"pgvector (AI 🧠), PostGIS (Maps), TimescaleDB (IoT) — Postgres ทำได้ทุกอย่าง" |
-| 13 | [[13-transaction-id-wraparound\|TXID Wraparound]] |"ระเบิดเวลา 32-bit: วิธีป้องกัน Database 📦 กลายเป็น Read-only ทันที" |
+| 13 | [[13-transaction-id-wraparound\|TXID Wraparound]] |"ระเบิดเวลา 32-bit: วิธีป้องกัน Database กลายเป็น Read-only ทันที" |
 
 ---
 

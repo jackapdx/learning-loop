@@ -51,7 +51,7 @@ tags: [cloud, databases, gcp, cloud-sql, firestore, high-availability]
 ### 2. Firestore (NoSQL - Document)
 
 -**จุดเด่น**: Serverless 100%**, สเกลตามการใช้งานจริง (Pay-per-use), ยืดหยุ่นเรื่อง Schema (JSON-like)
--**เหมาะสำหรับ**: Mobile 📱 Backends, User Profiles, Product Catalogs
+-**เหมาะสำหรับ**: Mobile Backends, User Profiles, Product Catalogs
 
 ### 3. Bigtable (NoSQL - Wide Column)
 
@@ -64,7 +64,7 @@ tags: [cloud, databases, gcp, cloud-sql, firestore, high-availability]
 
 ### ยุทธศาสตร์ Senior: การบริหารจัดการราคาและประสิทธิภาพ
 
-**Read Replicas:** เมื่อ Database 📦 หลักทำงานหนักเกินไป (CPU พุ่ง) จากการที่มีคนมา"อ่าน" เยอะ ให้เปิด Read Replicas แยกออกมาเพื่อกระจายโหลด **Point-in-Time Recovery (PITR):** Managed DB ช่วยให้คุณ"ย้อนเวลา" กลับไปวินาทีใดก็ได้ในช่วง 7 วันที่ผ่านมา (หากเกิดเหตุการณ์มีคนเผลอรัน`DROP TABLE`)
+**Read Replicas:** เมื่อ Database หลักทำงานหนักเกินไป (CPU พุ่ง) จากการที่มีคนมา"อ่าน" เยอะ ให้เปิด Read Replicas แยกออกมาเพื่อกระจายโหลด **Point-in-Time Recovery (PITR):** Managed DB ช่วยให้คุณ"ย้อนเวลา" กลับไปวินาทีใดก็ได้ในช่วง 7 วันที่ผ่านมา (หากเกิดเหตุการณ์มีคนเผลอรัน`DROP TABLE`)
 **Automatic Scaling:** ใน Cloud SQL คุณสามารถตั้งค่าให้ **"เพิ่ม Disk อัตโนมัติ"** ได้เมื่อพื้นที่ใกล้เต็ม เพื่อป้องกันระบบล่มแบบกะทันหัน
 
 ### ตารางตัดสินใจ (Decision Matrix)
@@ -81,7 +81,7 @@ tags: [cloud, databases, gcp, cloud-sql, firestore, high-availability]
 
 🎯**Quick Check:**"High Availability" ใน Cloud SQL ทำงานอย่างไร?
 หากคุณต้องการสร้างแอปแชทที่มีคนใช้พร้อมกัน 1 ล้านคน ตัวเลือกไหนประหยัดและสเกลง่ายที่สุด?
-Managed Database 📦 ช่วยลดภาระของทีม Engineer ในเรื่องใดบ้าง?
+Managed Database ช่วยลดภาระของทีม Engineer ในเรื่องใดบ้าง?
 
 <details>
 <summary>ดูเฉลย (คลิกเพื่อเปิด)</summary>
@@ -94,7 +94,7 @@ GCP จะรัน **Standby Instance** ไว้ในอีก Zone (พื�
 
 ## 🤔 สะท้อนคิด (Reflect)
 
-> 💭 คุณยังจ่ายค่า Engineer ให้มานั่งทำ Backup DB และลง Patch Security ด้วยมืออยู่หรือไม่? ต้นทุนของ Managed Database 📦 อาจดูแพงกว่าการเช่าเครื่องเปล่า แต่"ค่าเสียโอกาส" และ"ค่าความเสี่ยง" เมื่อระบบล่มนั้นแพงกว่าหลายเท่าตัว
+> 💭 คุณยังจ่ายค่า Engineer ให้มานั่งทำ Backup DB และลง Patch Security ด้วยมืออยู่หรือไม่? ต้นทุนของ Managed Database อาจดูแพงกว่าการเช่าเครื่องเปล่า แต่"ค่าเสียโอกาส" และ"ค่าความเสี่ยง" เมื่อระบบล่มนั้นแพงกว่าหลายเท่าตัว
 
 ---
 

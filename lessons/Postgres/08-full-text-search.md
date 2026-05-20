@@ -20,9 +20,9 @@ PostgreSQL มาพร้อมกับ **Full-Text Search (FTS)** ในต�
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️**สถานการณ์**:คุณมีตารางบทความ (`articles`) 10 ล้านแถว คุณต้องการค้นหาคำว่า"Database 📦 Optimization" ในเนื้อหาบทความ
+> ✍️**สถานการณ์**:คุณมีตารางบทความ (`articles`) 10 ล้านแถว คุณต้องการค้นหาคำว่า"Database Optimization" ในเนื้อหาบทความ
 >
->**คำถาม**:ระหว่างการใช้`WHERE content LIKE '%Database 📦%' AND content LIKE '%Optimization%'` กับการใช้ PostgreSQL Full-Text Search แบบไหนจะเร็วกว่ากัน? และแบบไหนจะให้ผลลัพธ์ที่"แม่นยำ" กว่า (เช่น ค้นหาคำว่า"optimized" แล้วเจอคำว่า"optimization" ด้วย)?**หยุดคิดสักครู่**— ความเร็วสำคัญ แต่ความฉลาดในการค้นหาก็สำคัญไม่แพ้กัน...
+>**คำถาม**:ระหว่างการใช้`WHERE content LIKE '%Database%' AND content LIKE '%Optimization%'` กับการใช้ PostgreSQL Full-Text Search แบบไหนจะเร็วกว่ากัน? และแบบไหนจะให้ผลลัพธ์ที่"แม่นยำ" กว่า (เช่น ค้นหาคำว่า"optimized" แล้วเจอคำว่า"optimization" ด้วย)?**หยุดคิดสักครู่**— ความเร็วสำคัญ แต่ความฉลาดในการค้นหาก็สำคัญไม่แพ้กัน...
 
 ---
 

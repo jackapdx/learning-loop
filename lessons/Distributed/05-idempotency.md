@@ -34,7 +34,7 @@ prerequisites: []
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
 |"เช็คยอดเงินก่อนหัก" | ❌ **อันตราย!** เกิด Race Condition ได้ง่ายมาก ถ้า 2 Request เข้ามาพร้อมกัน (Read-Modify-Write problem) |
-|"ใช้ Database 📦 Transaction" | ⚠️**เกือบใช่!** ช่วยให้ข้อมูลถูกต้องในรอบเดียว แต่ถ้า Client ส่งมา 2 รอบแยกกัน Transaction ก็ช่วยไม่ได้ |
+|"ใช้ Database Transaction" | ⚠️**เกือบใช่!** ช่วยให้ข้อมูลถูกต้องในรอบเดียว แต่ถ้า Client ส่งมา 2 รอบแยกกัน Transaction ก็ช่วยไม่ได้ |
 |"ใช้ Idempotency Key (UUID)" | ✅**ถูกต้อง!** นี่คือมาตรฐานทองคำ — ให้ Client ส่ง Unique Key มาด้วย แล้ว Server เช็คว่า Key นี้เคยประมวลผลไปแล้วหรือยัง |**ทำไมคนส่วนใหญ่ถึงพลาด?** เพราะเรามักคิดว่าระบบจะทำงานได้สมบูรณ์แบบ (Happy Path) และลืมไปว่าในโลกของ Distributed Systems การได้รับ Message เดิมซ้ำ (At-least-once delivery) เป็นสิ่งที่หลีกเลี่ยงไม่ได้
 
 ---
@@ -60,7 +60,7 @@ prerequisites: []
     *   Client สร้าง UUID สำหรับทุก Transaction
     *   Server เก็บ Key นี้ลงในตาราง`idempotency_keys` พร้อมผลลัพธ์
     *   ถ้าได้รับ Key เดิมซ้ำ ให้คืนผลลัพธ์เดิมจาก DB ทันทีโดยไม่ประมวลผลซ้ำ
-**Unique Constraints (Database 📦 Level):**
+**Unique Constraints (Database Level):**
     *   ใช้`UNIQUE INDEX` บนฟิลด์ที่รวมกันแล้วต้องไม่ซ้ำ (เช่น`user_id` +`order_ref`)
     *   ใช้`ON CONFLICT DO NOTHING` หรือ`ON CONFLICT DO UPDATE` (Upsert)
 **State Machine Validation:**
