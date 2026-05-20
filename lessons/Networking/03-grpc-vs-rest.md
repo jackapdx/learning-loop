@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [networking, protocols, microservices, system-design]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในยุค Microservices การที่เซอร์วิสคุยกันเอง (Internal Communication) คือหัวใจสำคัญ หากคุณยังใช้ **REST (JSON)** คุยกันทุกที่เหมือนที่คุยกับ Browser คุณอาจจะกำลัง"จ่ายแพงเกินไป" ทั้งในแง่ของความเร็วและทรัพยากรเครื่อง บทเรียนนี้จะพาไปรู้จักกับ **gRPC ** ผู้ท้าชิงที่ถูกสร้างมาเพื่อทำให้การคุยกันระหว่างเซิร์ฟเวอร์รวดเร็วและมีระเบียบที่สุด
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังออกแบบระบบ"Payment Gateway" ที่มี Microservices ภายในคุยกันอย่างหนัก (High Volume)
 > -**Order Service ** ต้องเรียก **Payment Service ** และ **Inventory Service ** ทุกๆ Request
@@ -27,7 +28,7 @@ tags: [networking, protocols, microservices, system-design]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -67,7 +68,7 @@ tags: [networking, protocols, microservices, system-design]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ทำไม Protobuf ถึงเร็วกว่า JSON?
 JSON ส่งชื่อ Field ไปทุกครั้ง:
@@ -88,7 +89,7 @@ gRPC ได้อานิสงส์จาก HTTP/2:
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 หากคุณต้องทำ Public API ให้คนอื่นทั่วโลกมาเชื่อมต่อ คุณควรเลือกใช้ตัวไหน?
@@ -106,13 +107,13 @@ gRPC ได้อานิสงส์จาก HTTP/2:
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในระบบของคุณ มี Microservices ที่คุยกันเองด้วย JSON อยู่กี่จุด? หากคุณเปลี่ยนเป็น gRPC คุณจะประหยัดค่า Compute (CPU) และค่า Data Transfer (Network 📡) ไปได้เท่าไหร่? การเลือก Protocol ที่ถูกต้องคือความรับผิดชอบของ Senior Engineer ในการคุมต้นทุนและประสิทธิภาพ
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[02-tcp-vs-udp|TCP vs UDP: รากฐานของ HTTP/1 และ HTTP/2]]
 - [[../Chat/00-overview|Real-time Communication ในระบบ Chat]]

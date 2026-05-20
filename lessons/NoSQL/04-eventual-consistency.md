@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [nosql, consistency, cap-theorem, system-design, databases]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 *"คุณโอเคไหมถ้าเพื่อนกด Like โพสต์คุณแล้วคุณยังไม่เห็นมันทันที?"* ในระบบกระจายตัว (Distributed Systems) ขนาดใหญ่ การรอให้ข้อมูล"เป๊ะ" ในทุกเซิร์ฟเวอร์ทั่วโลกนั้นเป็นเรื่องที่เป็นไปไม่ได้ทางกายภาพ NoSQL ส่วนใหญ่จึงเลือกใช้ **Eventual Consistency ** บทเรียนนี้จะสอนให้คุณเข้าใจว่า"ความไม่แน่นอน" นี้มีที่มาอย่างไร และ Senior Engineer รับมือกับมันอย่างไรให้ผู้ใช้ไม่ด่า
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ **สถานการณ์:** คุณออกแบบแอป Social Media ที่ใช้ **Cassandra ** แบบกระจาย 3 Regions (Asia, Europe, US)
 > - User A ในไทย โพสต์ข้อความ"สวัสดี" 
@@ -28,7 +29,7 @@ tags: [nosql, consistency, cap-theorem, system-design, databases]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -40,7 +41,7 @@ tags: [nosql, consistency, cap-theorem, system-design, databases]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. CAP Theorem (ทฤษฎีพื้นฐาน)
 ในระบบกระจายตัว คุณเลือกได้แค่ 2 จาก 3 อย่าง:
@@ -60,7 +61,7 @@ PACELC บอกว่าแม้ในสภาวะปกติ (ไม่�
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: การออกแบบ App ให้รับมือ Eventual Consistency
 
@@ -74,7 +75,7 @@ PACELC บอกว่าแม้ในสภาวะปกติ (ไม่�
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 ใน CAP Theorem ทำไมเราถึงเลือก"CA" (Consistency ⛓️ + Availability) ไม่ได้ในระบบ Cloud?
@@ -92,13 +93,13 @@ PACELC บอกว่าแม้ในสภาวะปกติ (ไม่�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ข้อมูลชุดไหนในระบบของคุณที่"ห้ามผิดพลาดเด็ดขาด" และชุดไหนที่"รอได้"? การพยายามทำให้ทุกอย่างเป็น Strong Consistency ⛓️ คือการฆ่าประสิทธิภาพระบบตัวเองโดยไม่จำเป็น Senior Engineer คือคนที่รู้ว่าจะ"ผ่อนปรน" ความเป๊ะตรงไหน เพื่อแลกกับประสบการณ์ผู้ใช้ที่ดีที่สุด
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[../../05-idempotency|Idempotency: การออกแบบระบบให้รันซ้ำได้]]
 - [[../Distributed/02-dual-write|ปัญหา Dual Write และความสอดคล้องของข้อมูล]]

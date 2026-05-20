@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: overview
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ยินดีต้อนรับสู่ซีรีส์เจาะลึก PostgreSQL — ฐานข้อมูล Open-source ที่ยืดหยุ่นและทรงพลังที่สุดในโลก ซีรีส์นี้รวบรวม **13 บทเรียนเข้มข้น ** ที่จะเปลี่ยนคุณจากคนที่"แค่เขียน SQL ได้" ให้เป็นผู้เชี่ยวชาญที่ออกแบบระบบระดับ Production ได้จริง
 
@@ -17,7 +18,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## แผนผังการเรียนรู้ (Roadmap)
+## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: ประสิทธิภาพและสถาปัตยกรรม (Performance) → #1, 2, 10
 สำหรับผู้ที่พบปัญหา Query ช้าหรือต้องการเตรียมระบบรับโหลดมหาศาล — เจาะลึก Table Partitioning, Index Types และการอ่าน EXPLAIN ANALYZE
@@ -36,7 +37,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## รายชื่อบทเรียนทั้งหมด (Lesson List)
+## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)
 
 | # | หัวข้อบทเรียน | ประเด็นสำคัญ (Key Takeaways) |
 |:---:|---|---|
@@ -56,7 +57,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณมีตาราง`orders` ขนาด 500 ล้านแถว เมื่อรัน Query:
 >`SELECT * FROM orders WHERE created_at > NOW() - INTERVAL '30 days'`

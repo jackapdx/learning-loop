@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [networking, load-balancing, system-design]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในระบบที่มีผู้ใช้นับล้าน Load Balancer ไม่ได้ทำหน้าที่แค่"สลับกันส่ง Request" (Round Robin) แต่คือสมองส่วนหน้าที่จะตัดสินใจว่า Request นี้ควรไปที่ไหนเพื่อให้ระบบทำงานได้เร็วที่สุดและไม่พัง การเลือกระหว่าง **Layer 4 ** และ **Layer 7 ** คือจุดตัดสินว่าคุณจะออกแบบระบบที่เน้น"ความเร็วดิบ" หรือ"ความฉลาดในการจัดการ" บทเรียนนี้จะสอนให้คุณเลือกใช้ตามสถานการณ์จริง
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังออกแบบระบบ E-commerce ขนาดใหญ่ที่มี 3 บริการหลัก:
 > 1.**Order Service **(เน้นความปลอดภัย)
@@ -30,7 +31,7 @@ tags: [networking, load-balancing, system-design]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -70,7 +71,7 @@ tags: [networking, load-balancing, system-design]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### เมื่อไหร่ควรใช้ L4 vs L7?
 
@@ -99,7 +100,7 @@ tags: [networking, load-balancing, system-design]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 หากต้องการให้ User ที่ล็อกอินแล้ว วิ่งไปหาเซิร์ฟเวอร์เครื่องเดิมเสมอ (Sticky Session) โดยใช้ Session Cookie คุณต้องใช้ LB เลเยอร์ไหน?
@@ -117,13 +118,13 @@ tags: [networking, load-balancing, system-design]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในระบบที่คุณใช้อยู่ มีความจำเป็นต้องใช้ความฉลาดของ Layer 7 หรือไม่? หรือคุณกำลังจ่ายค่า Latency ให้กับความฉลาดที่คุณไม่ได้ใช้งาน? การเลือก Load Balancer ที่ถูกต้องช่วยประหยัดทั้งค่าใช้จ่ายและเวลาในการแก้ปัญหา Performance ในระยะยาว
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[02-cdn-edge-computing|CDN & Edge: การกระจายโหลดในระดับโลก]]
 - [[../Distributed/04-spof|SPOF: เมื่อ Load Balancer กลายเป็นจุดอ่อนเสียเอง]]

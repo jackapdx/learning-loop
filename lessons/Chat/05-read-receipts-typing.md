@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -10,13 +11,13 @@ prerequisites: [Chat/03-message-ordering-delivery]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 "อ่านแล้ว สีฟ้า" — ฟีเจอร์ที่ดูเหมือนจะเรียบง่ายนี้ แท้จริงแล้วคือฝันร้ายของวิศวกรผู้ออกแบบระบบกระจายตัว (Distributed Systems) เพราะมันสร้างปัญหา **Write Amplification ** มหาศาล: ลองนึกภาพว่า 1 การอ่านของผู้รับ อาจส่งผลให้ต้องอัปเดตสถานะไปยังทุกอุปกรณ์ของผู้ส่งและผู้รับ บทเรียนนี้จะสอนวิธีจัดการ State Machine และเทคนิคการเพิ่มประสิทธิภาพ (Optimization) เพื่อไม่ให้ระบบล่มเพียงเพราะฟีเจอร์"อ่านแล้ว"
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** ผู้ใช้ A ส่งข้อความหา B โดยที่ A มี 3 อุปกรณ์ (มือถือ, iPad, คอมพิวเตอร์) และ B ก็มี 2 อุปกรณ์
 >
@@ -26,7 +27,7 @@ prerequisites: [Chat/03-message-ordering-delivery]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -66,7 +67,7 @@ prerequisites: [Chat/03-message-ordering-delivery]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### เทคนิค Optimization: Debounce & Batching
 เมื่อผู้ใช้กำลังพิมพ์หรือเลื่อนอ่านอย่างรวดเร็ว:
@@ -86,7 +87,7 @@ prerequisites: [Chat/03-message-ordering-delivery]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. ทำไมเราไม่ควรเก็บสถานะ"Typing" ลงใน Database 📦?
@@ -104,13 +105,13 @@ prerequisites: [Chat/03-message-ordering-delivery]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 คุณเคยรู้สึกกดดันไหมเวลาเห็น"อ่านแล้ว" แต่ยังไม่มีเวลาตอบ? ในฐานะวิศวกร เรามีพลังในการออกแบบ"แรงกดดันทางสังคม" เหล่านี้ผ่านโค้ดของเรา การเลือกที่จะแสดงหรือไม่แสดงข้อมูลบางอย่าง ส่งผลต่อพฤติกรรมของมนุษย์มากกว่าที่คุณคิด
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[01-websocket-realtime|WebSocket: ท่อหลักสำหรับส่งสถานะ Real-time]]
 - [[06-chat-message-storage|การออกแบบ Storage เพื่อรองรับการเก็บสถานะ Last Read]]

@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [networking, cdn, edge-computing, system-design]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 *"คุณจะทำให้ผู้ใช้ในอเมริกาเข้าเว็บที่เซิร์ฟเวอร์ตั้งอยู่ในไทยได้เร็วเท่ากับคนไทยได้อย่างไร?"* ความเร็วแสงมีจำกัด และระยะทางคือศัตรูตัวฉกาจของ Latency หากคุณต้องการให้ระบบของคุณ"เร็วทั่วโลก" การมีเซิร์ฟเวอร์เทพๆ แค่ที่เดียวไม่พอ คุณต้องส่งข้อมูลไปรอที่หน้าบ้านของผู้ใช้ บทเรียนนี้จะสอนวิธีใช้ **CDN ** และ **Edge Computing ** เพื่อเอาชนะข้อจำกัดของระยะทาง
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณเปิดตัวแอปพลิเคชัน"Global News" ที่มีผู้อ่านจากทั่วโลก 
 > - เซอร์วิสหลักตั้งอยู่ที่ ** กรุงเทพฯ (Bangkok)**
@@ -31,7 +32,7 @@ tags: [networking, cdn, edge-computing, system-design]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -43,7 +44,7 @@ tags: [networking, cdn, edge-computing, system-design]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. CDN (Content Delivery Network) คืออะไร?
 คือเครือข่ายของเซิร์ฟเวอร์ที่กระจายตัวอยู่ทั่วโลก ทำหน้าที่เป็น **"Global Cache"**:
@@ -63,7 +64,7 @@ tags: [networking, cdn, edge-computing, system-design]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์การลด Latency (The Senior Way)
 
@@ -78,7 +79,7 @@ tags: [networking, cdn, edge-computing, system-design]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 "Origin Server" ในบริบทของ CDN หมายถึงอะไร?
@@ -96,13 +97,13 @@ tags: [networking, cdn, edge-computing, system-design]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในแอปของคุณ มีส่วนประกอบไหนบ้างที่"เหมือนเดิมสำหรับทุกคน" (เช่น โลโก้, ฟอนต์, ข้อมูลสินค้า)? สิ่งเหล่านี้ควรถูกผลักไปอยู่ที่ CDN ทั้งหมดเพื่อให้เซิร์ฟเวอร์ของคุณมีสมาธิกับการประมวลผล Logic ที่สำคัญจริงๆ เท่านั้น
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[../03-cache-invalidation|กลยุทธ์การจัดการ Cache และการล้างแคช]]
 - [[01-load-balancing-l4-l7|Load Balancing ในระดับ Global (GSLB)]]

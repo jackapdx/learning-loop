@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -11,13 +12,13 @@ next: [distributed/08-multi-tenant]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 "ระบบเราต้อง Scale แบบ Horizontal ได้" คือคำพูดติดปากของสถาปนิกซอฟต์แวร์ แต่เบื้องหลังความสามารถนั้นคือการออกแบบให้เป็น **Stateless ** ให้ได้มากที่สุด อย่างไรก็ตาม ในโลกความเป็นจริง เราไม่สามารถหนี **State ** พ้นได้ทั้งหมด (เช่น ฐานข้อมูลหรือระบบแชทแบบ Real-time) บทเรียนนี้จะสอนให้คุณแยกแยะว่าส่วนไหนควรเป็น Stateless เพื่อความง่ายในการขยายระบบ และส่วนไหนต้องยอมเป็น Stateful เพื่อประสิทธิภาพที่เหมาะสม
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังออกแบบระบบ **Shopping Cart ** สำหรับเว็บ E-commerce ขนาดใหญ่ที่มีผู้ใช้หลักล้านคน ทีมงานถกเถียงกันเรื่องการเก็บข้อมูลสินค้าในตะกร้า:
 > 1. เก็บไว้ใน **Memory ของ Web Server ** โดยตรง (รวดเร็วมาก)
@@ -30,7 +31,7 @@ next: [distributed/08-multi-tenant]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -70,7 +71,7 @@ next: [distributed/08-multi-tenant]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### เมื่อไหร่ที่เรา"หนี" Stateful ไม่พ้น?
 
@@ -85,7 +86,7 @@ next: [distributed/08-multi-tenant]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > 🎯**Quick Check:**
 > 1. หากใช้ JWT ในการทำ Authentication ระบบนั้นถือว่าเป็น Stateless หรือ Stateful?
@@ -103,13 +104,13 @@ next: [distributed/08-multi-tenant]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭"Everything is stateless until it isn't." — ภารกิจของวิศวกรคือการผลัก State ออกไปให้ไกลจาก Application logic ให้มากที่สุด เพื่อให้ระบบของคุณสามารถ"เกิดและดับ" ได้ตลอดเวลาโดยไม่มีผลกระทบต่อผู้ใช้
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[../02-consistency-vs-availability|Consistency vs Availability: เมื่อ State ต้องกระจายตัว]]
 - [[../Networking/01-load-balancing-l4-l7|Load Balancing: การจัดการ Sticky Session]]

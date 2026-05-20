@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 เมื่อคุณต้องทำระบบค้นหาข้อความ (Search) หลายคนมักนึกถึงคำสั่ง`LIKE '%keyword%'` แต่เมื่อข้อมูลเริ่มใหญ่ขึ้น วิธีนี้จะช้าจนใช้งานไม่ได้ และไม่สามารถจัดลำดับความสำคัญ (Ranking) หรือจัดการกับคำที่เขียนต่างกันแต่ความหมายเหมือนกันได้
 
@@ -17,7 +18,7 @@ PostgreSQL มาพร้อมกับ **Full-Text Search (FTS)** ในต�
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณมีตารางบทความ (`articles`) 10 ล้านแถว คุณต้องการค้นหาคำว่า"Database 📦 Optimization" ในเนื้อหาบทความ
 >
@@ -27,7 +28,7 @@ PostgreSQL มาพร้อมกับ **Full-Text Search (FTS)** ในต�
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | วิธีการค้นหา | การวิเคราะห์ (Senior Perspective) |
 |---|---|
@@ -79,7 +80,7 @@ ORDER BY rank DESC;
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การค้นหาหลายภาษา (Multi-language)
 PostgreSQL รองรับพจนานุกรมหลายภาษา หากคุณทำแอปที่รองรับทั้งไทยและอังกฤษ คุณสามารถเก็บค่า`language` ไว้ในตารางและเรียกใช้ใน`to_tsvector` ได้ (สำหรับภาษาไทยอาจต้องใช้ Extension เพิ่มเติม เช่น`icu` หรือ`pg_thai`)
@@ -92,7 +93,7 @@ PostgreSQL รองรับพจนานุกรมหลายภาษา
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 ฟังก์ชันใดที่ใช้แปลงข้อความเป็นรูปแบบที่ค้นหาได้เร็ว ⚡?
@@ -110,13 +111,13 @@ Operator ใดใน`tsquery` ที่ใช้แทนเงื่อนไ�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 หากระบบ Search ของคุณตอนนี้ยังเป็น`LIKE` และกำลังเริ่มช้าลง ลองเปลี่ยนมาใช้ Full-Text Search ใน PostgreSQL ดูสิ — คุณจะได้ระบบที่"ฉลาดขึ้น" และ"เร็วขึ้น" โดยไม่ต้องเสียเงินเพิ่มแม้แต่บาทเดียว!
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[02-index-types\|Index Types — เจาะลึก GIN Index และความแตกต่างจาก B-tree]]
 - [[07-json-jsonb\|JSON & JSONB — การทำ Full-Text Search บนข้อมูล JSON]]

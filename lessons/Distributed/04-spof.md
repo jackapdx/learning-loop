@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [chat-exp, system-design, distributed]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 SPOF (Single Point of Failure) คือการบ้านก่อนนอนของ System Design — ง่ายที่จะ _พูดถึง_ แต่ยากที่จะ _หาให้ครบ_ ในระบบจริง ผู้สมัครส่วนใหญ่หา SPOF ได้ 2-3 จุด แต่จุดที่พลาดคือ Network, DNS, Configuration Store, Build Pipeline, และ"คน" คุณจะได้เรียนรู้วิธีคิดแบบ First Principles เพื่อหา SPOF ทุกจุด — ไม่ใช่แค่จุดที่เห็นชัด
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ **สถานการณ์:** คุณออกแบบระบบ E-commerce ที่มี:
 > - Load Balancer → 3 Web Servers → 1 PostgreSQL (Primary) + 1 Read Replica
@@ -28,7 +29,7 @@ SPOF (Single Point of Failure) คือการบ้านก่อนนอ�
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | จำนวน SPOF ที่หาได้ | การวิเคราะห์ |
 |---|---|
@@ -90,7 +91,7 @@ Senior Pattern:"Active-Active + Chaos Engineering"
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### SPOF ที่ไม่ค่อยมีคนนึกถึง — รายละเอียดที่พลาดกัน
 
@@ -213,7 +214,7 @@ Key Learning:
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:** ระบบของคุณมี Load Balancer → 3 App Servers → PostgreSQL (RDS Multi-AZ) → Redis (ElastiCache Cluster Mode)
 
@@ -235,13 +236,13 @@ SPOF ที่ซ่อนอยู่:
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 หยิบ Architecture 🏗️ Diagram ของระบบที่คุณดูแล — ลากเส้นผ่านทุก Component แล้วถามว่า:"ถ้าสิ่งนี้หายไปตอนนี้ ระบบยังทำงานไหม?" แล้วเดินต่อไปที่ Layer ที่ _ไม่อยู่ใน Diagram_: Build Pipeline, Config Store, DNS, People — ถามคำถามเดิมกับทุกจุด
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[01-self-recovery|Self Recovery — ระบบซ่อมตัวเองเมื่อพัง]]
 - [[../02-consistency-vs-availability|CAP Theorem — เมื่อ Partition คือ SPOF ที่หลีกเลี่ยงไม่ได้]]

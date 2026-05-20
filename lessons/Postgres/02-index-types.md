@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 **Index (ดัชนี)** เปรียบเสมือน"สารบัญ" ของหนังสือที่ช่วยให้เราหาข้อมูลได้รวดเร็วโดยไม่ต้องอ่านทั้งเล่ม (Sequential Scan) แต่นักพัฒนามักจะใช้เพียง **B-tree **(Default) โดยไม่รู้ว่า PostgreSQL มีอาวุธลับอีกมากมาย
 
@@ -17,7 +18,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณมีตารางเก็บ Log การเข้าใช้งาน (Audit Logs) จำนวน 500 ล้านแถว เรียงลำดับตามเวลา (`created_at`) โจทย์คือคุณต้องการดึงข้อมูลย้อนหลัง 1 ชั่วโมงที่ผ่านมาอย่างรวดเร็ว
 >
@@ -27,7 +28,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | ประเภทดัชนี | การวิเคราะห์ (Senior Perspective) |
 |---|---|
@@ -37,7 +38,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 7 มหัศจรรย์ดัชนีของ PostgreSQL
 
@@ -77,7 +78,7 @@ CREATE INDEX idx_user_email ON users (id) INCLUDE (email);
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Index-only Scan: ความเร็วแสง
 เมื่อ PostgreSQL พบว่าข้อมูลที่ต้องการทั้งหมดอยู่ใน Index แล้ว มันจะไม่เสียเวลาโหลดข้อมูลจากตารางจริง (Heap) มาอ่านเลย นี่คือเป้าหมายสูงสุดของการทำ Query Optimization
@@ -95,7 +96,7 @@ CREATE INDEX CONCURRENTLY idx_orders_customer ON orders (customer_id);
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:** เลือกประเภท Index ที่เหมาะสมที่สุด:
 ตารางเก็บรูปภาพ ที่ต้องการค้นหาด้วย"พิกัดละติจูด/ลองจิจูด" → ?
@@ -113,13 +114,13 @@ CREATE INDEX CONCURRENTLY idx_orders_customer ON orders (customer_id);
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองรันคำสั่งตรวจสอบขนาดดัชนีในฐานข้อมูลของคุณ — มี Index ไหนที่"ใหญ่กว่าตัวตารางจริง" บ้างไหม? คุณสามารถเปลี่ยนมันเป็น BRIN หรือทำ Partial Index เพื่อประหยัดพื้นที่และเพิ่มความเร็วในการเขียนได้หรือไม่?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[08-full-text-search\|Full-Text Search — การใช้ GIN Index ค้นหาข้อความขั้นสูง]]
 - [[10-explain-analyze\|EXPLAIN ANALYZE — วิธีเช็คว่า Query ของคุณใช้ Index ประเภทไหน]]

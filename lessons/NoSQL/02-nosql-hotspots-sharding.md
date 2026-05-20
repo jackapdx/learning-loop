@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [nosql, sharding, hotspots, cassandra, dynamodb, system-design]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 *"การแบ่งข้อมูล (Sharding) คือการกระจายภาระงาน แต่ถ้าคุณแบ่งไม่ดี งานทั้งหมดจะไปตกที่เซิร์ฟเวอร์เครื่องเดียว"* นี่คือฝันร้ายของ NoSQL ที่เรียกว่า **Hotspot ** แม้คุณจะมีเซิร์ฟเวอร์ 100 เครื่อง แต่ถ้าระบบพังเพราะเครื่องเดียวทำงานหนักเกินไป (Hot Partition) ระบบคุณก็คือล้มเหลว บทเรียนนี้จะสอนวิธีเลือก Sharding Key ให้รอดพ้นจากหายนะนี้
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณใช้ **Cassandra ** เก็บข้อมูล 📦 Followers ของ Twitter 
 > - คุณเลือกใช้`user_id` เป็น Partition Key เพื่อให้ข้อมูลของแต่ละ User แยกจากกัน
@@ -28,7 +29,7 @@ tags: [nosql, sharding, hotspots, cassandra, dynamodb, system-design]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -40,7 +41,7 @@ tags: [nosql, sharding, hotspots, cassandra, dynamodb, system-design]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. Hot Partition คืออะไร?
 คือสภาวะที่โหนดหนึ่งใน Cluster รับโหลด (Read/Write) หนักกว่าเพื่อนบ้านอย่างมหาศาล เนื่องจาก Sharding Key ที่เลือกดันเป็นข้อมูลยอดนิยม (Hot Key)
@@ -57,7 +58,7 @@ tags: [nosql, sharding, hotspots, cassandra, dynamodb, system-design]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### กรณีศึกษา: Discord's Data Service (Rust)
 Discord แก้ปัญหา Hot Partition ใน Cassandra โดยการสร้างเซอร์วิสในภาษา **Rust ** มาคั่นกลาง:
@@ -73,7 +74,7 @@ Discord แก้ปัญหา Hot Partition ใน Cassandra โดยกา�
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 "Cardinality" ต่ำ ส่งผลเสียต่อการทำ Sharding อย่างไร?
@@ -91,13 +92,13 @@ Discord แก้ปัญหา Hot Partition ใน Cassandra โดยกา�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในแอปของคุณ ใครคือ"ซูเปอร์สตาร์" หรือข้อมูลชุดไหนที่ถูกเข้าถึงบ่อยที่สุด? หากข้อมูลชิ้นนั้นทำให้เซิร์ฟเวอร์ตัวเดียวพัง คุณมีแผนรองรับอย่างไร? การออกแบบระบบให้ทนทานต่อ"ความดัง" (Viral Resistance) คือหน้าที่ของ Senior Engineer
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[01-sql-vs-nosql-tradeoffs|SQL vs NoSQL: พื้นฐานและการตัดสินใจเลือก]]
 - [[../Networking/04-cdn-edge-computing|CDN: การกระจายโหลดการอ่านในระดับ Global Edge]]

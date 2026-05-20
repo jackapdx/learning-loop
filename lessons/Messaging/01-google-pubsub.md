@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -10,13 +11,13 @@ prerequisites: []
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 Google Cloud Pub/Sub คือ Message Broker ระดับโลกที่ทรงพลังและไม่ต้องบริหารจัดการ (Serverless) แต่การเลือกใช้มันเพียงเพราะ"มันเป็นของ Google" คือกับดักที่พบบ่อยในการสัมภาษณ์ System Design วิศวกรระดับ Senior ต้องเข้าใจว่า **"จุดอ่อน"** ของมันคืออะไร และเมื่อไหร่ที่คุณควรหันไปใช้ **Internal Queue **(อย่าง pg-boss) หรือ **Memory Queue **(อย่าง BullMQ) แทน
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณกำลังออกแบบระบบ **High-Frequency Trading Platform ** ที่มีเงื่อนไขดังนี้:
 > 1. ต้องการ **Latency < 5ms ** ในการส่งคำสั่งซื้อขาย
@@ -33,7 +34,7 @@ Google Cloud Pub/Sub คือ Message Broker ระดับโลกที่�
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -45,7 +46,7 @@ Google Cloud Pub/Sub คือ Message Broker ระดับโลกที่�
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. ข้อจำกัดของ Pub/Sub (The Hard Truths)
 
@@ -64,7 +65,7 @@ Google Cloud Pub/Sub คือ Message Broker ระดับโลกที่�
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: การจัดการ Duplicates (Idempotency)
 
@@ -81,7 +82,7 @@ Pub/Sub รับประกันเพียง **"At-least-once Delivery"** 
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. หากต้องการทำระบบ"สรุปยอดขายรายปี" โดยการอ่านข้อมูลย้อนหลัง 12 เดือนจากคิว Pub/Sub สามารถทำได้หรือไม่?
@@ -97,13 +98,13 @@ Pub/Sub รับประกันเพียง **"At-least-once Delivery"** 
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭"เครื่องมือที่ดีที่สุด คือเครื่องมือที่คุณรู้ว่ามันจะพังตอนไหน" ในระบบปัจจุบันของคุณ มีจุดไหนที่คุณใช้ Pub/Sub เพียงเพราะ"มันง่าย" ทั้งที่จริงๆ แล้วต้องการความเร็ว (Latency) ที่สูงกว่านี้หรือไม่?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[02-streaming-vs-queuing|Streaming vs. Queuing: Kafka vs. RabbitMQ]]
 - [[../../05-idempotency|Idempotency: มาตรฐานการรับมือการรันงานซ้ำ]]

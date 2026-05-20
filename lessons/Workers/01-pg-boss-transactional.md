@@ -1,21 +1,26 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
-tags: [postgres, workers, pg-boss, system-design]
+tags:
+  - postgres
+  - workers
+  - pg-boss
+  - system-design
 ---
 
 # pg-boss: พลังของ Transactional Queue บน PostgreSQL
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 *"ทำไมต้องเอา Database ไปทำเป็นคิว ทั้งที่มันช้ากว่า Redis?"* คำตอบเดียวที่ Senior Engineer จะให้คุณคือ **"Transactional Integrity"** หากงานของคุณผิดพลาดไม่ได้แม้แต่รายการเดียว (เช่น การจ่ายเงิน หรือการยืนยันคำสั่งซื้อ) การใช้ **pg-boss ** คือการรับประกันว่า"ถ้าข้อมูลลง DB งานต้องเข้าคิว" บทเรียนนี้จะสอนให้คุณเห็นความแตกต่างระหว่างความเร็วและความชัวร์
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังทำระบบ **"สมัครสมาชิก (Register)"**
 > 1. บันทึกข้อมูลผู้ใช้ลงในตาราง`users`
@@ -33,7 +38,7 @@ tags: [postgres, workers, pg-boss, system-design]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -45,7 +50,7 @@ tags: [postgres, workers, pg-boss, system-design]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. Transactional Enqueue (ท่าไม้ตายของ pg-boss)
 หัวใจของ pg-boss คือการที่มันใช้ตารางใน Postgres เป็นคิว ทำให้เราสามารถใช้คำสั่ง SQL ร่วมกับงานอื่นๆ ได้:
@@ -67,7 +72,7 @@ Postgres ไม่ใช่คิวโดยธรรมชาติ แต่ 
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การดูแลรักษาในระดับ Production
 
@@ -84,7 +89,7 @@ ALTER TABLE pgboss.job SET (autovacuum_vacuum_scale_factor = 0.01);
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 อะไรคือข้อดีที่สุดของ pg-boss เมื่อเทียบกับ BullMQ (Redis)?
@@ -102,13 +107,13 @@ ALTER TABLE pgboss.job SET (autovacuum_vacuum_scale_factor = 0.01);
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในโปรเจกต์ของคุณ มีจุดไหนที่"การส่งใบเสร็จ" หรือ"การตัดสต็อก" ทำงานไม่ตรงกับข้อมูลในฐานข้อมูลไหม? การเลือกใช้เครื่องมือที่ให้ความสำคัญกับความถูกต้อง (Consistency ⛓️) มากกว่าความเร็ว (Performance) คือการตัดสินใจที่ Senior Engineer ต้องทำเพื่อความยั่งยืนของระบบ
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[02-bullmq-redis-performance|BullMQ: เมื่อความเร็วคือปัจจัยหลัก]]
 - [[../Postgres/05-vacuum-mvcc|เจาะลึกกลไก VACUUM และ MVCC ใน Postgres]]

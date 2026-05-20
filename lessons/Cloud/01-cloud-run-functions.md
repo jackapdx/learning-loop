@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [cloud, serverless, gcp, cloud-run]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในอดีตเรามี **Cloud Functions ** สำหรับงานเล็กๆ และ **Cloud Run ** สำหรับคอนเทนเนอร์ขนาดใหญ่ แต่ปัจจุบัน Google ได้รวมร่างพวกมันเข้าด้วยกันภายใต้ชื่อ **Cloud Run Functions (2nd Gen)** บทเรียนนี้จะสอนให้คุณเข้าใจว่า ภายใต้โครงสร้างเดียวกันนี้ คุณควรเลือกโครงสร้างโค้ดแบบไหน (Functions vs. Services) เพื่อให้ระบบของคุณประหยัดและสเกลได้ดีที่สุด
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณต้องสร้างระบบ **"ย่อรูปภาพโปรไฟล์"**
 > - เมื่อ User อัปโหลดรูปขึ้น Cloud Storage
@@ -30,7 +31,7 @@ tags: [cloud, serverless, gcp, cloud-run]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -63,7 +64,7 @@ Cloud Run functions (เดิมคือ Cloud Functions) ทำหน้า�
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: การรับมือกับ Cold Start
 ปัญหาใหญ่ของ Serverless คือ **Cold Start **(เวลาที่ใช้ในการ"ตื่น" เมื่อมี Request แรกหลังจาก Instance ดับไป)
@@ -77,7 +78,7 @@ Cloud Run functions (เดิมคือ Cloud Functions) ทำหน้า�
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 Cloud Run Functions (2nd Gen) รันอยู่บนเทคโนโลยีพื้นฐานอะไร?
@@ -95,13 +96,13 @@ Cloud Run Functions (2nd Gen) รันอยู่บนเทคโนโล�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในโปรเจกต์ของคุณ มีงานไหนที่คุณเขียน Web Server เต็มรูปแบบเพียงเพื่อจะรัน Logic เล็กๆ อย่างการส่งอีเมล หรือการ Update ข้อมูลใน Database 📦 ไหม? การลดความซับซ้อนลงมาเหลือแค่ฟังก์ชันเดียว อาจช่วยลดพื้นผิวในการเกิดบั๊กและความปลอดภัยได้มหาศาล
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[../Messaging/01-google-pubsub|การใช้ Pub/Sub เป็น Trigger ให้กับ Cloud Run Functions]]
 - [[../Networking/01-load-balancing-l4-l7|Load Balancing สำหรับ Cloud Run]]

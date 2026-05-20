@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: intermediate
 status: polished
@@ -10,11 +11,11 @@ prerequisites: [01-google-pubsub, 02-streaming-vs-queuing]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในระบบ Microservices หรือแม้แต่ Monolith ขนาดใหญ่ เมื่อ Component หนึ่งทำงานเสร็จและต้องแจ้งให้ Component อื่นทราบ (เช่น เมื่อมี Order ใหม่ ต้องแจ้งระบบคลังสินค้า ระบบขนส่ง และระบบอีเมล) การเรียกหากันตรงๆ (Direct Call) มักจะทำให้ระบบผูกติดกันเกินไป (Tight Coupling) หากระบบใดระบบหนึ่งพังหรือช้า จะส่งผลกระทบเป็นทอดๆ (Cascading Failure) การออกแบบการสื่อสารข้ามเซอร์วิสจึงเป็นความท้าทายหลักที่ต้องรักษาสมดุลระหว่างความเร็วของระบบและความน่าเชื่อถือ
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > **สถานการณ์:** คุณกำลังออกแบบระบบ E-commerce ที่มี Traffic สูง (5,000 orders/min) เมื่อลูกค้ากดสั่งซื้อ (Place Order) ระบบต้องทำ 4 อย่าง:
 > 1. ตัดสต็อก (Inventory)
@@ -36,7 +37,7 @@ prerequisites: [01-google-pubsub, 02-streaming-vs-queuing]
 >
 > **✋ หยุดตรงนี้ก่อน! ลองคิดดูว่าแต่ละวิธีมีข้อดีและข้อเสียอย่างไรในแง่ของ Latency และ Reliability เมื่อระบบมีขนาดใหญ่ขึ้น **
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -48,7 +49,7 @@ prerequisites: [01-google-pubsub, 02-streaming-vs-queuing]
 **ทำไมการให้เหตุผลแบบนี้สำคัญ?**
 การเลือกใช้ Event-Driven Architecture ไม่ใช่เพราะมันทันสมัย แต่เพราะในบริบทนี้เรายอมแลก ** ความสอดคล้องทันที (Immediate Consistency)** ในบางระบบ (เช่น Analytics, Email) เพื่อให้ได้มาซึ่ง ** ความทนทาน (Reliability)** และ ** ความเร็ว (Latency)** ในส่วนที่ผู้ใช้สัมผัสโดยตรง
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 Event Bus ทำหน้าที่เป็น **Message Broker ** ที่ยอมให้ผู้ส่ง (Publisher) กระจายข้อมูลออกไปโดยไม่ต้องสนใจว่าใครจะนำไปใช้ต่อ (Decoupling)
 
@@ -87,7 +88,7 @@ eventBus.subscribe('OrderCreated', async (event) => {
 > - [AWS Architecture Blog — What is an Event-Driven Architecture?](https://aws.amazon.com/event-driven-architecture/)
 > - [Martin Fowler — What do you mean by"Event-Driven"?](https://martinfowler.com/articles/201701-event-driven.html)
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ควรใช้ Event Bus เมื่อ...
 - ✅ ต้องการลด Latency ของ User-facing Action โดยย้ายงานที่ทำทีหลังได้ไปเป็น Background
@@ -103,7 +104,7 @@ eventBus.subscribe('OrderCreated', async (event) => {
 -**Observability:** ติดตามยากว่าคำสั่งซื้อนี้ไปติดค้างอยู่ที่ Service ไหน (มักต้องใช้ Distributed Tracing อย่าง Jaeger/OpenTelemetry)
 -**Idempotency:** ต้องเขียน Consumer ให้รองรับการทำงานซ้ำ เพราะในระบบกระจายตัวมีความเป็นไปได้ที่จะเกิด At-least-once delivery
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. ในสถานการณ์ที่ Payment Service ล่ม การใช้ Event Bus จะช่วยให้ Order Service ทำงานต่อไปได้อย่างไร?
@@ -117,11 +118,11 @@ eventBus.subscribe('OrderCreated', async (event) => {
 
 </details>
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > ในระบบที่คุณดูแลอยู่ มีจุดไหนที่ยังเรียกหากันแบบ Sync API ทั้งที่จริงแล้วเป็นงานที่สามารถรอได้ (Asynchronous) บ้างหรือไม่? และถ้าคุณจะเปลี่ยนมาใช้ Event Bus คุณพร้อมรับมือกับปัญหาเรื่อง การส่งข้อความซ้ำ (Duplication) และความล่าช้า (Lag) แล้วหรือยัง?
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 - [[01-google-pubsub|Google Cloud Pub/Sub]]
 - [[02-streaming-vs-queuing|Streaming vs Queuing]]
 - [[../Distributed/02-dual-write|Distributed/Dual Write Problem]]

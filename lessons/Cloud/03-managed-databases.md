@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [cloud, databases, gcp, cloud-sql, firestore, high-availability]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 *"การรัน PostgreSQL บน Virtual Machine (VM) คือการหาเรื่องใส่ตัว"* นี่คือคำกล่าวที่ Senior Engineer มักจะเตือนน้องๆ เพราะการดูแล Database ไม่ใช่แค่การรันมันขึ้นมา แต่คือการจัดการ **Backup, Patching, Replication, และ High Availability (HA)** ซึ่งเป็นงานที่น่าเบื่อและเสี่ยงสูง **Managed Databases ** จะทำสิ่งเหล่านี้ให้คุณโดยอัตโนมัติ เพื่อให้คุณไปโฟกัสที่การออกแบบ Schema และประสิทธิภาพของ Query แทน
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังออกแบบระบบ"Banking Application" ที่ต้องมีความแม่นยำสูง (ACID) และ"E-commerce Product Catalog" ที่ต้องการสเกลระดับโลก 
 > -**Banking:** ต้องการ Transaction ที่เป๊ะที่สุด ข้อมูลห้ามพังเด็ดขาด
@@ -29,7 +30,7 @@ tags: [cloud, databases, gcp, cloud-sql, firestore, high-availability]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -40,7 +41,7 @@ tags: [cloud, databases, gcp, cloud-sql, firestore, high-availability]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 💡 ใน Google Cloud (GCP) มี 3 ตัวเลือกหลักที่มือโปรต้องรู้จัก:
 
@@ -58,7 +59,7 @@ tags: [cloud, databases, gcp, cloud-sql, firestore, high-availability]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: การบริหารจัดการราคาและประสิทธิภาพ
 
@@ -76,7 +77,7 @@ tags: [cloud, databases, gcp, cloud-sql, firestore, high-availability]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 "High Availability" ใน Cloud SQL ทำงานอย่างไร?
@@ -94,13 +95,13 @@ GCP จะรัน **Standby Instance ** ไว้ในอีก Zone (พื�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 คุณยังจ่ายค่า Engineer ให้มานั่งทำ Backup DB และลง Patch Security ด้วยมืออยู่หรือไม่? ต้นทุนของ Managed Database 📦 อาจดูแพงกว่าการเช่าเครื่องเปล่า แต่"ค่าเสียโอกาส" และ"ค่าความเสี่ยง" เมื่อระบบล่มนั้นแพงกว่าหลายเท่าตัว
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[../Postgres/00-overview|เจาะลึก PostgreSQL แบบมือโปร]]
 - [[../NoSQL/01-sql-vs-nosql-tradeoffs|NoSQL Patterns: เมื่อไหร่ควรเปลี่ยนมาใช้]]

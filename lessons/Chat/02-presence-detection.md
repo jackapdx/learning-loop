@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -10,13 +11,13 @@ prerequisites: [Chat/01-websocket-realtime]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ฟีเจอร์"จุดสีเขียว" ที่บอกว่าใครออนไลน์อยู่บ้าง ดูเหมือนจะเป็นเรื่องง่ายๆ แค่เก็บสถานะ`is_online` ไว้ในฐานข้อมูล แต่เมื่อระบบต้องรองรับผู้ใช้หลักล้านคนและสถานะเปลี่ยนไปมาทุกวินาที การใช้ฐานข้อมูลแบบเดิมจะกลายเป็นคอขวดทันที บทเรียนนี้จะสอนวิธีใช้ **Redis ** และ **Heartbeat Mechanisms ** เพื่อสร้างระบบ Presence ที่รวดเร็วและแม่นยำระดับ Senior โดยคำนึงถึงเงื่อนไขที่"แอปไม่ได้บอกลา" เมื่อปิดตัวลง
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณกำลังออกแบบฟีเจอร์"Online Status" และ"Last Seen" ให้กับแอปแชทที่มีผู้ใช้ 10 ล้านคน โดยมีเงื่อนไขว่าเมื่อผู้ใช้เปิดแอปต้องขึ้น Online ทันที และเมื่อหายไปต้องแสดงเวลาล่าสุดที่ออนไลน์
 > 
@@ -31,7 +32,7 @@ prerequisites: [Chat/01-websocket-realtime]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -43,7 +44,7 @@ prerequisites: [Chat/01-websocket-realtime]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### กลยุทธ์สัญญาณชีพ (Heartbeat Mechanism)
 
@@ -61,7 +62,7 @@ prerequisites: [Chat/01-websocket-realtime]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การกระจายสถานะ (Presence Broadcasting)
 เมื่อนาย A ออนไลน์ เพื่อนๆ จะรู้ได้อย่างไร?
@@ -79,7 +80,7 @@ prerequisites: [Chat/01-websocket-realtime]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. ทำไมเราถึงควรตั้ง TTL ใน Redis ให้ยาวกว่าความถี่ของ Heartbeat (เช่น ส่งทุก 30 วิ แต่ TTL 60 วิ)?
@@ -95,13 +96,13 @@ prerequisites: [Chat/01-websocket-realtime]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองสังเกตแอปที่คุณใช้: มีจุดไหนที่คุณรู้สึกว่าสถานะ"Online" ไม่ตรงกับความเป็นจริงบ้างไหม? หลังจากเรียนบทนี้แล้ว คุณคิดว่าเกิดจาก Trade-off 🤝 หรือข้อจำกัดทางเทคนิคตรงจุดใด?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[01-websocket-realtime|WebSocket: ท่อส่งสัญญาณสำหรับ Heartbeat]]
 - [[04-push-notifications|การส่ง Push เมื่อสถานะ Presence กลายเป็น Offline]]

@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [distributed-systems, reliability, infrastructure]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 *"คุณจะเข้าบ้านได้อย่างไร ถ้ากุญแจบ้านถูกเก็บไว้ในตู้เซฟที่เปิดได้ด้วยรีโมทซึ่งต้องใช้ Wi-Fi ในบ้านเท่านั้น?"* นี่ไม่ใช่โจทย์ปริศนาธรรม แต่เป็นสิ่งที่เกิดขึ้นจริงกับบริษัทระดับโลกอย่าง **Meta (Facebook)** ในปี 2021 เมื่อระบบล่มจนวิศวกรเข้าออฟฟิศไม่ได้ และแก้ไขอะไรไม่ได้เพราะ"ทางแก้" ดันต้องพึ่งพา"ระบบที่พังอยู่" บทเรียนนี้จะสอนวิธีออกแบบระบบให้รอดพ้นจากวงจรประตูปิดตาย (Circular Dependency)
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังออกแบบระบบ"Self-healing Infrastructure 🏗️" ที่ใช้ AI 🧠 ตรวจจับบั๊กและ Restart เซอร์วิสอัตโนมัติ 
 > - เซอร์วิส **AI 🧠-Monitor ** ทำหน้าที่คอยสั่ง Restart เซอร์วิสอื่นๆ
@@ -28,7 +29,7 @@ tags: [distributed-systems, reliability, infrastructure]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -64,7 +65,7 @@ tags: [distributed-systems, reliability, infrastructure]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Out-of-band Management: ทางลับสำหรับ Engineer
 Senior Engineer จะไม่ยอมให้"ทางเข้าหลัก" เป็นทางเดียวที่เข้าถึงระบบได้:
@@ -79,7 +80,7 @@ Senior Engineer จะไม่ยอมให้"ทางเข้าหลั
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 ในเหตุการณ์ Meta อะไรคือจุดที่ทำให้วิศวกร"เข้าบ้านไม่ได้" (เข้า Data Center ไม่ได้)?
@@ -97,13 +98,13 @@ Senior Engineer จะไม่ยอมให้"ทางเข้าหลั
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในโปรเจกต์ของคุณตอนนี้ มีระบบไหนที่คุณ"เข้าไม่ถึง" ถ้า Domain Name (DNS) พังไหม? หรือถ้า Database 📦 ของคุณ Start ไม่ได้ คุณมีทางแก้ไขโดยไม่ต้องใช้ Tool ที่พึ่งพา Database 📦 นั้นหรือไม่? การออกแบบระบบที่กู้คืนได้ (Recoverable) สำคัญพอๆ กับการออกแบบระบบที่ไม่พัง
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[04-spof\|Single Point of Failure: จุดอ่อนเดียวที่ทำลายทั้งระบบ]]
 - [[../Postgres/06-connection-pooling-replicas\|การจัดการ Database ในสภาวะวิกฤต]]

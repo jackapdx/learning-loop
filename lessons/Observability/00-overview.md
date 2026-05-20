@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: overview
 level: senior
 status: polished
@@ -14,7 +15,7 @@ tags: [chat-exp, system-design, observability, sre, monitoring]
 >
 > Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
 
-## แผนผังการเรียนรู้ (Roadmap)
+## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: The Strategy (What to measure?) → #1
 [[01-monitoring-levels|Levels of Monitoring]] — เข้าใจ Golden Signals, RED และ USE Methods เพื่อเลือก Metrics ที่ถูกต้อง
@@ -22,7 +23,7 @@ tags: [chat-exp, system-design, observability, sre, monitoring]
 ### Path B: The Tools (How to measure?) → #2
 [[02-lgtm-stack|The LGTM Stack]] — เจาะลึกการทำงานร่วมกันของ Grafana, Prometheus, Loki และ Tempo
 
-## รายชื่อบทเรียนทั้งหมด (Lesson List)
+## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)
 
 | # | บทเรียน | คำถามสัมภาษณ์ |
 |---|---|---|

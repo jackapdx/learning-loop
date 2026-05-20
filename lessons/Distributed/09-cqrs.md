@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -10,11 +11,11 @@ prerequisites: [02-dual-write, 07-stateless-vs-stateful]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในระบบส่วนใหญ่ เรามักใช้ Data Model เดียวในการทั้งเขียน (Create/Update/Delete) และอ่าน (Read) ข้อมูล แต่เมื่อระบบซับซ้อนขึ้นและมีขนาดใหญ่ ความต้องการในการ"เขียน" ที่มักเน้นความถูกต้องและทำธุรกรรมได้สมบูรณ์ (Transactional Integrity) กับการ"อ่าน" ที่มักเน้นความเร็วและการค้นหาที่ซับซ้อน จะเริ่มขัดแย้งกันเอง การพยายามใช้ฐานข้อมูลหรือโมเดลเดียวเพื่อตอบโจทย์ทั้งสองฝั่ง มักจะนำไปสู่คอขวดด้านประสิทธิภาพหรือโค้ดที่ดูแลรักษาได้ยาก
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > **สถานการณ์:** คุณกำลังสร้างระบบ Social Media ขนาดใหญ่ที่มีผู้ใช้หลายล้านคน:
 > -** ฝั่งเขียน (Write):** เมื่อมีคนโพสต์ ต้องตรวจสอบสิทธิ์, กรองคำหยาบ, บันทึกลงฐานข้อมูลเชิงสัมพันธ์ (Relational DB) เพื่อความถูกต้อง
@@ -34,7 +35,7 @@ prerequisites: [02-dual-write, 07-stateless-vs-stateful]
 >
 > **✋ หยุดตรงนี้ก่อน! ลองนึกถึงผลกระทบของการเพิ่ม Index ต่อความเร็วในการเขียน และความซับซ้อนของการใช้ JOIN ใน Database หลัก **
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -85,7 +86,7 @@ async function getFeed(userId) {
 > - [Martin Fowler — CQRS](https://martinfowler.com/bliki/CQRS.html)
 > - [Microsoft Azure Architecture Center — CQRS pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs)
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ควรใช้ CQRS เมื่อ...
 - ✅ ความต้องการในการอ่านและเขียนแตกต่างกันอย่างสิ้นเชิง (เช่น ฝั่งเขียนเป็น Transaction ทางการเงิน แต่ฝั่งอ่านเป็น Analytics Dashboard)
@@ -101,7 +102,7 @@ async function getFeed(userId) {
 -**Maintenance Cost:** ต้องเขียนโค้ดเพื่อซิงค์ข้อมูล (Event Handlers) และมีภาระในการดูแล Database เพิ่มขึ้นอย่างน้อย 1 ประเภท
 -**Eventual Consistency Issues:** หากเกิดบั๊กในการซิงค์ ข้อมูลสองฝั่งจะไม่ตรงกัน ต้องมีเครื่องมือ/สคริปต์สำหรับซ่อมแซมข้อมูล (Data Reconciliation)
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. ทำไมการทำ"Denormalization" ในฝั่ง Query ของ CQRS ถึงช่วยลด Latency ได้?
@@ -115,11 +116,11 @@ async function getFeed(userId) {
 
 </details>
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > ในฐานข้อมูลที่คุณใช้งานอยู่ มีตารางไหนที่มี Index มากเกินไปจนการเขียนเริ่มช้าบ้างหรือไม่? ถ้าระบบนั้นสามารถยอมรับความล่าช้าในการแสดงผลได้สัก 5 วินาที การแยกตารางค้นหาออกมาต่างหากจะช่วยลดภาระได้แค่ไหน?
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 - [[../Messaging/03-event-bus|Messaging/Event Bus]]
 - [[02-dual-write|Distributed/Dual Write Problem]]
 - [[../Postgres/05-vacuum-mvcc|Postgres/MVCC]]

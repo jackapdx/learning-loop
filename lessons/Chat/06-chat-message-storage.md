@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -10,13 +11,13 @@ prerequisites: [Chat/03-message-ordering-delivery]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในระบบแชท ข้อมูลข้อความเป็นสิ่งที่เพิ่มขึ้นมหาศาลอย่างรวดเร็ว (WhatsApp มีข้อความไหลผ่านกว่า 1 แสนล้านข้อความต่อวัน) การใช้คำสั่ง SQL พื้นฐานเพื่อดึงข้อมูลจะกลายเป็นหายนะเมื่อฐานข้อมูลของคุณโตขึ้น บทเรียนนี้จะสอนกลยุทธ์การจัดเก็บข้อมูลแบบ **Hot/Warm/Cold **, การทำ **Time-based Partitioning ** และทำไม **Cursor-based Pagination ** ถึงเป็นฮีโร่ที่มาแทนที่ OFFSET
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณมีตาราง`messages` ที่มีข้อมูล 1 พันล้านแถว ผู้ใช้ต้องการ"เลื่อนดูข้อความเก่า" เมื่อ 2 เดือนที่แล้ว
 >
@@ -28,7 +29,7 @@ prerequisites: [Chat/03-message-ordering-delivery]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -70,7 +71,7 @@ Database 📦 จะใช้ความสามารถของ B-Tree Inde
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การจัดการไฟล์แนบ (Media Storage Strategy)
 ห้ามเก็บรูปภาพหรือวิดีโอ (Binary Data) ลงใน Database 📦 โดยตรงเด็ดขาด!
@@ -85,7 +86,7 @@ Database 📦 จะใช้ความสามารถของ B-Tree Inde
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. ทำไม OFFSET 1,000,000 ถึงทำให้ Database 📦 ทำงานหนัก?
@@ -103,13 +104,13 @@ Database 📦 จะใช้ความสามารถของ B-Tree Inde
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองนึกถึงวันที่คุณต้องดูแลฐานข้อมูลที่มีข้อความไหลเข้าวันละล้านแถว หากวันนี้คุณยังออกแบบด้วย OFFSET อยู่ คุณจะรับมือกับบิลค่าใช้จ่าย Cloud และเสียงบ่นจากผู้ใช้ที่โหลดข้อมูลช้าได้อย่างไร? การตัดสินใจเลือก Pagination Style ในวันนี้ คือการกำหนดอนาคตของระบบในอีก 1 ปีข้างหน้า
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[../Postgres/01-table-partitioning|เจาะลึกการทำ Table Partitioning ใน PostgreSQL]]
 - [[../04-database-sharding|เมื่อฐานข้อมูลใหญ่เกิน 1 เครื่อง: การทำ Sharding]]

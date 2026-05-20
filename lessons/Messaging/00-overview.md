@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: overview
 level: senior
 status: polished
@@ -14,7 +15,7 @@ tags: [chat-exp, system-design, messaging, pubsub]
 >
 > Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
 
-## แผนผังการเรียนรู้ (Roadmap)
+## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: Managed Cloud Messaging → #1
 [[01-google-pubsub|Google Cloud Pub/Sub]] — พลังของ Serverless Messaging และขีดจำกัดที่คุณต้องระวัง
@@ -25,7 +26,7 @@ tags: [chat-exp, system-design, messaging, pubsub]
 ### Path C: Event-Driven Design → #3
 [[03-event-bus|Event Bus]] — ลดความผูกมัด (Decoupling) เพื่อเพิ่มความทนทานและความเร็ว
 
-## รายชื่อบทเรียนทั้งหมด (Lesson List)
+## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)
 
 | # | บทเรียน | คำถามสัมภาษณ์ |
 |---|---|---|

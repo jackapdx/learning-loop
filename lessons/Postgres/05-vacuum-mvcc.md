@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 คุณเคยสงสัยไหมว่าทำไม PostgreSQL ถึงสามารถให้ผู้ใช้คนหนึ่ง"อ่าน" ข้อมูลในขณะที่ผู้ใช้คนอื่นกำลัง"เขียน" ข้อมูลตัวเดียวกันได้โดยไม่ต้องรอ? คำตอบคือ **MVCC (Multi-Version Concurrency Control)**
 
@@ -17,7 +18,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณมีตาราง`orders` ที่มีการ UPDATE สถานะวันละ 1 ล้านครั้ง ทุกเช้าคุณสังเกตว่าตารางนี้กินพื้นที่เพิ่มขึ้นเรื่อยๆ ทั้งที่จำนวนแถว (Rows) ยังเท่าเดิม ประสิทธิภาพการสแกนตาราง (Seq Scan) ก็ช้าลงเรื่อยๆ
 >
@@ -27,7 +28,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | สิ่งที่คุณอาจคิด | การวิเคราะห์ (Senior Perspective) |
 |---|---|
@@ -61,7 +62,7 @@ PostgreSQL ใช้ระบบ Snapshot เพื่อให้แต่ล�
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การตั้งค่า Auto-VACUUM ให้ทำงานดุดันขึ้น (Tuning)
 ในระบบที่มีการเขียนข้อมูลสูง (High Write Load) ค่า Default ของ Auto-VACUUM มักจะช้าเกินไปจนทำความสะอาดไม่ทัน
@@ -87,7 +88,7 @@ SELECT * FROM pgstattuple('orders');
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯 **Quick Check:**
 MVCC ย่อมาจากอะไร และประโยชน์สูงสุดของมันคืออะไร?
@@ -105,13 +106,13 @@ MVCC ย่อมาจากอะไร และประโยชน์ส�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองรันคำสั่งเช็ค`age(relfrozenxid)` ในฐานข้อมูล Production ของคุณดูสิ — มีตารางไหนที่เข้าใกล้เลข 1 พันล้านหรือยัง? หากมี นั่นคือระเบิดเวลาที่รอวัน Shutdown ระบบของคุณอยู่!
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[09-locking-concurrency\|Locking & Concurrency — เข้าใจว่า MVCC ทำงานร่วมกับ Lock อย่างไร]]
 - [[01-table-partitioning\|Table Partitioning — วิธีแก้ปัญหา Bloat ด้วยการ DROP ตารางย่อยทิ้งแทนการ DELETE]]

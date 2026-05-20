@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: overview
 level: senior
 status: polished
@@ -14,7 +15,7 @@ tags: [chat-exp, system-design, cloud, gcp, serverless]
 
 Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
 
-## แผนผังการเรียนรู้ (Roadmap)
+## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: Serverless Computing & Storage → #1, 2
 [[01-cloud-run-functions|Cloud Run Functions]] (Compute) + [[02-cloud-storage|Cloud Storage]] (Object Store) — รันโค้ดและเก็บไฟล์อย่างไรให้สเกลได้
@@ -23,7 +24,7 @@ Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
 [[03-managed-databases|Managed Databases]] — ลดภาระการดูแล DB ด้วย Cloud SQL/Firestore
 [[04-iam-security|IAM Security]] — ปกป้องระบบด้วยการจัดการสิทธิ์ที่เข้มงวดที่สุด
 
-## รายชื่อบทเรียนทั้งหมด (Lesson List)
+## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)
 
 | # | บทเรียน | คำถามสัมภาษณ์ |
 |---|---|---|

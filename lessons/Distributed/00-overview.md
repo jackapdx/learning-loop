@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: overview
 level: senior
 status: polished
@@ -14,7 +15,7 @@ tags: [chat-exp, system-design, distributed]
 
 Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
 
-## แผนผังการเรียนรู้ (Roadmap)
+## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: Resilience & Scalability → #1, 4, 7, 10, 11
 [[01-self-recovery|Self-Recovery]] (Circuit Breaker) + [[04-spof|Single Point of Failure]] + [[07-stateless-vs-stateful|Stateless vs Stateful]] + [[10-distributed-id-generation|Distributed ID Generation]] + [[11-distributed-rate-limiting|Distributed Rate Limiting]] — ทำให้ระบบไม่พังและ Scale ได้แบบ Horizontal โดยไม่มีคอขวดที่ ID และป้องกันการโดนถล่มด้วย Request
@@ -25,7 +26,7 @@ Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
 ### Path C: Infrastructure Reliability → #5, 6, 8
 [[05-circular-dependencies|Circular Dependencies]] + [[06-blast-radius-guardrails|Blast Radius & Guardrails]] + [[08-multi-tenant|Multi-Tenant Architecture]] — ออกแบบโครงสร้างพื้นฐานให้ทนทานและรองรับลูกค้าหลายรายอย่างปลอดภัย
 
-## รายชื่อบทเรียนทั้งหมด (Lesson List)
+## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)
 
 | # | บทเรียน | คำถามสัมภาษณ์ |
 |---|---|---|

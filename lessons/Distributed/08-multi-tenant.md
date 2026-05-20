@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [chat-exp, system-design, distributed-systems, saas, architecture]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 "SaaS" (Software as a Service) คือเป้าหมายของบริษัทซอฟต์แวร์ยุคใหม่ แต่การเปลี่ยนจากระบบที่รันให้ลูกค้าคนเดียว (Single Tenant) ไปเป็นระบบที่รองรับลูกค้าหมื่นราย (Multi-Tenant) บนโครงสร้างพื้นฐานเดียวกันนั้นไม่ใช่เรื่องง่าย บทเรียนนี้จะพาคุณไปดูวิธีการจัดการความปลอดภัย ความเป็นส่วนตัวของข้อมูล และปัญหา"เพื่อนบ้านเสียงดัง" (Noisy Neighbor) ที่อาจทำให้ระบบล่มทั้งแผงได้
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > **สถานการณ์:** คุณเป็น Lead Engineer ของระบบ CRM แบบ SaaS ปัจจุบันมีลูกค้า 500 ราย ข้อมูลทั้งหมดถูกเก็บอยู่ใน **ฐานข้อมูลตัวเดียวกัน** และใช้คอลัมน์ `tenant_id` ในการแยกข้อมูล ปัญหาเกิดขึ้นเมื่อ **ลูกค้า A** (บริษัทใหญ่) รัน Report มหาศาลจนฐานข้อมูล CPU พุ่งไปที่ 100% ทำให้ **ลูกค้า B, C, D** (บริษัทเล็กๆ) เข้าใช้งานระบบไม่ได้เลย
 >
@@ -28,7 +29,7 @@ tags: [chat-exp, system-design, distributed-systems, saas, architecture]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -40,7 +41,7 @@ tags: [chat-exp, system-design, distributed-systems, saas, architecture]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 การออกแบบระบบ Multi-tenant คือการสร้างสมดุลระหว่าง"ประสิทธิภาพของทรัพยากร" (Resource Efficiency) และ"การแยกส่วนข้อมูล" (Data Isolation) [source: AWS Whitepaper — SaaS Storage Strategies]
 
@@ -69,7 +70,7 @@ tags: [chat-exp, system-design, distributed-systems, saas, architecture]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Row-Level Security (RLS) ใน PostgreSQL
 หากคุณเลือกแบบ **Pool** (Shared Table) คุณควรใช้ RLS เพื่อป้องกันมนุษย์ (Dev) เขียน Query ลืม `WHERE tenant_id = ...`:
@@ -90,7 +91,7 @@ USING (tenant_id = current_setting('app.current_tenant_id')::UUID);
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 **Quick Check:**
 
@@ -109,13 +110,13 @@ USING (tenant_id = current_setting('app.current_tenant_id')::UUID);
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > "Multi-tenancy is a spectrum, not a binary choice." — ระบบของคุณตอนนี้เอียงไปทาง"ความประหยัด" หรือ"ความปลอดภัย"? และถ้ามีลูกค้ายักษ์ใหญ่เข้ามาในวันพรุ่งนี้ สถาปัตยกรรมของคุณจะรับมือไหวไหม?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[../04-database-sharding|Database Sharding: เมื่อ Multi-tenant เริ่มใหญ่เกินหนึ่งเครื่อง]]
 - [[../Postgres/11-transactions-isolation|Transaction Isolation: ความลับของความปลอดภัยใน DB]]

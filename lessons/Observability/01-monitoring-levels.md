@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [observability, sre, monitoring, metrics]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 *"คุณมี Dashboard เป็นร้อยอัน แต่ทำไมเวลาระบบล่ม คุณกลับหาต้นเหตุไม่เจอ?"* นี่คือปัญหาของ"การวัดทุกอย่างแต่ไม่รู้อะไรเลย" (Metric Bloat) วิศวกรระดับ Senior จะไม่เสียเวลาสร้างกราฟที่ไม่ได้บอกสุขภาพของระบบ บทเรียนนี้จะสอน 3 กรอบแนวคิด (Frameworks) มาตรฐานโลกที่จะช่วยให้คุณเลือกวัดสิ่งที่"สำคัญ" จริงๆ
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ **สถานการณ์:** คุณเป็น SRE ที่ดูแลระบบ **Microservices ** ขนาดใหญ่ 
 > - ผู้ใช้เริ่มบ่นว่า"แอปช้า" (Slowness)
@@ -31,7 +32,7 @@ tags: [observability, sre, monitoring, metrics]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -43,7 +44,7 @@ tags: [observability, sre, monitoring, metrics]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 💡 ในโลก SRE มี 3 แนวทางหลักในการเลือก Metrics:
 
@@ -68,7 +69,7 @@ tags: [observability, sre, monitoring, metrics]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: การวัด Saturation ที่มองไม่เห็น
 Saturation คือจุดที่แยกมือโปรออกจากมือสมัครเล่น:
@@ -84,7 +85,7 @@ Saturation คือจุดที่แยกมือโปรออกจา
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 "P99 Latency" คืออะไร และทำไมถึงสำคัญกว่า"Average Latency"?
@@ -102,13 +103,13 @@ RED Method ย่อมาจากอะไรบ้าง?
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในระบบที่คุณดูแลอยู่ตอนนี้ คุณมี Alert ที่บอกเรื่อง **Saturation ** บ้างไหม? หรือคุณจะรู้ว่าระบบเต็มก็ต่อเมื่อ CPU มันแตะ 100% ไปแล้ว? การวัด Saturation คือการรู้ล่วงหน้าว่า"พายุล่มกำลังจะมา" ก่อนที่มันจะมาถึงจริงๆ
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[02-lgtm-stack|The LGTM Stack: เครื่องมือสำหรับเก็บ Metrics เหล่านี้]]
 - [[../Distributed/01-self-recovery|Self-Recovery: การแก้ปัญหาอัตโนมัติจาก Metrics]]

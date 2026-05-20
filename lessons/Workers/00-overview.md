@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: overview
 level: senior
 status: polished
@@ -14,7 +15,7 @@ tags: [chat-exp, system-design, workers, queues]
 >
 > Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
 
-## แผนผังการเรียนรู้ (Roadmap)
+## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: Transactional Integrity → #1
 [[01-pg-boss-transactional|pg-boss (PostgreSQL)]] — เมื่อความถูกต้องของข้อมูล (Atomicity) สำคัญที่สุด
@@ -22,7 +23,7 @@ tags: [chat-exp, system-design, workers, queues]
 ### Path B: High Performance → #2
 [[02-bullmq-redis-performance|BullMQ (Redis)]] — เมื่อความเร็ว (Throughput) และความซับซ้อนของคิวคือหัวใจ
 
-## รายชื่อบทเรียนทั้งหมด (Lesson List)
+## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)
 
 | # | บทเรียน | คำถามสัมภาษณ์ |
 |---|---|---|

@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: overview
 level: senior
 status: polished
@@ -14,7 +15,7 @@ tags: [chat-exp, system-design, nosql, databases]
 >
 > Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
 
-## แผนผังการเรียนรู้ (Roadmap)
+## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: Scaling Strategy → #1, 2, 5
 [[01-sql-vs-nosql-tradeoffs|SQL vs NoSQL]] + [[02-nosql-hotspots-sharding|Hotspots & Sharding]] + [[05-oltp-vs-olap|OLTP vs OLAP]] — เมื่อไหร่ควรเปลี่ยน และจะเลือกใช้ฐานข้อมูลประเภทไหนให้ถูกงาน
@@ -22,7 +23,7 @@ tags: [chat-exp, system-design, nosql, databases]
 ### Path B: Concurrency & Integrity → #3, 4
 [[03-nosql-locking-concurrency|Locking & Concurrency]] + [[04-eventual-consistency|Eventual Consistency]] — เจาะลึกกลไกภายในที่ทำให้ระบบช้าลงโดยไม่รู้ตัว
 
-## รายชื่อบทเรียนทั้งหมด (Lesson List)
+## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)
 
 | # | บทเรียน | คำถามสัมภาษณ์ |
 |---|---|---|

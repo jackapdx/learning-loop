@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: overview
 level: senior
 status: polished
@@ -12,7 +13,7 @@ tags: [testing, api-testing, service-virtualization, mountebank, load-testing, p
 >
 > Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
 
-## แผนผังการเรียนรู้ (Roadmap)
+## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ### Path A: API Testing & Service Virtualization → #1
 [[01-api-testing-mountebank|API Testing with Mountebank]] — จำลอง API ของ Third-Party และ Dependency เพื่อทดสอบระบบของคุณแบบแยกส่วน โดยไม่ต้องรอให้ Dependency พร้อม
@@ -29,7 +30,7 @@ graph TD
   T02 -.-> N01[Networking/01-load-balancing-l4-l7]
 ```
 
-## รายชื่อบทเรียนทั้งหมด (Lesson List)
+## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)
 
 | # | บทเรียน | คำถามสัมภาษณ์ |
 |---|---|---|

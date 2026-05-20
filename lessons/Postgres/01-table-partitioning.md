@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 **Table Partitioning ** คือการแบ่งตารางขนาดใหญ่ (Large Table) ออกเป็นตารางย่อยๆ (Partitions) ตามเกณฑ์ที่กำหนด (เช่น วันที่, หมวดหมู่, หรือรหัส) โดยที่ Application ยังคงมองเห็นเป็นตารางเดียว
 
@@ -17,7 +18,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณมีตาราง`events` เก็บ Log การใช้งานระบบ มีข้อมูลทั้งหมด 2,000 ล้านแถว และมีข้อมูลใหม่เพิ่มขึ้นวันละ 10 ล้านแถว โจทย์ของคุณคือ:
 > 1. ต้อง Query ข้อมูล 7 วันล่าสุดให้เร็วที่สุด
@@ -29,7 +30,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | สิ่งที่คุณอาจคิด | การวิเคราะห์ (Senior Perspective) |
 |---|---|
@@ -97,7 +98,7 @@ SELECT * FROM orders WHERE created_at >= '2026-05-15';
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Sub-partitioning: การแบ่งย่อยสองชั้น
 คุณสามารถทำ Partition ซ้อน Partition ได้ เช่น แบ่งตาม"เดือน" ก่อน แล้วข้างในเดือนแบ่งตาม"ภูมิภาค" (Region) เพื่อให้การ Query เฉพาะเจาะจงมากขึ้น
@@ -116,7 +117,7 @@ SELECT * FROM orders WHERE created_at >= '2026-05-15';
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:** หากคุณต้องเก็บข้อมูลตำแหน่งรถขนส่ง (GPS Logs) วันละ 100 ล้านจุด และต้องเก็บย้อนหลัง 30 วัน
 ควรเลือก Partitioning ประเภทไหน?
@@ -134,13 +135,13 @@ SELECT * FROM orders WHERE created_at >= '2026-05-15';
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 กลับไปสำรวจฐานข้อมูลของคุณตอนนี้ — ตารางไหนที่"ใหญ่และบวม" ที่สุด? หากคุณเปลี่ยนมันเป็น Partitioned Table ในวันนี้ คุณจะประหยัดเวลาในการ Maintenance ไปได้มหาศาลแค่ไหน?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[02-index-types\|Index Types — การเลือกดัชนีให้เหมาะกับตารางย่อย]]
 - [[10-explain-analyze\|EXPLAIN ANALYZE — วิธีตรวจสอบว่า Partition Pruning ทำงานจริงไหม]]

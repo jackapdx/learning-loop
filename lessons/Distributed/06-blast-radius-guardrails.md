@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [distributed-systems, devops, reliability]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 *"การลบข้อมูล 5 เครื่อง กับการลบข้อมูล 5,000 เครื่อง ใช้เวลาในคำสั่ง (Enter) เท่ากัน"* นี่คือความน่ากลัวของระบบอัตโนมัติ (Automation) ในยุค Cloud หากคุณไม่มีการจำกัด **Blast Radius **(รัศมีทำลายล้าง) ความผิดพลาดเพียงเล็กน้อยของวิศวกรคนเดียว อาจทำให้บริษัทระดับโลกล่มไปทั้งภูมิภาคเหมือนเหตุการณ์ AWS S3 ในปี 2017 บทเรียนนี้จะสอนวิธี"สร้างกรง" ขังความผิดพลาดไม่ให้ลุกลาม
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณต้องอัปเดต Configuration ของระบบ Database 📦 ทั้งหมด 100 Cluster ทั่วโลกเพื่อเพิ่มประสิทธิภาพ วิศวกรในทีมเขียน Script เสร็จแล้วและทดสอบใน Staging ผ่านฉลุย 
 >
@@ -27,7 +28,7 @@ tags: [distributed-systems, devops, reliability]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -56,7 +57,7 @@ tags: [distributed-systems, devops, reliability]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Automation Guardrails: รั้วกั้นมนุษย์
 อย่าพึ่งพาแค่สติของวิศวกร ให้พึ่งพาระบบ:
@@ -74,7 +75,7 @@ tags: [distributed-systems, devops, reliability]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 การแบ่งระบบเป็น"Cells" ช่วยลด Blast Radius ได้อย่างไร?
@@ -92,13 +93,13 @@ tags: [distributed-systems, devops, reliability]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในงานของคุณตอนนี้ มีจุดไหนที่คุณสามารถ"Enter ครั้งเดียวแล้วพังทั้งบริษัท" ได้ไหม? ถ้ามี นั่นคือจุดที่คุณต้องสร้าง Guardrail หรือแบ่ง Cell เพิ่มขึ้น ความเก่งของวิศวกรไม่ได้วัดที่ว่าเขาไม่เคยพลาด แต่วัดที่ว่า"เมื่อเขาพลาดแล้ว ผลกระทบมันเล็กแค่ไหน"
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[01-self-recovery\|การออกแบบระบบให้กู้คืนตัวเองได้]]
 - [[../Postgres/01-table-partitioning\|Partitioning: การจำกัด Blast Radius ในระดับ Database]]

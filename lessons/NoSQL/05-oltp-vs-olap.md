@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [chat-exp, system-design, database, nosql, big-data]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 "ทำไมแค่รัน Report ยอดขายย้อนหลัง 1 ปี ถึงทำให้เว็บล่ม?" นี่คือคำถามคลาสสิกที่วิศวกรมือใหม่มักเจอ เมื่อพยายามใช้ฐานข้อมูลตัวเดียวทำทุกอย่างในระบบ บทเรียนนี้จะสอนให้คุณเข้าใจความแตกต่างระหว่างงานแบบ **Transactional (เน้นความเร็วรายบรรทัด)** และ **Analytical (เน้นการประมวลผลข้อมูลมหาศาล)** ซึ่งเป็นกุญแจสำคัญในการออกแบบ Data Architecture ระดับโลก
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณมีฐานข้อมูล 📦 PostgreSQL ที่เก็บข้อมูลการสั่งซื้อ (Orders) จำนวน **1 พันล้านแถว **(1 Billion rows)
 > 1. **งาน A:** ลูกค้ากดสั่งซื้อสินค้า และระบบต้องบันทึก 1 Order ใหม่ลงไปทันที
@@ -27,7 +28,7 @@ tags: [chat-exp, system-design, database, nosql, big-data]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -39,7 +40,7 @@ tags: [chat-exp, system-design, database, nosql, big-data]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. OLTP (Online Transactional Processing)
 คือระบบที่ออกแบบมาเพื่อ **"จัดการธุรกรรม"** ในชีวิตประจำวัน
@@ -65,7 +66,7 @@ tags: [chat-exp, system-design, database, nosql, big-data]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ทำไม Columnar Storage ถึงเร็วกว่าในงาน Analytics?
 ใน OLTP (Row-oriented) ถ้าคุณต้องการแค่`SUM(price)` DB ต้องอ่านข้อมูล"ทุกคอลัมน์" (ชื่อ, ที่อยู่, วันที่) ขึ้นมา Memory ก่อนจะทิ้งคอลัมน์ที่ไม่ใช้ออกไป
@@ -81,7 +82,7 @@ tags: [chat-exp, system-design, database, nosql, big-data]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 หากต้องการทำระบบ"ประวัติการแชทย้อนหลัง" ของแอป Messaging ควรใช้ DB ประเภทไหน?
@@ -99,13 +100,13 @@ Column-oriented Storage มีประโยชน์สูงสุดใน�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭"Don't use a hammer when you need a saw." — ระบบที่คุณดูแลอยู่ตอนนี้ กำลังโดน Report หนักๆ ดึงขาจนวิ่งไม่ออกอยู่หรือเปล่า? การแยกฐานข้อมูลสำหรับวิเคราะห์ข้อมูล (Analytical DB) อาจเป็นการลงทุนที่คุ้มค่าที่สุดในปีนี้
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[01-sql-vs-nosql-tradeoffs|SQL vs NoSQL: พื้นฐานการเลือกฐานข้อมูล]]
 - [[../Postgres/02-index-types|Index Types: กุญแจสู่ความเร็วใน OLTP]]

@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [cloud, security 🛡️, iam, gcp, compliance]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 *"ในระบบ Cloud ความผิดพลาดที่ร้ายแรงที่สุดไม่ใช่การเขียนโค้ดบั๊ก แต่คือการเปิดสิทธิ์ทิ้งไว้กว้างเกินไป"* เพียงแค่กุญแจ (API Key) ชุดเดียวหลุดออกไปสู่สาธารณะ บริษัทของคุณอาจพังพินาศได้ในพริบตา **IAM (Identity and Access Management)** ไม่ใช่แค่เรื่องของการใส่ Password แต่คือศิลปะของการจัดการ"ใคร" ทำ"อะไร" ได้ที่"ไหน" บทเรียนนี้จะสอนวิธีใช้หลักการ **Least Privilege ** เพื่อปกป้องระบบของคุณจากภายในสู่ภายนอก
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังสร้าง Microservice ชื่อ **"Log-Processor"**
 > - หน้าที่ของมันคือการดึงไฟล์จาก Cloud Storage มาประมวลผล แล้วเขียนสรุปลงใน BigQuery
@@ -27,7 +28,7 @@ tags: [cloud, security 🛡️, iam, gcp, compliance]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -39,7 +40,7 @@ tags: [cloud, security 🛡️, iam, gcp, compliance]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. Principle of Least Privilege (PoLP)
 หัวใจของความปลอดภัยคือการ **"ให้สิทธิ์น้อยที่สุดเท่าที่จำเป็น"**:
@@ -57,7 +58,7 @@ tags: [cloud, security 🛡️, iam, gcp, compliance]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: การลดพื้นผิวการโจมตี (Attack Surface)
 
@@ -75,7 +76,7 @@ tags: [cloud, security 🛡️, iam, gcp, compliance]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 "Service Account" ต่างจาก"User Account" อย่างไร?
@@ -93,13 +94,13 @@ tags: [cloud, security 🛡️, iam, gcp, compliance]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในทีมของคุณ ปัจจุบันมีใครที่มีสิทธิ์"Owner" บ้าง? และพวกเขามีความจำเป็นต้องใช้สิทธิ์นั้นจริงๆ หรือไม่? การทำความสะอาดสิทธิ์ (IAM Cleanup) คือหนึ่งในงานที่คุ้มค่าที่สุดในการทำ SRE เพื่อลดความเสี่ยงที่ประเมินค่าไม่ได้
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[01-cloud-run-functions|การตั้งค่าสิทธิ์ให้ Cloud Run Functions รันอย่างปลอดภัย]]
 - [[../Distributed/04-spof|IAM เป็น Single Point of Failure ได้อย่างไร?]]

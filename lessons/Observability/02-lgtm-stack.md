@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [observability, grafana, prometheus, loki, tempo, lgtm]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในระบบ Distributed Systems เมื่อเกิดปัญหา คุณมักจะเริ่มจากคำถาม: *"มันเกิดอะไรขึ้น?"* (Metrics), *"มันเกิดที่ไหน?"* (Logs) และ *"ทำไมมันถึงเกิด?"* (Traces) หากเครื่องมือทั้ง 3 อย่างนี้แยกจากกัน คุณจะเสียเวลา"กระโดดข้ามหน้าจอ" จนสายเกินแก้ บทเรียนนี้จะพาไปรู้จักกับ **LGTM Stack ** มาตรฐานใหม่ที่ทำให้ทั้ง 3 เสาหลักของ Observability คุยภาษาเดียวกัน
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** ระบบ Checkout ของคุณเกิด Error พุ่งสูงขึ้น (Spike) ใน Grafana 
 > - คุณเห็นกราฟสีแดงใน **Prometheus **(Metrics)
@@ -30,7 +31,7 @@ tags: [observability, grafana, prometheus, loki, tempo, lgtm]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -42,7 +43,7 @@ tags: [observability, grafana, prometheus, loki, tempo, lgtm]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 💡**LGTM Stack ** คือการรวมตัวของ 4 เครื่องมือจาก Grafana Labs:
 
@@ -64,7 +65,7 @@ tags: [observability, grafana, prometheus, loki, tempo, lgtm]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: Correlation is King
 สิ่งที่จะแยกคุณออกจาก Junior คือการเซ็ต **Correlation ** ระหว่างเครื่องมือ:
@@ -81,7 +82,7 @@ tags: [observability, grafana, prometheus, loki, tempo, lgtm]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 "Tracing" มีความสำคัญอย่างไรในระบบ Microservices ที่มีการเรียกต่อกันหลายทอด?
@@ -99,13 +100,13 @@ tags: [observability, grafana, prometheus, loki, tempo, lgtm]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในทีมของคุณ ปัจจุบันใช้เวลาเฉลี่ยเท่าไหร่ (MTTR) ในการหาต้นเหตุของบั๊กที่เกิดขึ้นข้ามเซอร์วิส? หากคุณยังต้องก๊อปปี้ ID จาก Log ไปค้นหาในเครื่องมืออื่นทีละอัน นั่นคือเวลาที่เสียไปโดยเปล่าประโยชน์ การรวม Stack เข้าด้วยกันไม่ใช่แค่เรื่องเทคโนโลยี แต่คือเรื่องของการซื้อเวลาคืนมาให้กับวิศวกร
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[01-monitoring-levels|Monitoring Levels: เลือกวัด Metrics ให้ถูกตัว]]
 - [[../Networking/03-grpc-vs-rest|gRPC & Tracing: การส่ง Trace ID ผ่าน Header]]

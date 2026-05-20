@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [nosql, mongodb, locking, performance, system-design]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 *"คุณมีซูเปอร์คอมพิวเตอร์ 64 คอร์ แต่ทำไม Database กลับรันคำสั่งได้แค่ทีละอย่าง?"* นี่ไม่ใช่เรื่องตลก แต่เป็นความจริงที่เกิดขึ้นกับ **MongoDB ** ในอดีต และยังคงเป็นบทเรียนสำคัญเรื่อง **Lock Granularity **(ระดับความละเอียดของการล็อก) บทเรียนนี้จะพาคุณไปดูเหตุการณ์ระบบล่มครั้งประวัติศาสตร์ของ **Foursquare ** ที่ลากยาวถึง 11 ชั่วโมงเพียงเพราะ"แม่กุญแจตัวเดียว"
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณอัปเกรดเซิร์ฟเวอร์ Database 📦 เป็นเครื่องที่แรงที่สุดในตลาด (96 Cores, 512GB RAM) 
 > - คุณหวังว่าจะรองรับ Write ได้เพิ่มขึ้น 10 เท่า
@@ -28,7 +29,7 @@ tags: [nosql, mongodb, locking, performance, system-design]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -40,7 +41,7 @@ tags: [nosql, mongodb, locking, performance, system-design]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. ลำดับขั้นของการ Lock (Lock Granularity)
 ยิ่ง Lock ละเอียด ระบบยิ่งทำงานขนาน (Parallel) ได้ดี:
@@ -63,7 +64,7 @@ MongoDB แก้ปัญหานี้ถาวรโดยการเปล
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: การหา Serial Bottleneck
 จำกฎของ **Amdahl's Law **: ความเร็วของระบบจะถูกจำกัดด้วยส่วนที่"รันขนานไม่ได้" (Sequential part)
@@ -76,7 +77,7 @@ MongoDB แก้ปัญหานี้ถาวรโดยการเปล
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 ทำไมการเกิด Page Fault ถึงทำให้อาการ Global Lock เลวร้ายลง?
@@ -94,13 +95,13 @@ MongoDB แก้ปัญหานี้ถาวรโดยการเปล
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 คุณเคยตรวจสอบ"Locking 🧵 Strategy" ของเครื่องมือที่คุณใช้ไหม? ไม่ว่าจะเป็น Database 📦, Message Broker หรือแม้แต่ Code ในภาษาที่คุณเขียน (เช่น`synchronized` ใน Java หรือ`lock` ใน C#) การออกแบบให้ระบบ"Lock น้อยที่สุดและสั้นที่สุด" คือกุญแจสู่ระบบที่สเกลได้จริง
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[../Postgres/09-locking-concurrency|Locking ใน PostgreSQL: ความต่างจาก NoSQL]]
 - [[../Observability/01-monitoring-levels|การวัด Saturation และการรอทรัพยากร]]

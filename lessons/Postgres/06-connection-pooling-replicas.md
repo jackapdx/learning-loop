@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 เมื่อแอปพลิเคชันของคุณโตขึ้น ปัญหาที่คุณจะเจอไม่ใช่แค่ Query ช้า แต่คือการที่ Database **"หมดลมหายใจ"** เพราะทนรับการเชื่อมต่อพร้อมกัน (Concurrent Connections) ไม่ไหว หรือไม่สามารถประมวลผลการอ่านข้อมูลมหาศาลได้ทันในเครื่องเดียว
 
@@ -17,7 +18,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณรันแอปบน Kubernetes และตั้งค่า`max_connections` ของ Postgres ไว้ที่ 500 แต่เมื่อคุณ Scale Pods เพิ่มเป็น 50 Pods (แต่ละ Pod มี 20 connections) ระบบกลับพังทันทีพร้อมข้อความ:`FATAL: remaining connection slots are reserved for non-replication superuser connections`
 >
@@ -27,7 +28,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | สิ่งที่คุณอาจคิด | การวิเคราะห์ (Senior Perspective) |
 |---|---|
@@ -60,7 +61,7 @@ PostgreSQL ออกแบบมาให้ 1 Connection = 1 Process ซึ่�
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Load Balancing: ใครจะอ่านเครื่องไหน?
 เมื่อมีเครื่องอ่าน (Read Replicas) หลายเครื่อง แอปของคุณต้องรู้ว่าจะส่ง Query ไปที่ไหน
@@ -78,7 +79,7 @@ PostgreSQL ออกแบบมาให้ 1 Connection = 1 Process ซึ่�
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 ทำไมการมี`max_connections` เยอะๆ ถึงทำให้ CPU ทำงานหนักขึ้น?
@@ -96,13 +97,13 @@ PostgreSQL ออกแบบมาให้ 1 Connection = 1 Process ซึ่�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 วันนี้ระบบของคุณมี Connection Pooler หรือยัง? และถ้าคืนนี้ Traffic พุ่งขึ้น 10 เท่า ระบบของคุณจะขยายตัวได้ทันที หรือจะล่มเพราะ"ที่นั่ง (Connections) เต็ม"?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[01-table-partitioning\|Table Partitioning — การเตรียมข้อมูลให้พร้อมสำหรับการสแกนใน Replicas]]
 - [[11-transactions-isolation\|Isolation Levels — เข้าใจว่าความล่าช้าของข้อมูล (Lag) ใน Replica มีผลกับความถูกต้องอย่างไร]]

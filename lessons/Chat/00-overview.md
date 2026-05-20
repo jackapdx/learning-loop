@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: overview
 level: senior
 status: polished
@@ -18,7 +19,7 @@ tags: [chat-exp, system-design, chat]
 
 ---
 
-## แผนผังการเรียนรู้ (Roadmap)
+## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
 ```mermaid
 graph TD
@@ -40,7 +41,7 @@ graph TD
 
 ---
 
-## รายชื่อบทเรียนทั้งหมด (Lesson List)
+## 📋 รายชื่อบทเรียนทั้งหมด (Lesson List)
 
 | # | หัวข้อบทเรียน | ประเด็นสำคัญในการสัมภาษณ์ (Interview Focus) |
 |:---:|---|---|

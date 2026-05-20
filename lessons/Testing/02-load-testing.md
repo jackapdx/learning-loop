@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -10,13 +11,13 @@ prerequisites: []
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 "ระบบเรารับ 1,000 req/s ได้สบาย" — แต่คุณรู้ได้อย่างไร? ถ้าคำตอบคือ"ก็ยังไม่เคยพังนี่" แสดงว่าคุณกำลังทดสอบระบบด้วยความหวัง ไม่ใช่ด้วยข้อมูล ผู้ใช้ 10 คนอาจใช้งานได้ดี แต่ผู้ใช้ 10,000 คนพร้อมกันคือคนละโลก — Connection Pool หมด, Database Lock สะสม, GC Pause ถี่จนระบบสะดุด, Memory Leak ที่ซ่อนอยู่โผล่มาตอน Load สูง Load Testing ไม่ใช่แค่"ยิง Request เยอะๆ" แต่มันคือการออกแบบ Experiment ที่มี Hypothesis, Metrics, และ Threshold ที่ชัดเจน — เพื่อหาจุดที่ระบบคุณจะพัง **ก่อน ** ที่ผู้ใช้จริงจะเป็นคนหามันเจอ
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณเป็นเจ้าของระบบ E-commerce ที่จะเปิดตัว Flash Sale พรุ่งนี้เวลา 10:00 น. ทีม Marketing คาดการณ์ Traffic:
 > - ผู้ใช้พร้อมกันสูงสุด 50,000 คน
@@ -37,7 +38,7 @@ prerequisites: []
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -49,7 +50,7 @@ prerequisites: []
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### Load Testing คืออะไร (และไม่ใช่อะไร)?
 
@@ -145,7 +146,7 @@ export default function () {
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การออกแบบ Load Test ที่มี Hypothesis (ไม่ใช่แค่ยิงมั่ว)
 
@@ -194,7 +195,7 @@ Load Test ที่ดีมี 4 ขั้นตอน:
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. คุณใช้ Load Test กับระบบที่ P99 Latency = 50ms ที่ 1,000 VUs แต่เมื่อเพิ่มเป็น 5,000 VUs P99 กลายเป็น 3,000ms — แต่ CPU ทุกตัวยังอยู่ที่ 30% —"คอขวด" น่าจะอยู่ที่ไหน?
@@ -214,13 +215,13 @@ Load Test ที่ดีมี 4 ขั้นตอน:
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ครั้งสุดท้ายที่ระบบคุณมีปัญหาเรื่อง Performance — คุณรู้ก่อนหรือหลังผู้ใช้รู้? ถ้าคุณมี Load Test ตอนนี้ มันตอบคำถามอะไรได้บ้าง?"ระบบรับได้กี่ req/s?" หรือ"ที่ 10,000 req/s ตัวไหนจะพังก่อน และพังยังไง?" — ความต่างระหว่างสองคำถามนี้คือความต่างระหว่าง"มีความหวัง" กับ"มีข้อมูล"
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[01-api-testing-mountebank|API Testing with Mountebank: จำลอง Dependency ก่อน Load Test]]
 - [[../Observability/01-monitoring-levels|Monitoring Levels: Golden Signals, RED, USE — Metrics ที่ต้องวัดระหว่าง Load Test]]

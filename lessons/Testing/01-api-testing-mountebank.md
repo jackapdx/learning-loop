@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -10,13 +11,13 @@ prerequisites: []
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ระบบ Microservices สมัยใหม่แทบทุกตัวต้องเรียก API ภายนอก ไม่ว่าจะเป็น Payment Gateway, SMS Provider, หรือ Internal Service ของทีมอื่น ปัญหาคือ Dependency เหล่านี้ไม่ได้พร้อมให้คุณทดสอบเสมอ: Sandbox ล่ม, Rate Limit เต็ม, ทีมอื่นยังเขียนไม่เสร็จ, หรือคุณแค่ไม่อยากเสียเงินเรียก API จริงทุกครั้งที่รัน Test การ"Mock" ในโค้ด (if/else หรือ DI Mock) แก้ปัญหาเฉพาะ Unit Test ได้ แต่ **ไม่ได้ทดสอบ Network Call จริงๆ **— คุณจะรู้ได้อย่างไรว่าโค้ดคุณ handle Connection Timeout, 500 Error, หรือ Response ช้าจาก Dependency ได้ถูกต้อง? นี่คือจุดที่ **Service Virtualization ** เข้ามาแทนที่
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังสร้างระบบจองตั๋วคอนเสิร์ตที่ต้องเรียก 3 External APIs:
 > 1.**Payment API **(Third-party, คิดเงินจริงต่อครั้ง, Sandbox เสถียรแค่ 60%)
@@ -37,7 +38,7 @@ prerequisites: []
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -49,7 +50,7 @@ prerequisites: []
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### Service Virtualization คืออะไร?
 
@@ -131,7 +132,7 @@ POST http://localhost:2525/imposters
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Mountebank vs WireMock vs MockServer — เลือกอะไรเมื่อไหร่?
 
@@ -192,7 +193,7 @@ Mountebank มีโหมด`proxyOnce` — มันจะ Forward Request ไ
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. Mock ในโค้ด (Jest Mock) กับ Service Virtualization (Mountebank) ต่างกันที่อะไร? และทำไม Mock ในโค้ดถึงไม่พอสำหรับ Integration Test?
@@ -212,13 +213,13 @@ Mountebank มีโหมด`proxyOnce` — มันจะ Forward Request ไ
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในระบบที่คุณทำอยู่ตอนนี้ External Dependency ตัวไหนที่"เทสกับของจริงไม่ได้" บ้าง? (เสียเงิน, ยังไม่เสร็จ, ไม่เสถียร) แล้วคุณมั่นใจแค่ไหนว่าโค้ดคุณ handle ทุก Failure Mode ของ Dependency นั้นได้อย่างถูกต้อง — ไม่ใช่แค่ Happy Path? การที่ CI ผ่านสีเขียวทุกวัน อาจหมายความว่าคุณแค่"ยังไม่เคยลองเทสให้มันพัง"
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[02-load-testing|Load Testing: กดดันระบบให้ถึงจุดแตกหัก]]
 - [[../Distributed/02-dual-write|Dual Write: เมื่อเขียน 2 ระบบต้องทำอย่างไรให้ Atomic]]

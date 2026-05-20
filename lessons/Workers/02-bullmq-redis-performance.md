@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [redis, workers, bullmq, system-design]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 *"เมื่อคุณต้องส่ง Notification หาคน 1 ล้านคนภายใน 10 นาที หรือต้องประมวลผลวิดีโอที่มีงานไหลมานับพันชิ้นต่อวินาที คุณต้องการสิ่งที่เร็วกว่า Disk"* **BullMQ ** คือคำตอบยอดนิยมในระบบ Node.js เพราะมันทำงานบน Redis ทำให้เข้าถึงข้อมูลได้ด้วยความเร็วระดับ Microseconds บทเรียนนี้จะสอนให้คุณคุมวัวที่ดุดันตัวนี้ให้อยู่หมัดในระดับ Production
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังออกแบบระบบ **"ประมวลผลรูปภาพ (Image Processing)"**
 > 1. ผู้ใช้อัปโหลดรูปภาพผ่านเว็บ
@@ -31,7 +32,7 @@ tags: [redis, workers, bullmq, system-design]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -43,7 +44,7 @@ tags: [redis, workers, bullmq, system-design]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. ทำไมต้อง Redis? (Speed & Features)
 การที่ BullMQ รันบน Redis ทำให้มันได้เปรียบเรื่อง:
@@ -70,7 +71,7 @@ const myQueue = new Queue('paint', {
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ยุทธศาสตร์ Senior: การทำ [[../../05-idempotency|Idempotency]]
 เนื่องจาก BullMQ รับประกันการส่งงานแบบ **"At Least Once"**(อย่างน้อยหนึ่งครั้ง) หมายความว่างานเดิมอาจถูกรันซ้ำได้ (เช่น กรณี Stalled Job)
@@ -82,7 +83,7 @@ const myQueue = new Queue('paint', {
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯 **Quick Check:**
 "Stalled Job" เกิดขึ้นเมื่อไหร่ และระบบจัดการอย่างไร?
@@ -100,13 +101,13 @@ const myQueue = new Queue('paint', {
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในระบบของคุณ มีงานไหนที่"ต้องการความเร็ว" จนยอมแลกกับ"ความเสี่ยงที่ข้อมูลอาจหายถ้า Redis ล่ม" ได้ไหม? การเลือก BullMQ คือการเลือกประสิทธิภาพสูงสุด แต่คุณต้องมีวินัยในการจัดการหน่วยความจำและการเขียนโค้ดที่รองรับการรันซ้ำ (Idempotent) ตลอดเวลา
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[../../05-idempotency|Idempotency: การรันงานซ้ำอย่างปลอดภัย]]
 - [[01-pg-boss-transactional|pg-boss: เมื่อต้องการความถูกต้องเหนือความเร็ว]]

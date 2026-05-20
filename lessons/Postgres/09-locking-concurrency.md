@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 "PostgreSQL จัดการ Lock ให้เองอยู่แล้ว" — คำพูดนี้จริงเพียงครึ่งเดียว! แม้ Postgres จะมีระบบจัดการการทำงานพร้อมกัน (Concurrency) ที่ยอดเยี่ยม แต่การไม่เข้าใจกลไกการล็อกจะนำไปสู่ปัญหาที่แก้ได้ยากใน Production เช่น **Deadlocks **, Query ที่ค้างรออย่างไร้สาเหตุ หรือแย่ที่สุดคือข้อมูลทับซ้อน (Race Conditions)
 
@@ -17,7 +18,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณมีตาราง`jobs` ที่ใช้เป็นคิวงาน (Task Queue) มี Worker 10 ตัวทำงานพร้อมกัน ทุกตัวจะรันคำสั่ง:
 >```sql
@@ -31,7 +32,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | สิ่งที่คุณอาจคิด | การวิเคราะห์ (Senior Perspective) |
 |---|---|
@@ -63,7 +64,7 @@ Deadlock เกิดขึ้นเมื่อ Transaction A ล็อก Row 
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Advisory Locks: การสร้าง Lock ของเราเอง
 บางครั้งเราไม่ได้อยากล็อกแถวในฐานข้อมูล แต่อยากล็อก"ตรรกะบางอย่าง" (เช่น ป้องกันไม่ให้ Cron Job รันซ้ำพร้อมกัน) เราสามารถใช้ **Advisory Locks ** ได้
@@ -86,7 +87,7 @@ WHERE wait_event_type = 'Lock';
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 คำสั่งใดที่ช่วยให้ระบบ Job Queue ทำงานแบบขนาน (Parallel) ได้ดีที่สุด?
@@ -104,13 +105,13 @@ WHERE wait_event_type = 'Lock';
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ระบบจัดการยอดเงินคงเหลือ (Wallet) หรือระบบตัดสต็อกสินค้าของคุณ มีโอกาสเกิด Race Condition ไหม? ถ้า Transaction 2 อันรันพร้อมกัน ยอดเงินจะยังถูกต้องอยู่หรือไม่? หากยังใช้แค่`UPDATE balance = balance - 100` โดยไม่มีการล็อกแถวที่เหมาะสม คุณกำลังเสี่ยงภัยอยู่!
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[05-vacuum-mvcc\|VACUUM & MVCC — ความสัมพันธ์ระหว่างการล็อกและ Snapshot ของข้อมูล]]
 - [[11-transactions-isolation\|Isolation Levels — วิธีที่แต่ละระดับจัดการความเข้มงวดของการล็อกต่างกัน]]

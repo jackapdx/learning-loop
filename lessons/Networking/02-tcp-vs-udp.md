@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [networking, protocols, system-design]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 *"คุณยอมรับได้ไหมถ้าเพื่อนพูด 10 ประโยคแล้วหายไป 1 ประโยค? แล้วถ้าเป็นเงินในบัญชีที่หายไป 1 บาทล่ะ?"* การเลือกโปรโตคอลการสื่อสารคือการเลือกระหว่าง **ความแม่นยำ (Accuracy)** และ ** ความเร็ว (Real-time)** หากคุณเลือกผิดแอปของคุณอาจจะช้าอืดอาดจนคนเลิกใช้ หรือข้อมูลผิดพลาดจนบริษัทล้มละลาย บทเรียนนี้จะสอนวิธีเลือกใช้ TCP และ UDP แบบมือโปร
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังออกแบบแอปพลิเคชัน **Video Conference **(เหมือน Zoom) สำหรับผู้ใช้นับล้าน 
 >
@@ -27,7 +28,7 @@ tags: [networking, protocols, system-design]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -69,7 +70,7 @@ tags: [networking, protocols, system-design]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### เทคนิค Senior: เมื่อไหร่ควรใช้ UDP + Custom Reliability?
 บางครั้งเราต้องการความเร็วของ UDP แต่ก็อยากให้ข้อมูล"สำคัญ" บางอย่างไม่หาย (เช่น คำสั่งยิงในเกมออนไลน์):
@@ -84,7 +85,7 @@ tags: [networking, protocols, system-design]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 ในการส่งไฟล์ ZIP ขนาด 1GB คุณควรใช้โปรโตคอลไหน? เพราะอะไร?
@@ -102,13 +103,13 @@ tags: [networking, protocols, system-design]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในระบบที่คุณออกแบบ มีจุดไหนที่คุณใช้ TCP เพียงเพราะ"ความคุ้นเคย" ทั้งที่ความจริงแล้วข้อมูลนั้นหายได้และต้องการความเร็วมากกว่าหรือไม่? (เช่น Log Telemetry หรือ Metrics ต่างๆ) การเข้าใจคุณสมบัติของ Layer 4 คือก้าวแรกของการเป็น Network 📡 Architect ที่เก่ง
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[01-load-balancing-l4-l7|Load Balancing ในระดับ L4 (TCP/UDP)]]
 - [[04-grpc-vs-rest|gRPC (HTTP/2) vs REST: การเลือกโปรโตคอลในระดับ Application]]

@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [chat-exp, system-design, distributed]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 Distributed Systems ไม่ได้แค่"พัง" — มันพังแบบแปลกๆ ตลอดเวลา คำถามที่แท้จริงคือ _เมื่อมันพัง มันซ่อมตัวเองได้ไหม?_ ในบทนี้คุณจะได้เรียนรู้กลไกการ Self-Healing ที่แยก Senior ออกจาก Junior — ตั้งแต่ Retry แบบมีสมอง ไปจนถึง Circuit Breaker และ Bulkhead
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ **สถานการณ์:** คุณมี Microservice A ที่เรียก Microservice B ผ่าน HTTP B เริ่มตอบช้าเพราะ DB ของมันกำลังยุ่ง A ยังคงส่ง Request เข้าไปเรื่อยๆ ด้วย Timeout 5 วินาที — Request ค้างจน Thread 🧵 Pool ของ A เต็ม
 >
@@ -25,7 +26,7 @@ Distributed Systems ไม่ได้แค่"พัง" — มันพั�
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | ถ้าคุณตอบว่า... | การวิเคราะห์ |
 |---|---|
@@ -113,7 +114,7 @@ Request 5: รอ 1600ms → Fail (เกิน Max Retry → Circuit เปิ�
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Bulkhead Pattern
 
@@ -192,7 +193,7 @@ Key Learning:
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:** เลือกกลไก Self-Recovery ให้ถูกต้อง:
 
@@ -211,13 +212,13 @@ Key Learning:
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ดูระบบที่คุณกำลังสร้างอยู่ตอนนี้ — ถ้า Service B พัง Service A ของคุณจะทำอย่างไร? มี Circuit Breaker ไหม? Retry ทุกครั้งที่ Fail หรือเปล่า? ถ้าต้องอธิบายให้ผู้สัมภาษณ์ฟังว่า"ระบบนี้ฟื้นตัวเองตอนตี 3 โดยไม่มีใครต้องตื่น" — คุณอธิบายได้ไหม?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[../02-consistency-vs-availability|CAP Theorem และความสอดคล้องของข้อมูล]]
 - [[04-spof|Single Point of Failure — ค้นหาและกำจัดจุดเปราะบาง]]

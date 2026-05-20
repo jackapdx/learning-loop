@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 **CTE (Common Table Expression)** คือการสร้าง"ตารางเสมือนชั่วคราว" เพื่อให้ SQL ของคุณอ่านง่ายขึ้นและแบ่งสัดส่วนได้ชัดเจน แต่ความสามารถที่แท้จริงที่แยก Senior ออกจาก Junior คือ **Recursive CTE ** ซึ่งเป็นวิธีเดียวในมาตรฐาน SQL ที่ใช้จัดการกับข้อมูลที่มีความสัมพันธ์เป็นลำดับชั้น (Hierarchical Data) หรือโครงสร้างแบบกราฟ (Graph) ได้อย่างมีประสิทธิภาพ
 
@@ -17,7 +18,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณมีตารางพนักงาน (`employees`) ที่มี Column`id`,`name`, และ`manager_id` (ซึ่งชี้กลับไปที่`id` ของหัวหน้า)
 >
@@ -27,7 +28,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | วิธีการ | การวิเคราะห์ (Senior Perspective) |
 |---|---|
@@ -37,7 +38,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. Basic CTE (Non-Recursive)
 เปรียบเสมือนการสร้างตัวแปรเพื่อเก็บผลลัพธ์ของ Query หนึ่งไว้ใช้ใน Query ถัดไปภายในคำสั่งเดียว
@@ -79,7 +80,7 @@ SELECT * FROM org_chart ORDER BY level;
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Materialized CTE (PostgreSQL 12+)
 โดยปกติ PostgreSQL จะพยายามเอา CTE ไปยุบรวมกับ Main Query (Inlining) เพื่อ Optimize แต่บางครั้งเราอยากให้มันรันแยกกันและเก็บผลลัพธ์ชั่วคราวไว้เลย เราใช้`MATERIALIZED`
@@ -105,7 +106,7 @@ SELECT * FROM search_graph;
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯 **Quick Check:**
 ส่วนประกอบ 2 ส่วนของ Recursive CTE ที่เชื่อมด้วย`UNION ALL` เรียกว่าอะไรบ้าง?
@@ -123,13 +124,13 @@ SELECT * FROM search_graph;
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองนึกถึงฟีเจอร์"Comment Threads" (การตอบกลับคอมเมนต์ซ้อนกันหลายชั้น) ในแอปพลิเคชันของคุณ — ตอนนี้คุณดึงข้อมูลมาแสดงผลอย่างไร? หากใช้ Recursive CTE คุณจะลดความซับซ้อนของ Code หลังบ้านลงไปได้มากแค่ไหน?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[03-window-functions\|Window Functions — การใช้ Window Functions ร่วมกับ CTE เพื่อวิเคราะห์ข้อมูลเป็นขั้นตอน]]
 - [[12-extensions-ecosystem\|Extensions — เครื่องมือเสริมที่ช่วยจัดการกราฟข้อมูลได้ลึกซึ้งกว่าเดิม]]

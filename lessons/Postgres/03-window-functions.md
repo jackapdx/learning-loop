@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 **Window Functions ** คือหนึ่งในฟีเจอร์ที่ทรงพลังที่สุดของ SQL ที่ช่วยให้คุณรันการคำนวณข้าม"ชุดของแถว" (Window) โดยที่ยังรักษาเอกลักษณ์ของแต่ละแถวไว้ได้ (ไม่ถูกยุบรวมเหมือน`GROUP BY`)
 
@@ -17,7 +18,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณมีตารางยอดขาย (`sales`) ที่มีข้อมูลพนักงาน (`employee_id`), ยอดขาย (`amount`), และวันที่ (`sale_date`)
 >
@@ -27,7 +28,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | วิธีการ | การวิเคราะห์ (Senior Perspective) |
 |---|---|
@@ -37,7 +38,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### Syntax พื้นฐานของ Window Functions
 
@@ -97,7 +98,7 @@ FROM daily_sales;
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Window Frames: การกำหนดขอบเขตที่ละเอียดขึ้น
 บางครั้งเราไม่ได้ต้องการคำนวณ"ทั้งหมด" แต่ต้องการคำนวณ"3 วันย้อนหลัง" หรือ"5 แถวก่อนหน้า" เราใช้`ROWS` หรือ`RANGE` ในการกำหนด Frame
@@ -118,7 +119,7 @@ FROM daily_sales;
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 ฟังก์ชันไหนที่ใช้หา"อันดับ" โดยที่ถ้าคะแนนเท่ากันให้อันดับเหมือนกัน และลำดับถัดไปไม่ข้ามตัวเลข?
@@ -136,13 +137,13 @@ FROM daily_sales;
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองกลับไปดู SQL Report ที่ซับซ้อนที่สุดที่คุณเคยเขียน — มีจุดไหนที่ใช้ Subquery ซ้อนกันหลายชั้นไหม? ลองคิดดูว่าหากเปลี่ยนมาใช้ Window Functions Code ของคุณจะอ่านง่ายขึ้นและทำงานเร็วขึ้นได้กี่เท่า?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[04-ctes-recursive\|CTEs & Recursive — การใช้งาน Window Functions ร่วมกับ CTE เพื่อความสะอาดของ Code]]
 - [[10-explain-analyze\|EXPLAIN ANALYZE — วิธีตรวจสอบว่า Window Function กินทรัพยากรตรงไหน]]

@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [chat-exp, system-design, distributed]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 นี่คือคำถาม System Design ที่ถูกถาม **บ่อยที่สุด ** ในกลุ่มคำถามขั้นสูง — Design Instagram/Twitter Feed โมเดล Hybrid ที่ใช้จริงในอุตสาหกรรม และเกณฑ์ที่ใช้ตัดสินใจว่าจะ Push หรือ Pull
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณกำลังออกแบบ Feed ให้ Instagram ผู้ใช้คนหนึ่ง (Lisa แบล็คพิงค์) มีผู้ติดตาม 100 ล้านคน เธอโพสต์รูป 1 รูป
 >
@@ -25,7 +26,7 @@ tags: [chat-exp, system-design, distributed]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | ถ้าคุณตอบว่า... | การวิเคราะห์ |
 |---|---|
@@ -77,7 +78,7 @@ Hybrid:     100M followers → Pull | 100 followers → Push
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### เกณฑ์การสลับโหมด (The Threshold)
 
@@ -145,7 +146,7 @@ Key Learning:
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:** จับคู่สถานการณ์กับโมเดลที่เหมาะสม:
 
@@ -164,13 +165,13 @@ Key Learning:
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองนึกถึงแอปที่คุณใช้ประจำ (Instagram, Twitter, TikTok, Facebook) — คุณคิดว่าเขาใช้ Push 📱 หรือ Pull? มีฟีเจอร์ไหนที่คุณรู้สึกว่าช้า — และมันเกี่ยวกับ Fan-out Strategy ไหม?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[../01-trade-off-articulation|การอธิบาย Trade-off ในการออกแบบระบบ]]
 - [[../04-database-sharding|การออกแบบ Database Sharding และ Scaling]]

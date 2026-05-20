@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [chat-exp, system-design, distributed]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 Dual Write Problem คือหนึ่งใน Distributed Systems Bug ที่อันตรายที่สุด — เกิดขึ้นเมื่อคุณต้องเขียน Database และ Publish Event"พร้อมกัน" แต่ไม่มี Distributed Transaction ปัญหานี้เป็นกับดักที่แม้แต่ Senior ก็พลาด คุณจะได้เรียนรู้ 4 วิธีแก้ พร้อมข้อดีข้อเสียของแต่ละวิธี
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ **สถานการณ์:** คุณมี Order Service ที่เมื่อรับออเดอร์แล้วต้อง:
 > 1. เขียน Order ลง PostgreSQL
@@ -27,7 +28,7 @@ Dual Write Problem คือหนึ่งใน Distributed Systems Bug ที
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | ถ้าคุณตอบว่า... | การวิเคราะห์ |
 |---|---|
@@ -40,7 +41,7 @@ Dual Write Problem คือหนึ่งใน Distributed Systems Bug ที
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### ปัญหาหลัก
 
@@ -91,7 +92,7 @@ Outbox Processor (แยก Process):
 
 **ข้อดี:**Atomic (บันทึกใน Transaction เดียว) — ไม่มีวันหาย
 **ข้อเสีย:**At-least-once delivery (ต้องทำ [[../../05-idempotency|Idempotent Consumer]])
-**เมื่อใช้:** เกือบทุกกรณี — นี่คือ Industry Standard
+**เมื่อใช้:** เกือบทุกกรณี — เป็น Pattern ที่ได้รับการยอมรับอย่างกว้างขวางเพราะแก้ปัญหา Dual Write ได้โดยไม่ต้องเปลี่ยน Business Logic
 
 #### วิธีที่ 2: CDC — Change Data Capture
 
@@ -138,7 +139,7 @@ Coordinator เป็น Single Point of Failure
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Outbox Pattern — Implementation Deep Dive
 
@@ -216,7 +217,7 @@ Key Learning:
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:** คุณมี User Service ที่เวลา ⏰ User Register ต้อง:
 INSERT INTO users
@@ -246,13 +247,13 @@ Welcome Email ต้องเป็น _ผลลัพธ์จากการ 
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 กลับไปดู Service ที่คุณเขียน — มีตรงไหนที่เขียน DB แล้วส่ง Event/Message ทันที โดยไม่มี Transactional Guarantee บ้าง? ถ้า Process ตายระหว่างนั้น — ข้อมูลจะหายไปเงียบๆ หรือเปล่า? นี่คือ Bug ที่ตรวจไม่เจอใน Unit Test — มันเจอเฉพาะใน Production เวลา ⏰ 3am
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[../../05-idempotency|Idempotency — มาตรฐานการรันงานซ้ำในระบบกระจายตัว]]
 - [[12-distributed-transactions|Distributed Transactions — Saga และ Outbox Pattern]]

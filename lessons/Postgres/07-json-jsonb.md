@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในยุคสมัยใหม่ ข้อมูลมักมาในรูปแบบที่ไม่มีโครงสร้างแน่นอน (Unstructured Data) เช่น การตั้งค่า (Settings), ข้อมูลจาก API ภายนอก หรือ Metadata ของแอปพลิเคชัน PostgreSQL จึงนำเสนอ **JSONB ** เพื่อให้คุณเก็บข้อมูลแบบ Schema-less ได้เหมือน MongoDB แต่ยังรักษาความสามารถระดับ ACID และความเร็วของ SQL ไว้ได้ครบถ้วน
 
@@ -17,7 +18,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณกำลังออกแบบระบบ"ประวัติการสั่งซื้อ" โดยที่สินค้าแต่ละประเภทมีข้อมูลจำเพาะไม่เหมือนกัน (เช่น เสื้อผ้ามี Size/Color, มือถือมี RAM/Storage)
 >
@@ -27,7 +28,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | แนวทางการออกแบบ | การวิเคราะห์ (Senior Perspective) |
 |---|---|
@@ -37,7 +38,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. JSON vs JSONB (ต่างกันที่ B)
 *   **JSON:** เก็บเป็น Text ดิบๆ ข้อดีคือเก็บไว (ไม่ต้อง Parse) แต่ข้อเสียคือ Query ช้ามากเพราะต้อง Parse ใหม่ทุกครั้งที่อ่าน
@@ -64,7 +65,7 @@ CREATE INDEX idx_product_attr ON products USING GIN (attributes);
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### jsonpath: การค้นหาขั้นสูง (PostgreSQL 12+)
 หากคุณต้องการเงื่อนไขที่ซับซ้อน เช่น"หาสินค้าที่มีราคาใน JSONB มากกว่า 100" คุณสามารถใช้`jsonpath` ได้เหมือน XPath ใน XML
@@ -84,7 +85,7 @@ WHERE attributes @@ '$.price > 100';
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 JSONB เก็บข้อมูลในรูปแบบใดที่ต่างจาก JSON ธรรมดา?
@@ -102,13 +103,13 @@ JSONB เก็บข้อมูลในรูปแบบใดที่ต�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 มีตารางไหนในแอปของคุณที่ต้องทำ`ALTER TABLE` เพื่อเพิ่ม Column ใหม่ทุกครั้งที่ Requirement เปลี่ยนไหม? ลองเปลี่ยน Column เหล่านั้นมาเป็น JSONB สักตัวดูสิ แล้วคุณจะพบกับอิสระในการพัฒนาที่มากขึ้น!
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[02-index-types\|Index Types — เจาะลึก GIN Index สำหรับ JSONB]]
 - [[08-full-text-search\|Full-Text Search — การค้นหาข้อความภายใน JSONB]]
