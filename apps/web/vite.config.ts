@@ -51,6 +51,7 @@ function lessonWatchPlugin(): Plugin {
       server.watcher.on("unlink", onMdChange);
 
       console.log(`  📝 Watching ${LESSONS_ROOT} for lesson .md changes`);
+      rebuild();
     },
   };
 }
