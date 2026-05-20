@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 คุณอาจรู้จัก PostgreSQL ในฐานะฐานข้อมูลแบบ Relational แต่ความลับที่ทำให้มันครองใจวิศวกรทั่วโลกคือ **"Extension Ecosystem"** ที่ช่วยให้มันแปลงร่างเป็นอะไรก็ได้ที่คุณต้องการ
 
@@ -17,7 +18,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังสร้างแอปพลิเคชันยุคใหม่ที่ต้องการ:
 > 1. เก็บพิกัดละติจูด/ลองจิจูดของร้านค้าและหา"ร้านที่ใกล้ที่สุด"
@@ -30,7 +31,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | สิ่งที่คุณอาจคิด | การวิเคราะห์ (Senior Perspective) |
 |---|---|
@@ -39,7 +40,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 3 ยอดขุนพล Extension ที่ Senior ต้องรู้จัก
 
@@ -62,7 +63,7 @@ Extension ที่ทรงพลังที่สุดในโลกสำ�
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Foreign Data Wrappers (FDW): การเชื่อมต่อข้ามโลก
 PostgreSQL สามารถมองเห็นตารางใน Database 📦 อื่น (MySQL, MongoDB, หรือแม้แต่ Google Sheets) ให้กลายเป็น"ตารางเสมือน" ในตัวมันเองได้ผ่าน FDW
@@ -82,7 +83,7 @@ SELECT * FROM remote_server_orders WHERE amount > 1000;
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 Extension ใดที่ใช้ในการทำระบบค้นหาความคล้ายคลึงของข้อความด้วย AI 🧠?
@@ -100,13 +101,13 @@ Extension ใดที่ใช้ในการทำระบบค้นห�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองสำรวจความต้องการของโปรเจกต์คุณดูสิ — มีฟีเจอร์ไหนที่คุณคิดว่าจะต้องไปเปิด Database 📦 ตัวใหม่เพิ่มไหม? ลองเช็คดูว่าใน PostgreSQL มี Extension ที่ทำเรื่องนั้นได้อยู่แล้วหรือเปล่า? บางครั้ง"ความง่าย" คือหัวใจสำคัญของความสำเร็จในระยะยาว
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[02-index-types\|Index Types — เข้าใจดัชนีพิเศษอย่าง GiST ที่ PostGIS มักเรียกใช้]]
 - [[08-full-text-search\|Full-Text Search — ฟีเจอร์ค้นหาในตัวที่ทำงานร่วมกับ Extensions ได้ดี]]

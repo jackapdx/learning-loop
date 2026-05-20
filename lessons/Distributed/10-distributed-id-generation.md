@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -10,13 +11,13 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในระบบฐานข้อมูลเดี่ยว เรามักใช้`AUTO_INCREMENT` หรือ`SERIAL` เพื่อสร้าง ID แต่เมื่อระบบขยายตัวเป็น **Distributed Systems ** ที่มีฐานข้อมูลหลายตัว (Sharding) หรือมี Write Nodes จำนวนมาก การใช้ลำดับตัวเลขแบบรวมศูนย์ (Centralized Sequence) จะกลายเป็น **Bottleneck ** และ **SPOF (Single Point of Failure)** ทันที บทเรียนนี้จะพาไปดูว่าเราจะสร้าง ID ที่"ไม่ซ้ำ" และ"มีประสิทธิภาพ" ในระดับ Scale ได้อย่างไรโดยไม่ต้องพึ่งพาตัวนับตัวเดียว
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณกำลังออกแบบระบบ Chat ระดับโลกที่ต้องรองรับการส่งข้อความ 1 ล้านข้อความต่อวินาที (1M msgs/sec) โดยข้อมูลถูกกระจายเก็บในฐานข้อมูล 10 ตัว (Shards) ทั่วโลก
 > 
@@ -31,7 +32,7 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -43,7 +44,7 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. UUID (Universally Unique Identifier)
 
@@ -75,7 +76,7 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การเลือก ID ตามบริบท (Decision Framework)
 
@@ -96,7 +97,7 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. ทำไมการใช้ UUID v4 ถึงทำให้ฐานข้อมูลช้าลงเมื่อมีข้อมูลจำนวนมาก (ล้านแถวขึ้นไป)?
@@ -114,13 +115,13 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในระบบปัจจุบันที่คุณดูแลอยู่ ID ที่ใช้อยู่เป็นแบบไหน? หากวันหนึ่ง Traffic โตขึ้น 100 เท่า ID นั้นจะยังทำงานได้ดีอยู่ไหม? คุณยินดีจะแลก"ความง่าย" ของ UUID v4 กับ"ความเร็ว" ของ Snowflake หรือไม่?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[04-database-sharding|Database Sharding: การแบ่งข้อมูลเมื่อตัวเดียวไม่พอ]]
 - [[../Postgres/02-index-types|PostgreSQL Index Types และประสิทธิภาพ]]

@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -10,13 +11,13 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 เมื่อระบบของคุณขยายตัวจาก Server เครื่องเดียวเป็น Cluster ที่มี 50 เครื่อง การทำ Rate Limiting แบบเดิมๆ (In-memory) จะเริ่มมีปัญหา หากคุณตั้งโควต้าไว้ที่ 100 req/min แต่ละเครื่องจะนับของตัวเอง ทำให้ผู้ใช้อาจยิงได้ถึง 5,000 req/min! บทเรียนนี้จะสอนวิธีทำ **Global Rate Limiting ** ให้แม่นยำและรวดเร็ว โดยไม่ให้ตัววัดความเร็วกลายเป็นคอขวดเสียเอง
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณเป็นวิศวกรที่ระบบ Chat ระบบหนึ่งซึ่งมี API Server 20 เครื่อง โจทย์คือต้องจำกัดการส่งข้อความของผู้ใช้ที่"10 ข้อความต่อนาที" เพื่อป้องกัน Spam
 > 
@@ -31,7 +32,7 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -43,7 +44,7 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. สถานที่เก็บข้อมูล (Where to store?)
 
@@ -61,7 +62,7 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การทำ Rate Limiting ในระดับโปร (Advanced Patterns)
 
@@ -82,7 +83,7 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. ปัญหา"Boundary Spike" เกิดขึ้นกับอัลกอริทึมใด? และแก้ได้อย่างไร?
@@ -100,13 +101,13 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองดูระบบที่คุณทำอยู่ — ถ้าพรุ่งนี้มีบอทมารุมยิง API ของคุณล้านครั้งต่อวินาที ระบบจะป้องกันตัวเองได้ไหม? จุดไหนที่จะพังก่อนกันระหว่าง Database หรือ Rate Limiter?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[09-load-balancer|Load Balancer: การกระจายงานให้เครื่องลูกข่าย]]
 - [[../14-kong-api-gateway|Kong API Gateway และการทำ Rate Limiting สำเร็จรูป]]

@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในโลกของ Distributed Systems ข้อมูลสามารถถูกแก้ไขพร้อมกันได้จากหลายทิศทาง (Concurrency) คำถามคือ **"ฐานข้อมูลของคุณรับประกันความถูกต้อง (Consistency) ได้แค่ไหน?"**
 
@@ -17,7 +18,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังทำระบบโอนเงิน (Money Transfer) Transaction ของคุณมีขั้นตอนดังนี้:
 > 1.`SELECT balance FROM accounts WHERE id = 1;` (อ่านได้ 1,000 บาท)
@@ -30,7 +31,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | สิ่งที่คุณอาจคิด | การวิเคราะห์ (Senior Perspective) |
 |---|---|
@@ -62,7 +63,7 @@ PostgreSQL รองรับระดับความเข้มงวดข
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Serialization Failure: สิ่งที่ต้องเตรียมใจ
 เมื่อคุณใช้`SERIALIZABLE` หรือ`REPEATABLE READ` บางครั้ง Postgres จะตอบกลับมาว่า **"ฉันทำให้ Transaction นี้สำเร็จไม่ได้เพราะมันจะขัดแย้งกับคนอื่น"**(Error 40001)
@@ -83,7 +84,7 @@ WHERE id = 1 AND balance >= 100;
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 Isolation Level เริ่มต้นของ PostgreSQL คืออะไร?
@@ -101,13 +102,13 @@ Isolation Level เริ่มต้นของ PostgreSQL คืออะไ�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในแอปของคุณตอนนี้ — คุณจัดการกับ"ยอดเงิน" หรือ"จำนวนสินค้าคงเหลือ" อย่างไร? คุณพึ่งพาแค่ระดับ Isolation เริ่มต้น หรือคุณได้ใส่การล็อก (Locking 🧵) ที่รัดกุมไว้แล้ว? ความผิดพลาดเพียง 1 ในล้านครั้งในโลกของเงินทองอาจหมายถึงความเสียหายมหาศาล!
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[09-locking-concurrency\|Locking & Concurrency — วิธีใช้ SELECT FOR UPDATE เพื่อเสริมความปลอดภัยให้ Transaction]]
 - [[05-vacuum-mvcc\|VACUUM & MVCC — เข้าใจว่า MVCC สร้าง Snapshot ของแต่ละ Transaction อย่างไร]]

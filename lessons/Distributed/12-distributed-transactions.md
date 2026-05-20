@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -10,13 +11,13 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในระบบ Monolith การโอนเงินหรือตัดสต็อกเป็นเรื่องง่ายเพราะเราใช้`BEGIN TRANSACTION` ในฐานข้อมูลตัวเดียว แต่ใน **Microservices ** เมื่อ Order Service อยู่คนละเครื่องกับ Inventory Service เราไม่สามารถใช้ ACID Transaction แบบเดิมได้อีกต่อไป หากเครื่องหนึ่งสำเร็จแต่อีกเครื่องพัง ข้อมูลจะขัดแย้งกันทันที บทเรียนนี้จะสอนวิธีจัดการ **Distributed Consistency ** โดยไม่ต้องใช้ Distributed Lock ที่แสนช้า
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณกำลังออกแบบระบบจองตั๋วเครื่องบินที่ประกอบด้วย 3 เซอร์วิส:
 > 1.**Booking Service:** สร้างคำขอจอง (Postgres)
@@ -31,7 +32,7 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -43,7 +44,7 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. ปัญหาของ Two-Phase Commit (2PC)
 2PC พยายามทำ Distributed ACID โดยใช้ Coordinator สั่ง"Prepare" และ"Commit"
@@ -65,7 +66,7 @@ Saga คือชุดของ Local Transactions ที่รันต่อ�
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การออกแบบ Compensating Transaction ให้ปลอดภัย
 
@@ -81,7 +82,7 @@ Saga คือชุดของ Local Transactions ที่รันต่อ�
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. ความแตกต่างที่สำคัญที่สุดระหว่าง Database Rollback กับ Saga Compensating Transaction คืออะไร?
@@ -99,13 +100,13 @@ Saga คือชุดของ Local Transactions ที่รันต่อ�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในระบบที่คุณทำอยู่ มีจุดไหนบ้างที่"เขียน DB หนึ่งที่แล้วไปเรียก API อีกที่" หรือไม่? ถ้า API นั้นพังหลังจากเขียน DB เสร็จ ข้อมูลในระบบของคุณจะเน่าหรือไม่? คุณมีแผนจะนำ Outbox หรือ Saga มาช่วยอย่างไร?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[02-dual-write|Dual Write Problem: ปัญหาพื้นฐานของระบบกระจาย]]
 - [[../05-idempotency|Idempotency: การทำให้การรันซ้ำปลอดภัย]]

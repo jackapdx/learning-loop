@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,7 +10,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 หากคุณเปรียบ PostgreSQL เป็นรถยนต์`EXPLAIN ANALYZE` ก็คือเครื่องสแกนที่ช่วยบอกว่าเครื่องยนต์กำลังทำงานอย่างไร คอขวดอยู่ตรงไหน และทำไมมันถึงวิ่งช้ากว่าที่ควรจะเป็น นี่คือทักษะที่แยก"นักพัฒนาทั่วไป" ออกจาก"Database Expert"
 
@@ -17,7 +18,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณมี Query ที่ทำงานช้ามาก คุณจึงรัน`EXPLAIN ANALYZE` และพบข้อความนี้ในผลลัพธ์:
 >```
@@ -32,7 +33,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | สิ่งที่คุณเห็นใน Plan | การวิเคราะห์ (Senior Perspective) |
 |---|---|
@@ -42,7 +43,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. EXPLAIN vs EXPLAIN ANALYZE
 *   **EXPLAIN:** บอกแค่ **"แผน"** ที่ฐานข้อมูลคิดจะทำ (ไม่รันจริง) - ใช้สำหรับ Query ที่รันนานมากๆ และเราแค่อยากเช็คเบื้องต้น
@@ -61,7 +62,7 @@ tags: [chat-exp, system-design, postgres]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การตรวจสอบ I/O ด้วย BUFFERS
 หากคุณต้องการรู้ว่า Query ของคุณ"อ่าน Disk" หนักแค่ไหน ให้ใช้:
@@ -79,7 +80,7 @@ EXPLAIN (ANALYZE, BUFFERS) SELECT ...;
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 คำสั่งใดที่จะ"รัน Query จริง" เพื่อวัดเวลาที่แน่นอน?
@@ -97,13 +98,13 @@ EXPLAIN (ANALYZE, BUFFERS) SELECT ...;
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองหยิบ Query ที่"ช้าที่สุด" ในแอปพลิเคชันของคุณมาสแกนด้วย`EXPLAIN ANALYZE` ดูตอนนี้เลย — คุณเห็น`Seq Scan` ไหม? หรือคุณเห็น`Sort` ข้อมูลมหาศาลที่ไม่ได้ใช้ Index หรือเปล่า? การปรับแต่งเพียงบรรทัดเดียวอาจทำให้ระบบเร็วขึ้นกว่าเดิม 10 เท่า!
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[02-index-types\|Index Types — การเลือก Index ที่ถูกต้องเพื่อให้ Planner เลือกใช้ใน Plan]]
 - [[09-locking-concurrency\|Locking & Concurrency — เข้าใจว่าการรอ Lock ไม่แสดงผลใน EXPLAIN Plan ปกติ]]

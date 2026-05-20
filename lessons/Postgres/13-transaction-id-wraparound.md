@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -9,13 +10,13 @@ tags: [postgres, system-design, reliability]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในโลกของ PostgreSQL มีระเบิดเวลาลูกหนึ่งที่เรียกว่า **Transaction ID (TXID) Wraparound ** หากคุณไม่รู้จักมัน วันหนึ่ง Database ของคุณอาจจะหยุดรับคำสั่ง Write (INSERT/UPDATE/DELETE) ทันทีเพื่อป้องกันข้อมูลพัง และคุณจะทำอะไรไม่ได้เลยนอกจากนั่งรอ`VACUUM` ทำงานเป็นชั่วโมงหรือเป็นวัน บทเรียนนี้จะพาไปดูเบื้องหลังของ MVCC และวิธีที่ Senior Engineer ป้องกันหายนะนี้
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณเป็น Lead Engineer ที่บริษัท Startup ที่กำลังโตเร็วมาก (Hyper-growth) ระบบของคุณประมวลผลธุรกรรมนับล้านต่อวันบน PostgreSQL 
 > 
@@ -29,7 +30,7 @@ tags: [postgres, system-design, reliability]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -41,7 +42,7 @@ tags: [postgres, system-design, reliability]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. ทำไมต้องมี Wraparound?
 PostgreSQL ใช้ **MVCC (Multi-Version Concurrency 🧵 Control)** โดยทุกครั้งที่ Update ข้อมูล มันจะไม่ทับข้อมูลเก่า แต่จะสร้าง"Version ใหม่" และติดป้ายกำกับว่าแถวนี้ถูกสร้างโดย Transaction ID (TXID) ไหน
@@ -61,7 +62,7 @@ PostgreSQL ใช้ **MVCC (Multi-Version Concurrency 🧵 Control)** โดย
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### วิธีการ Monitor (The Senior Way)
 อย่ารอให้ระบบล่ม ให้รัน Query นี้เพื่อดูว่าจุดจบอยู่ใกล้แค่ไหน:
@@ -89,7 +90,7 @@ ALTER SYSTEM SET autovacuum_freeze_max_age = 500000000; -- เริ่ม Freez
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯 **Quick Check:**
 เลข TXID ของ PostgreSQL มีขนาดกี่ bit และรองรับได้สูงสุดเท่าไหร่?
@@ -107,13 +108,13 @@ ALTER SYSTEM SET autovacuum_freeze_max_age = 500000000; -- เริ่ม Freez
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในระบบที่คุณดูแลอยู่ตอนนี้ คุณเคยเช็ค`age(datfrozenxid)` บ้างไหม? การที่`autovacuum` กำลังรันอยู่ ไม่ได้แปลว่ามันกำลังทำงานได้สำเร็จ การเข้าใจ"ขีดจำกัด" ของเครื่องมือที่คุณใช้ คือสิ่งที่แยกแยะระหว่างคนใช้เครื่องมือเป็น กับวิศวกรที่คุมเครื่องมือได้
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[05-vacuum-mvcc\|MVCC และ VACUUM พื้นฐาน]]
 - [[09-locking-concurrency\|การจัดการ Lock และ Transaction]]

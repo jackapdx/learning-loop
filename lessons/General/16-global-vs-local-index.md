@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -10,10 +11,10 @@ prerequisites: [04-database-sharding]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 เมื่อฐานข้อมูลมีขนาดใหญ่จนต้องทำ Partitioning หรือ Sharding (แบ่งข้อมูลออกเป็นส่วนๆ) ปัญหาถัดมาที่วิศวกรต้องเจอคือ **การสร้าง Index ** เพื่อให้ค้นหาข้อมูลได้เร็ว เนื่องจากข้อมูลไม่ได้อยู่รวมกันที่เดียวอีกต่อไป การตัดสินใจว่าจะสร้าง Index แยกตามแต่ละ Partition (Local Index) หรือสร้าง Index รวมที่ครอบคลุมทุก Partition (Global Index) เป็น trade-off สำคัญที่ส่งผลโดยตรงต่อความเร็วในการอ่านข้อมูล (Read Latency) และความเร็วในการเขียน/ดูแลรักษาข้อมูล (Write Latency & Maintenance)
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 **สถานการณ์:**
 คุณกำลังออกแบบระบบ E-commerce ที่มีตาราง`orders` ขนาด 5TB ทีมตัดสินใจทำ Partitioning ข้อมูลตาม`created_at` (แบ่งเป็นรายเดือน) เพื่อให้จัดการข้อมูลเก่าได้ง่าย (Data Retention) 
 ระบบมี 2 query patterns หลัก:
@@ -30,7 +31,7 @@ prerequisites: [04-database-sharding]
 
 ✋** หยุดตรงนี้ก่อน:** ลองคิดถึง Trade-off ของแต่ละวิธีก่อนเลื่อนไปดูผลตอบรับ
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -41,7 +42,7 @@ prerequisites: [04-database-sharding]
 **ทำไมการให้เหตุผลแบบนี้สำคัญ?**
 วิศวกรระดับ Senior จะรู้ว่า"Index ไม่ได้ฟรี" เมื่อมีการทำ Partitioning, Local Index ทำให้เราเขียนข้อมูลได้เร็วและลบ Partition ทิ้งได้ง่าย แต่ทำให้ Query ที่ไม่มี Partition Key ช้าลงมหาศาล ในขณะที่ Global Index ทำให้ Query เร็ว แต่ทำให้การเขียนช้าลงและลบ Partition ได้ยากขึ้น การตัดสินใจจึงต้องมาจาก SLA และ Query Pattern ของระบบ
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 เมื่อข้อมูลถูกแบ่ง (Partitioned) การสร้าง Index จะมี 2 รูปแบบหลักๆ ซึ่งมี Trade-off ตรงข้ามกันอย่างชัดเจน:
 
@@ -72,7 +73,7 @@ CREATE GLOBAL INDEX idx_global_ref_code ON orders (order_reference_code);
 ```
 > ** อ้างอิง:**[PostgreSQL 17 docs — Partitioning and Indexes] (Note: PostgreSQL Native ยังไม่รองรับ Global Index แบบแท้จริงบน Partitioned Tables แต่ใช้วิธีอื่นชดเชย)
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 การเลือกระหว่าง Global และ Local Index คือการเลือกระหว่าง **Read Performance ** กับ **Write/Maintenance Performance **
 
@@ -93,7 +94,7 @@ CREATE GLOBAL INDEX idx_global_ref_code ON orders (order_reference_code);
 -** ใช้ Local Index กับ Query ที่ไม่มี Partition Key:** เกิดปรากฏการณ์ **Scatter-Gather ** คือระบบต้องส่ง Query ไปหาทุก Partition พร้อมกัน แล้วเอาผลลัพธ์มารวมกัน ถ้ามี 100 Partitions ก็ต้องทำ 100 Index Scans ทำให้เปลือง CPU และช้ามาก
 -** ใช้ Global Index ในระบบที่ลบข้อมูลบ่อย:** เมื่อคุณทำการ Drop Partition ข้อมูลใน Global Index จะกลายเป็น"Orphaned" หรือ"Stale" การจัดการ (Rebuild/Cleanup Global Index) จะใช้เวลานานและล็อกระบบ (Locking)
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. ถ้าเราเก็บ Log ระบบ 10TB โดยทำ Partition รายวัน เรามีระบบ Alert ที่จะแสกนหาคำว่า"ERROR" ใน log ของวันนี้เท่านั้น ควรใช้ Index แบบไหนสำหรับคอลัมน์ log_level?
@@ -107,10 +108,10 @@ CREATE GLOBAL INDEX idx_global_ref_code ON orders (order_reference_code);
 
 </details>
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > ในระบบ Database หรือ DynamoDB ที่คุณดูแลอยู่ มี Secondary Index ตัวไหนบ้างที่เป็น Global Index? คุณเคยเจอจังหวะที่ Global Index ทำให้ระบบช้าตอน Bulk Insert หรือตอนลบข้อมูลจำนวนมากหรือไม่? ถ้าเจอปัญหานั้น คุณจะออกแบบ Partition Key ใหม่เพื่อเปลี่ยนให้มันกลายเป็น Local Index ได้หรือไม่?
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 - [[04-database-sharding|Database Sharding]]
 - [[10-monolith-microservice-monorepo|Monolith vs Microservices vs Monorepo]]

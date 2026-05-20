@@ -1,4 +1,5 @@
 ---
+verified: false
 contentType: learning-loop
 level: senior
 status: polished
@@ -10,13 +11,13 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 เมื่อระบบของคุณขยายตัวไปถึงระดับร้อยล้านหรือพันล้านผู้ใช้ (Google, Meta, Netflix Scale) การเก็บข้อมูลเพื่อหาคำตอบง่ายๆ เช่น"User คนนี้เคยดูวิดีโอนี้หรือยัง?" หรือ"วันนี้มีคนเข้าเว็บไม่ซ้ำกัน (Unique Visitors) กี่คน?" จะเริ่มกิน RAM มหาศาลจนระบบแบกไม่ไหว **Probabilistic Data Structures ** คือ"เวทมนตร์" ที่ช่วยให้เราตอบคำถามเหล่านี้ได้โดยใช้หน่วยความจำเพียงไม่กี่ KB โดยแลกกับ ** ความแม่นยำที่ลดลงเพียงเล็กน้อย **
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณกำลังออกแบบระบบ"Anti-Spam" สำหรับอีเมลที่มีผู้ใช้ 1,000 ล้านคน
 > 
@@ -31,7 +32,7 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -43,7 +44,7 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. Bloom Filter: เช็คว่า"มีอยู่หรือไม่?"
 
@@ -71,7 +72,7 @@ Bloom Filter คือ Bit Array ขนาดใหญ่ที่ทำงา�
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การนำไปใช้ในระบบกระจายจริง (Production Use Cases)
 
@@ -86,7 +87,7 @@ Bloom Filter คือ Bit Array ขนาดใหญ่ที่ทำงา�
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. ถ้า Bloom Filter บอกว่า"ไม่มีข้อมูลนี้" (Not Found) เราสามารถเชื่อถือได้กี่เปอร์เซ็นต์?
@@ -104,13 +105,13 @@ Bloom Filter คือ Bit Array ขนาดใหญ่ที่ทำงา�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองนึกถึงฟีเจอร์"Already Read" หรือ"Unique Views" ในระบบของคุณ — ตอนนี้คุณใช้ SQL`COUNT(DISTINCT ...)` หรือ`WHERE NOT IN (...)` อยู่หรือเปล่า? ถ้าวันหนึ่งข้อมูลโตขึ้นหมื่นเท่า ระบบของคุณจะยังรันไหวไหม? คุณจะกล้าแลก Error 1% กับ RAM ที่ลดลง 99% หรือไม่?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[../NoSQL/02-nosql-hotspots-sharding|NoSQL Architecture และการเก็บข้อมูลใน Disk]]
 - [[../Postgres/02-index-types|Index Types: เมื่อไหร่ที่ Index แบบปกติเริ่มไม่พอ]]
