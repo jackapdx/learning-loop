@@ -11,9 +11,9 @@ tags: [chat-exp, system-design, distributed]
 > [!info] ปฐมนิเทศ
 > Distributed Systems ไม่ได้พังแบบ"มี Bug" — มันพังแบบ"ทุกอย่างทำงานถูกต้องตาม Design แต่ระบบยังพัง" เพราะธรรมชาติของ Distributed Systems เต็มไปด้วย Partial Failures, Network 📡 Partitions, และ Timing Assumptions ที่ผิด
 >
-ซีรีส์นี้รวบรวม **13 บทเรียน ** ที่ครอบคลุม Patterns ที่ใช้แก้ปัญหาเหล่านี้ใน Production จริง
+ซีรีส์นี้รวบรวม **13 บทเรียน**ที่ครอบคลุม Patterns ที่ใช้แก้ปัญหาเหล่านี้ใน Production จริง
 
-Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
+Each lesson takes**5-10 minutes**based on the **Learning Loop**principle.
 
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 

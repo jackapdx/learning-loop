@@ -1,6 +1,9 @@
 # markdownlint-cli2 configuration for Learning Loop lessons
 # Thai + English mixed content with wikilinks, YAML frontmatter, code blocks
-# Run: bunx markdownlint-cli2 "lessons/**/*.md"
+# Run: bunx markdownlint-cli2
+
+customRules:
+  - ".markdownlint/custom-rules.js"
 
 config:
   default: true

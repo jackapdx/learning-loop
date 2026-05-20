@@ -12,19 +12,17 @@ tags: [chat-exp, system-design, postgres]
 
 ## 🎯 ปฐมนิเทศ (Orient)
 
-เมื่อแอปพลิเคชันของคุณโตขึ้น ปัญหาที่คุณจะเจอไม่ใช่แค่ Query ช้า แต่คือการที่ Database **"หมดลมหายใจ"** เพราะทนรับการเชื่อมต่อพร้อมกัน (Concurrent Connections) ไม่ไหว หรือไม่สามารถประมวลผลการอ่านข้อมูลมหาศาลได้ทันในเครื่องเดียว
+เมื่อแอปพลิเคชันของคุณโตขึ้น ปัญหาที่คุณจะเจอไม่ใช่แค่ Query ช้า แต่คือการที่ Database **"หมดลมหายใจ"**เพราะทนรับการเชื่อมต่อพร้อมกัน (Concurrent Connections) ไม่ไหว หรือไม่สามารถประมวลผลการอ่านข้อมูลมหาศาลได้ทันในเครื่องเดียว
 
-บทเรียนนี้จะสอนวิธีแก้ปัญหาด้วย 2 อาวุธหนัก:**Connection Pooling **(เพื่อลดภาระการสร้าง Connection) และ **Read Replicas **(เพื่อแยกภาระการอ่านออกจากเครื่องหลัก)
+บทเรียนนี้จะสอนวิธีแก้ปัญหาด้วย 2 อาวุธหนัก:**Connection Pooling**(เพื่อลดภาระการสร้าง Connection) และ **Read Replicas**(เพื่อแยกภาระการอ่านออกจากเครื่องหลัก)
 
 ---
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ** สถานการณ์:** คุณรันแอปบน Kubernetes และตั้งค่า`max_connections` ของ Postgres ไว้ที่ 500 แต่เมื่อคุณ Scale Pods เพิ่มเป็น 50 Pods (แต่ละ Pod มี 20 connections) ระบบกลับพังทันทีพร้อมข้อความ:`FATAL: remaining connection slots are reserved for non-replication superuser connections`
+> **สถานการณ์:**คุณรันแอปบน Kubernetes และตั้งค่า`max_connections` ของ Postgres ไว้ที่ 500 แต่เมื่อคุณ Scale Pods เพิ่มเป็น 50 Pods (แต่ละ Pod มี 20 connections) ระบบกลับพังทันทีพร้อมข้อความ:`FATAL: remaining connection slots are reserved for non-replication superuser connections`
 >
-> ** คำถาม:** ในฐานะ Senior Engineer คุณจะแก้ปัญหานี้อย่างไร? ระหว่าง"เพิ่ม`max_connections` เป็น 2,000" กับ"ติดตั้ง PgBouncer"? และเพราะอะไร?
-
-**หยุดคิดสักครู่ **— การเพิ่มเลข`max_connections` ให้สูงๆ มีราคาที่ต้องจ่ายหรือไม่?
+>**คำถาม:**ในฐานะ Senior Engineer คุณจะแก้ปัญหานี้อย่างไร? ระหว่าง"เพิ่ม`max_connections` เป็น 2,000" กับ"ติดตั้ง PgBouncer"? และเพราะอะไร?**หยุดคิดสักครู่**— การเพิ่มเลข`max_connections` ให้สูงๆ มีราคาที่ต้องจ่ายหรือไม่?
 
 ---
 
@@ -32,9 +30,9 @@ tags: [chat-exp, system-design, postgres]
 
 | สิ่งที่คุณอาจคิด | การวิเคราะห์ (Senior Perspective) |
 |---|---|
-|"แค่เพิ่ม`max_connections` ก็จบ" | ❌ ** อันตราย!** ทุก Connection ใน Postgres คือ 1 Process ใน OS ซึ่งใช้ Memory และ CPU มหาศาล การมี Process เยอะเกินไปจะทำให้เกิด Context Switching จนระบบอืดลงอย่างมาก |
+|"แค่เพิ่ม`max_connections` ก็จบ" | ❌ **อันตราย!**ทุก Connection ใน Postgres คือ 1 Process ใน OS ซึ่งใช้ Memory และ CPU มหาศาล การมี Process เยอะเกินไปจะทำให้เกิด Context Switching จนระบบอืดลงอย่างมาก |
 |"ใช้ Connection Pool ภายในแอป (เช่น HikariCP)" | ⚠️ ช่วยได้ในระดับหนึ่ง แต่ถ้าคุณมีหลายสิบ Microservices แต่ละตัวก็ยังจองที่นั่งของตัวเองจนเต็มอยู่ดี |
-|"ติดตั้ง PgBouncer (External Pooler)" | ✅ ** ถูกต้อง!**PgBouncer จะเป็นตัวกลางที่ช่วยจัดการ"แชร์" Connection จริงๆ ให้กับแอป ทำให้คุณรองรับ Pods เป็นร้อยได้ด้วย Connection จริงเพียงไม่กี่สิบ |
+|"ติดตั้ง PgBouncer (External Pooler)" | ✅**ถูกต้อง!**PgBouncer จะเป็นตัวกลางที่ช่วยจัดการ"แชร์" Connection จริงๆ ให้กับแอป ทำให้คุณรองรับ Pods เป็นร้อยได้ด้วย Connection จริงเพียงไม่กี่สิบ |
 
 ---
 
@@ -70,7 +68,7 @@ PostgreSQL ออกแบบมาให้ 1 Connection = 1 Process ซึ่�
 
 เมื่อมีเครื่องอ่าน (Read Replicas) หลายเครื่อง แอปของคุณต้องรู้ว่าจะส่ง Query ไปที่ไหน
 *   **Application Level:** ใน Code ต้องแยก Database 📦 Connection ระหว่าง`Writer` (Primary) และ`Reader` (Replica Cluster)
-*   **Infrastructure 🏗️ Level:** ใช้ Proxy เช่น **HAProxy ** หรือ **Cloud Load Balancer ** เพื่อกระจายงานไปยัง Replicas
+*   **Infrastructure 🏗️ Level:**ใช้ Proxy เช่น**HAProxy**หรือ**Cloud Load Balancer** เพื่อกระจายงานไปยัง Replicas
 
 ### Replication Lag: สิ่งที่ต้องระวัง
 
@@ -80,24 +78,22 @@ PostgreSQL ออกแบบมาให้ 1 Connection = 1 Process ซึ่�
 ### กรณีศึกษา: สถาปัตยกรรมระบบแชทจริง (Scaling Strategy)
 
 ในระบบตัวอย่างที่เราศึกษา ซึ่งรองรับ Agent นับพันคนพร้อมกัน:
-*   ใช้ **PgBouncer ** ในโหมด **Transaction ** เพื่อรับโหลดจาก 19 Microservices
-*   ใช้ **Read Replicas ** เพื่อให้ระบบ Dashboard ของ Agent ดึงข้อมูลประวัติแชทมหาศาลโดยไม่รบกวนการรับส่งข้อความ Real-time ⏰ ในเครื่อง Primary
+*   ใช้ **PgBouncer**ในโหมด**Transaction** เพื่อรับโหลดจาก 19 Microservices
+*   ใช้ **Read Replicas**เพื่อให้ระบบ Dashboard ของ Agent ดึงข้อมูลประวัติแชทมหาศาลโดยไม่รบกวนการรับส่งข้อความ Real-time ⏰ ในเครื่อง Primary
 
 ---
 
 ## ✅ จุดตรวจสอบ (Checkpoint)
 
-🎯**Quick Check:**
-ทำไมการมี`max_connections` เยอะๆ ถึงทำให้ CPU ทำงานหนักขึ้น?
+🎯**Quick Check:**ทำไมการมี`max_connections` เยอะๆ ถึงทำให้ CPU ทำงานหนักขึ้น?
 ความแตกต่างระหว่าง Transaction Mode และ Session Mode ใน PgBouncer คืออะไร?
 หากต้องการทำ Report ประจำปีที่ต้องสแกนตารางทั้งใบ ควรส่ง Query นี้ไปที่เครื่องใด?
 
 <details>
 <summary>ดูเฉลย (คลิกเพื่อเปิด)</summary>
 
-เพราะเกิด **Context Switching **— CPU ต้องสลับไปมาเพื่อจัดการ Process จำนวนมากจนไม่มีเวลาทำงานจริง
-**Session Mode ** จองขาด (1 แอป : 1 DB Connection) |**Transaction Mode ** จองเฉพาะช่วงที่ทำงาน (จบ COMMIT/ROLLBACK ปุ๊บ คืนให้คนอื่นทันที)
-**Read Replica ** — เพื่อป้องกันไม่ให้การสแกนข้อมูลมหาศาลไปแย่งทรัพยากรจากการทำงานปกติในเครื่อง Primary
+เพราะเกิด**Context Switching**— CPU ต้องสลับไปมาเพื่อจัดการ Process จำนวนมากจนไม่มีเวลาทำงานจริง
+**Session Mode**จองขาด (1 แอป : 1 DB Connection) |**Transaction Mode**จองเฉพาะช่วงที่ทำงาน (จบ COMMIT/ROLLBACK ปุ๊บ คืนให้คนอื่นทันที)**Read Replica** — เพื่อป้องกันไม่ให้การสแกนข้อมูลมหาศาลไปแย่งทรัพยากรจากการทำงานปกติในเครื่อง Primary
 
 </details>
 

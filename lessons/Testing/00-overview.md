@@ -9,9 +9,8 @@ tags: [testing, api-testing, service-virtualization, mountebank, load-testing, p
 # Testing — ทดสอบก่อนที่ผู้ใช้จะทดสอบให้
 
 > [!info] ปฐมนิเทศ
->"It works on my machine" คือประโยคที่คร่าชีวิต Production มาแล้วนับครั้งไม่ถ้วน ปัญหาไม่ใช่ว่าคุณเขียนโค้ดไม่ดี — แต่คือโค้ดของคุณไม่เคยเจอโลกจริง: API ที่ล่ม, Network Latency ที่เหวี่ยง, Load ที่ถาโถมแบบไม่ทันตั้งตัว ซีรีส์นี้จะสอนให้คุณจำลองโลกจริงใน Test Environment ด้วย **Service Virtualization (Mountebank)** และ **Load Testing **
->
-> Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
+>"It works on my machine" คือประโยคที่คร่าชีวิต Production มาแล้วนับครั้งไม่ถ้วน ปัญหาไม่ใช่ว่าคุณเขียนโค้ดไม่ดี — แต่คือโค้ดของคุณไม่เคยเจอโลกจริง: API ที่ล่ม, Network Latency ที่เหวี่ยง, Load ที่ถาโถมแบบไม่ทันตั้งตัว ซีรีส์นี้จะสอนให้คุณจำลองโลกจริงใน Test Environment ด้วย **Service Virtualization (Mountebank)**และ**Load Testing**>
+> Each lesson takes**5-10 minutes**based on the **Learning Loop**principle.
 
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 

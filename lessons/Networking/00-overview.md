@@ -13,7 +13,7 @@ tags: [chat-exp, system-design, networking]
 >
 > ซีรีส์นี้จะพาคุณไปดูเบื้องหลังของการสื่อสารในระบบ Distributed Systems ที่ Senior Engineer ต้องรู้
 >
-> Each lesson takes **5-10 minutes **based on the **Learning Loop **principle.
+> Each lesson takes **5-10 minutes**based on the **Learning Loop**principle.
 
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 
@@ -35,7 +35,7 @@ tags: [chat-exp, system-design, networking]
 | 4 | [[04-grpc-vs-rest\|gRPC vs REST]] |"ทำไม Microservices ถึงนิยมใช้ gRPC มากกว่า REST ในการคุยกันเอง?" |
 
 > [!question] ลองทำก่อน
-> หากคุณต้องออกแบบระบบ **Video Streaming **(เช่น Netflix):
+> หากคุณต้องออกแบบระบบ **Video Streaming**(เช่น Netflix):
 > 1. การเลือก Server เพื่อส่งไฟล์วิดีโอควรใช้เงื่อนไขอะไร? (IP, Headers, หรือ Geographic?)
 > 2. คุณจะใช้ Load Balancer ระดับไหนเพื่อดูว่า User คนนี้กำลังขอวิดีโอเรื่องอะไร?
 >

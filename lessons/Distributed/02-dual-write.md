@@ -18,13 +18,11 @@ Dual Write Problem คือหนึ่งใน Distributed Systems Bug ที
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️ **สถานการณ์:** คุณมี Order Service ที่เมื่อรับออเดอร์แล้วต้อง:
+> ✍️ **สถานการณ์:**คุณมี Order Service ที่เมื่อรับออเดอร์แล้วต้อง:
 > 1. เขียน Order ลง PostgreSQL
 > 2. ส่ง Event`OrderCreated` เข้า Kafka/Google PubSub ให้ Notification 📱 Service
 >
-> ** คำถาม:** เกิดอะไรขึ้นถ้า... PostgreSQL เขียนสำเร็จ แต่ Kafka/PubSub publish ไม่สำเร็จ? และ _กลับกัน_ ถ้า Kafka publish สำเร็จ แต่ PostgreSQL เขียนไม่สำเร็จ? ระบบของคุณรับมือกับทั้งสองกรณีได้หรือไม่?
-
-**✋ หยุดตรงนี้ **— เขียนแนวทางแก้ของคุณก่อนอ่านต่อ
+>**คำถาม:**เกิดอะไรขึ้นถ้า... PostgreSQL เขียนสำเร็จ แต่ Kafka/PubSub publish ไม่สำเร็จ? และ _กลับกัน_ ถ้า Kafka publish สำเร็จ แต่ PostgreSQL เขียนไม่สำเร็จ? ระบบของคุณรับมือกับทั้งสองกรณีได้หรือไม่?**✋ หยุดตรงนี้**— เขียนแนวทางแก้ของคุณก่อนอ่านต่อ
 
 ---
 
@@ -34,10 +32,8 @@ Dual Write Problem คือหนึ่งใน Distributed Systems Bug ที
 |---|---|
 |"ใช้ Transaction — ถ้าอันใดหนึ่งพังก็ Rollback ทั้งคู่" | ⚠️ PostgreSQL กับ PubSub คนละระบบ — ทำ Distributed Transaction ไม่ได้ (ไม่มี 2PC ใน PubSub) |
 |"เขียน DB ก่อน แล้วค่อยส่ง Event — ส่งไม่สำเร็จก็ไม่เป็นไร" | ❌ Notification 📱 Service ไม่รู้ว่ามี Order ใหม่ → ผู้ใช้ไม่ได้ Notification 📱 → ระบบไม่สมบูรณ์ |
-|"ใช้ Outbox Pattern" | ✅ ** ถูกทาง!** เก็บ Event ไว้ใน DB table เดียวกับ Business Data → Atomically ปลอดภัย 🛡️ → Worker ค่อยไปส่ง |
-|"ใช้ CDC (Change Data Capture)" | ✅ ** ถูกต้องเช่นกัน!** อ่านจาก DB Write-ahead Log → ส่ง Event — ไม่ต้องเปลี่ยน Business Logic เลย |
-
-**คนส่วนใหญ่ตอบผิดเพราะ:** ไม่รู้ว่า Distributed Transaction ระหว่างสองระบบที่แตกต่างกัน _ไม่มีอยู่จริง_ — หรือคิดว่า"แค่ Retry" ก็พอ
+|"ใช้ Outbox Pattern" | ✅ **ถูกทาง!**เก็บ Event ไว้ใน DB table เดียวกับ Business Data → Atomically ปลอดภัย 🛡️ → Worker ค่อยไปส่ง |
+|"ใช้ CDC (Change Data Capture)" | ✅**ถูกต้องเช่นกัน!**อ่านจาก DB Write-ahead Log → ส่ง Event — ไม่ต้องเปลี่ยน Business Logic เลย |**คนส่วนใหญ่ตอบผิดเพราะ:**ไม่รู้ว่า Distributed Transaction ระหว่างสองระบบที่แตกต่างกัน _ไม่มีอยู่จริง_ — หรือคิดว่า"แค่ Retry" ก็พอ
 
 ---
 
@@ -65,8 +61,8 @@ Dual Write Problem คือหนึ่งใน Distributed Systems Bug ที
 |---|---|---|---|
 | 1. Happy Path | ✅ | ✅ | ถูกต้อง |
 | 2. DB พังก่อน | ❌ | ไม่ได้เรียก | ถูกต้อง (แค่ Retry ทั้งหมด) |
-| 3. DB สำเร็จ PubSub พัง | ✅ | ❌ | ❌ **Order อยู่ใน DB แต่ Notification 📱 ไม่ส่ง **|
-| 4. PubSub สำเร็จ DB พัง | ❌ | ✅ | ❌ **Notification 📱 ส่งแล้ว แต่ Order ไม่มีอยู่จริง ** |
+| 3. DB สำเร็จ PubSub พัง | ✅ | ❌ | ❌**Order อยู่ใน DB แต่ Notification 📱 ไม่ส่ง**|
+| 4. PubSub สำเร็จ DB พัง | ❌ | ✅ | ❌ **Notification 📱 ส่งแล้ว แต่ Order ไม่มีอยู่จริง** |
 
 ### 4 วิธีแก้ — เรียงจากง่ายไปซับซ้อน
 
@@ -91,7 +87,7 @@ Outbox Processor (แยก Process):
 
 **ข้อดี:**Atomic (บันทึกใน Transaction เดียว) — ไม่มีวันหาย
 **ข้อเสีย:**At-least-once delivery (ต้องทำ [[../../05-idempotency|Idempotent Consumer]])
-**เมื่อใช้:** เกือบทุกกรณี — เป็น Pattern ที่ได้รับการยอมรับอย่างกว้างขวางเพราะแก้ปัญหา Dual Write ได้โดยไม่ต้องเปลี่ยน Business Logic
+**เมื่อใช้:**เกือบทุกกรณี — เป็น Pattern ที่ได้รับการยอมรับอย่างกว้างขวางเพราะแก้ปัญหา Dual Write ได้โดยไม่ต้องเปลี่ยน Business Logic
 
 #### วิธีที่ 2: CDC — Change Data Capture
 
@@ -100,11 +96,7 @@ PostgreSQL WAL Log ──▶ Debezium/Kafka Connect ──▶ Kafka/PubSub
                             │
                             └── อ่านทุก INSERT/UPDATE/DELETE จาก DB
                                 โดยไม่ต้องแก้ Business Logic เลย
-```
-
-**ข้อดี:** ไม่ต้องเปลี่ยน Code เดิม — แค่เสียบเข้าไป
-**ข้อเสีย:** เพิ่ม Infrastructure 🏗️ Complexity (ต้องรัน Debezium)
-**เมื่อใช้:**Microservices เยอะ (10+) ที่แชร์ DB เดียวกัน
+```**ข้อดี:**ไม่ต้องเปลี่ยน Code เดิม — แค่เสียบเข้าไป**ข้อเสีย:**เพิ่ม Infrastructure 🏗️ Complexity (ต้องรัน Debezium)**เมื่อใช้:**Microservices เยอะ (10+) ที่แชร์ DB เดียวกัน
 
 #### วิธีที่ 3: Transactional Outbox + Polling Publisher
 
@@ -125,7 +117,7 @@ connection.on('notification', (msg) => {
 ```
 
 **ข้อดี:**Latency ต่ำกว่า Outbox Polling
-**ข้อเสีย:** เพิ่ม Connection ให้ PostgreSQL
+**ข้อเสีย:**เพิ่ม Connection ให้ PostgreSQL
 
 #### วิธีที่ 4: สอง Phase Commit (2PC) — ไม่แนะนำ
 
@@ -163,10 +155,7 @@ Coordinator เป็น Single Point of Failure
    4. At-least-once guarantee → Consumer ต้อง [[../../05-idempotency|Idempotent]]
 ```
 
-### คำถามที่ผู้สัมภาษณ์ชอบถาม:"Outbox Processor ใช้ Pull แบบไหน?"
-
-**คำตอบระดับ Senior:**
->"ผมใช้ Polling Interval แบบ Adaptive: ปกติ Poll ทุก 2 วินาที แต่ถ้าเจอ Records เยอะในรอบก่อน → ลด Interval เหลือ 100ms ถ้าไม่มี Records → เพิ่มเป็น 5 วินาที เราเรียกสิ่งนี้ว่า Adaptive Polling — มันบาลานซ์ระหว่าง Latency กับ DB Load ได้ดี"
+### คำถามที่ผู้สัมภาษณ์ชอบถาม:"Outbox Processor ใช้ Pull แบบไหน?"**คำตอบระดับ Senior:**>"ผมใช้ Polling Interval แบบ Adaptive: ปกติ Poll ทุก 2 วินาที แต่ถ้าเจอ Records เยอะในรอบก่อน → ลด Interval เหลือ 100ms ถ้าไม่มี Records → เพิ่มเป็น 5 วินาที เราเรียกสิ่งนี้ว่า Adaptive Polling — มันบาลานซ์ระหว่าง Latency กับ DB Load ได้ดี"
 
 ### เมื่อ Outbox โตขึ้น: Tombstone Strategy
 

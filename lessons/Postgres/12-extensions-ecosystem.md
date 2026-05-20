@@ -12,7 +12,7 @@ tags: [chat-exp, system-design, postgres]
 
 ## 🎯 ปฐมนิเทศ (Orient)
 
-คุณอาจรู้จัก PostgreSQL ในฐานะฐานข้อมูลแบบ Relational แต่ความลับที่ทำให้มันครองใจวิศวกรทั่วโลกคือ **"Extension Ecosystem"** ที่ช่วยให้มันแปลงร่างเป็นอะไรก็ได้ที่คุณต้องการ
+คุณอาจรู้จัก PostgreSQL ในฐานะฐานข้อมูลแบบ Relational แต่ความลับที่ทำให้มันครองใจวิศวกรทั่วโลกคือ **"Extension Ecosystem"**ที่ช่วยให้มันแปลงร่างเป็นอะไรก็ได้ที่คุณต้องการ
 
 หากคุณต้องการเก็บพิกัดแผนที่, จัดการข้อมูล AI (Vectors), ทำระบบ Time-series สำหรับ IoT หรือแม้แต่การรัน Cron Jobs ในฐานข้อมูล — คุณสามารถทำได้ทั้งหมดภายใน Postgres ตัวเดียวโดยไม่ต้องติดตั้ง Database ใหม่เพิ่ม บทเรียนนี้จะแนะนำให้คุณรู้จัก Extension ที่"ต้องมี" สำหรับระบบระดับโมเดิร์น
 
@@ -20,14 +20,12 @@ tags: [chat-exp, system-design, postgres]
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️ ** สถานการณ์:** คุณกำลังสร้างแอปพลิเคชันยุคใหม่ที่ต้องการ:
+> ✍️**สถานการณ์:**คุณกำลังสร้างแอปพลิเคชันยุคใหม่ที่ต้องการ:
 > 1. เก็บพิกัดละติจูด/ลองจิจูดของร้านค้าและหา"ร้านที่ใกล้ที่สุด"
 > 2. เก็บ Embeddings ของข้อความเพื่อทำระบบค้นหาด้วย AI 🧠 (Semantic Search)
 > 3. เก็บ Log การเข้าใช้งานวันละหลายล้านแถวและทำการบีบอัด (Compression) อัตโนมัติ
 >
-> ** คำถาม:** ในฐานะคนออกแบบระบบ คุณต้องติดตั้ง Database 📦 กี่ตัว? (PostgreSQL + Redis + MongoDB + Elasticsearch + ...) หรือมีวิธีที่ง่ายกว่านั้น?
-
-**หยุดคิดสักครู่ **— การดูแล Database 📦 5 ตัว กับตัวเดียว แตกต่างกันอย่างไรในเชิงการทำงาน?
+>**คำถาม:**ในฐานะคนออกแบบระบบ คุณต้องติดตั้ง Database 📦 กี่ตัว? (PostgreSQL + Redis + MongoDB + Elasticsearch + ...) หรือมีวิธีที่ง่ายกว่านั้น?**หยุดคิดสักครู่**— การดูแล Database 📦 5 ตัว กับตัวเดียว แตกต่างกันอย่างไรในเชิงการทำงาน?
 
 ---
 
@@ -36,7 +34,7 @@ tags: [chat-exp, system-design, postgres]
 | สิ่งที่คุณอาจคิด | การวิเคราะห์ (Senior Perspective) |
 |---|---|
 |"ใช้ Database 📦 เฉพาะทางแยกกัน (Best-of-breed)" | ⚠️ แม้จะมีฟีเจอร์ครบ แต่ความซับซ้อนในการดูแล (Operational Complexity) และการทำ Data Sync จะทำให้ทีมเหนื่อยล้าและเกิดปัญหาข้อมูลไม่ตรงกัน |
-|"ใช้ PostgreSQL ตัวเดียว + Extensions" | ✅ ** ถูกต้อง!** สำหรับระบบที่ขนาดไม่ใหญ่ระดับ Facebook หรือ Google การใช้ Postgres + Extensions คือทางเลือกที่ชาญฉลาดที่สุด เพราะช่วยลด Overhead และประหยัดค่าใช้จ่ายได้มหาศาล |
+|"ใช้ PostgreSQL ตัวเดียว + Extensions" | ✅ **ถูกต้อง!**สำหรับระบบที่ขนาดไม่ใหญ่ระดับ Facebook หรือ Google การใช้ Postgres + Extensions คือทางเลือกที่ชาญฉลาดที่สุด เพราะช่วยลด Overhead และประหยัดค่าใช้จ่ายได้มหาศาล |
 
 ---
 
@@ -46,7 +44,7 @@ tags: [chat-exp, system-design, postgres]
 
 #### 1. pgvector (อาวุธสำหรับยุค AI)
 
-ช่วยให้คุณเก็บข้อมูล **Embeddings **(ตัวเลขเวกเตอร์จาก AI 🧠 เช่น OpenAI) ได้โดยตรง และค้นหาความคล้ายคลึงของข้อมูล (Similarity Search) ได้อย่างรวดเร็ว
+ช่วยให้คุณเก็บข้อมูล**Embeddings**(ตัวเลขเวกเตอร์จาก AI 🧠 เช่น OpenAI) ได้โดยตรง และค้นหาความคล้ายคลึงของข้อมูล (Similarity Search) ได้อย่างรวดเร็ว
 *   **ใช้ทำ:** ระบบแนะนำสินค้า, Semantic Search ("หารูปที่มีหมาสีขาว"), RAG (Retrieval-Augmented Generation)
 
 #### 2. PostGIS (มาตรฐานโลกสำหรับ GIS)
@@ -83,7 +81,7 @@ SELECT * FROM remote_server_orders WHERE amount > 1000;
 แม้ Extensions จะเก่งมาก แต่การติดตั้งเยอะเกินไปมีข้อควรระวัง:
 *   **Version Compatibility:** เมื่อต้องการอัปเกรด Postgres ต้องเช็คว่า Extensions รองรับเวอร์ชันใหม่หรือยัง
 *   **Memory Usage:**Extension บางตัว (เช่น TimescaleDB) กินทรัพยากรเพิ่มขึ้นอย่างเห็นได้ชัด
-*   **Vendor Support:** หากใช้ Managed Database 📦 (เช่น AWS RDS, Google Cloud SQL) ต้องเช็คลิสต์ว่าเขารองรับ Extension ตัวนั้นไหม
+*   **Vendor Support:**หากใช้ Managed Database 📦 (เช่น AWS RDS, Google Cloud SQL) ต้องเช็คลิสต์ว่าเขารองรับ Extension ตัวนั้นไหม
 
 ### กรณีศึกษา: พลังของการใช้ระบบเดียว (The Power of One)
 
@@ -93,15 +91,12 @@ SELECT * FROM remote_server_orders WHERE amount > 1000;
 
 ## ✅ จุดตรวจสอบ (Checkpoint)
 
-🎯**Quick Check:**
-Extension ใดที่ใช้ในการทำระบบค้นหาความคล้ายคลึงของข้อความด้วย AI 🧠?
+🎯**Quick Check:**Extension ใดที่ใช้ในการทำระบบค้นหาความคล้ายคลึงของข้อความด้วย AI 🧠?
 หากต้องการรันคำสั่ง`DELETE` ข้อมูลเก่าทุกๆ ตี 2 ภายในฐานข้อมูล ควรใช้ Extension ใด?
 ประโยชน์สูงสุดของการใช้ Extensions แทนการตั้ง Database 📦 ใหม่คืออะไร?
 
 <details>
-<summary>ดูเฉลย (คลิกเพื่อเปิด)</summary>
-
-**`pgvector`**
+<summary>ดูเฉลย (คลิกเพื่อเปิด)</summary>**`pgvector`**
 **`pg_cron`**
 **ลดความซับซ้อน (Simplicity):** ดูแลแค่ระบบเดียว, Backup ที่เดียว, และใช้ SQL เดียวในการ JOIN ข้อมูลข้ามประเภทกันได้ทันที
 
