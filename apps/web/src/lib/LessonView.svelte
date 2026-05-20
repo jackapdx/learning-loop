@@ -281,7 +281,7 @@
   }
 </script>
 
-<div class="max-w-3xl mx-auto px-4 py-8 sm:py-12">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
   {#if loading}
     <div class="flex items-center justify-center py-20">
       <div class="flex flex-col items-center gap-4">
@@ -381,7 +381,7 @@
     </div>
 
     <!-- Current Step Content -->
-    <div class="mha-card animate-maha-slide-up" use:highlightOnUpdate={currentStep} use:vocabTooltip>
+    <div class="mha-card-static animate-maha-slide-up" use:highlightOnUpdate={currentStep} use:vocabTooltip>
       <div class="mha-card-body">
         <h2 class="text-lg font-semibold text-surface-900 dark:text-surface-100 mb-4 flex items-center gap-2">
           {@html currentSection?.title || ''}
@@ -527,7 +527,7 @@
     <!-- Completion screen -->
     {#if showCompletion}
       <div class="mt-8 animate-maha-slide-up">
-        <div class="mha-card p-6 sm:p-8 text-center border-2 border-green-200 dark:border-green-800">
+        <div class="mha-card-static p-6 sm:p-8 text-center border-2 border-green-200 dark:border-green-800">
           <div class="text-5xl mb-3">🎉</div>
           <h3 class="text-xl font-bold text-surface-900 dark:text-surface-100 mb-1">เรียนจบบทเรียนแล้ว!</h3>
           <p class="text-surface-600 dark:text-surface-300 text-sm mb-6">

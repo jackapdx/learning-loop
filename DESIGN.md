@@ -104,7 +104,12 @@ spacing:
   gutter: 24px
   margin-mobile: 16px
   margin-desktop: 48px
-  container-max: 1280px
+  container-max: 1152px
+  reading-max: 896px
+  breakpoint-sm: 640px
+  breakpoint-md: 768px
+  breakpoint-lg: 1024px
+  breakpoint-xl: 1280px
 ---
 
 ## Brand & Style
@@ -159,9 +164,31 @@ The typography strategy prioritizes clarity and institutional trust. **Hanken Gr
 **Public Sans** is utilized for all body copy. As a font designed for accessibility and institutional clarity, it ensures that educational content is digestible and inclusive. Large displays use a tighter letter-spacing and heavier weights to command attention, while labels utilize uppercase tracking to mimic blueprint annotations.
 
 ## Layout & Spacing
-The layout follows a **Fixed-Grid System** inspired by drafting paper. It uses a 12-column grid for desktop and a 4-column grid for mobile. 
 
-Spacing is strictly derived from an 8px base unit to maintain mathematical harmony. To emphasize the "architectural" theme, use generous inner padding within containers (minimum 24px) to give content room to breathe. Margins and gutters are kept consistent to reinforce a sense of stability and order. Reflow rules should prioritize vertical stacking on mobile, maintaining the 8px rhythm even when elements collapse.
+The layout follows a **mobile-first responsive strategy** with clean content-driven breakpoints. Based on 2025–2026 global screen resolution data (60% mobile traffic, 360–430px mobile cluster, 1920×1080 desktop dominant), the system adopts pragmatic container widths aligned with Tailwind CSS breakpoints.
+
+### Container Widths
+
+| Context | Max-Width | Rationale |
+|---|---|---|
+| Navbar / Footer | 1152px (`max-w-6xl`) | Modern structural chrome — wider than old Bootstrap 1140px, just under the common 1200px convention |
+| Landing Hero & Features | 1152px (`max-w-6xl`) | Spacious hero layout for headline, feature grid, and philosophy cards |
+| Course Overview Grid | 1152px (`max-w-6xl`) | 2-column lesson cards breathe properly on desktop |
+| Lesson Content | 896px (`max-w-4xl`) | ~80–85 chars/line at prose-sm (14px), ideal for mixed Thai/English with code blocks and tables |
+| Quiz Modals | 512px (`max-w-lg`) | Compact overlay for focused question-answer interaction |
+
+### Breakpoint Strategy
+
+Mobile-first with `min-width` media queries:
+
+- **Base (mobile):** 320–640px — single column, 16px page margins, base styles for smallest phones
+- **Tablet (md):** ≥ 768px — wider grids, 24px margins, multi-column where content benefits
+- **Desktop (lg):** ≥ 1024px — full layouts, sidebars, expanded navigation
+- **Wide (xl):** ≥ 1280px — extra whitespace, maximum containers cap at 1152px
+
+### Spacing Scale
+
+Strictly derived from an 8px base unit to maintain mathematical harmony. Generous inner padding within containers (minimum 24px) gives content room to breathe. Margins and gutters remain consistent to reinforce stability and order. Reflow rules prioritize vertical stacking on mobile, maintaining the 8px rhythm even when elements collapse.
 
 ## Elevation & Depth
 Depth in this high-tech system is communicated through **Low-Contrast Outlines**, **Tonal Layers**, and **Ambient Glow** — never heavy drop shadows. The aesthetic evokes illuminated glass panels floating above a drafting surface.

@@ -246,6 +246,16 @@
   .dark .mha-card:hover {
     box-shadow: 0 0 16px rgba(16, 185, 129, 0.18), 0 4px 24px rgba(0, 0, 0, 0.3);
   }
+  /* Static card variant — no hover lift/glow. Use for reading/content cards where hover is distracting. */
+  .mha-card-static {
+    @apply bg-white rounded-lg border border-surface-200 shadow-none
+           dark:bg-surface-800 dark:border-surface-700;
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    transition: none;
+  }
+  .dark .mha-card-static {
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.04);
+  }
   .mha-card-header {
     @apply px-6 py-4 border-b border-surface-200
            dark:border-surface-600;
@@ -1017,24 +1027,17 @@ html {
   background-size: 24px 24px;
 }
 
-/* Dot-grid + blueprint line overlay — dual-layer grid for hero sections */
+/* Dot-grid — blueprint dot pattern for hero sections */
 .dot-grid-blueprint {
   background-image:
-    /* dot layer */
-    radial-gradient(circle, rgba(15, 23, 42, 0.12) 1.5px, transparent 1.5px),
-    /* vertical lines */
-    linear-gradient(90deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-    /* horizontal lines */
-    linear-gradient(0deg, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
-  background-size: 24px 24px, 72px 72px, 72px 72px;
+    radial-gradient(circle, rgba(15, 23, 42, 0.12) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
 }
 
 .dark .dot-grid-blueprint {
   background-image:
-    radial-gradient(circle, rgba(148, 163, 184, 0.12) 1.5px, transparent 1.5px),
-    linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px),
-    linear-gradient(0deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
-  background-size: 24px 24px, 72px 72px, 72px 72px;
+    radial-gradient(circle, rgba(148, 163, 184, 0.12) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
 }
 
 @media (max-width: 640px) {

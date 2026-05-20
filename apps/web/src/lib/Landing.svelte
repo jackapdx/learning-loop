@@ -22,7 +22,7 @@
   const sectionCount = $derived(data?.sections?.length ?? 10);
 </script>
 
-<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
   <!-- Hero with dot-grid background + high-tech vibe -->
   <section class="relative pt-16 pb-12 sm:pt-28 sm:pb-20 overflow-hidden dot-grid-blueprint bg-surface-50 dark:bg-[#020617]">
     <!-- Ambient emerald glow behind hero content -->
@@ -32,8 +32,8 @@
       <div class="absolute top-1/3 right-1/4 w-[300px] h-[200px] rounded-full bg-emerald-400/3 dark:bg-emerald-400/5 blur-[80px]"></div>
     </div>
 
-    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-surface-900 tracking-tight mb-4 dark:text-surface-50" style="font-family: var(--font-family-heading); line-height: 1.35; letter-spacing: -0.02em;">
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-surface-900 tracking-tight mb-4 dark:text-surface-100" style="font-family: var(--font-family-heading); line-height: 1.35; letter-spacing: -0.02em;">
         System Design<br class="hidden sm:block" />
         <span class="text-emerald-600 dark:text-emerald-400 dark:text-glow-emerald">ที่คุณเข้าใจจริง</span>
       </h1>
@@ -149,7 +149,7 @@
       <span class="inline-block text-xs font-semibold text-emerald-600 uppercase tracking-widest mb-3 dark:text-emerald-400" style="font-family: var(--font-family-heading); letter-spacing: 0.08em;">
         Our Philosophy
       </span>
-      <h2 class="text-2xl sm:text-3xl font-bold text-surface-900 tracking-tight mb-2 dark:text-surface-50" style="font-family: var(--font-family-heading); letter-spacing: -0.02em;">
+      <h2 class="text-2xl sm:text-3xl font-bold text-surface-900 tracking-tight mb-2 dark:text-surface-100" style="font-family: var(--font-family-heading); letter-spacing: -0.02em;">
         เขียนแบบ Engineer<br class="sm:hidden" /> ไม่ใช่ Salesperson
       </h2>
       <p class="max-w-md mx-auto text-sm text-surface-500 dark:text-surface-400">

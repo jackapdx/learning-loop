@@ -130,7 +130,7 @@
   });
 </script>
 
-<div class="max-w-4xl mx-auto px-4 py-8 sm:py-12">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
   {#if loading}
     <div class="flex items-center justify-center py-20">
       <div class="flex flex-col items-center gap-4">
@@ -152,7 +152,7 @@
       <button onclick={() => navigate('')} class="inline-block text-xs text-surface-400 hover:text-emerald-600 dark:text-surface-500 dark:hover:text-emerald-400 transition-maha mb-6 border-0 bg-transparent cursor-pointer" style="font-family: var(--font-family-heading); letter-spacing: 0.05em;">
         ← Home
       </button>
-      <h1 class="text-3xl sm:text-4xl font-bold text-surface-900 dark:text-surface-50 mb-3 tracking-tight" style="font-family: var(--font-family-heading); letter-spacing: -0.02em;">
+      <h1 class="text-3xl sm:text-4xl font-bold text-surface-900 dark:text-surface-100 mb-3 tracking-tight" style="font-family: var(--font-family-heading); letter-spacing: -0.02em;">
         {overview.title}
       </h1>
 

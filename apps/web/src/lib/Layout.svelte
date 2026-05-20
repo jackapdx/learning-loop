@@ -47,7 +47,7 @@
   <!-- Navbar -->
   <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-surface-200
               dark:bg-surface-900/90 dark:border-surface-700">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
       <button onclick={() => { window.location.hash = ''; window.location.reload(); }} class="flex items-center gap-2 text-lg font-bold text-surface-900 dark:text-surface-100 hover:opacity-80 transition-maha border-0 bg-transparent cursor-pointer" style="font-family: var(--font-family-heading); letter-spacing: -0.01em;">
         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 dark:bg-emerald-400"></span>
         System Design
@@ -87,7 +87,7 @@
   <!-- Footer -->
   <footer class="bg-white border-t border-surface-200 py-6 px-4 mt-auto
                   dark:bg-surface-900 dark:border-surface-700">
-    <div class="max-w-5xl mx-auto text-center text-xs text-surface-400 dark:text-surface-500">
+    <div class="max-w-6xl mx-auto text-center text-xs text-surface-400 dark:text-surface-500">
       <a href="https://apdx.dev" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-maha">apdx.dev</a> — Built with Svelte 5
     </div>
   </footer>
