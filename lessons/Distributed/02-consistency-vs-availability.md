@@ -4,7 +4,7 @@ contentType: learning-loop
 level: senior
 status: polished
 tags: [system-design, distributed-systems, cap-theorem, consistency, availability]
-prerequisites: [01-trade-off-articulation]
+prerequisites: [core/01-trade-off-articulation]
 ---
 
 # Consistency vs. Availability (ความสอดคล้องและความพร้อมใช้งาน: เจาะลึกทฤษฎี CAP)

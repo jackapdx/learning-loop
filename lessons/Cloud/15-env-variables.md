@@ -4,7 +4,7 @@ contentType: learning-loop
 level: beginner
 status: polished
 tags: [devops, security, configuration, 12-factor-app]
-prerequisites: [10-monolith-microservice-monorepo]
+prerequisites: [core/10-monolith-microservice-monorepo]
 ---
 
 # .env (การจัดการ Config ผ่าน Environment Variables)

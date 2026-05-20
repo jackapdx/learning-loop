@@ -4,7 +4,7 @@ contentType: learning-loop
 level: senior
 status: polished
 tags: [system-design, storage, networking, fundamentals]
-prerequisites: [03-cache-invalidation]
+prerequisites: [core/03-cache-invalidation]
 ---
 
 # Buffer vs Cache: จุดที่คนสับสนบ่อยที่สุด

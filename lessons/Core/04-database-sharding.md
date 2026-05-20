@@ -4,7 +4,7 @@ contentType: learning-loop
 level: senior
 status: polished
 tags: [system-design, database, scalability, sharding, distributed-systems]
-prerequisites: [02-consistency-vs-availability, 03-cache-invalidation]
+prerequisites: [distributed/02-consistency-vs-availability, core/03-cache-invalidation]
 ---
 
 # Database Sharding (ยุทธศาสตร์การแบ่งส่วนข้อมูลในระดับสูง)

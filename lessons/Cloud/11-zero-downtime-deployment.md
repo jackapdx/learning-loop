@@ -4,7 +4,7 @@ contentType: learning-loop
 level: senior
 status: polished
 tags: [devops, system-design, zero-downtime, database-migrations]
-prerequisites: [09-load-balancer, 10-monolith-microservice-monorepo]
+prerequisites: [networking/09-load-balancer, core/10-monolith-microservice-monorepo]
 ---
 
 # Zero Downtime Deployment: เมื่อการอัปเดตระบบต้องไม่สะดุด

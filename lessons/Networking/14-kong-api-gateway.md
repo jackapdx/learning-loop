@@ -4,7 +4,7 @@ contentType: learning-loop
 level: senior
 status: polished
 tags: [system-design, networking, api-gateway, microservices]
-prerequisites: [09-load-balancer, 10-monolith-microservice-monorepo]
+prerequisites: [networking/09-load-balancer, core/10-monolith-microservice-monorepo]
 ---
 
 # API Gateway (Kong): ประตูหน้าของ Microservices

@@ -4,7 +4,7 @@ contentType: learning-loop
 level: senior
 status: polished
 tags: [system-design, caching, redis, performance, reliability]
-prerequisites: [02-consistency-vs-availability]
+prerequisites: [distributed/02-consistency-vs-availability]
 ---
 
 # Cache Invalidation (ยุทธศาสตร์การจัดการข้อมูลในแคช)
