@@ -1,0 +1,30 @@
+{
+  "name": "shared",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "bun": "./src/index.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "dev": "tsc --watch --preserveWatchOutput",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt --write src",
+    "format:check": "oxfmt --check src"
+  },
+  "dependencies": {
+    "arktype": "^2.2.0"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3",
+    "@types/node": "^22.15.0"
+  }
+}

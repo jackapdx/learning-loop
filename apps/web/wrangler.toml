@@ -1,0 +1,7 @@
+# Cloudflare Pages configuration for learning-loop-app (static site)
+name = "learning-loop-app"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-05-12"
+
+# Static site — no Workers needed
+# Deploy with: npx wrangler pages deploy dist

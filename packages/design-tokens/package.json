@@ -1,0 +1,28 @@
+{
+  "name": "@learning-loop-app/design-tokens",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.js",
+      "types": "./src/index.d.ts"
+    },
+    "./styles/tokens.css": "./src/styles/tokens.css",
+    "./styles/components.css": "./src/styles/components.css"
+  },
+  "scripts": {
+    "build": "echo 'No build required'",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt --write src",
+    "format:check": "oxfmt --check src"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.0",
+    "tailwindcss": "^4.3.0"
+  }
+}

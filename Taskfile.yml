@@ -1,0 +1,235 @@
+version: '3'
+
+output: prefixed
+
+vars:
+  PM: bun
+  RUN: bun run --cwd
+  PACKAGES:
+    - packages/shared
+    - packages/ui
+    - packages/design-tokens
+  APPS:
+    - apps/api
+    - apps/web
+
+env:
+  FORCE_COLOR: '1'
+
+tasks:
+  # ─── SETUP ───────────────────────────────────────────────────────
+  install:
+    desc: Install workspace dependencies
+    sources:
+      - package.json
+      - bun.lock
+    generates:
+      - node_modules
+      - apps/api/node_modules
+      - apps/web/node_modules
+      - packages/shared/node_modules
+      - packages/ui/node_modules
+    cmds:
+      - "{{.PM}} install --frozen-lockfile"
+    deps:
+      - ensure:pm
+
+  # ─── DEVELOPMENT ─────────────────────────────────────────────────
+  dev:
+    desc: Start all projects in development mode (builds shared + UI first)
+    aliases: [start]
+    deps: [build:shared, build:ui]
+    cmds:
+      - concurrently --names "shared,ui,api,web" --prefix-colors "blue,magenta,cyan,green" --hide "shared,ui" "{{.RUN}} packages/shared dev" "{{.RUN}} packages/ui dev" "{{.RUN}} apps/api dev" "{{.RUN}} apps/web dev"
+
+  dev:api:
+    desc: Start the Hono API server
+    aliases: [api]
+    deps: [install]
+    cmds:
+      - "{{.RUN}} apps/api dev"
+
+  dev:web:
+    desc: Start the React + Vite dev server
+    aliases: [web]
+    deps: [install]
+    cmds:
+      - "{{.RUN}} apps/web dev"
+
+  dev:shared:
+    desc: Start shared package in watch mode
+    aliases: [shared]
+    cmds:
+      - "{{.RUN}} packages/shared dev"
+
+  dev:ui:
+    desc: Start UI package in watch mode
+    aliases: [ui]
+    cmds:
+      - "{{.RUN}} packages/ui dev"
+
+  # ─── BUILD ───────────────────────────────────────────────────────
+  build:
+    desc: Build all projects in dependency order
+    aliases: [b]
+    deps: [build:shared, build:ui, build:api, build:web]
+
+  build:shared:
+    desc: Build shared library
+    sources:
+      - packages/shared/src/**/*.ts
+    generates:
+      - packages/shared/dist/
+    cmds:
+      - "{{.RUN}} packages/shared build"
+
+  build:ui:
+    desc: Build UI library
+    deps: [build:shared]
+    sources:
+      - packages/ui/src/**/*.{ts,tsx}
+    generates:
+      - packages/ui/dist/
+    cmds:
+      - "{{.RUN}} packages/ui build"
+
+  build:api:
+    desc: Build the Hono API
+    deps: [build:shared]
+    sources:
+      - apps/api/src/**/*.ts
+    generates:
+      - apps/api/dist/
+    cmds:
+      - "{{.RUN}} apps/api build"
+
+  build:web:
+    desc: Build the React app
+    deps: [build:shared, build:ui]
+    sources:
+      - apps/web/src/**/*.{ts,tsx}
+    generates:
+      - apps/web/dist/
+    cmds:
+      - "{{.RUN}} apps/web build"
+
+  # ─── TEST ────────────────────────────────────────────────────────
+  test:
+    desc: Run all tests
+    aliases: [t]
+    cmds:
+      - "{{.RUN}} apps/api test 2>/dev/null || true"
+      - "{{.RUN}} apps/web test"
+
+  test:api:
+    desc: Run API tests
+    cmds:
+      - "{{.RUN}} apps/api test"
+
+  test:web:
+    desc: Run web tests
+    cmds:
+      - "{{.RUN}} apps/web test"
+
+  test:watch:
+    desc: Run tests in watch mode
+    cmds:
+      - "{{.RUN}} apps/api test --watch"
+      - "{{.RUN}} apps/web test --watch"
+
+  # ─── CODE QUALITY ────────────────────────────────────────────────
+  lint:
+    desc: Lint all projects with oxlint
+    sources:
+      - "**/*.ts"
+      - "**/*.tsx"
+    cmds:
+      - oxlint
+
+  lint:fix:
+    desc: Lint and auto-fix issues
+    cmds:
+      - oxlint --fix
+
+  format:
+    desc: Format all code with oxfmt
+    aliases: [fmt]
+    sources:
+      - "**/*.ts"
+      - "**/*.tsx"
+      - "**/*.json"
+    cmds:
+      - oxfmt .
+
+  format:check:
+    desc: Check formatting without modifying files
+    aliases: [fmtchk]
+    cmds:
+      - oxfmt --check .
+
+  typecheck:
+    desc: Run type-checking on all workspace packages
+    aliases: [tc]
+    cmds:
+      - "{{.RUN}} packages/shared typecheck"
+      - "{{.RUN}} packages/ui typecheck"
+      - "{{.RUN}} apps/api typecheck"
+      - "{{.RUN}} apps/web typecheck"
+
+  # ─── CLEAN ───────────────────────────────────────────────────────
+  clean:
+    desc: Remove build artifacts
+    cmds:
+      - rm -rf apps/api/dist apps/web/dist packages/shared/dist packages/ui/dist
+
+  clean:deps:
+    desc: Remove node_modules and lockfile
+    cmds:
+      - rm -rf node_modules apps/*/node_modules packages/*/node_modules
+      - rm -f bun.lock bun.lockb
+
+  # ─── DOCKER ──────────────────────────────────────────────────────
+  docker:up:
+    desc: Start Docker services (API + Web)
+    cmds:
+      - docker-compose up -d
+
+  docker:down:
+    desc: Stop and remove Docker services
+    cmds:
+      - docker-compose down
+
+  docker:build:
+    desc: Build Docker images (API + Web)
+    cmds:
+      - docker-compose build
+
+  docker:logs:
+    desc: Tail logs from all services
+    cmds:
+      - docker-compose logs -f
+
+  # ─── CI ──────────────────────────────────────────────────────────
+  ci:
+    desc: Full CI pipeline (install -> lint -> typecheck -> test -> build)
+    aliases: [check]
+    deps: [install]
+    cmds:
+      - task: lint
+      - task: typecheck
+      - task: test
+      - task: build
+
+  # ─── UTILITIES ───────────────────────────────────────────────────
+  ensure:pm:
+    internal: true
+    desc: Verify package manager is installed
+    preconditions:
+      - sh: command -v bun >/dev/null 2>&1
+        msg: "bun is required. Install it first."
+
+  default:
+    desc: Show available tasks
+    aliases: [help]
+    cmds:
+      - task --list

@@ -1,0 +1,38 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+.turbo
+
+# Auto-generated lesson data
+apps/web/src/lib/lessons-data.ts
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Cloudflare
+.wrangler/
+
+# Coverage
+coverage/
+
+# pi agent artifacts
+.pi-lens
+
+# Bun
+*.local
+bun.lock.hash

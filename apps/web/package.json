@@ -1,0 +1,33 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "bun run scripts/prebuild-lessons.ts",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "svelte-check --tsconfig ./tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt --write src scripts",
+    "format:check": "oxfmt --check src scripts"
+  },
+  "dependencies": {
+    "svelte": "^5.55.5",
+    "shared": "workspace:*",
+    "ui": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^8.0.0",
+    "@sveltejs/vite-plugin-svelte": "^7.1.2",
+    "@tailwindcss/vite": "^4.3.0",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3",
+    "svelte-check": "^4.4.8",
+    "@types/node": "^22.15.0",
+    "marked": "^18.0.3"
+  }
+}

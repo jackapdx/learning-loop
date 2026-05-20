@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+    volumes:
+      - ./apps/api:/app
+      - /app/node_modules
+    command: bun dev
+    networks:
+      - maha-network
+
+  web:
+    build:
+      context: ./apps/web
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    environment:
+      - NODE_ENV=development
+      - VITE_API_URL=http://api:3000
+    volumes:
+      - ./apps/web:/app
+      - /app/node_modules
+    depends_on:
+      - api
+    command: bun dev
+    networks:
+      - maha-network
+
+networks:
+  maha-network:
+    driver: bridge

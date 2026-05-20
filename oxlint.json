@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/refs/heads/main/crates/oxc_linter/schema.json",
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    ".turbo",
+    "coverage",
+    "apps/web/src/lib/lessons-data.ts"
+  ],
+  "rules": {
+    "correctness": {
+      "no-unused-vars": "error",
+      "no-const-assign": "error",
+      "no-duplicate-imports": "error"
+    },
+    "style": {
+      "no-var": "error",
+      "prefer-const": "error"
+    },
+    "typescript": {
+      "no-explicit-any": "warn"
+    }
+  }
+}

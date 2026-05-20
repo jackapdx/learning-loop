@@ -1,0 +1,153 @@
+/* ==========================================================================
+   🌱 Intelligent Growth Design Tokens
+   Shared design system foundation.
+   Tailwind CSS v4 @theme directive — extends the default Tailwind theme.
+   ========================================================================== */
+
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* ── Brand Colours (Emerald Green — technical precision + natural vitality) ── */
+  --color-maha-50: #ecfdf5;
+  --color-maha-100: #d1fae5;
+  --color-maha-200: #a7f3d0;
+  --color-maha-300: #6ee7b7;
+  --color-maha-400: #34d399;
+  --color-maha-500: #10b981;
+  --color-maha-600: #059669;
+  --color-maha-700: #047857;
+  --color-maha-800: #065f46;
+  --color-maha-900: #064e3b;
+
+  /* ── Surface / Neutral palette (slate-based, architectural) ── */
+  --color-surface-50: #f8f9ff;
+  --color-surface-100: #f1f5f9;
+  --color-surface-200: #e2e8f0;
+  --color-surface-300: #cbd5e1;
+  --color-surface-400: #94a3b8;
+  --color-surface-500: #64748b;
+  --color-surface-600: #475569;
+  --color-surface-700: #334155;
+  --color-surface-800: #1e293b;
+  --color-surface-900: #0f172a;
+  --color-surface-950: #020617;
+
+  /* ── Typography ── */
+  --font-family-sans:
+    "Public Sans", "Noto Sans Thai", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family-heading:
+    "Hanken Grotesk", "Noto Sans Thai", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-family-mono:
+    "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono", Consolas, "Liberation Mono", Menlo,
+    monospace;
+
+  /* ── Border radius (Soft-Technical: 4px base) ── */
+  --radius-maha-sm: 0.125rem;
+  --radius-maha-md: 0.25rem;
+  --radius-maha-lg: 0.5rem;
+  --radius-maha-xl: 0.75rem;
+
+  /* ── Shadows (low-contrast, tonal layers) ── */
+  --shadow-maha-sm: 0 1px 2px 0 rgb(15 23 42 / 0.03);
+  --shadow-maha-md: 0 4px 6px -1px rgb(15 23 42 / 0.04), 0 2px 4px -2px rgb(15 23 42 / 0.04);
+  --shadow-maha-lg: 0 10px 15px -3px rgb(15 23 42 / 0.04), 0 4px 6px -4px rgb(15 23 42 / 0.04);
+  --shadow-maha-xl: 0 20px 25px -5px rgb(15 23 42 / 0.05), 0 8px 10px -6px rgb(15 23 42 / 0.05);
+
+  /* ── Animations ── */
+  --animate-maha-fade-in: maha-fade-in 0.25s ease-out;
+  --animate-maha-slide-up: maha-slide-up 0.3s ease-out;
+  --animate-maha-slide-down: maha-slide-down 0.3s ease-out;
+  --animate-maha-scale-in: maha-scale-in 0.2s ease-out;
+  --animate-maha-spin-slow: spin 3s linear infinite;
+
+  /* ── Focus ring ── */
+  --ring-color-maha: var(--color-maha-500);
+}
+
+/* ── Dark mode overrides ── */
+.dark {
+  /* Only flip surface-50 for page background.
+     Mid/high surface levels stay at light-mode values for correct text/border contrast. */
+  --color-surface-50: #020617;
+  /* Emerald scale: lighter tones for dark backgrounds */
+  --color-maha-50: #022c22;
+  --color-maha-100: #064e3b;
+  --color-maha-200: #065f46;
+  --color-maha-300: #047857;
+  --color-maha-400: #34d399;
+  --color-maha-500: #10b981;
+  --color-maha-600: #34d399;
+  --color-maha-700: #6ee7b7;
+  --color-maha-800: #a7f3d0;
+  --color-maha-900: #d1fae5;
+}
+
+/* ── Keyframes ── */
+@keyframes maha-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes maha-slide-up {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes maha-slide-down {
+  from { transform: translateY(-12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes maha-scale-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ── Utility: transition presets ── */
+@utility transition-maha {
+  transition-property:
+    color, background-color, border-color, outline-color, text-decoration-color, fill, stroke,
+    opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+@utility transition-maha-slow {
+  transition-duration: 250ms;
+}
+
+@utility transition-maha-fast {
+  transition-duration: 100ms;
+}
+
+/* ── Utility: focus ring ── */
+@utility focus-ring-maha {
+  @apply focus:outline-none focus:ring-2 focus:ring-maha-500 focus:ring-offset-2
+         dark:focus:ring-offset-surface-900 dark:focus:ring-maha-600;
+}
+
+/* Surface-850 utility (between 800 and 900 for dark card surfaces) */
+@utility bg-surface-850 {
+  background-color: #1e293b;
+}
+
+/* Shimmer loading effect */
+@utility shimmer-bg {
+  background: linear-gradient(
+    90deg,
+    var(--color-surface-100) 0%,
+    var(--color-surface-200) 50%,
+    var(--color-surface-100) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

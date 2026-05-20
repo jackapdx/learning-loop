@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [
+    "node_modules",
+    "dist",
+    ".turbo",
+    "coverage",
+    "bun.lock",
+    "*.local",
+    "apps/web/src/lib/lessons-data.ts"
+  ]
+}
