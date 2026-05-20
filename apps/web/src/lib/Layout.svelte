@@ -11,24 +11,6 @@
 
   let theme = $state<Theme>(getCurrentTheme());
 
-  // Listen for OS-level theme changes (e.g., user flips system setting while app is open)
-  $effect(() => {
-    const mq = window.matchMedia('(prefers-color-scheme: dark)');
-    function onSystemChange(e: MediaQueryListEvent) {
-      const stored = localStorage.getItem('theme');
-      if (stored) return; // user has explicit preference, ignore system change
-      if (e.matches) {
-        document.documentElement.classList.add('dark');
-        theme = 'dark';
-      } else {
-        document.documentElement.classList.remove('dark');
-        theme = 'light';
-      }
-    }
-    mq.addEventListener('change', onSystemChange);
-    return () => mq.removeEventListener('change', onSystemChange);
-  });
-
   function toggleTheme() {
     const next: Theme = theme === 'dark' ? 'light' : 'dark';
     theme = next;
@@ -51,7 +33,6 @@
       <button onclick={() => { window.location.hash = ''; window.location.reload(); }} class="flex items-center gap-2 text-lg font-bold text-surface-900 dark:text-surface-100 hover:opacity-80 transition-maha border-0 bg-transparent cursor-pointer" style="font-family: var(--font-family-heading); letter-spacing: -0.01em;">
         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 dark:bg-emerald-400"></span>
         System Design
-        <span class="text-[10px] font-medium text-surface-400 dark:text-surface-500 ml-0.5" style="letter-spacing: 0.04em;">v2.0</span>
       </button>
       <div class="flex items-center gap-4">
         <a href="#overview" class="text-sm text-surface-600 hover:text-emerald-600 dark:text-surface-400 dark:hover:text-emerald-400 transition-maha no-underline" style="font-family: var(--font-family-heading); letter-spacing: 0.02em;">
@@ -80,7 +61,7 @@
   </nav>
 
   <!-- Main Content -->
-  <main class="flex-1">
+  <main class="flex-1" role="main">
     {@render children()}
   </main>
 
