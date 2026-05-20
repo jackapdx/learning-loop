@@ -182,7 +182,7 @@
           {#if isSearching}
             <button
               onclick={() => (searchQuery = '')}
-              class="absolute right-2.5 top-1/2 -translate-y-1/2 size-5 rounded
+              class="absolute right-2.5 top-1/2 -translate-y-1/2 size-5 rounded cursor-pointer
                      bg-surface-300 dark:bg-surface-600 text-white dark:text-surface-200 flex items-center justify-center
                      hover:bg-surface-400 dark:hover:bg-surface-500 transition-maha"
               aria-label="ล้างการค้นหา"
@@ -241,7 +241,7 @@
             <button onclick={startQuiz} class="mha-btn mha-btn-primary mha-btn-sm">
               Quiz ทบทวน
             </button>
-            <button onclick={handleReset} class="text-xs text-surface-400 dark:text-surface-500 hover:text-red-500 dark:hover:text-red-400 transition-maha">
+            <button onclick={handleReset} class="text-xs text-surface-400 dark:text-surface-500 hover:text-red-500 dark:hover:text-red-400 transition-maha cursor-pointer">
               รีเซ็ตความคืบหน้า
             </button>
           </div>
@@ -273,7 +273,7 @@
         <!-- Section header -->
         <button
           onclick={() => toggleSection(section.section)}
-          class="w-full flex items-center gap-3 px-1 py-2 mb-3 text-left hover:opacity-80 transition-maha"
+          class="w-full flex items-center gap-3 px-1 py-2 mb-3 text-left hover:opacity-80 transition-maha cursor-pointer"
         >
           <span class="text-lg transition-transform duration-200 text-surface-500 dark:text-surface-400" class:rotate-90={!isCollapsed}>
             ▶

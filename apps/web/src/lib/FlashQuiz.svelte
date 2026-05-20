@@ -107,7 +107,7 @@
       </div>
       <button
         onclick={handleClose}
-        class="p-1 rounded-lg text-surface-400 dark:text-surface-500 hover:text-surface-700 dark:hover:text-surface-200 hover:bg-surface-100 dark:hover:bg-surface-700 transition-maha"
+        class="p-1 rounded-lg text-surface-400 dark:text-surface-500 hover:text-surface-700 dark:hover:text-surface-200 hover:bg-surface-100 dark:hover:bg-surface-700 transition-maha cursor-pointer"
         aria-label="ปิด"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -144,7 +144,7 @@
             <button
               onclick={() => selectOption(i)}
               disabled={answered}
-              class="w-full text-left p-3 rounded-lg border-2 transition-all duration-200 text-sm flex items-start gap-3 {getOptionClass(i)}"
+              class="w-full text-left p-3 rounded-lg border-2 transition-all duration-200 text-sm flex items-start gap-3 cursor-pointer {getOptionClass(i)}"
             >
               <span
                 class="flex-shrink-0 w-7 h-7 rounded-full border-2 flex items-center justify-center text-xs font-bold mt-0.5"

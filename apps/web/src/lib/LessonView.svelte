@@ -304,7 +304,7 @@
     <div class="mb-6">
       <button
         onclick={() => navigate('overview')}
-        class="text-sm text-surface-500 dark:text-surface-400 hover:text-emerald-700 dark:hover:text-emerald-400 transition-maha inline-flex items-center gap-1 mb-4"
+        class="text-sm text-surface-500 dark:text-surface-400 hover:text-emerald-700 dark:hover:text-emerald-400 transition-maha cursor-pointer inline-flex items-center gap-1 mb-4"
       >
         ← กลับหน้าหลัก
       </button>
