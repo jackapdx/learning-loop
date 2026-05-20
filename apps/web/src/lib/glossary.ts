@@ -19,6 +19,7 @@ export const glossary: Record<string, string> = {
   "Connection Pooling": "เทคนิคจัดการการเชื่อมต่อฐานข้อมูลแบบใช้ซ้ำ ลด Overhead การสร้าง Connection ใหม่ทุกครั้ง",
   Replication: "การคัดลอกข้อมูลไปยังหลายเซิร์ฟเวอร์เพื่อเพิ่ม Availability และ Read Throughput",
   "PITR": "**Point-in-Time Recovery** — ความสามารถในการกู้คืนฐานข้อมูลกลับไปยังวินาทีใดก็ได้ในอดีต โดยอาศัยการ Backup ร่วมกับ Write-Ahead Logs (WAL)",
+  "WAL": "**Write-Ahead Logging** — เทคนิคการบันทึกการเปลี่ยนแปลงลง Log (WAL file) บน Disk ก่อนจะเขียนลงฐานข้อมูลจริง เพื่อรับประกันความทนทาน (Durability) และช่วยในการกู้คืนข้อมูล (Recovery)",
 
   // Networking
   WebSocket: "โปรโตคอล Full-Duplex บน TCP — เปิด Connection เดียวแล้วส่งข้อมูลสองทางได้ตลอด เหมาะกับแอป Real-time",
