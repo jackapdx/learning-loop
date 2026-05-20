@@ -18,6 +18,7 @@ export const glossary: Record<string, string> = {
   Indexing: "โครงสร้างข้อมูลที่ช่วยให้ค้นหาได้เร็วขึ้น โดยแลกมาด้วยพื้นที่จัดเก็บและความช้าตอนเขียน",
   "Connection Pooling": "เทคนิคจัดการการเชื่อมต่อฐานข้อมูลแบบใช้ซ้ำ ลด Overhead การสร้าง Connection ใหม่ทุกครั้ง",
   Replication: "การคัดลอกข้อมูลไปยังหลายเซิร์ฟเวอร์เพื่อเพิ่ม Availability และ Read Throughput",
+  "PITR": "**Point-in-Time Recovery** — ความสามารถในการกู้คืนฐานข้อมูลกลับไปยังวินาทีใดก็ได้ในอดีต โดยอาศัยการ Backup ร่วมกับ Write-Ahead Logs (WAL)",
 
   // Networking
   WebSocket: "โปรโตคอล Full-Duplex บน TCP — เปิด Connection เดียวแล้วส่งข้อมูลสองทางได้ตลอด เหมาะกับแอป Real-time",
@@ -63,6 +64,7 @@ export const glossary: Record<string, string> = {
   "Rolling Update": "การทยอยอัปเดตเซิร์ฟเวอร์ทีละเครื่องใน Pool จนครบ — ประหยัดทรัพยากรกว่า Blue-Green แต่ใช้เวลานานกว่า",
   "Expand-Contract": "**Parallel Change Pattern** — ขั้นตอนการเปลี่ยน Database Schema แบบ 5 ขั้น เพื่อไม่ให้ระบบพังระหว่างการ Deploy",
   "Graceful Shutdown": "การปิดระบบอย่างละมุน — รอให้ Request ที่ค้างอยู่ทำงานจนจบก่อนจะหยุดการทำงานของเซิร์ฟเวอร์",
+  "RPO": "**Recovery Point Objective** — ระยะเวลาสูงสุดที่ยอมรับได้ในการสูญเสียข้อมูลเมื่อระบบล่ม (เช่น RPO = 4 ชั่วโมง แปลว่าข้อมูลย้อนหลัง 4 ชั่วโมงอาจสูญหายได้)",
 
   // Observability
   Observability: "ความสามารถในการเข้าใจสถานะภายในของระบบจากข้อมูลภายนอก — ประกอบด้วย Metrics, Logs, Traces",
@@ -76,6 +78,7 @@ export const glossary: Record<string, string> = {
   Throughput: "ปริมาณงานที่ระบบทำได้ต่อหน่วยเวลา (เช่น Requests/sec, Messages/sec)",
   "SPOF": "**Single Point of Failure** — จุดเดียวในระบบที่หากล้มเหลวจะทำให้ทั้งระบบล่ม",
   "Horizontal Scaling": "การเพิ่มจำนวนเครื่อง (Scale Out) แทนการเพิ่มสเปคเครื่องเดิม (Vertical Scaling)",
+  "I/O": "**Input/Output** — การรับส่งข้อมูลเข้าและออกจากระบบ (เช่น Disk Read/Write, Network IO) ซึ่งมักเป็นคอขวดหลักในแง่ประสิทธิภาพของระบบ",
   "Eventual Consistency": "โมเดลความสอดคล้องที่ยอมให้ข้อมูลต่างกันชั่วคราว แต่รับประกันว่าจะตรงกันในที่สุด — ใช้ในระบบ Distributed ขนาดใหญ่",
   "Strong Consistency": "โมเดลที่รับประกันว่าทุกโหนดเห็นข้อมูลเดียวกันทันทีหลังเขียน — แลกมาด้วย Latency และ Availability",
 };
