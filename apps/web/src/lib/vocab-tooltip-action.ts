@@ -30,6 +30,14 @@ function getOrCreateTip(): HTMLDivElement {
   return tipEl;
 }
 
+function formatGlossaryDefinition(text: string): string {
+  const escaped = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  return escaped.replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>');
+}
+
 function showTooltip(span: VocabSpan) {
   hideAll();
 
@@ -42,7 +50,7 @@ function showTooltip(span: VocabSpan) {
   if (!key) return;
 
   const tip = getOrCreateTip();
-  tip.innerHTML = glossary[key];
+  tip.innerHTML = formatGlossaryDefinition(glossary[key]);
   tip.style.opacity = '1';
   tip.style.transform = 'translateY(0)';
 
