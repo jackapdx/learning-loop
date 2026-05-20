@@ -10,7 +10,7 @@ prerequisites: [09-load-balancer, 10-monolith-microservice-monorepo]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 เมื่อคุณเปลี่ยนจาก Monolith เป็น Microservices ปัญหาหนึ่งที่ตามมาทันทีคือ **"ความซ้ำซ้อนของงานส่วนกลาง"** เช่น ทุกเซอร์วิสต้องทำ Auth เอง, ทำ Rate Limiting เอง, และทำ Logging เอง
 
@@ -18,7 +18,7 @@ prerequisites: [09-load-balancer, 10-monolith-microservice-monorepo]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณมี Microservices 20 ตัว และคุณตัดสินใจใช้ **Kong API Gateway ** เป็นด่านหน้า
 > -** โจทย์:** คุณต้องการทำ **Rate Limiting ** เพื่อป้องกันไม่ให้ผู้ใช้คนเดียวส่ง Request ถี่เกินไปจนระบบล่ม
@@ -30,7 +30,7 @@ prerequisites: [09-load-balancer, 10-monolith-microservice-monorepo]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -42,7 +42,7 @@ prerequisites: [09-load-balancer, 10-monolith-microservice-monorepo]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. API Gateway คืออะไร?
 API Gateway ทำหน้าที่เป็น Reverse Proxy ที่อยู่หน้าสุดของระบบ คอยจัดการเรื่อง:
@@ -66,7 +66,7 @@ Kong เป็น API Gateway ที่ได้รับความนิย�
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Gateway vs. Sidecar (Service Mesh)
 ในระบบขนาดใหญ่มหาศาล การมี Gateway ตัวเดียวอาจไม่พอ (Gateway becomes a Bottleneck)
@@ -80,7 +80,7 @@ Kong เป็น API Gateway ที่ได้รับความนิย�
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. หากคุณใช้ Kong ในโหมด DB-less คุณจะเปลี่ยนการตั้งค่า Rate Limiting แบบไม่ต้องรีสตาร์ทเครื่องได้อย่างไร?
@@ -97,13 +97,13 @@ Kong เป็น API Gateway ที่ได้รับความนิย�
 </details>
 
 ---
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ระบบของคุณมี"งานส่วนกลาง" ที่กระจายอยู่ตามเซอร์วิสต่างๆ มากเกินไปหรือเปล่า? การนำ API Gateway มาใช้จะช่วยลดความซ้ำซ้อนนั้นได้ หรือจะกลายเป็นการสร้างจุดที่อาจจะพัง (SPOF) เพิ่มขึ้นอีกหนึ่งจุดกันแน่?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 - [[09-load-balancer|Load Balancer: L4 vs L7]]
 - [[Distributed/04-spof|SPOF: เมื่อ Gateway กลายเป็นจุดตาย]]
 - [[Distributed/11-distributed-rate-limiting|Distributed Rate Limiting: การควบคุมปริมาณ Request]]

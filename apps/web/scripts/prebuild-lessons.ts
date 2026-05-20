@@ -20,6 +20,8 @@ const EXCLUDE_DIRS = new Set(["node_modules", ".git"]);
 const SECTION_NAMES: Record<string, string> = {
   "": "บทเรียนหลัก",
   Postgres: "PostgreSQL ขั้นสูง",
+  Core: "หลักการออกแบบระบบ",
+  Interview: "เทคนิคการสัมภาษณ์",
 };
 
 // ── Section type → content emoji mapping ──

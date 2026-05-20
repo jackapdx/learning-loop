@@ -118,6 +118,6 @@ USING (tenant_id = current_setting('app.current_tenant_id')::UUID);
 
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
-- [[../04-database-sharding|Database Sharding: เมื่อ Multi-tenant เริ่มใหญ่เกินหนึ่งเครื่อง]]
+- [[../Core/04-database-sharding|Database Sharding: เมื่อ Multi-tenant เริ่มใหญ่เกินหนึ่งเครื่อง]]
 - [[../Postgres/11-transactions-isolation|Transaction Isolation: ความลับของความปลอดภัยใน DB]]
 - [Whitepaper: SaaS Storage Strategies on AWS](https://aws.amazon.com/blogs/apn/calculating-tenant-costs-in-a-saas-environment/)

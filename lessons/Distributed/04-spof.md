@@ -245,5 +245,5 @@ SPOF ที่ซ่อนอยู่:
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[01-self-recovery|Self Recovery — ระบบซ่อมตัวเองเมื่อพัง]]
-- [[../02-consistency-vs-availability|CAP Theorem — เมื่อ Partition คือ SPOF ที่หลีกเลี่ยงไม่ได้]]
-- [[../04-database-sharding|Database Sharding — การกระจายข้อมูลเพื่อหลีกเลี่ยง SPOF ระดับ Storage]]
+- [[../Distributed/02-consistency-vs-availability|CAP Theorem — เมื่อ Partition คือ SPOF ที่หลีกเลี่ยงไม่ได้]]
+- [[../Core/04-database-sharding|Database Sharding — การกระจายข้อมูลเพื่อหลีกเลี่ยง SPOF ระดับ Storage]]

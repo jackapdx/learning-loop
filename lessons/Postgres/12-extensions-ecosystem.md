@@ -111,4 +111,4 @@ Extension ใดที่ใช้ในการทำระบบค้นห�
 
 - [[02-index-types\|Index Types — เข้าใจดัชนีพิเศษอย่าง GiST ที่ PostGIS มักเรียกใช้]]
 - [[08-full-text-search\|Full-Text Search — ฟีเจอร์ค้นหาในตัวที่ทำงานร่วมกับ Extensions ได้ดี]]
-- [[../04-database-sharding\|Database Sharding — เมื่อข้อมูลใหญ่เกินกว่าที่ Extension หนึ่งตัวจะรับไหว]]
+- [[../Core/04-database-sharding\|Database Sharding — เมื่อข้อมูลใหญ่เกินกว่าที่ Extension หนึ่งตัวจะรับไหว]]

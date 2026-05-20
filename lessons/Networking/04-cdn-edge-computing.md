@@ -105,6 +105,6 @@ tags: [networking, cdn, edge-computing, system-design]
 
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
-🔗 - [[../03-cache-invalidation|กลยุทธ์การจัดการ Cache และการล้างแคช]]
+🔗 - [[../Core/03-cache-invalidation|กลยุทธ์การจัดการ Cache และการล้างแคช]]
 - [[01-load-balancing-l4-l7|Load Balancing ในระดับ Global (GSLB)]]
 - [System Design Primer: Content Delivery Network](https://github.com/donnemartin/system-design-primer#content-delivery-network)

@@ -145,4 +145,4 @@ SELECT * FROM orders WHERE created_at >= '2026-05-15';
 
 - [[02-index-types\|Index Types — การเลือกดัชนีให้เหมาะกับตารางย่อย]]
 - [[10-explain-analyze\|EXPLAIN ANALYZE — วิธีตรวจสอบว่า Partition Pruning ทำงานจริงไหม]]
-- [[../04-database-sharding\|Database Sharding — เมื่อข้อมูลใหญ่เกินกว่าจะรันในเครื่องเดียว]]
+- [[../Core/04-database-sharding\|Database Sharding — เมื่อข้อมูลใหญ่เกินกว่าจะรันในเครื่องเดียว]]

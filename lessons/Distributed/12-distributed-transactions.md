@@ -109,7 +109,7 @@ Saga คือชุดของ Local Transactions ที่รันต่อ�
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[02-dual-write|Dual Write Problem: ปัญหาพื้นฐานของระบบกระจาย]]
-- [[../05-idempotency|Idempotency: การทำให้การรันซ้ำปลอดภัย]]
+- [[../Distributed/05-idempotency|Idempotency: การทำให้การรันซ้ำปลอดภัย]]
 - [[../Messaging/03-event-bus|Event Bus และการสื่อสารแบบ Async]]
 - [[docs/Upgrade Plan - Overview|ยุทธศาสตร์การออกแบบระบบใหม่ (Greenfield Arch)]]
 eld Arch)]]

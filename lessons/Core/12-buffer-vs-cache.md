@@ -10,7 +10,7 @@ prerequisites: [03-cache-invalidation]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในวิศวกรรมซอฟต์แวร์ เราใช้"พื้นที่เก็บข้อมูลชั่วคราว" อยู่ตลอดเวลา แต่คำว่า **Buffer ** และ **Cache ** มักถูกใช้สลับกันจนน่าปวดหัว แม้ว่าทั้งคู่จะทำงานคล้ายกันคือ"เก็บข้อมูลไว้ชั่วคราว" แต่จุดประสงค์ (Intent) ของพวกมันต่างกันอย่างสิ้นเชิง
 
@@ -18,7 +18,7 @@ prerequisites: [03-cache-invalidation]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณกำลังออกแบบระบบ"บันทึกวิดีโอสด (Live Streaming)" 
 > -** ฝั่งส่ง (Producer):** กล้องส่งข้อมูลภาพดิบมาด้วยความเร็วสูงมากแต่ไม่คงที่ (Bursty)
@@ -32,7 +32,7 @@ prerequisites: [03-cache-invalidation]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -44,7 +44,7 @@ prerequisites: [03-cache-invalidation]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 1. ความแตกต่างที่สำคัญ (The Core Difference)
 
@@ -69,7 +69,7 @@ prerequisites: [03-cache-invalidation]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### เมื่อ Buffer กลายเป็นปัญหา (Bufferbloat)
 หากคุณทำ Buffer ใหญ่เกินไปเพื่อหวังว่าจะไม่เสียข้อมูลเลย (No Data Loss) คุณจะเจอกับปัญหา **Latency มหาศาล ** เพราะข้อมูลต้องต่อคิวนานเกินไปก่อนจะถูกประมวลผล
@@ -86,7 +86,7 @@ prerequisites: [03-cache-invalidation]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. ในระบบ YouTube การที่วิดีโอ"หมุนๆ (Buffering)" เกิดจากอะไรพยายามแก้ปัญหาอะไร?
@@ -104,13 +104,13 @@ prerequisites: [03-cache-invalidation]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ในโปรเจกต์ของคุณ มีจุดไหนที่คุณใช้คำว่า"Cache" แต่จริงๆ แล้วมันกำลังทำหน้าที่เป็น"Buffer" หรือไม่? การเข้าใจหน้าที่ที่แท้จริงจะช่วยให้คุณปรับแต่ง (Tune) พารามิเตอร์ของระบบได้แม่นยำขึ้นมาก
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 - [[03-cache-invalidation|Cache Invalidation: ปัญหาโลกแตกของ Caching]]
 - [[Messaging/01-google-pubsub|Pub/Sub & Load Leveling]]
 - [[Networking/02-tcp-vs-udp|TCP Flow Control & Buffering]]

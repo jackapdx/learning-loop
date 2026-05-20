@@ -107,4 +107,4 @@ PostgreSQL ออกแบบมาให้ 1 Connection = 1 Process ซึ่�
 
 - [[01-table-partitioning\|Table Partitioning — การเตรียมข้อมูลให้พร้อมสำหรับการสแกนใน Replicas]]
 - [[11-transactions-isolation\|Isolation Levels — เข้าใจว่าความล่าช้าของข้อมูล (Lag) ใน Replica มีผลกับความถูกต้องอย่างไร]]
-- [[../04-database-sharding\|Database Sharding — เมื่อการทำ Replicas เครื่องเดียวไม่พอรับโหลดการเขียน]]
+- [[../Core/04-database-sharding\|Database Sharding — เมื่อการทำ Replicas เครื่องเดียวไม่พอรับโหลดการเขียน]]

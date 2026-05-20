@@ -1,8 +1,16 @@
+---
+contentType: learning-loop
+level: senior
+status: polished
+tags: [system-design, distributed, patterns, idempotency]
+prerequisites: []
+---
+
 # Idempotency (การทำงานซ้ำที่ให้ผลลัพธ์เดิม)
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในระบบ Distributed Systems"ความผิดพลาดคือเรื่องปกติ" — เครือข่ายอาจตัดขาด, Server อาจ Restart หรือ Timeout สิ่งเหล่านี้ทำให้เกิดการ **Retry **(ส่งใหม่) และเมื่อมีการส่งใหม่ ปัญหาที่ตามมาคือ **"การทำงานซ้ำ" (Double Processing)** เช่น ลูกค้าถูกหักเงิน 2 รอบ หรือสินค้าถูกส่งซ้ำ 2 ชิ้น
 
@@ -10,7 +18,7 @@
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณกำลังออกแบบระบบ"Wallet" สำหรับแอปสั่งอาหาร เมื่อลูกค้ากด"ชำระเงิน" แอปจะเรียก API`/v1/payments/withdraw`
 >
@@ -22,7 +30,7 @@
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -34,7 +42,7 @@
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### ปัญหาหลัก (The Core Problem)
 
@@ -64,7 +72,7 @@
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การออกแบบ Idempotent Consumer (สำหรับ Kafka/PubSub)
 
@@ -93,7 +101,7 @@ async function processOrder(message: Message) {
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > 🎯**Quick Check:**
 > 1. ถ้าคำสั่ง SQL ของคุณคือ`UPDATE users SET points = 100 WHERE id = 1` คำสั่งนี้เป็น Idempotent หรือไม่?
@@ -111,13 +119,13 @@ async function processOrder(message: Message) {
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองนึกถึงระบบที่คุณทำอยู่ตอนนี้ มี API ไหนที่มีความเสี่ยงจะถูกเรียกซ้ำแล้วข้อมูลพังไหม? คุณได้ฝากความหวังไว้ที่ UI (เช่นการ Disable ปุ่มหลังกด) เพียงอย่างเดียวหรือเปล่า? จำไว้ว่า"UI Validation ไม่ใช่ Security และไม่ใช่ Reliability"
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[02-consistency-vs-availability|CAP Theorem และ Reliability]]
 - [[Distributed/02-dual-write|Dual Write: เมื่อการเขียน 2 ที่พร้อมกันต้องการ Idempotency]]

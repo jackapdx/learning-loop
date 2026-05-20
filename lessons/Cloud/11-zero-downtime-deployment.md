@@ -10,7 +10,7 @@ prerequisites: [09-load-balancer, 10-monolith-microservice-monorepo]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 การกดปุ่ม Deploy แล้วภาวนาไม่ให้ระบบล่มคือสัญลักษณ์ของระบบที่ยังไม่โตพอ (Junior-level Ops) ในโลกของระบบขนาดใหญ่ การอัปเดตซอฟต์แวร์ต้องเกิดขึ้นได้ตลอดเวลาโดยที่ผู้ใช้ **ไม่รู้สึกตัวแม้แต่นิดเดียว **(Zero Downtime)
 
@@ -18,7 +18,7 @@ prerequisites: [09-load-balancer, 10-monolith-microservice-monorepo]
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณใช้ **Blue-Green Deployment ** เพื่ออัปเดตระบบ E-commerce
 > -** โจทย์:** คุณต้องเปลี่ยนชื่อคอลัมน์จาก`user_name` เป็น`full_name` ในฐานข้อมูล PostgreSQL
@@ -30,7 +30,7 @@ prerequisites: [09-load-balancer, 10-monolith-microservice-monorepo]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -66,7 +66,7 @@ prerequisites: [09-load-balancer, 10-monolith-microservice-monorepo]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### การจัดการ Stateful Sessions
 หากแอปของคุณเก็บ Session ไว้ใน Memory (In-memory Session) เมื่อมีการ Deploy และเครื่องเก่าถูกปิด ผู้ใช้จะหลุดทันที (Session Drop)
@@ -79,7 +79,7 @@ prerequisites: [09-load-balancer, 10-monolith-microservice-monorepo]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. หากคุณใช้ Blue-Green Deployment แต่ฐานข้อมูลของคุณมีเพียงตัวเดียว (Single Instance) คุณยังสามารถทำ Zero Downtime ได้หรือไม่?
@@ -97,13 +97,13 @@ prerequisites: [09-load-balancer, 10-monolith-microservice-monorepo]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 ลองนึกถึงการ Deploy ครั้งที่พังที่สุดของคุณ: ปัญหานั้นเกิดจาก"ตัวโค้ด" หรือเกิดจาก"ความไม่เข้ากันของข้อมูลระหว่างเปลี่ยนผ่าน"? การนำ Expand-Contract มาใช้จะช่วยป้องกันเหตุการณ์นั้นได้หรือไม่?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 - [[09-load-balancer|Load Balancer: ตัวจัดระเบียบ Traffic]]
 - [[Distributed/01-self-recovery|Self-Recovery & Health Checks]]
 - [[Postgres/11-transactions-isolation|Transactions & Concurrency]]

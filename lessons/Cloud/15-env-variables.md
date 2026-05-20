@@ -10,11 +10,11 @@ prerequisites: [10-monolith-microservice-monorepo]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 เมื่อพัฒนาแอปพลิเคชัน เรามักต้องใช้ข้อมูลที่เปลี่ยนแปลงตามสภาพแวดล้อม (Environment) เช่น URL ของ Database หรือความลับ (Secrets) อย่าง API Keys หากเราเขียนข้อมูลเหล่านี้ลงใน Code โดยตรง (Hardcoding) จะทำให้ไม่สามารถนำแอปพลิเคชันไปรันในสภาพแวดล้อมอื่น (เช่น นำไปรันบน Server จริง) ได้ง่ายๆ และที่ร้ายแรงที่สุดคือความเสี่ยงที่ความลับจะรั่วไหลเมื่อนำโค้ดขึ้นระบบควบคุมเวอร์ชัน (Version Control) การจัดการค่าคอนฟิกเหล่านี้อย่างปลอดภัยจึงเป็นรากฐานสำคัญของสถาปัตยกรรมซอฟต์แวร์ที่แข็งแรง
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > **สถานการณ์:** คุณกำลังพัฒนา Node.js App และต้องการเชื่อมต่อกับ Database ในเครื่องตัวเอง (Local) แต่เมื่อ Deploy ขึ้น Server จริง (Production) Database URL จะเปลี่ยนไป นอกจากนี้ คุณใช้ API Key สำคัญของ Stripe ในการตัดเงินลูกค้า
 >
@@ -31,7 +31,7 @@ prerequisites: [10-monolith-microservice-monorepo]
 >
 > **✋ หยุดตรงนี้ก่อน! ลองนึกถึงความเสี่ยงเมื่อคุณทำ Source Code หลุด หรือมีคนใหม่เข้ามาร่วมทีม เขาจะตั้งค่าโปรเจกต์ได้อย่างไร?**
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -92,7 +92,7 @@ if (!dbUrl) {
 > - [The Twelve-Factor App — III. Config](https://12factor.net/config)
 > - [Node.js Documentation — process.env](https://nodejs.org/api/process.html#processenv)
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### ควรใช้ Environment Variables เมื่อ...
 - ✅ เก็บ Credentials และ Secrets (API Keys, Passwords, Access Tokens)
@@ -107,7 +107,7 @@ if (!dbUrl) {
 -**Validation Issues:** แอปพลิเคชันอาจพังระหว่างทำงาน (Runtime Error) หากลืมตั้งค่าตัวแปรในระบบ Production แนะนำให้ใช้เครื่องมือเช็ก (Schema Validation) ตั้งแต่แอปเริ่มทำงาน
 -**Secret Sprawl:** เมื่อมี Microservices หลายตัว การจัดการไฟล์เหล้านี้ของทุกตัวบนเครื่องนักพัฒนาจะเริ่มสร้างความสับสน
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 > **Quick Check:**
 > 1. ทำไมเราจึงจำเป็นต้องมีไฟล์`.env.example` ควบคู่ไปกับไฟล์ที่มีค่าจริง?
@@ -121,11 +121,11 @@ if (!dbUrl) {
 
 </details>
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > ในโปรเจกต์ปัจจุบันของคุณ มี API Key หรือ Token ใดที่ถูกฮาร์ดโค้ดฝังไว้ในไฟล์ซอร์สโค้ดบ้างหรือไม่? ถ้าโค้ดโปรเจกต์นี้หลุดเป็นสาธารณะวันนี้ ความเสียหายจะรุนแรงแค่ไหน?
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 - [[11-zero-downtime-deployment|Zero-downtime Deployment]]
 - [[../Cloud/04-iam-security|Cloud/IAM Security]]
 - [[../Postgres/06-connection-pooling-replicas|Postgres/Connection Pooling]]

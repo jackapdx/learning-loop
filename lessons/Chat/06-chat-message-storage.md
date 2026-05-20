@@ -113,5 +113,5 @@ Database 📦 จะใช้ความสามารถของ B-Tree Inde
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[../Postgres/01-table-partitioning|เจาะลึกการทำ Table Partitioning ใน PostgreSQL]]
-- [[../04-database-sharding|เมื่อฐานข้อมูลใหญ่เกิน 1 เครื่อง: การทำ Sharding]]
+- [[../Core/04-database-sharding|เมื่อฐานข้อมูลใหญ่เกิน 1 เครื่อง: การทำ Sharding]]
 - [Whitepaper: Why you should never use OFFSET for pagination](../../Research/cursor-vs-offset.md)

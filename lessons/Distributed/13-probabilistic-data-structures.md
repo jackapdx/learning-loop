@@ -115,5 +115,5 @@ Bloom Filter คือ Bit Array ขนาดใหญ่ที่ทำงา�
 
 - [[../NoSQL/02-nosql-hotspots-sharding|NoSQL Architecture และการเก็บข้อมูลใน Disk]]
 - [[../Postgres/02-index-types|Index Types: เมื่อไหร่ที่ Index แบบปกติเริ่มไม่พอ]]
-- [[../03-cache-invalidation|Cache Efficiency และการป้องกัน Cache Misses]]
-- [[../04-database-sharding|Database Sharding: การกระจายข้อมูลเมื่อขนาดใหญ่เกินหนึ่งเครื่อง]]
+- [[../Core/03-cache-invalidation|Cache Efficiency และการป้องกัน Cache Misses]]
+- [[../Core/04-database-sharding|Database Sharding: การกระจายข้อมูลเมื่อขนาดใหญ่เกินหนึ่งเครื่อง]]

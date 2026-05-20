@@ -10,13 +10,13 @@ prerequisites: [02-consistency-vs-availability, 03-cache-invalidation]
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 "Hash ด้วย UserID" คือคำตอบพื้นฐานที่วิศวกรทุกคนมักจะตอบ — และนั่นคือเหตุผลที่มันไม่เพียงพอสำหรับระดับ Senior บทเรียนนี้จะพาคุณไปไกลกว่าแค่ทฤษฎีพื้นฐาน โดยเจาะลึกเรื่อง **Consistent Hashing **,**Virtual Nodes **, การรับมือกับ **Hot Keys ** และกลยุทธ์ **Zero-Downtime Resharding ** เพื่อให้ระบบขยายตัวได้โดยไม่พังลงกลางคัน
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ** สถานการณ์:** คุณมีฐานข้อมูลผู้ใช้ที่เติบโตจาก 1 ล้านเป็น 100 ล้านแถว ปัจจุบันคุณใช้วิธี Sharding แบบง่ายคือ`hash(user_id) % 4` แบ่งออกเป็น 4 Shards (S0, S1, S2, S3) ทุกอย่างดูดี... จนกระทั่งความจุเต็ม และคุณต้องเพิ่ม Shard ที่ 5 (S4) เพื่อรองรับข้อมูลที่พุ่งสูงขึ้น
 >
@@ -30,7 +30,7 @@ prerequisites: [02-consistency-vs-availability, 03-cache-invalidation]
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -42,7 +42,7 @@ prerequisites: [02-consistency-vs-availability, 03-cache-invalidation]
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### ภัยเงียบของการใช้`hash % N`
 
@@ -64,7 +64,7 @@ prerequisites: [02-consistency-vs-availability, 03-cache-invalidation]
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### 4 ความท้าทายระดับ Senior และวิธีแก้
 
@@ -83,7 +83,7 @@ prerequisites: [02-consistency-vs-availability, 03-cache-invalidation]
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 <blockquote>
 <strong>Quick Check:</strong>
@@ -101,7 +101,7 @@ prerequisites: [02-consistency-vs-availability, 03-cache-invalidation]
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 <blockquote>
 💭 ฐานข้อมูลที่คุณใช้อยู่ตอนนี้ หากพรุ่งนี้ Traffic พุ่งขึ้น 100 เท่า คุณมีแผนจะ"ผ่า" (Shard) มันอย่างไรโดยไม่ให้ธุรกิจหยุดชะงัก? คุณจะจัดการเรื่องความสัมพันธ์ของข้อมูล (Relationships) อย่างไรเมื่อมันไม่ได้อยู่เครื่องเดียวกันแล้ว?
@@ -109,7 +109,7 @@ prerequisites: [02-consistency-vs-availability, 03-cache-invalidation]
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[02-consistency-vs-availability|CAP Theorem: เมื่อข้อมูลกระจายตัว Consistency จะเป็นอย่างไร]]
 - [[03-cache-invalidation|Cache Invalidation: การใช้แคชเพื่อลดภาระ DB]]

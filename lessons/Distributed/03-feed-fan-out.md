@@ -173,5 +173,5 @@ Key Learning:
 
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
-🔗 - [[../01-trade-off-articulation|การอธิบาย Trade-off ในการออกแบบระบบ]]
-- [[../04-database-sharding|การออกแบบ Database Sharding และ Scaling]]
+🔗 - [[../Core/01-trade-off-articulation|การอธิบาย Trade-off ในการออกแบบระบบ]]
+- [[../Core/04-database-sharding|การออกแบบ Database Sharding และ Scaling]]

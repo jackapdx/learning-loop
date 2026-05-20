@@ -71,6 +71,6 @@ tags: [chat-exp, system-design, postgres]
 
 ## แหล่งข้อมูลและบทความแนะนำ
 
-- [[../04-database-sharding\|Database Sharding — เมื่อ Partitioning ตัวเดียวไม่พอ]]
+- [[../Core/04-database-sharding\|Database Sharding — เมื่อ Partitioning ตัวเดียวไม่พอ]]
 - [Postgres Extensions ที่น่าสนใจ](../../Postgres/Interesting%20Extensions.md)
 - [การเขียน Postgres แบบ Type-Safe](../../Postgres/TypeSafe.md)

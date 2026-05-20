@@ -1,14 +1,22 @@
+---
+contentType: learning-loop
+level: senior
+status: polished
+tags: [system-design, ai-ml, infrastructure]
+prerequisites: []
+---
+
 # AI/ML Infrastructure (โครงสร้างพื้นฐานสำหรับระบบ AI ระดับสูง)
 
 ---
 
-## ปฐมนิเทศ (Orient)
+## 🎯 ปฐมนิเทศ (Orient)
 
 ในปี 2026 คำถามอย่าง"ออกแบบ Serving Layer สำหรับ LLM" หรือ"ระบบ Recommendation แบบ Real-time" ได้กลายเป็น **บรรทัดฐาน (Standard)** สำหรับการสัมภาษณ์ตำแหน่ง Senior Engineer ไปแล้ว หากคุณยังติดอยู่กับความรู้เก่าๆ บทเรียนนี้จะพาคุณไปทำความรู้จักกับโลกของ **Semantic Caching **,**Continuous Batching ** และการบริหารจัดการ **GPU Resources ** ที่มีอยู่อย่างจำกัด
 
 ---
 
-## ลองทำก่อน (Attempt)
+## 🧪 ลองทำก่อน (Attempt)
 
 > ✍️ ** สถานการณ์:** คุณต้องออกแบบระบบ Serving สำหรับ LLM 🧠 ที่ต้องตอบคำถามผู้ใช้ภายใน 2 วินาที และต้องรองรับ 1,000 requests/วินาที (RPS)
 > ** ข้อมูลทางเทคนิค:**
@@ -21,7 +29,7 @@
 
 ---
 
-## ผลตอบรับ (Feedback)
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
@@ -32,7 +40,7 @@
 
 ---
 
-## คำอธิบาย (Explain)
+## 📖 คำอธิบาย (Explain)
 
 ### 3 ความจริงที่น่าเจ็บปวดของ AI Inference
 
@@ -66,7 +74,7 @@
 
 ---
 
-## ขยายความ (Extend)
+## 🔬 ขยายความ (Extend)
 
 ### Vector Database vs. SQL: เมื่อไหร่ควรใช้?
 
@@ -91,7 +99,7 @@ nodeSelector:
 
 ---
 
-## จุดตรวจสอบ (Checkpoint)
+## ✅ จุดตรวจสอบ (Checkpoint)
 
 🎯**Quick Check:**
 Batching ช่วยลดค่าใช้จ่ายได้อย่างไร?
@@ -109,13 +117,13 @@ Cache ปกติต้องพิมพ์เหมือนกันเป�
 
 ---
 
-## สะท้อนคิด (Reflect)
+## 🤔 สะท้อนคิด (Reflect)
 
 > 💭 หากวันพรุ่งนี้บริษัทต้องการเปลี่ยนจาก"Software Company" เป็น"AI 🧠-First Company" คุณมีองค์ความรู้พอที่จะวางรากฐานให้ระบบ AI 🧠 รันได้อย่างยั่งยืนและไม่ผลาญงบประมาณบริษัทจนเกินไปหรือไม่?
 
 ---
 
-## หัวข้อที่เกี่ยวข้อง (Related Topics)
+## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 🔗 - [[03-cache-invalidation|Cache Invalidation ในโลกของ AI]]
 - [[Distributed/04-spof|การป้องกัน Single Point of Failure ใน GPU Clusters]]

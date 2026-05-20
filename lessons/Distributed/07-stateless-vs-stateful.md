@@ -112,6 +112,6 @@ next: [distributed/08-multi-tenant]
 
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
-🔗 - [[../02-consistency-vs-availability|Consistency vs Availability: เมื่อ State ต้องกระจายตัว]]
+🔗 - [[../Distributed/02-consistency-vs-availability|Consistency vs Availability: เมื่อ State ต้องกระจายตัว]]
 - [[../Networking/01-load-balancing-l4-l7|Load Balancing: การจัดการ Sticky Session]]
 - [[../Messaging/01-google-pubsub|Pub/Sub: หัวใจของการแชร์สถานะในระบบ Real-time]]

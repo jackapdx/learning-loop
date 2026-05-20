@@ -220,6 +220,6 @@ Key Learning:
 
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
-🔗 - [[../02-consistency-vs-availability|CAP Theorem และความสอดคล้องของข้อมูล]]
+🔗 - [[../Distributed/02-consistency-vs-availability|CAP Theorem และความสอดคล้องของข้อมูล]]
 - [[04-spof|Single Point of Failure — ค้นหาและกำจัดจุดเปราะบาง]]
 - [[02-dual-write|Dual Write Problem — เมื่อต้องเขียนสองที่พร้อมกัน]]

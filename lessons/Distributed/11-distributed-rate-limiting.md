@@ -110,6 +110,6 @@ prerequisites: [docs/Learn/Lessons/Distributed/00-overview.md, docs/Learn/Lesson
 ## 📚 หัวข้อที่เกี่ยวข้อง (Related Topics)
 
 - [[09-load-balancer|Load Balancer: การกระจายงานให้เครื่องลูกข่าย]]
-- [[../14-kong-api-gateway|Kong API Gateway และการทำ Rate Limiting สำเร็จรูป]]
+- [[../Networking/14-kong-api-gateway|Kong API Gateway และการทำ Rate Limiting สำเร็จรูป]]
 - [[../Messaging/02-streaming-vs-queuing|การใช้ Message Queue เพื่อจัดการ Backpressure แทน Rate Limiting]]
 - [[../NoSQL/01-sql-vs-nosql-tradeoffs|Redis vs SQL: ทำไม Redis ถึงเหมาะกับการเก็บสถานะชั่วคราว]]
