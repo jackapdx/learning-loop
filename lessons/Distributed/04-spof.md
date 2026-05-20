@@ -18,12 +18,12 @@ SPOF (Single Point of Failure) คือการบ้านก่อนนอ�
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️ **สถานการณ์:**คุณออกแบบระบบ E-commerce ที่มี:
+> ✍️ **สถานการณ์**:คุณออกแบบระบบ E-commerce ที่มี:
 > - Load Balancer → 3 Web Servers → 1 PostgreSQL (Primary) + 1 Read Replica
 > - Redis Cache (1 Node)
 > - S3 สำหรับรูปภาพ
 >
->**คำถาม:**ถ้าคุณต้องนำเสนอ SPOF Analysis ให้ CTO ภายใน 2 นาที — คุณจะชี้จุดไหนได้กี่จุด? แล้วจุดไหนที่คุณ _อาจจะพลาด_ เพราะไม่ค่อยมีคนนึกถึง?
+>**คำถาม**:ถ้าคุณต้องนำเสนอ SPOF Analysis ให้ CTO ภายใน 2 นาที — คุณจะชี้จุดไหนได้กี่จุด? แล้วจุดไหนที่คุณ _อาจจะพลาด_ เพราะไม่ค่อยมีคนนึกถึง?
 
 หยุดตรงนี้ — ลองเขียนในใจก่อน... (คนส่วนใหญ่หาได้ 3-4 จุด)
 
@@ -38,7 +38,7 @@ SPOF (Single Point of Failure) คือการบ้านก่อนนอ�
 | 8+ จุด (เพิ่ม Config Store, CI/CD, Deployment Process, IAM) | ✅**Senior — คุณกำลังคิดทั้งระบบ**|
 | คน (On-call, Knowledge Silo) | ✅✅ **Staff — คุณคิดถึง Socio-technical System**|
 
-**คนส่วนใหญ่ตอบผิดเพราะ:**มองแค่ Infrastructure 🏗️ Diagram — แต่ SPOF ที่แท้จริงอยู่ทุก Layer ตั้งแต่ Network 📡 ไปจนถึงคน
+**คนส่วนใหญ่ตอบผิดเพราะ**: มองแค่ Infrastructure 🏗️ Diagram — แต่ SPOF ที่แท้จริงอยู่ทุก Layer ตั้งแต่ Network 📡 ไปจนถึงคน
 
 ---
 
@@ -215,7 +215,7 @@ Key Learning:
 
 ## ✅ จุดตรวจสอบ (Checkpoint)
 
-🎯**Quick Check:**ระบบของคุณมี Load Balancer → 3 App Servers → PostgreSQL (RDS Multi-AZ) → Redis (ElastiCache Cluster Mode)
+🎯**Quick Check:** ระบบของคุณมี Load Balancer → 3 App Servers → PostgreSQL (RDS Multi-AZ) → Redis (ElastiCache Cluster Mode)
 
 SPOF ที่ถูกต้องตามความรู้สึกคือ"ไม่มี" — RDS มี Multi-AZ, Redis มี Cluster, App มี 3 ตัว...**แต่ SPOF ที่ซ่อนอยู่คืออะไร?**<details>
 <summary>ดูคำตอบ (คลิกเพื่อเปิด)</summary>

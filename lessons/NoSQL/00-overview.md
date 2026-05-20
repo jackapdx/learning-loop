@@ -13,7 +13,7 @@ tags: [chat-exp, system-design, nosql, databases]
 >
 > แต่ NoSQL ไม่ใช่"ยาวิเศษ" มันมาพร้อมกับข้อแลกเปลี่ยน (Trade-offs) ที่เจ็บปวด ทั้งเรื่องความถูกต้องของข้อมูล (Consistency ⛓️) และความซับซ้อนในการออกแบบ Schema บทเรียนนี้จะพาคุณไปดูเบื้องหลังการทำงานของ NoSQL ผ่านเหตุการณ์จริงของบริษัทระดับโลก
 >
-> Each lesson takes **5-10 minutes**based on the **Learning Loop**principle.
+> Each lesson takes **5-10 minutes** based on the **Learning Loop** principle.
 
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 

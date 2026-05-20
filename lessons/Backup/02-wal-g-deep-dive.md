@@ -13,7 +13,7 @@ prerequisites: [database-backup-fundamentals]
 
 ## 🎯 ปฐมนิเทศ (Orient)
 
-WAL-G คือ successor ของ WAL-E — เครื่องมือ Continuous Archiving ที่เปลี่ยนจาก Python เป็น Go และอ้างว่า **restore เร็วกว่าเดิม 4 เท่า**จนถึง 7 เท่าบนบาง hardware แต่มันไม่ใช่"เปลี่ยนภาษาแล้วเร็วขึ้น" ง่าย ๆ — มันคือการออกแบบใหม่ทั้งหมดของ pipeline การบีบอัด, การเชื่อมต่อ cloud storage, และการจัดการ parallel I/O
+WAL-G คือ successor ของ WAL-E — เครื่องมือ Continuous Archiving ที่เปลี่ยนจาก Python เป็น Go และอ้างว่า **restore เร็วกว่าเดิม 4 เท่า** จนถึง 7 เท่าบนบาง hardware แต่มันไม่ใช่"เปลี่ยนภาษาแล้วเร็วขึ้น" ง่าย ๆ — มันคือการออกแบบใหม่ทั้งหมดของ pipeline การบีบอัด, การเชื่อมต่อ cloud storage, และการจัดการ parallel I/O
 
 บทเรียนนี้จะพาคุณลงไปดูว่าทำไมทีมที่ Heroku, Citus, และ Fly.io ถึงเลือกใช้ WAL-G — และอะไรคือข้อจำกัดที่คุณต้องจัดการเอง
 
@@ -25,7 +25,7 @@ WAL-G คือ successor ของ WAL-E — เครื่องมือ Con
 
 WAL-G เกิดจากโปรเจกต์ฝึกงานของ Katie Li ที่ Citus Data ในปี 2017 — โจทย์คือ"ทำ WAL-E ให้ดีขึ้น" แต่แทนที่จะ refactor โค้ด Python ทีมเลือก rewrite ทั้งหมดใน Go [source: Citus Data blog — Introducing WAL-G]
 
-WAL-G เป็น**continuous archiving tool**— หมายความว่ามันช่วยคุณ:
+WAL-G เป็น **continuous archiving tool**— หมายความว่ามันช่วยคุณ:
 1.**Push**: ส่ง WAL segments และ base backups ไปยัง cloud storage (S3, GCS, Azure, Swift, local, SFTP)
 2.**Fetch**: ดึง WAL segments และ base backups กลับมาเพื่อ restore
 3.**Delete**: จัดการ retention policy — ลบ backups เก่าและ WAL ที่ไม่จำเป็น
@@ -36,7 +36,7 @@ WAL-G เป็น**continuous archiving tool**— หมายความว�
 
 #### Pipeline ของ WAL-E (Python) — จุดที่เป็นคอขวด
 
-WAL-E ใช้ **Unix pipes**เชื่อมต่อกระบวนการภายนอก:
+WAL-E ใช้ **Unix pipes** เชื่อมต่อกระบวนการภายนอก:
 
 ```text
 PostgreSQL WAL segment → Python process → pipe → lzop compression → pipe → AWS SDK → S3
@@ -53,7 +53,7 @@ PostgreSQL WAL segment → Python process → pipe → lzop compression → pipe
 PostgreSQL WAL segment → Go process (in-memory LZ4/LZMA/ZSTD/Brotli) → Go AWS SDK (multi-part upload) → S3
 ```
 
-WAL-G link compression library โดยตรง (C library ผ่าน CGo สำหรับ LZMA/Brotli) — ไม่ต้อง spawn process, ไม่มี pipe, ไม่มี extra memory copy นี่คือสาเหตุที่โค้ด **ลดจาก 6,500 บรรทัด (WAL-E) เหลือ 1,500 บรรทัด (WAL-G)**และ restore throughput แตะ ~95% ของ theoretical maximum ของ EBS bandwidth (875 MiB/s บน r4.8xlarge) [source: Citus Data blog — Introducing WAL-G]
+WAL-G link compression library โดยตรง (C library ผ่าน CGo สำหรับ LZMA/Brotli) — ไม่ต้อง spawn process, ไม่มี pipe, ไม่มี extra memory copy นี่คือสาเหตุที่โค้ด **ลดจาก 6,500 บรรทัด (WAL-E) เหลือ 1,500 บรรทัด (WAL-G)** และ restore throughput แตะ ~95% ของ theoretical maximum ของ EBS bandwidth (875 MiB/s บน r4.8xlarge) [source: Citus Data blog — Introducing WAL-G]
 
 ### Compression — เร็ว vs เล็ก
 
@@ -74,7 +74,7 @@ export WALG_COMPRESSION_METHOD=zstd
 # WALG_COMPRESSION_METHOD: zstd
 ```
 
-⚠️ **Limitation:**การเปลี่ยน compression algorithm กลางคัน — backups เก่าจะ restore ไม่ได้ถ้าไม่มี decompression library เดิม คุณต้องเก็บ backups เก่าไว้หรือ migrate ทีละส่วน
+⚠️ **Limitation**: การเปลี่ยน compression algorithm กลางคัน — backups เก่าจะ restore ไม่ได้ถ้าไม่มี decompression library เดิม คุณต้องเก็บ backups เก่าไว้หรือ migrate ทีละส่วน
 
 ### Safety Features — สิ่งที่ WAL-G ทำเหนือกว่า WAL-E
 
@@ -82,7 +82,7 @@ export WALG_COMPRESSION_METHOD=zstd
 
 WAL-E ใช้"exclusive backup mode" — ถ้า backup process ตายระหว่างทาง PostgreSQL จะค้างใน backup mode และต้องการ manual intervention (ลบ`backup_label` file) เพื่อเริ่มใหม่
 
-WAL-G ใช้**non-exclusive backup mode**(PostgreSQL 9.6+) —`backup_label` และ`tablespace_map` ถูกอ่านจาก SQL query แทนที่จะเขียนลง disk — ไม่มี stale state ถ้ากระบวนการตาย [source: Citus Data blog]
+WAL-G ใช้ **non-exclusive backup mode**(PostgreSQL 9.6+) —`backup_label` และ`tablespace_map` ถูกอ่านจาก SQL query แทนที่จะเขียนลง disk — ไม่มี stale state ถ้ากระบวนการตาย [source: Citus Data blog]
 
 #### 2. Atomic Restore —`pg_control` Last
 
@@ -105,7 +105,7 @@ wal-g backup-push --delta /var/lib/postgresql/data
 | Full | 100% ของ database size | ปกติ | ไม่มี dependency |
 | Delta | ~10-20% ของ database size | ต้อง fetch full + delta | ถ้า full backup ถูกลบ — delta ใช้ไม่ได้ |
 
-⚠️ **ถ้าใช้ delta backup:**คุณต้องเก็บ full backup ที่ delta อ้างถึงไว้เสมอ —`wal-g delete retain FULL 5` จะเก็บ 5 full backups ล่าสุดและ delta ของมัน
+⚠️ **ถ้าใช้ delta backup:** คุณต้องเก็บ full backup ที่ delta อ้างถึงไว้เสมอ —`wal-g delete retain FULL 5` จะเก็บ 5 full backups ล่าสุดและ delta ของมัน
 
 ---
 
@@ -195,7 +195,7 @@ archive_timeout = 60s  # Force WAL segment rotation ทุก 60 วิ
 <details>
 <summary>🎯 ดูเฉลย (คลิกเพื่อเปิด)</summary>
 
-1. WAL-G ใช้ Go's goroutine เพื่อ download และ decompress หลาย WAL segments พร้อมกัน — แต่ละ goroutine จัดการหนึ่ง segment การเพิ่ม`WALG_DOWNLOAD_CONCURRENCY` ทำให้ restore เร็วขึ้น**แต่**ถ้าสูงเกินไป: (a) network bandwidth อาจอิ่มตัวจนกระทบ production, (b) CPU อาจ throttle จาก decompression หลาย streams, (c) disk I/O อาจเป็นคอขวดใหม่ — เพราะ writes หลาย streams พร้อมกันอาจ random I/O แทน sequential
+1. WAL-G ใช้ Go's goroutine เพื่อ download และ decompress หลาย WAL segments พร้อมกัน — แต่ละ goroutine จัดการหนึ่ง segment การเพิ่ม`WALG_DOWNLOAD_CONCURRENCY` ทำให้ restore เร็วขึ้น **แต่** ถ้าสูงเกินไป: (a) network bandwidth อาจอิ่มตัวจนกระทบ production, (b) CPU อาจ throttle จาก decompression หลาย streams, (c) disk I/O อาจเป็นคอขวดใหม่ — เพราะ writes หลาย streams พร้อมกันอาจ random I/O แทน sequential
 
 2. Backups เก่าที่ใช้ LZ4 จะ restore ไม่ได้ — เพราะ WAL-G จะพยายาม decompress ด้วย ZSTD/LZMA และ fail WAL-G ใช้ compression algorithm เดียวกันสำหรับทุก operation — การเปลี่ยน compression ต้อง: (a) เก็บ backups เก่าไว้จนหมดอายุ หรือ (b) migrate โดยทำ full backup ใหม่ด้วย algorithm ใหม่ แล้วค่อยลบของเก่า
 
@@ -224,7 +224,7 @@ archive_timeout = 60s  # Force WAL segment rotation ทุก 60 วิ
 
 ## 🔗 แหล่งอ้างอิง (Sources)
 
-> **อ้างอิง:**
+> **อ้างอิง**:
 > - [WAL-G GitHub Repository (Active, May 2026)](https://github.com/wal-g/wal-g)
 > - [Citus Data — Introducing WAL-G: Faster Disaster Recovery for Postgres (2017)](https://www.citusdata.com/blog/2017/08/18/introducing-wal-g-faster-restores-for-postgres/)
 > - [WAL-G Documentation (ReadTheDocs)](https://wal-g.readthedocs.io/)

@@ -13,22 +13,22 @@ prerequisites: []
 
 ## 🎯 ปฐมนิเทศ (Orient)
 
-ระบบ Microservices สมัยใหม่แทบทุกตัวต้องเรียก API ภายนอก ไม่ว่าจะเป็น Payment Gateway, SMS Provider, หรือ Internal Service ของทีมอื่น ปัญหาคือ Dependency เหล่านี้ไม่ได้พร้อมให้คุณทดสอบเสมอ: Sandbox ล่ม, Rate Limit เต็ม, ทีมอื่นยังเขียนไม่เสร็จ, หรือคุณแค่ไม่อยากเสียเงินเรียก API จริงทุกครั้งที่รัน Test การ"Mock" ในโค้ด (if/else หรือ DI Mock) แก้ปัญหาเฉพาะ Unit Test ได้ แต่ **ไม่ได้ทดสอบ Network Call จริงๆ**— คุณจะรู้ได้อย่างไรว่าโค้ดคุณ handle Connection Timeout, 500 Error, หรือ Response ช้าจาก Dependency ได้ถูกต้อง? นี่คือจุดที่ **Service Virtualization**เข้ามาแทนที่
+ระบบ Microservices สมัยใหม่แทบทุกตัวต้องเรียก API ภายนอก ไม่ว่าจะเป็น Payment Gateway, SMS Provider, หรือ Internal Service ของทีมอื่น ปัญหาคือ Dependency เหล่านี้ไม่ได้พร้อมให้คุณทดสอบเสมอ: Sandbox ล่ม, Rate Limit เต็ม, ทีมอื่นยังเขียนไม่เสร็จ, หรือคุณแค่ไม่อยากเสียเงินเรียก API จริงทุกครั้งที่รัน Test การ"Mock" ในโค้ด (if/else หรือ DI Mock) แก้ปัญหาเฉพาะ Unit Test ได้ แต่ **ไม่ได้ทดสอบ Network Call จริงๆ**— คุณจะรู้ได้อย่างไรว่าโค้ดคุณ handle Connection Timeout, 500 Error, หรือ Response ช้าจาก Dependency ได้ถูกต้อง? นี่คือจุดที่ **Service Virtualization** เข้ามาแทนที่
 
 ---
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️**สถานการณ์:**คุณกำลังสร้างระบบจองตั๋วคอนเสิร์ตที่ต้องเรียก 3 External APIs:
+> ✍️**สถานการณ์**:คุณกำลังสร้างระบบจองตั๋วคอนเสิร์ตที่ต้องเรียก 3 External APIs:
 > 1.**Payment API**(Third-party, คิดเงินจริงต่อครั้ง, Sandbox เสถียรแค่ 60%)
 > 2.**Seat Map API**(Internal Team B, ยังเขียนไม่เสร็จ — อีก 3 สัปดาห์)
 > 3.**SMS Notification API**(Production เดียวกับที่ลูกค้าใช้ — ห้ามส่ง SMS จริงตอนเทส)
 >
-> **ข้อจำกัด:**> - คุณต้องส่งมอบ Integration Test ภายในวันศุกร์นี้
+> **ข้อจำกัด**:> - คุณต้องส่งมอบ Integration Test ภายในวันศุกร์นี้
 > - CI/CD Pipeline ต้องรัน Test อัตโนมัติทุก Commit
 > - ต้องทดสอบ Failure Scenarios: Payment Timeout, Seat Map ตอบกลับช้า 10 วิ, SMS API คืน 503
 >
->**คำถาม:**คุณจะออกแบบ Test Environment อย่างไรให้:
+>**คำถาม**:คุณจะออกแบบ Test Environment อย่างไรให้:
 > 1. ทดสอบได้ทันทีโดยไม่ต้องรอ Team B
 > 2. ไม่เสียเงินค่า Payment API จริงทุกรอบที่รัน CI
 > 3. จำลอง Network Failure ได้เหมือนจริง (Timeout, Latency, 5xx Error)
@@ -41,9 +41,9 @@ prerequisites: []
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
-|"ใช้ Mock Library ในโค้ด (Jest Mock, Sinon)" | ⚠️ **ใช้ได้แค่ Unit Test!**Mock ในโค้ดข้าม Network Layer ไปเลย — คุณไม่มีทางรู้ว่าโค้ดคุณ handle`ECONNREFUSED`, Socket Timeout, หรือ DNS Resolution Failure ได้จริงหรือเปล่า และทุกครั้งที่ API Contract เปลี่ยน คุณต้องตามแก้ Mock ทุกที่ |
-|"ใช้ JSON Server / json-server" | ⚠️ **ดีกว่า Mock ในโค้ด**เพราะมี Network Call จริง แต่ json-server ทำได้แค่ CRUD REST — ไม่สามารถจำลอง Latency, Fault Injection, หรือ Stateful Behavior (เช่น"ตอบ 200 ครั้งแรก, 500 ครั้งที่สอง") |
-|"ใช้ Mountebank / WireMock / MockServer" | ✅**นี่คือ Service Virtualization!**คุณสร้าง External HTTP Server จริงๆ ที่รับ Request และตอบกลับตามเงื่อนไขที่คุณตั้งไว้ — รองรับ Latency Injection, Fault Simulation, Proxy Recording และ State Machine เพื่อจำลอง Dependency ได้เหมือนจริงโดยไม่ต้องแก้โค้ดเลยแม้แต่บรรทัดเดียว |**ทำไมการเลือกนี้สำคัญ?**Mock ในโค้ดทำให้คุณเทสแค่"Happy Path ในหัวคุณ" — แต่ Service Virtualization ทำให้คุณเทส"โลกความเป็นจริงที่พังได้" การที่ระบบคุณรอดจาก Payment Gateway Timeout คือสิ่งที่ Mock ในโค้ดไม่เคยบอกคุณได้
+|"ใช้ Mock Library ในโค้ด (Jest Mock, Sinon)" | ⚠️ **ใช้ได้แค่ Unit Test!** Mock ในโค้ดข้าม Network Layer ไปเลย — คุณไม่มีทางรู้ว่าโค้ดคุณ handle`ECONNREFUSED`, Socket Timeout, หรือ DNS Resolution Failure ได้จริงหรือเปล่า และทุกครั้งที่ API Contract เปลี่ยน คุณต้องตามแก้ Mock ทุกที่ |
+|"ใช้ JSON Server / json-server" | ⚠️ **ดีกว่า Mock ในโค้ด** เพราะมี Network Call จริง แต่ json-server ทำได้แค่ CRUD REST — ไม่สามารถจำลอง Latency, Fault Injection, หรือ Stateful Behavior (เช่น"ตอบ 200 ครั้งแรก, 500 ครั้งที่สอง") |
+|"ใช้ Mountebank / WireMock / MockServer" | ✅**นี่คือ Service Virtualization!** คุณสร้าง External HTTP Server จริงๆ ที่รับ Request และตอบกลับตามเงื่อนไขที่คุณตั้งไว้ — รองรับ Latency Injection, Fault Simulation, Proxy Recording และ State Machine เพื่อจำลอง Dependency ได้เหมือนจริงโดยไม่ต้องแก้โค้ดเลยแม้แต่บรรทัดเดียว |**ทำไมการเลือกนี้สำคัญ?** Mock ในโค้ดทำให้คุณเทสแค่"Happy Path ในหัวคุณ" — แต่ Service Virtualization ทำให้คุณเทส"โลกความเป็นจริงที่พังได้" การที่ระบบคุณรอดจาก Payment Gateway Timeout คือสิ่งที่ Mock ในโค้ดไม่เคยบอกคุณได้
 
 ---
 
@@ -51,7 +51,7 @@ prerequisites: []
 
 ### Service Virtualization คืออะไร?
 
-**Service Virtualization**คือการสร้าง"ตัวปลอม" ของ Dependency ที่ทำงานบน Network จริง — มันรับ Request ผ่าน HTTP/TCP จริงๆ และตอบกลับตาม Behavior ที่คุณกำหนด ต่างจาก Mock ในโค้ดที่แทนที่แค่ Function Call
+**Service Virtualization** คือการสร้าง"ตัวปลอม" ของ Dependency ที่ทำงานบน Network จริง — มันรับ Request ผ่าน HTTP/TCP จริงๆ และตอบกลับตาม Behavior ที่คุณกำหนด ต่างจาก Mock ในโค้ดที่แทนที่แค่ Function Call
 
 ```text
 ┌─────────────┐     HTTP Request      ┌──────────────────┐
@@ -68,7 +68,7 @@ prerequisites: []
 
 ### Mountebank — เครื่องมือ Service Virtualization แบบ Protocol-Agnostic
 
-Mountebank สร้างโดย Brandon Byars (อดีต ThoughtWorks) เป็น Open-Source Tool ที่จำลอง HTTP, HTTPS, TCP, SMTP, GraphQL และ gRPC ได้ผ่าน REST API หรือ CLI [source: mountebank docs — overview]**แนวคิดหลัก 3 อย่าง:**1.**Imposter**—"ตัวปลอม" คือ Service เสมือนที่เปิด Port รับ Request จริงๆ (เช่น`http://localhost:4545`)
+Mountebank สร้างโดย Brandon Byars (อดีต ThoughtWorks) เป็น Open-Source Tool ที่จำลอง HTTP, HTTPS, TCP, SMTP, GraphQL และ gRPC ได้ผ่าน REST API หรือ CLI [source: mountebank docs — overview]**แนวคิดหลัก 3 อย่าง:** 1.**Imposter**—"ตัวปลอม" คือ Service เสมือนที่เปิด Port รับ Request จริงๆ (เช่น`http://localhost:4545`)
 2.**Stub**— กฎการตอบกลับของ Imposter นั้นๆ (เช่น"ถ้า Request เป็น POST /pay → ตอบ 200")
 3.**Predicate**— เงื่อนไขที่ใช้เลือก Stub (match URL, Method, Headers, Body Content)
 
@@ -122,7 +122,7 @@ POST http://localhost:2525/imposters
 }
 ```
 
-> ⚠️ **ข้อจำกัดของตัวอย่างข้างบน:**ถ้าใช้ Predicate ซ้ำกัน Mountebank จะเลือก Stub แรกที่ Match เสมอ — ถ้าต้องการให้ระบบทำงานได้หลาย State ต้องใช้**Stub Overlap Behavior**หรือ`x-mountebank-inject-headers` เพื่อให้ Client เลือกว่าจะให้ตอบแบบไหน [source: mountebank docs — predicates]
+> ⚠️ **ข้อจำกัดของตัวอย่างข้างบน**: ถ้าใช้ Predicate ซ้ำกัน Mountebank จะเลือก Stub แรกที่ Match เสมอ — ถ้าต้องการให้ระบบทำงานได้หลาย State ต้องใช้ **Stub Overlap Behavior** หรือ`x-mountebank-inject-headers` เพื่อให้ Client เลือกว่าจะให้ตอบแบบไหน [source: mountebank docs — predicates]
 
 ---
 
@@ -147,15 +147,15 @@ POST http://localhost:2525/imposters
 **ควรใช้ Service Virtualization เมื่อ:**- ✅ Dependency ยังพัฒนาไม่เสร็จ หรือไม่เสถียรพอให้เทส
 - ✅ ต้องการเทส Failure Scenarios ที่ Dependency จริงทำให้เกิดยาก (Timeout, 5xx, Malformed Response)
 - ✅ CI/CD ต้องการรัน Test ซ้ำๆ โดยไม่เสียค่าใช้จ่าย (API ที่คิดเงินต่อ Call)
-- ✅ ต้องการ Contract Testing — Verify ว่า Request ที่คุณส่งตรงกับ Spec ของ Dependency**ไม่ควรใช้ Service Virtualization เมื่อ:**- ❌ Dependency มี Behavior ซับซ้อนที่จำลองไม่ได้ (ML Model, Legacy Mainframe)
+- ✅ ต้องการ Contract Testing — Verify ว่า Request ที่คุณส่งตรงกับ Spec ของ Dependency **ไม่ควรใช้ Service Virtualization เมื่อ:**- ❌ Dependency มี Behavior ซับซ้อนที่จำลองไม่ได้ (ML Model, Legacy Mainframe)
 - ❌ การเปลี่ยน API Contract บ่อยทำให้ Maintaining Stubs แพงกว่าการรอของจริง
 - ❌ Dependency มี Rate Limit ที่ไม่กระทบ Test (ฟรี Tier เพียงพอ)
 
 ### สิ่งที่ต้องแลก (Trade-offs)
 
--**Maintenance Cost:**ทุกครั้งที่ API Contract ของ Dependency เปลี่ยน คุณต้องอัปเดต Stubs — ถ้ามี 10 Microservices ที่ใช้ Payment API เดียวกัน ต้องอัปเดต Stubs 10 ที่
--**False Confidence:**Stubs ตอบแบบที่คุณ"คิดว่า" Dependency จะตอบ — แต่ของจริงอาจตอบต่างจากที่คุณคิด ทำให้ Test ผ่าน แต่ Production พัง
--**Complexity:**การตั้งค่า Mountebank ใน CI Pipeline (Docker, Network, Port Management) เพิ่มความซับซ้อนให้ Infrastructure
+-**Maintenance Cost:** ทุกครั้งที่ API Contract ของ Dependency เปลี่ยน คุณต้องอัปเดต Stubs — ถ้ามี 10 Microservices ที่ใช้ Payment API เดียวกัน ต้องอัปเดต Stubs 10 ที่
+-**False Confidence:** Stubs ตอบแบบที่คุณ"คิดว่า" Dependency จะตอบ — แต่ของจริงอาจตอบต่างจากที่คุณคิด ทำให้ Test ผ่าน แต่ Production พัง
+-**Complexity**: การตั้งค่า Mountebank ใน CI Pipeline (Docker, Network, Port Management) เพิ่มความซับซ้อนให้ Infrastructure
 
 ### เทคนิค Production: Proxy Recording + Stub
 
@@ -180,7 +180,7 @@ Mountebank มีโหมด`proxyOnce` — มันจะ Forward Request ไ
 }
 ```
 
-> ⚠️**ข้อควรระวัง:**`proxyOnce` ใช้ได้ดีกับ Idempotent API (GET, Read-only) — กับ POST/PUT ที่มี Side Effect (สร้าง Transaction จริง) มันจะสร้างของจริงในครั้งแรก! ใช้`proxyAlways` หรือเขียน Custom Stub แทนสำหรับ Mutating Operations
+> ⚠️**ข้อควรระวัง**:`proxyOnce` ใช้ได้ดีกับ Idempotent API (GET, Read-only) — กับ POST/PUT ที่มี Side Effect (สร้าง Transaction จริง) มันจะสร้างของจริงในครั้งแรก! ใช้`proxyAlways` หรือเขียน Custom Stub แทนสำหรับ Mutating Operations
 
 ---
 
@@ -193,7 +193,7 @@ Mountebank มีโหมด`proxyOnce` — มันจะ Forward Request ไ
 <details>
 <summary>🎯 ดูเฉลย (คลิกเพื่อเปิด)</summary>
 
-1.**Mock ในโค้ด**แทนที่ Function Call — มันทดสอบเฉพาะ Logic แต่ไม่ทดสอบ Network Layer (Timeout, Connection Refused, DNS Failure, Serialization)**Service Virtualization**สร้าง Server ปลอมที่รับ HTTP Request จริง — ทำให้ทดสอบ Network Behavior, Retry Logic, Circuit Breaker, และ Timeout Handling ได้ทั้งหมดในระดับ Integration Test
+1.**Mock ในโค้ด** แทนที่ Function Call — มันทดสอบเฉพาะ Logic แต่ไม่ทดสอบ Network Layer (Timeout, Connection Refused, DNS Failure, Serialization)**Service Virtualization** สร้าง Server ปลอมที่รับ HTTP Request จริง — ทำให้ทดสอบ Network Behavior, Retry Logic, Circuit Breaker, และ Timeout Handling ได้ทั้งหมดในระดับ Integration Test
 
 2.**เสี่ยงสร้าง Order จริง!**`proxyOnce` จะ Forward POST ไป API จริงในครั้งแรกและสร้าง Order จริง — ถ้า API นั้นไม่ใช่ Idempotent (สั่งซื้อของ, หักเงิน) จะเกิด Side Effect ใน Production ควรใช้ Custom Stub หรือ`proxyAlways` สำหรับ Write Operations
 

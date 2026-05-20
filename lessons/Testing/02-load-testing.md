@@ -13,24 +13,24 @@ prerequisites: []
 
 ## 🎯 ปฐมนิเทศ (Orient)
 
-"ระบบเรารับ 1,000 req/s ได้สบาย" — แต่คุณรู้ได้อย่างไร? ถ้าคำตอบคือ"ก็ยังไม่เคยพังนี่" แสดงว่าคุณกำลังทดสอบระบบด้วยความหวัง ไม่ใช่ด้วยข้อมูล ผู้ใช้ 10 คนอาจใช้งานได้ดี แต่ผู้ใช้ 10,000 คนพร้อมกันคือคนละโลก — Connection Pool หมด, Database Lock สะสม, GC Pause ถี่จนระบบสะดุด, Memory Leak ที่ซ่อนอยู่โผล่มาตอน Load สูง Load Testing ไม่ใช่แค่"ยิง Request เยอะๆ" แต่มันคือการออกแบบ Experiment ที่มี Hypothesis, Metrics, และ Threshold ที่ชัดเจน — เพื่อหาจุดที่ระบบคุณจะพัง **ก่อน**ที่ผู้ใช้จริงจะเป็นคนหามันเจอ
+"ระบบเรารับ 1,000 req/s ได้สบาย" — แต่คุณรู้ได้อย่างไร? ถ้าคำตอบคือ"ก็ยังไม่เคยพังนี่" แสดงว่าคุณกำลังทดสอบระบบด้วยความหวัง ไม่ใช่ด้วยข้อมูล ผู้ใช้ 10 คนอาจใช้งานได้ดี แต่ผู้ใช้ 10,000 คนพร้อมกันคือคนละโลก — Connection Pool หมด, Database Lock สะสม, GC Pause ถี่จนระบบสะดุด, Memory Leak ที่ซ่อนอยู่โผล่มาตอน Load สูง Load Testing ไม่ใช่แค่"ยิง Request เยอะๆ" แต่มันคือการออกแบบ Experiment ที่มี Hypothesis, Metrics, และ Threshold ที่ชัดเจน — เพื่อหาจุดที่ระบบคุณจะพัง **ก่อน** ที่ผู้ใช้จริงจะเป็นคนหามันเจอ
 
 ---
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> ✍️**สถานการณ์:**คุณเป็นเจ้าของระบบ E-commerce ที่จะเปิดตัว Flash Sale พรุ่งนี้เวลา 10:00 น. ทีม Marketing คาดการณ์ Traffic:
+> ✍️**สถานการณ์**:คุณเป็นเจ้าของระบบ E-commerce ที่จะเปิดตัว Flash Sale พรุ่งนี้เวลา 10:00 น. ทีม Marketing คาดการณ์ Traffic:
 > - ผู้ใช้พร้อมกันสูงสุด 50,000 คน
 > - เฉลี่ย 5,000 orders/นาที ในช่วง 10 นาทีแรก
 > - แต่ละ Order มี 4 API Calls:`POST /cart/add`,`POST /checkout`,`POST /pay`,`GET /order/status`
 >
->**ระบบปัจจุบัน:**> - 3 Node.js Instances หลัง Load Balancer (L7)
+>**ระบบปัจจุบัน**: > - 3 Node.js Instances หลัง Load Balancer (L7)
 > - PostgreSQL Primary + 2 Read Replicas
 > - Redis สำหรับ Session และ Cart Cache
 > - Connection Pool: 20 connections ต่อ Instance (รวม 60 ไป DB)
 >
->**คำถาม:**> 1. คุณจะรู้ได้อย่างไรว่า 3 Instances กับ 60 DB Connections นี้พอสำหรับ 50,000 Concurrent Users?
-> 2. ถ้าจะทดสอบ Load Test**ก่อน**วันจริง — คุณควรวัด Metrics อะไรบ้างถึงจะรู้ว่า"คอขวด" อยู่ตรงไหน? (CPU? DB Connections? Redis? P99 Latency?)
+>**คำถาม**:> 1. คุณจะรู้ได้อย่างไรว่า 3 Instances กับ 60 DB Connections นี้พอสำหรับ 50,000 Concurrent Users?
+> 2. ถ้าจะทดสอบ Load Test **ก่อน** วันจริง — คุณควรวัด Metrics อะไรบ้างถึงจะรู้ว่า"คอขวด" อยู่ตรงไหน? (CPU? DB Connections? Redis? P99 Latency?)
 >
 >**หยุดตรงนี้ก่อน**— (คำใบ้: คำว่า"รับไหว" ต้องมีตัวเลขกำกับ —"P99 Latency < 500ms ที่ 5,000 req/s และ Error Rate < 0.1%")
 
@@ -40,9 +40,9 @@ prerequisites: []
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
-|"ใช้ Apache Bench ยิงเยอะๆ แล้วดูว่า Error มั้ย" | ⚠️ **ไม่พอ!**Apache Bench (`ab`) ยิง Request แบบ Sequential จากเครื่องเดียว — มันไม่จำลอง Concurrent Users จริง, ไม่มี Ramp-Up Pattern (Traffic ค่อยๆ เพิ่ม), ไม่มี Custom Assertions, และไม่เก็บ Metrics ระหว่าง Test |
-|"ใช้ k6/Artillery เขียน Script, ยิงจาก 1 เครื่อง, วัด P99 Latency" | ⚠️ **เกือบดี!**แต่การยิงจาก 1 เครื่องหมายความว่า Client-Side อาจเป็นคอขวดก่อนระบบ — คุณต้องรู้ว่าเมื่อไหร่ที่ Load Generator เองเริ่มอิ่มตัว (CPU/Network ของเครื่องที่ยิง) และต้องใช้ Distributed Load Generator สำหรับ 50K Concurrent |
-|"ออกแบบ Test Plan: Ramp-Up 0→5,000 VUs ใน 5 นาที → Hold 10 นาที → วัด P50/P90/P99 Latency, Error Rate, Throughput, DB Connection Usage, Redis Hit Rate, CPU/Memory**พร้อมกัน**— และใช้ Distributed k6 หรือ Artillery จากหลายเครื่อง/หลาย Region" | ✅ **นี่คือ Load Test ที่มี Hypothesis!**คุณไม่ได้แค่"ยิงแล้วดูว่าพังมั้ย" — คุณออกแบบ Experiment ที่มีเป้าหมายชัดเจน: Confirm ว่าระบบรับ 5,000 req/s โดย P99 < 500ms และคุณวัด Metrics เพียงพอที่จะ pinpoint คอขวดได้ถ้ามันพัง (Latency Spike ที่ DB Query? หรือ Redis? หรือ App Server CPU?) |**ทำไมการคิดแบบนี้สำคัญ?**Load Test ที่ไม่มี Hypothesis คือการสุ่มยิง Request แล้วหวังว่าจะเจอ Bug — เหมือนหมอที่สุ่มฉีดยาโดยไม่รู้ว่ากำลังรักษาอะไร Load Test ที่ดีเริ่มจากคำถาม:"ที่ 5,000 req/s ตัวไหนจะพังก่อน?" และออกแบบ Experiment เพื่อตอบคำถามนั้น
+|"ใช้ Apache Bench ยิงเยอะๆ แล้วดูว่า Error มั้ย" | ⚠️ **ไม่พอ!** Apache Bench (`ab`) ยิง Request แบบ Sequential จากเครื่องเดียว — มันไม่จำลอง Concurrent Users จริง, ไม่มี Ramp-Up Pattern (Traffic ค่อยๆ เพิ่ม), ไม่มี Custom Assertions, และไม่เก็บ Metrics ระหว่าง Test |
+|"ใช้ k6/Artillery เขียน Script, ยิงจาก 1 เครื่อง, วัด P99 Latency" | ⚠️ **เกือบดี!** แต่การยิงจาก 1 เครื่องหมายความว่า Client-Side อาจเป็นคอขวดก่อนระบบ — คุณต้องรู้ว่าเมื่อไหร่ที่ Load Generator เองเริ่มอิ่มตัว (CPU/Network ของเครื่องที่ยิง) และต้องใช้ Distributed Load Generator สำหรับ 50K Concurrent |
+|"ออกแบบ Test Plan: Ramp-Up 0→5,000 VUs ใน 5 นาที → Hold 10 นาที → วัด P50/P90/P99 Latency, Error Rate, Throughput, DB Connection Usage, Redis Hit Rate, CPU/Memory **พร้อมกัน**— และใช้ Distributed k6 หรือ Artillery จากหลายเครื่อง/หลาย Region" | ✅ **นี่คือ Load Test ที่มี Hypothesis!** คุณไม่ได้แค่"ยิงแล้วดูว่าพังมั้ย" — คุณออกแบบ Experiment ที่มีเป้าหมายชัดเจน: Confirm ว่าระบบรับ 5,000 req/s โดย P99 < 500ms และคุณวัด Metrics เพียงพอที่จะ pinpoint คอขวดได้ถ้ามันพัง (Latency Spike ที่ DB Query? หรือ Redis? หรือ App Server CPU?) |**ทำไมการคิดแบบนี้สำคัญ?** Load Test ที่ไม่มี Hypothesis คือการสุ่มยิง Request แล้วหวังว่าจะเจอ Bug — เหมือนหมอที่สุ่มฉีดยาโดยไม่รู้ว่ากำลังรักษาอะไร Load Test ที่ดีเริ่มจากคำถาม:"ที่ 5,000 req/s ตัวไหนจะพังก่อน?" และออกแบบ Experiment เพื่อตอบคำถามนั้น
 
 ---
 
@@ -154,7 +154,7 @@ Load Test ที่ดีมี 4 ขั้นตอน:
 - กำหนด Metrics ที่จะวัด (Golden Signals: Latency, Traffic, Errors, Saturation)
 - กำหนด Thresholds (ผ่าน/ไม่ผ่าน)**3. สังเกตระหว่าง Test**- ดู Metrics แบบ Real-Time (Grafana Dashboard)
 - จดบันทึกเวลาที่ Metrics เริ่มเปลี่ยน —"ที่ 3,200 VUs, P99 Latency เริ่มเกิน 200ms" → นี่คือสัญญาณเตือนแรก
-- เช็ค Saturation: DB Connections, Thread Pool, Redis Memory, Network Bandwidth**4. วิเคราะห์ผล**- Hypothesis ถูกหรือผิด?
+- เช็ค Saturation: DB Connections, Thread Pool, Redis Memory, Network Bandwidth **4. วิเคราะห์ผล**- Hypothesis ถูกหรือผิด?
 - ถ้าผิด — เพราะอะไร? (DB Lock? Connection Pool? Network?)
 - คอขวดอยู่ที่ Layer ไหน? (App → DB → Cache → Network)
 - ต้องเปลี่ยนอะไรก่อนเปิดจริง?

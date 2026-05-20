@@ -12,9 +12,9 @@ tags: [chat-exp, system-design, chat]
 
 ## ปฐมนิเทศ (Orient)
 
-"การออกแบบระบบ WhatsApp / LINE / Messenger" ไม่ใช่แค่การวาดแผนภาพรับส่งข้อความ แต่มันคือโจทย์ System Design ที่คลาสสิกที่สุด เพราะมันรวมทุกมิติของ Distributed Systems ไว้ในที่เดียว: ตั้งแต่ **Real-time ⏰ Connectivity**,**Data Consistency ⛓️**,**Horizontal Scaling**ไปจนถึง**Efficient Storage**[source: Slack Engineering — Scaling Slack’s Real-time Messaging]
+"การออกแบบระบบ WhatsApp / LINE / Messenger" ไม่ใช่แค่การวาดแผนภาพรับส่งข้อความ แต่มันคือโจทย์ System Design ที่คลาสสิกที่สุด เพราะมันรวมทุกมิติของ Distributed Systems ไว้ในที่เดียว: ตั้งแต่ **Real-time ⏰ Connectivity**,**Data Consistency ⛓️**,**Horizontal Scaling** ไปจนถึง **Efficient Storage**[source: Slack Engineering — Scaling Slack’s Real-time Messaging]
 
-ซีรีส์นี้ประกอบด้วย **6 บทเรียนเข้มข้น**ที่กลั่นกรองจากประสบการณ์การสร้างระบบจริงจาก**สถาปัตยกรรมระบบแชท**(สถาปัตยกรรม 19 Microservices บน Google Pub/Sub, MongoDB และ Firebase) ทุกบทเรียนถูกออกแบบตามหลัก **Learning Loop**เพื่อให้คุณเข้าใจทั้ง"ทฤษฎี" และ"การนำไปใช้จริง" ภายใน 5-10 นาที
+ซีรีส์นี้ประกอบด้วย **6 บทเรียนเข้มข้น** ที่กลั่นกรองจากประสบการณ์การสร้างระบบจริงจาก **สถาปัตยกรรมระบบแชท**(สถาปัตยกรรม 19 Microservices บน Google Pub/Sub, MongoDB และ Firebase) ทุกบทเรียนถูกออกแบบตามหลัก **Learning Loop** เพื่อให้คุณเข้าใจทั้ง"ทฤษฎี" และ"การนำไปใช้จริง" ภายใน 5-10 นาที
 
 ---
 
@@ -57,9 +57,9 @@ graph TD
 
 ## อ้างอิงจากสถาปัตยกรรมจริง
 
-บทเรียนทั้งหมดอ้างอิงจาก**สถาปัตยกรรมระบบแชทจริง**— ระบบ Customer Support แบบ Multi-channel ที่รองรับทั้ง Facebook, LINE และ Marketplace ต่างๆ โดยมีหัวใจหลักคือ:
--  **19 Microservices**ทำงานร่วมกันผ่าน Google Cloud Pub/Sub
--**Hybrid Storage:**MongoDB (Messages), PostgreSQL (Analytics), Redis (Cache), และ Firebase (Real-time ⏰ State)
+บทเรียนทั้งหมดอ้างอิงจาก **สถาปัตยกรรมระบบแชทจริง**— ระบบ Customer Support แบบ Multi-channel ที่รองรับทั้ง Facebook, LINE และ Marketplace ต่างๆ โดยมีหัวใจหลักคือ:
+-  **19 Microservices** ทำงานร่วมกันผ่าน Google Cloud Pub/Sub
+-**Hybrid Storage:** MongoDB (Messages), PostgreSQL (Analytics), Redis (Cache), และ Firebase (Real-time ⏰ State)
 -  **AI 🧠 Integration:** ระบบจัดการตั๋วอัตโนมัติด้วย Agentic AI 🧠 Engine
 
 ---

@@ -13,7 +13,7 @@ tags: [chat-exp, system-design, networking]
 >
 > ซีรีส์นี้จะพาคุณไปดูเบื้องหลังของการสื่อสารในระบบ Distributed Systems ที่ Senior Engineer ต้องรู้
 >
-> Each lesson takes **5-10 minutes**based on the **Learning Loop**principle.
+> Each lesson takes **5-10 minutes** based on the **Learning Loop** principle.
 
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 

@@ -11,8 +11,8 @@ tags: [chat-exp, system-design, observability, sre, monitoring]
 > [!info] ปฐมนิเทศ
 > ระบบที่ล่มไม่ใช่สิ่งที่น่ากลัวที่สุด แต่ระบบที่"กำลังจะล่ม" หรือ"ล่มแบบเงียบๆ" โดยที่คุณไม่รู้ตัวต่างหากที่น่ากลัวที่สุด
 >
-> ซีรีส์นี้จะเปลี่ยนคุณจากคนที่คอยเช็คแค่ว่า"Server ยังรันอยู่ไหม?" (Up/Down) ให้กลายเป็นวิศวกรที่เข้าใจทุกจังหวะการเต้นของหัวใจระบบ ผ่านหลักการ **Levels of Monitoring**และเครื่องมือยอดนิยมอย่าง**LGTM Stack**>
-> Each lesson takes**5-10 minutes**based on the **Learning Loop**principle.
+> ซีรีส์นี้จะเปลี่ยนคุณจากคนที่คอยเช็คแค่ว่า"Server ยังรันอยู่ไหม?" (Up/Down) ให้กลายเป็นวิศวกรที่เข้าใจทุกจังหวะการเต้นของหัวใจระบบ ผ่านหลักการ **Levels of Monitoring** และเครื่องมือยอดนิยมอย่าง **LGTM Stack**>
+> Each lesson takes **5-10 minutes** based on the **Learning Loop** principle.
 
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 

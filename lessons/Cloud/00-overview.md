@@ -13,7 +13,7 @@ tags: [chat-exp, system-design, cloud, gcp, serverless]
 >
 ซีรีส์นี้จะพาคุณไปสำรวจองค์ประกอบหลักของ Modern Cloud ตั้งแต่การประมวลผลแบบ Serverless ไปจนถึงการจัดการ Network 📡 และความปลอดภัยในระดับ Infrastructure 🏗️
 
-Each lesson takes **5-10 minutes**based on the **Learning Loop**principle.
+Each lesson takes **5-10 minutes** based on the **Learning Loop** principle.
 
 ## 🗺️ แผนผังการเรียนรู้ (Roadmap)
 

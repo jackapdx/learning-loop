@@ -52,7 +52,7 @@ WAL-G, pgBackRest, Barman — แต่ละตัวเก่งด้าน�
 | 2 | [[02-wal-g-deep-dive\|WAL-G Deep Dive]] |"จาก Python สู่ Go: WAL-G restore เร็วกว่า WAL-E 4 เท่าได้อย่างไร — และอะไรที่คุณต้องจัดการเอง" |
 | 3 | [[03-backup-tool-comparison\|Backup Tool Comparison]] |"WAL-G vs pgBackRest vs Barman — ไม่มีตัวไหนดีที่สุด มีแต่ตัวที่เหมาะกับ context คุณที่สุด" |
 
-> **อ้างอิงหลัก:**
+> **อ้างอิงหลัก**:
 > - [WAL-G GitHub Repository](https://github.com/wal-g/wal-g)
 > - [Introducing WAL-G by Citus (2017)](https://www.citusdata.com/blog/2017/08/18/introducing-wal-g-faster-restores-for-postgres/)
 > - [Crunchy Data — Introduction to Postgres Backups (2023)](https://www.crunchydata.com/blog/introduction-to-postgres-backups)

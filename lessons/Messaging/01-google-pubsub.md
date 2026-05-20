@@ -13,21 +13,21 @@ prerequisites: []
 
 ## 🎯 ปฐมนิเทศ (Orient)
 
-Google Cloud Pub/Sub คือ Message Broker ระดับโลกที่ทรงพลังและไม่ต้องบริหารจัดการ (Serverless) แต่การเลือกใช้มันเพียงเพราะ"มันเป็นของ Google" คือกับดักที่พบบ่อยในการสัมภาษณ์ System Design วิศวกรระดับ Senior ต้องเข้าใจว่า **"จุดอ่อน"**ของมันคืออะไร และเมื่อไหร่ที่คุณควรหันไปใช้**Internal Queue**(อย่าง pg-boss) หรือ**Memory Queue**(อย่าง BullMQ) แทน
+Google Cloud Pub/Sub คือ Message Broker ระดับโลกที่ทรงพลังและไม่ต้องบริหารจัดการ (Serverless) แต่การเลือกใช้มันเพียงเพราะ"มันเป็นของ Google" คือกับดักที่พบบ่อยในการสัมภาษณ์ System Design วิศวกรระดับ Senior ต้องเข้าใจว่า **"จุดอ่อน"** ของมันคืออะไร และเมื่อไหร่ที่คุณควรหันไปใช้ **Internal Queue**(อย่าง pg-boss) หรือ **Memory Queue**(อย่าง BullMQ) แทน
 
 ---
 
 ## 🧪 ลองทำก่อน (Attempt)
 
-> **สถานการณ์:**คุณกำลังออกแบบระบบ**High-Frequency Trading Platform**ที่มีเงื่อนไขดังนี้:
-> 1. ต้องการ**Latency < 5ms**ในการส่งคำสั่งซื้อขาย
-> 2. ต้องรับประกัน**Message Ordering**อย่างเคร่งครัด (Strict FIFO across global scale)
-> 3. ต้องสามารถ**Replay Events**ย้อนหลังได้ 1 ปี เพื่อทำ Audit (Event Sourcing)
+> **สถานการณ์**:คุณกำลังออกแบบระบบ **High-Frequency Trading Platform** ที่มีเงื่อนไขดังนี้:
+> 1. ต้องการ **Latency < 5ms** ในการส่งคำสั่งซื้อขาย
+> 2. ต้องรับประกัน **Message Ordering** อย่างเคร่งครัด (Strict FIFO across global scale)
+> 3. ต้องสามารถ **Replay Events** ย้อนหลังได้ 1 ปี เพื่อทำ Audit (Event Sourcing)
 >
->**ข้อจำกัด:**> - ระบบต้องรองรับการประมวลผลคำสั่งซื้อขายระดับล้านรายการต่อวินาที
+>**ข้อจำกัด**:> - ระบบต้องรองรับการประมวลผลคำสั่งซื้อขายระดับล้านรายการต่อวินาที
 > - ห้ามมีข้อความหายเด็ดขาด (Zero Data Loss)
 >
->**คำถาม:**ในฐานะ Lead Architect คุณจะเลือกใช้ Google Pub/Sub สำหรับงานนี้หรือไม่? หากไม่ — คุณมีทางเลือกอื่นที่ตอบโจทย์กว่าอย่างไร?
+>**คำถาม**:ในฐานะ Lead Architect คุณจะเลือกใช้ Google Pub/Sub สำหรับงานนี้หรือไม่? หากไม่ — คุณมีทางเลือกอื่นที่ตอบโจทย์กว่าอย่างไร?
 >
 >**✋ หยุดตรงนี้ก่อน**— ลองคิดดูว่า"บริการที่จัดการให้ทุกอย่าง (Fully Managed)" มักจะแลกมาด้วยอะไรในแง่ของ Performance?
 
@@ -37,9 +37,9 @@ Google Cloud Pub/Sub คือ Message Broker ระดับโลกที่�
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|
-|"ใช้ Pub/Sub ได้ เพราะมัน Scale ได้ไม่จำกัด" | ⚠️ **ขาดบริบท!**แม้ Pub/Sub จะ Scale ได้มหาศาล แต่ P95 Latency เฉลี่ยอยู่ที่ ~50ms ซึ่ง"ช้าเกินไป" สำหรับระบบ Trading ที่ต้องการระดับ < 5ms |
-|"ใช้ Pub/Sub และเปิด Ordering Key" | ⚠️**ใกล้เคียง!**การเปิด Ordering Key ช่วยเรื่องลำดับได้ แต่จะสร้างคอขวด (Bottleneck) และเพิ่ม Latency มากขึ้นไปอีก และมันยังไม่ตอบโจทย์เรื่อง Replay 1 ปี |
-|"ใช้ Kafka (Log-based Streaming)" | ✅**Senior-level!**คุณเข้าใจว่า Kafka ถูกออกแบบมาเพื่อ Streaming ที่มี Low Latency และรองรับ Retention นานเท่าที่ต้องการเพื่อทำ Replay (Event Sourcing) |**ทำไมการให้เหตุผลแบบนี้สำคัญ?**เพราะวิศวกรอาวุโสรู้ว่า Pub/Sub ถูกออกแบบมาเพื่อ**Asynchronous Messaging**(Fire-and-forget) ไม่ใช่**High-speed Data Streaming**หรือ**Audit Log Storage**ระยะยาว
+|"ใช้ Pub/Sub ได้ เพราะมัน Scale ได้ไม่จำกัด" | ⚠️ **ขาดบริบท!** แม้ Pub/Sub จะ Scale ได้มหาศาล แต่ P95 Latency เฉลี่ยอยู่ที่ ~50ms ซึ่ง"ช้าเกินไป" สำหรับระบบ Trading ที่ต้องการระดับ < 5ms |
+|"ใช้ Pub/Sub และเปิด Ordering Key" | ⚠️**ใกล้เคียง!** การเปิด Ordering Key ช่วยเรื่องลำดับได้ แต่จะสร้างคอขวด (Bottleneck) และเพิ่ม Latency มากขึ้นไปอีก และมันยังไม่ตอบโจทย์เรื่อง Replay 1 ปี |
+|"ใช้ Kafka (Log-based Streaming)" | ✅**Senior-level!** คุณเข้าใจว่า Kafka ถูกออกแบบมาเพื่อ Streaming ที่มี Low Latency และรองรับ Retention นานเท่าที่ต้องการเพื่อทำ Replay (Event Sourcing) |**ทำไมการให้เหตุผลแบบนี้สำคัญ?** เพราะวิศวกรอาวุโสรู้ว่า Pub/Sub ถูกออกแบบมาเพื่อ **Asynchronous Messaging**(Fire-and-forget) ไม่ใช่ **High-speed Data Streaming** หรือ **Audit Log Storage** ระยะยาว
 
 ---
 
@@ -47,9 +47,9 @@ Google Cloud Pub/Sub คือ Message Broker ระดับโลกที่�
 
 ### 1. ข้อจำกัดของ Pub/Sub (The Hard Truths)
 
--**Latency:**เนื่องจากเป็น Managed Service ที่มีหลาย Layer (gRPC -> Google Network 📡 -> Internal Storage) ทำให้ Latency สูงกว่าระบบที่อ่านจาก Memory (Redis/BullMQ)
--**Retention:**เก็บข้อมูลได้สูงสุด**31 วัน**เท่านั้น ไม่สามารถใช้เป็นแหล่งเก็บข้อมูลหลักสำหรับ Event Sourcing ระยะยาวได้
--**No Global Ordering:**การเรียงลำดับ (Ordering Key) ทำได้ดีแค่ภายใน Region เดียวกัน และจะทำให้ความสามารถในการ Scale ลดลง (Throughput capped per key)
+-**Latency**: เนื่องจากเป็น Managed Service ที่มีหลาย Layer (gRPC -> Google Network 📡 -> Internal Storage) ทำให้ Latency สูงกว่าระบบที่อ่านจาก Memory (Redis/BullMQ)
+-**Retention**: เก็บข้อมูลได้สูงสุด **31 วัน** เท่านั้น ไม่สามารถใช้เป็นแหล่งเก็บข้อมูลหลักสำหรับ Event Sourcing ระยะยาวได้
+-**No Global Ordering:** การเรียงลำดับ (Ordering Key) ทำได้ดีแค่ภายใน Region เดียวกัน และจะทำให้ความสามารถในการ Scale ลดลง (Throughput capped per key)
 
 ### 2. การเลือกใช้ตามสถานการณ์ (Trade-off Matrix)
 
@@ -66,16 +66,16 @@ Google Cloud Pub/Sub คือ Message Broker ระดับโลกที่�
 
 ### ยุทธศาสตร์ Senior: การจัดการ Duplicates (Idempotency)
 
-Pub/Sub รับประกันเพียง **"At-least-once Delivery"**หมายความว่าคุณต้องเจอ Message ซ้ำแน่นอน:
-1.**Idempotency Key:**ใช้ UUID ที่ Client สร้างมา (เช่น`request_id`) เก็บใน Redis/DB เป็นเวลา 24 ชม.
-2.**Atomic Write:**ใช้`ON CONFLICT DO NOTHING` ใน SQL เพื่อให้แน่ใจว่าประมวลผลแค่ครั้งเดียว
+Pub/Sub รับประกันเพียง **"At-least-once Delivery"** หมายความว่าคุณต้องเจอ Message ซ้ำแน่นอน:
+1.**Idempotency Key:** ใช้ UUID ที่ Client สร้างมา (เช่น`request_id`) เก็บใน Redis/DB เป็นเวลา 24 ชม.
+2.**Atomic Write:** ใช้`ON CONFLICT DO NOTHING` ใน SQL เพื่อให้แน่ใจว่าประมวลผลแค่ครั้งเดียว
 - [source: Cloud Pub/Sub Documentation — At-least-once delivery]
 
 ### กรณีศึกษา: สถาปัตยกรรมระบบแชทจริง (Message Backbone)
 
 ในระบบตัวอย่างที่เราศึกษา เราใช้ Pub/Sub เป็นหัวใจหลักในการส่งข้อความข้าม 19 Microservices:
--**ทำไมถึงเลือก?**เพราะเราต้องการ**Native Fan-out**— เมื่อมีข้อความใหม่ 1 ข้อความ เราต้องส่งไปทั้ง`Notification-Service`,`Analytics-Service`, และ`Search-Indexer`
--**Trade-off:**เรายอมรับ Latency ที่เพิ่มขึ้น 50ms (ซึ่งผู้ใช้แชทไม่รู้สึก) เพื่อแลกกับการไม่ต้องจัดการ Infrastructure ของ Message Broker เอง และความง่ายในการเพิ่ม Consumer ใหม่ๆ
+-**ทำไมถึงเลือก?** เพราะเราต้องการ **Native Fan-out**— เมื่อมีข้อความใหม่ 1 ข้อความ เราต้องส่งไปทั้ง`Notification-Service`,`Analytics-Service`, และ`Search-Indexer`
+-**Trade-off**: เรายอมรับ Latency ที่เพิ่มขึ้น 50ms (ซึ่งผู้ใช้แชทไม่รู้สึก) เพื่อแลกกับการไม่ต้องจัดการ Infrastructure ของ Message Broker เอง และความง่ายในการเพิ่ม Consumer ใหม่ๆ
 
 ---
 
