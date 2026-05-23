@@ -25,7 +25,7 @@
 
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
   <!-- Hero with interactive grid background + high-tech vibe -->
-  <section class="relative pt-16 pb-12 sm:pt-28 sm:pb-20 overflow-hidden bg-surface-50 dark:bg-[#020617]" style="min-height: 60vh;">
+  <section class="relative pt-10 pb-12 sm:pt-16 sm:pb-20 overflow-hidden bg-surface-50 dark:bg-[#020617]" style="min-height: 50vh;">
     <!-- Interactive dot-grid canvas (spring-physics responsive to mouse) -->
     <InteractiveGrid />
 

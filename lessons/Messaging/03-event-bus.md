@@ -34,7 +34,9 @@ prerequisites: [01-google-pubsub, 02-streaming-vs-queuing]
 > 3. ใช้ Event Bus โดย Order Service ส่ง`OrderCreated` event แล้วให้ Service อื่นมา Subscribe เพื่อไปทำต่อ
 > 4. ใช้ Distributed Transaction (2-Phase Commit) เพื่อให้มั่นใจว่าทุก Service ทำงานสำเร็จพร้อมกันทั้งหมด
 >
->**✋ หยุดตรงนี้ก่อน! ลองคิดดูว่าแต่ละวิธีมีข้อดีและข้อเสียอย่างไรในแง่ของ Latency และ Reliability เมื่อระบบมีขนาดใหญ่ขึ้น**## 💬 ผลตอบรับ (Feedback)
+>**✋ หยุดตรงนี้ก่อน! ลองคิดดูว่าแต่ละวิธีมีข้อดีและข้อเสียอย่างไรในแง่ของ Latency และ Reliability เมื่อระบบมีขนาดใหญ่ขึ้น**
+
+## 💬 ผลตอบรับ (Feedback)
 
 | หากคุณตอบว่า... | การวิเคราะห์ |
 |:---|:---|

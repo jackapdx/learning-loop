@@ -441,8 +441,15 @@ function parseAttemptOptions(content: string, section?: string): AttemptOption[]
   let inTable = false;
   for (const line of lines) {
     const trimmed = line.trim();
-    if (trimmed.startsWith("|") && trimmed.endsWith("|")) {
-      if (trimmed.includes("---")) {
+    // Markdown table rows always start with |, but trailing | is optional.
+    // Even a row that appears to have "extra" | separators (e.g. from inline
+    // |**text** in the analysis cell) should still be treated as a table row
+    // as long as it starts with |. We collect cells[0] (option text) and the
+    // rest (cells[1..]) as the analysis, joining them back.
+    if (trimmed.startsWith("|")) {
+      // Only treat pure separator rows (|, -, :, whitespace only) as table dividers.
+      // Data rows that happen to contain "---" in their text are not separators.
+      if (/^\|[\s\-\|:]+\|?$/.test(trimmed)) {
         inTable = true;
         continue;
       }
@@ -453,7 +460,8 @@ function parseAttemptOptions(content: string, section?: string): AttemptOption[]
         .filter(Boolean);
       if (cells.length >= 2) {
         const text = cells[0].replace(/[*_`]/g, "").trim();
-        let rawAnalysis = cells[1].replace(/<br>/g, " ").trim();
+        // Join all remaining cells as the analysis (handles inline | in content)
+        let rawAnalysis = cells.slice(1).join(" ").replace(/<br>/g, " ").trim();
 
         let level: "correct" | "partial" | "incorrect" = "partial";
         if (/^✅|^🏆|^\[correct\]/.test(rawAnalysis)) {

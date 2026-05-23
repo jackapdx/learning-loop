@@ -35,6 +35,7 @@ tags: [chat-exp, system-design, postgres]
 |---|---|
 |"ใช้ Database เฉพาะทางแยกกัน (Best-of-breed)" | ⚠️ แม้จะมีฟีเจอร์ครบ แต่ความซับซ้อนในการดูแล (Operational Complexity) และการทำ Data Sync จะทำให้ทีมเหนื่อยล้าและเกิดปัญหาข้อมูลไม่ตรงกัน |
 |"ใช้ PostgreSQL ตัวเดียว + Extensions" | ✅ **ถูกต้อง!** สำหรับระบบที่ขนาดไม่ใหญ่ระดับ Facebook หรือ Google การใช้ Postgres + Extensions คือทางเลือกที่ชาญฉลาดที่สุด เพราะช่วยลด Overhead และประหยัดค่าใช้จ่ายได้มหาศาล |
+|"ใช้ PostgreSQL ตัวเดียว + เขียน Logic เอง (Custom Code)" | ⚠️ **ฟังดูดีแต่เปลืองแรงมหาศาล!** ในทางทฤษฎี คุณสามารถเขียนฟังก์ชัน Haversine คำนวณระยะทางเอง หรือทำ Semantic Search ด้วยการ Query แบบ brute-force ได้ แต่คุณจะต้องสร้าง Index เฉพาะทางเอง จัดการ Edge Case ทั้งหมดด้วยตัวเอง และสุดท้าย Performance จะสู้ Extension ที่ถูก Optimize มาเป็นสิบปีโดยทีมผู้เชี่ยวชาญไม่ได้ |
 
 ---
 
